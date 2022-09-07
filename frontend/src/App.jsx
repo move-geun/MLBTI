@@ -33,6 +33,10 @@ function App() {
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/simulation" element={<SimulationPage />} />
         <Route path="/live" element={<LivePage />} />
+
+
+
+
       </Routes>
     
     </BrowserRouter>
