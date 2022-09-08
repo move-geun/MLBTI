@@ -27,6 +27,7 @@ li{
 input, button{
     border:none;
     background-color: white;
+    white-space: nowrap;
 }
 input:focus,
 input:active,
@@ -34,6 +35,17 @@ button:focus,
 button:active {
   outline: none;
   box-shadow: none;
+}
+div {
+    white-space: nowrap;
+}
+button {
+    background-color: #2565d0;
+    font-weight: 600;
+    color: white;
+    padding: 10px 40px;
+    border-radius: 0.5rem;
+    cursor: pointer;
 }
 `;
 
