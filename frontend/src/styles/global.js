@@ -39,14 +39,35 @@ button:active {
 div {
     white-space: nowrap;
 }
+
 button {
     background-color: #2565d0;
     font-weight: 600;
     color: white;
-    padding: 10px 40px;
+    padding: 0.625rem 1.7rem;
     border-radius: 0.5rem;
+    font-size:1.5rem;
     cursor: pointer;
+
+    @media screen and (max-width: 830px) {
+        font-size:1rem;
+    }
+
+    @media screen and (max-width: 480px) {
+        font-size:0.8rem;
+  }
 }
+
+h1 {
+    font-size: 80px;
+
+    @media screen and (max-width: 830px) {
+        font-size: 50px;
+    }
+    @media screen and (max-width: 480px) {
+        font-size: 30px;
+  }
+  }
 `;
 
 export default GlobalStyle;
