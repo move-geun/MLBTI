@@ -4,7 +4,8 @@ const LoginBox = styled.div`
   min-width: 320px;
   max-width: 500px;
   height: 100vh;
-  margin: 50px auto;
+  margin: 50px auto 0 auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,6 +25,12 @@ const LoginBox = styled.div`
     font-weight: 600;
     color: white;
     padding: 10px 40px;
+  }
+  @media screen and (max-width: 480px) {
+    h1 {
+      font-size: 30px;
+    }
+    background-color: tomato;
   }
 `;
 
