@@ -17,24 +17,26 @@ import GlobalStyle from "./styles/global";
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
       <GlobalStyle />
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/findPwd" element={<FindPWDPage />} />
-        <Route path="/myprofile" element={<MyProfilePage />} />
-        <Route path="/teamcustom" element={<TeamCustomPage />} />
-        <Route path="/teamdetail" element={<TeamDetailPage />} />
-        <Route path="/playerdetail" element={<PlayerDetailPage />} />
-        <Route path="/matchsimulation" element={<MatchSimultaionPage />} />
-        <Route path="/customsimultaion" element={<CustomSimulationPage />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/simulation" element={<SimulationPage />} />
-        <Route path="/live" element={<LivePage />} />
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/findPwd" element={<FindPWDPage />} />
+          <Route path="/myprofile" element={<MyProfilePage />} />
+          <Route path="/teamcustom" element={<TeamCustomPage />} />
+          <Route path="/teamdetail" element={<TeamDetailPage />} />
+          <Route path="/playerdetail" element={<PlayerDetailPage />} />
+          <Route path="/matchsimulation" element={<MatchSimultaionPage />} />
+          <Route path="/customsimultaion" element={<CustomSimulationPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/simulation" element={<SimulationPage />} />
+          <Route path="/live" element={<LivePage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

@@ -12,25 +12,21 @@ const LoginBox = styled.div`
 
   h1 {
     color: #2565d0;
-    font-size: 80px;
   }
   form {
     width: 100%;
     font-size: 25px;
   }
   button {
-    margin-top: 40px;
-    font-size: 30px;
-    background-color: #2565d0;
-    font-weight: 600;
-    color: white;
-    padding: 10px 40px;
-  }
-  @media screen and (max-width: 480px) {
-    h1 {
-      font-size: 30px;
+    margin-top: 2rem;
+
+    @media screen and (max-width: 830px) {
+      margin-top: 1.5rem;
     }
-    background-color: tomato;
+
+    @media screen and (max-width: 480px) {
+      margin-top: 1rem;
+    }
   }
 `;
 
