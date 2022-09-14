@@ -9,6 +9,7 @@ import {
   InBtn,
   ErrorText,
   ContentCase,
+  InputBtnDiv,
 } from "./SignupPage.style";
 
 const SignupPage = () => {
@@ -61,6 +62,7 @@ const SignupPage = () => {
         <InputDiv>
           <Text>이메일</Text>
           <ContentCase>
+            <InputBtnDiv>
             <StyledInput
               type="email"
               placeholder="example@exam.com"
@@ -71,11 +73,14 @@ const SignupPage = () => {
               className="email"
               onBlur={(e) => {
                 validateEmail(e);
-              }}
-            />
+              }}>
+              </StyledInput>
+              {/* <button>인증하기</button> */}
+              </InputBtnDiv>
             {defaultEmail && !emailValid ? (
               <ErrorText>올바르지 않은 이메일 형식 입니다.</ErrorText>
             ) : null}
+
           </ContentCase>
         </InputDiv>
 
