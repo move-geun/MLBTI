@@ -17,7 +17,10 @@ const FormInputsBlock = styled.form`
       font-size: 20px;
     }
     span {
-      font-size: 20px;
+      font-size: 17px;
+    }
+    input {
+      font-size: 17px;
     }
   }
 
@@ -29,7 +32,10 @@ const FormInputsBlock = styled.form`
       font-size: 15px;
     }
     span {
-      font-size: 15px;
+      font-size: 13px;
+    }
+    input {
+      font-size: 13px;
     }
   }
 `;
@@ -54,10 +60,12 @@ const SingupWrapper = styled.div`
 
 const InputDiv = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 100%;
+  flex-direction: row;
+  width: 90%;
   margin: 0 0 2rem 2rem;
   justify-content: space-between;
+  align-items: center;
+  /* outline: 1px solid; */
 
 `;
 
@@ -75,10 +83,18 @@ const Text = styled.div`
 const StyledInput = styled.input`
   font-size: 20px;
   padding: 1rem 0.5rem;
-  width: 80%;
+  width: 100%;
   height: 1rem;
   border-bottom: 1px solid black;
 `;
+
+const ContentCase = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* margin: 0 0 0.5rem 0.5rem; */
+  /* outline: 1px solid; */
+`
+
 const InBtn = styled.button`
   border: 0;
   padding: 1rem;
@@ -106,4 +122,5 @@ export {
   StyledInput,
   InBtn,
   ErrorText,
+  ContentCase,
 };
