@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const FindPWDBox = styled.div`
-  min-width: 350px;
   max-width: 550px;
   height: 100vh;
   margin: 50px auto 0 auto;
@@ -14,15 +13,23 @@ const FindPWDBox = styled.div`
     color: #2565d0;
   }
   form {
+    margin-top: 1rem;
     width: 100%;
     font-size: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+  @media screen and (max-width: 830px) {
+    width: 375px;
+  }
+  @media screen and (max-width: 480px) {
+    width: 225px;
+  }
 `;
 
 const InputBox = styled.div`
+  width: 100%;
   margin-bottom: 1rem;
   display: flex;
   flex-direction: row;
@@ -31,15 +38,16 @@ const InputBox = styled.div`
   div {
     font-size: 25px;
     @media screen and (max-width: 830px) {
-      font-size: 1.5rem;
+      font-size: 1rem;
     }
     @media screen and (max-width: 480px) {
-      font-size: 1rem;
+      font-size: 0.625rem;
     }
   }
 `;
 
 const ContentCase = styled.div`
+  width: 384px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -58,10 +66,12 @@ const ContentCase = styled.div`
 
   font-size: 25px;
   @media screen and (max-width: 830px) {
-    font-size: 1.5rem;
+    width: 250px;
+    font-size: 1rem;
   }
   @media screen and (max-width: 480px) {
-    font-size: 1rem;
+    width: 180px;
+    font-size: 0.625rem;
   }
 `;
 
@@ -72,14 +82,15 @@ const StyledInput = styled.div`
   justify-content: space-evenly;
   align-items: center;
   input {
+    width: 100%;
     border: none;
     border-bottom: 1px solid black;
     font-size: 25px;
     @media screen and (max-width: 830px) {
-      font-size: 1.5rem;
+      font-size: 1rem;
     }
     @media screen and (max-width: 480px) {
-      font-size: 1rem;
+      font-size: 0.625rem;
     }
   }
   button {
