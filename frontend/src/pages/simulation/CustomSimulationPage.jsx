@@ -8,6 +8,7 @@ import {
 // 전체 width 조절
 // 시뮬레이션 시작 버튼 연결
 // 승률 높은 곳에 색 변경
+// 수정필요
 
 const CustomSimulationPage = () => {
   return (
