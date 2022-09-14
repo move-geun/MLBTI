@@ -1,18 +1,19 @@
 import styled from "styled-components";
 
 const Background = styled.div`
-  height: 100%;
-  min-width: 320px;
-  max-width: 500px;
+  width: 100vw;
+  height: 100vh;
 
 `;
 
-const Navbar = styled.div`
 
+const Header = styled.div`
+  font-size: 20px;
+  margin-top: 1rem;
 `
-
 
 export {
   Background,
-  Navbar,
+  Header,
+
 }
