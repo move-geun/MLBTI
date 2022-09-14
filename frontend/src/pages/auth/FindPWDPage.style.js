@@ -58,7 +58,9 @@ const ContentCase = styled.div`
     margin: 5px 0 0 5px;
     font-size: 1rem;
     font-weight: 400;
-
+    @media screen and (max-width: 830px) {
+      font-size: 0.8rem;
+    }
     @media screen and (max-width: 480px) {
       font-size: 0.625rem;
     }
@@ -67,11 +69,12 @@ const ContentCase = styled.div`
   font-size: 25px;
   @media screen and (max-width: 830px) {
     width: 250px;
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
   @media screen and (max-width: 480px) {
-    width: 180px;
+    width: 160px;
     font-size: 0.625rem;
+    margin-left: 0;
   }
 `;
 
@@ -87,7 +90,7 @@ const StyledInput = styled.div`
     border-bottom: 1px solid black;
     font-size: 25px;
     @media screen and (max-width: 830px) {
-      font-size: 1rem;
+      font-size: 0.8rem;
     }
     @media screen and (max-width: 480px) {
       font-size: 0.625rem;
