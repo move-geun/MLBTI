@@ -1,43 +1,40 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import AdbIcon from "@mui/icons-material/Adb";
+// import Logo from '../../public/assets/cap.png'
+
+import styled from "styled-components";
+
+let pages = [
+  { MLB: "https://www.mlb.com/" },
+  { "나만의 팀 만들기": "/teamcustom" },
+  { 경기일정: "/" },
+];
+
+const pages1 = ["MLB", "나만의 팀 만들기", "경기일정"];
+
+const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 
-import styled from 'styled-components';
-
-let pages = [ {'MLB': "https://www.mlb.com/"}, 
-               {'나만의 팀 만들기': "/teamcustom"}, 
-               {'경기일정': "/"},
-            ];
-
-
-const pages1 = ['MLB', '나만의 팀 만들기', '경기일정']
-
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
-const Bar = styled(AppBar)`
-  color: black;
-`
 
 const LogoImg = styled.img`
-  
-`
+  width: 40px;
+`;
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -54,32 +51,32 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar style={{ background: 'white'}} position="static">
+    <AppBar style={{ background: "white" }} position="static">
       <Container maxWidth="xl">
-      
         <Toolbar disableGutters>
+          {/* 로고 이미지  */}
+          <LogoImg src={"/assets/cap.png"}></LogoImg>
 
-          {/* 로고 */}
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* MLBTI */}
           <Typography
             variant="h1"
             component="a"
             href="/"
             sx={{
               mr: 2,
-              fontSize: '30px',
-              display: { xs: 'flex', md: 'flex' },
+              fontSize: "30px",
+              display: { xs: "flex", md: "flex" },
               fontWeight: 1000,
-              letterSpacing: '.3rem',
-              color: '#2565d0',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "#2565d0",
+              textDecoration: "none",
             }}
           >
             MLBTI
           </Typography>
-          
+
           {/* head 부분 */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -87,24 +84,23 @@ const Navbar = () => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-            >
-            </IconButton>
+            ></IconButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
               {pages1.map((page) => (
@@ -115,47 +111,25 @@ const Navbar = () => {
             </Menu>
           </Box>
 
-    
-          {/* 로고 아이콘 */}
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-
           {/* 메뉴 목록 */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
-                component='a'
-                href= {Object.values(page)}
-                // key={page}
+                component="a"
+                href={Object.values(page)}
                 onClick={handleCloseNavMenu}
-                sx={{ 
-                  my: 2, 
-                  color: 'black', 
-                  display: 'block',
+                sx={{
+                  my: 2,
+                  color: "black",
+                  display: "block",
+                  fontFamily: 'MICEGothic Bold'
                 }}
               >
                 {Object.keys(page)}
               </Button>
             ))}
           </Box>
-          
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -163,17 +137,17 @@ const Navbar = () => {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
