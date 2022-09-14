@@ -1,0 +1,148 @@
+import styled from "styled-components";
+
+const PageContainer = styled.div`
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0 1rem 2rem;
+  font-size: 1.5rem;
+
+  .divide {
+    margin-top: 2rem;
+    width: 100%;
+  }
+
+  img {
+    margin: 0 0.3rem;
+  }
+
+  @media screen and (max-width: 830px) {
+    font-size: 1.3rem;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+    img {
+      margin: 0 0.1rem;
+    }
+  }
+`;
+
+const NameBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+  }
+`;
+
+const Name = styled.div`
+  color: #2565d0;
+  display: flex;
+  flex-direction: row;
+
+  span {
+    color: black;
+  }
+
+  img {
+    color: gray;
+    width: 1.5rem;
+    height: 1.5rem;
+    @media screen and (max-width: 830px) {
+      width: 1.3rem;
+      height: 1.3rem;
+    }
+    @media screen and (max-width: 480px) {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+`;
+
+const Id = styled.div`
+  color: rgba(0, 0, 0, 0.2);
+  margin-left: 1rem;
+  @media screen and (max-width: 480px) {
+    margin-left: 0;
+    margin-top: 0.3rem;
+  }
+`;
+
+const ChangePwd = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  img {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 0;
+    @media screen and (max-width: 830px) {
+      width: 1.3rem;
+      height: 1.3rem;
+    }
+    @media screen and (max-width: 480px) {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+`;
+
+const GraphBox = styled.div`
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  img {
+    @media screen and (max-width: 830px) {
+      width: 80%;
+      height: 80%;
+    }
+    @media screen and (max-width: 480px) {
+      width: 60%;
+      height: 60%;
+    }
+  }
+
+  .GraphDraw {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .nameDraw {
+      font-size: 1.7rem;
+      width: 100%;
+      border-bottom: 2px solid #2565d0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      span {
+        margin: 0.8rem;
+      }
+      @media screen and (max-width: 830px) {
+        font-size: 1.3rem;
+        span {
+          margin: 0.5rem;
+        }
+      }
+      @media screen and (max-width: 480px) {
+        font-size: 1rem;
+        span {
+          margin: 0.2rem;
+        }
+      }
+    }
+  }
+`;
+
+export { PageContainer, NameBox, Name, Id, ChangePwd, GraphBox };
