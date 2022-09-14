@@ -1,37 +1,38 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-// import Logo from '../../public/assets/cap.png'
-
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
 import styled from "styled-components";
 
 let pages = [
-  { MLB: "https://www.mlb.com/" },
+  { 'MLB': "https://www.mlb.com/" },
   { "나만의 팀 만들기": "/teamcustom" },
-  { 경기일정: "/" },
+  { '경기일정': "/" },
+  { '메이저 리그 팀': "/" },
 ];
 
-const pages1 = ["MLB", "나만의 팀 만들기", "경기일정"];
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
-
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const LogoImg = styled.img`
   width: 40px;
+  /* @media screen and (max-width: 900px) {
+        display: none;
+    } */
+  
 `;
 
-const Navbar = () => {
+const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -54,12 +55,13 @@ const Navbar = () => {
     <AppBar style={{ background: "white" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* 로고 이미지  */}
+          {/* 로고 이미지 (small)  */}
           <LogoImg src={"/assets/cap.png"}></LogoImg>
+          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
 
-          {/* MLBTI */}
           <Typography
             variant="h1"
+            noWrap
             component="a"
             href="/"
             sx={{
@@ -75,8 +77,7 @@ const Navbar = () => {
             MLBTI
           </Typography>
 
-          {/* head 부분 */}
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -84,36 +85,59 @@ const Navbar = () => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-            ></IconButton>
+            >
+              <MenuIcon style={{ color:'black'}} />
+            </IconButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
+                vertical: 'bottom',
+                horizontal: 'left',
               }}
               keepMounted
               transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
+                vertical: 'top',
+                horizontal: 'left',
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages1.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+          
+              {pages.map((page) => (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    {Object.keys(page)}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
 
-          {/* 메뉴 목록 */}
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+          </Box>
+          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href=""
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            LOGO
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          {pages.map((page) => (
               <Button
                 component="a"
                 href={Object.values(page)}
@@ -137,17 +161,17 @@ const Navbar = () => {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px" }}
+              sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right',
               }}
               keepMounted
               transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
@@ -164,4 +188,4 @@ const Navbar = () => {
     </AppBar>
   );
 };
-export default Navbar;
+export default ResponsiveAppBar;
