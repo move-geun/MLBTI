@@ -11,18 +11,17 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import styled from "styled-components";
 
 let pages = [
   { 'MLB': "https://www.mlb.com/" },
-  { "나만의 팀 만들기": "/teamcustom" },
+  { "시뮬레이션": "/matchsimulation" },
   { '경기일정': "/" },
   { '메이저 리그 팀': "/" },
 ];
 
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['프로필', '나만의 팀 만들기', '로그아웃'];
 
 const LogoImgDesk = styled.img`
   width: 40px;
