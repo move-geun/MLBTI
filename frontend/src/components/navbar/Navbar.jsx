@@ -24,12 +24,18 @@ let pages = [
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const LogoImg = styled.img`
+const LogoImgDesk = styled.img`
   width: 40px;
-  /* @media screen and (max-width: 900px) {
+  @media screen and (max-width: 900px) {
         display: none;
-    } */
+    }
   
+`;
+const LogoImgMoblie = styled.img`
+  width: 40px;
+  @media screen and (min-width: 900px) {
+        display: none;
+    }
 `;
 
 const ResponsiveAppBar = () => {
@@ -55,8 +61,8 @@ const ResponsiveAppBar = () => {
     <AppBar style={{ background: "white" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* 로고 이미지 (small)  */}
-          <LogoImg src={"/assets/cap.png"}></LogoImg>
+          {/* 로고 이미지  */}
+          <LogoImgDesk src={"/assets/cap.png"}></LogoImgDesk>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
 
           <Typography
@@ -67,7 +73,7 @@ const ResponsiveAppBar = () => {
             sx={{
               mr: 2,
               fontSize: "30px",
-              display: { xs: "flex", md: "flex" },
+              display: { xs: "none", md: "flex" },
               fontWeight: 1000,
               letterSpacing: ".3rem",
               color: "#2565d0",
@@ -106,7 +112,6 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-          
               {pages.map((page) => (
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
@@ -115,26 +120,27 @@ const ResponsiveAppBar = () => {
                 </MenuItem>
               ))}
             </Menu>
-
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+
+          {/* 모바일 일 때 보임 */}
+          <LogoImgMoblie src={"/assets/cap.png"} ></LogoImgMoblie>
           <Typography
-            variant="h5"
+            variant="h1"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
+              fontWeight: 1000,
+              fontSize: "30px",
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: '#2565d0',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            MLBTI
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           {pages.map((page) => (
