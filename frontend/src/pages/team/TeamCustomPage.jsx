@@ -1,9 +1,12 @@
+import Navbar from "../../components/navbar/Navbar";
+import { Background, Header } from "./TeamCustomPage.style";
+
 const TeamCustomPage = () => {
-
   return (
-
-    <div>팀커스텀</div>
-  )
-} 
-
-export default TeamCustomPage
+    <Background>
+      <Navbar />
+      <Header>My team 구성하기</Header>
+    </Background>
+  );
+};
+export default TeamCustomPage;
