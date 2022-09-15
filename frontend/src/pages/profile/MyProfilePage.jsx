@@ -1,3 +1,6 @@
+// import { useState } from "react";
+import * as React from "react";
+import Modal from "@mui/material/Modal";
 import {
   PageContainer,
   NameBox,
@@ -5,16 +8,43 @@ import {
   Id,
   ChangePwd,
   GraphBox,
+  ModalBox,
 } from "./MyProfilePage.style";
 
+// const [nickName, setNickname] = useState("");
+
 const MyProfilePage = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <PageContainer>
       <NameBox>
         <Name>
           <div>배송윤 아님</div>
           <span>님</span>
-          <img src="/assets/cap.png" alt="편집이미지였던것.." />
+          <img
+            src="/assets/cap.png"
+            alt="편집이미지였던것.."
+            onClick={handleOpen}
+          />
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <ModalBox>
+              <div className="title">닉네임 변경</div>
+              <div className="content">
+                <span>닉네임</span>
+                <input type="text" />
+                <button>중복확인</button>
+              </div>
+              <button className="change">변경하기</button>
+            </ModalBox>
+          </Modal>
         </Name>
         <Id>example@naver.com</Id>
       </NameBox>

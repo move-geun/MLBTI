@@ -144,5 +144,48 @@ const GraphBox = styled.div`
     }
   }
 `;
+const ModalBox = styled.div`
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 330px;
+  height: 200px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 5px;
 
-export { PageContainer, NameBox, Name, Id, ChangePwd, GraphBox };
+  .title {
+    width: 90%;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .content {
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+
+    input {
+      width: 50%;
+      border-bottom: 1px solid black;
+    }
+    button {
+      padding: 0.2rem 0.4rem;
+    }
+  }
+
+  .change {
+    font-size: 1rem;
+    padding: 0.3rem 0.5rem;
+  }
+`;
+
+export { PageContainer, NameBox, Name, Id, ChangePwd, GraphBox, ModalBox };
