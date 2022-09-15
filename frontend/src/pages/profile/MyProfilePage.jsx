@@ -42,7 +42,9 @@ const MyProfilePage = () => {
                 <input type="text" />
                 <button>중복확인</button>
               </div>
-              <button className="change">변경하기</button>
+              <button className="change" onClick={handleClose}>
+                변경하기
+              </button>
             </ModalBox>
           </Modal>
         </Name>
