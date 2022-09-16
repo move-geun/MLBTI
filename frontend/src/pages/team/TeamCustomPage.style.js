@@ -23,7 +23,6 @@ const CenterWrapper = styled.div`
     align-items: center;
     width:100%;
   }
-  outline: 2px solid;
 `
 const MyteamWrapper = styled.div`
   width: 50%;
