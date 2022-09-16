@@ -15,20 +15,21 @@ import {
 import styled from "styled-components";
 import TextField from "@mui/material/TextField";
 import Dropdown from "../../components/TeamCustom/Dropdown";
+import PlyaerList from "../../components/TeamCustom/PlayerList";
+import TeamCoposition from "../../components/TeamCustom/TeamComposition";
 
 const SearchInput = styled(TextField)`
   margin: 1rem;
 `;
 
 const TeamCustomPage = () => {
-
-
   return (
     <>
       <Navbar />
       <Background>
         <Header>My team 구성하기</Header>
         <CenterWrapper>
+          {/* 왼쪽 박스 */}
           <MyteamWrapper>
             <Nickname>배송윤 아님 님의 구단</Nickname>
             <CustomTeamName>
@@ -44,19 +45,24 @@ const TeamCustomPage = () => {
                   marginLeft: "1rem",
                 }}
               />
-              <Img className="magnifying  " src={"/assets/MagnifyingGlass.png"}></Img>
+              <Img
+                className="magnifying  "
+                src={"/assets/MagnifyingGlass.png"}
+              />
             </SearchDiv>
-              
-            <Dropdown/>
-          </MyteamWrapper>
-
+            <Dropdown />
+            <PlyaerList/>
+          </MyteamWrapper>  
+          {/* 오른쪽 박스 */}
           <SimulationWrapper>
-            시뮬 자리
-            <Img className="ground" src={"/assets/Ground.png"}/>
-
-
+            <Img className="ground" src={"/assets/Ground.png"} />
           </SimulationWrapper>
         </CenterWrapper>
+        
+        {/* 팀 전력 */}
+        <TeamCoposition>
+          
+        </TeamCoposition>
       </Background>
     </>
   );

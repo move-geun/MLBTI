@@ -9,7 +9,6 @@ const Background = styled.div`
   height: 100vh;
   
 `
-
 const Header = styled.div`
   font-size: 20px;
   margin-top: 1rem;
@@ -18,7 +17,7 @@ const Header = styled.div`
 const CenterWrapper = styled.div`
   display: flex;
   width: 95%;
-  height: 60%;
+  height: 65%;
   @media screen and (max-width: 830px) {
     flex-direction: column;
     align-items: center;
@@ -28,10 +27,9 @@ const CenterWrapper = styled.div`
 const MyteamWrapper = styled.div`
   width: 50%;
   height: 100%;
-  outline: 2px solid blue;
   @media screen and (max-width: 830px) {
     width: 90%
-  }
+  }  
 `
 
 const Nickname = styled.div`
@@ -57,21 +55,36 @@ const EditBtn = styled(FiEdit)`
 
 const SearchDiv = styled.div`
   display: flex;
-  align-items: center;
+  align-items: center;  
 `
 const Img = styled.img`
-  width: 20px;
-  cursor: pointer;
+
+  &.magnifying{
+    width:20px;
+    cursor: pointer;
+  }
 
   &.ground{
     width: 400px;
+    height: 400px;
+    padding-top: 5.5rem;
+    @media screen and (max-width: 830px) {
+      width: 350px;
+      height: 350px;
+      padding-top: 0;
+    }
+    @media screen and (max-width: 480px) {
+      width: 250px;
+      height: 250px;
+    }
   }
 `;
 
 const SimulationWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   width: 50%;
-  height: 100%
-
+  height: 100%;
 `
 
 
