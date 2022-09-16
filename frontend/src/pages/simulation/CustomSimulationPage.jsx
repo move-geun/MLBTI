@@ -8,15 +8,19 @@ import {
   ModalBox,
 } from "./CustomSimulationPage.style";
 // 모달 연결
+// 모달 수정(연결이 왜 안되지)
 // 전체 width 조절
 // 승률 높은 곳에 색 변경
 // 수정필요
 
 const CustomSimulationPage = () => {
   const [open, setOpen] = React.useState(false);
+  const [opensec, setOpenSec] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  // const chat = () => console.log("눌러짐");
+  const handleOpensec = () => setOpenSec(true);
+  const handleClosesec = () => setOpenSec(false);
+  const chat = () => console.log("눌러짐");
 
   return (
     <CustomConatiner>
@@ -45,10 +49,28 @@ const CustomSimulationPage = () => {
           </Modal>
         </TeamCase>
         <span> VS </span>
-        <TeamCase>
+        <TeamCase onClick={handleOpensec}>
           <img src="/assets/cap.png" alt="2팀이었던것.." />
           <div>팀 설정하기</div>
           <div>44%</div>
+          <Modal
+            open={opensec}
+            onClose={handleClosesec}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <ModalBox>
+              <div className="title">닉네임 변경</div>
+              <div className="content">
+                <span>닉네임</span>
+                <input type="text" />
+                <button>중복확인</button>
+              </div>
+              <button className="change" onClick={handleClosesec}>
+                변경하기
+              </button>
+            </ModalBox>
+          </Modal>
         </TeamCase>
       </TeamContainer>
       <Link to="/simulation" style={{ textDecoration: "none", color: "black" }}>
