@@ -36,14 +36,16 @@ const CustomSimulationPage = () => {
             aria-describedby="modal-modal-description"
           >
             <ModalBox>
-              <div className="title">닉네임 변경</div>
+              <div className="title">1팀 선택하기</div>
               <div className="content">
-                <span>닉네임</span>
+                <span>날씨</span>
+                <input type="checkbox" />
+                <span>팀</span>
                 <input type="text" />
-                <button>중복확인</button>
+                <button>검색하기</button>
               </div>
               <button className="change" onClick={handleClose}>
-                변경하기
+                매치업
               </button>
             </ModalBox>
           </Modal>
@@ -60,14 +62,16 @@ const CustomSimulationPage = () => {
             aria-describedby="modal-modal-description"
           >
             <ModalBox>
-              <div className="title">닉네임 변경</div>
+              <div className="title">2팀 선택하기</div>
               <div className="content">
-                <span>닉네임</span>
+                <span>날씨</span>
+                <input type="checkbox" />
+                <span>팀</span>
                 <input type="text" />
-                <button>중복확인</button>
+                <button>검색하기</button>
               </div>
-              <button className="change" onClick={handleClosesec}>
-                변경하기
+              <button className="change" onClick={handleClose}>
+                매치업
               </button>
             </ModalBox>
           </Modal>
