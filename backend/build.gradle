@@ -1,5 +1,7 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
+
+
 buildscript{
     ext {
         springBootVer = '2.4.5'
@@ -30,6 +32,20 @@ plugins {
     id 'org.springframework.boot' version "${springBootVer}"
 }
 
+processResources {
+    with copySpec {
+        from 'src/main/resources'
+        include 'my-app*.yml'
+        include 'my-app*.yaml'
+        include 'my-app*.properties'
+        project.properties.findAll().each {
+            prop ->
+                if (prop.value != null) {
+                    filter(ReplaceTokens, tokens: [(prop.key): prop.value.toString()])
+                }
+        }
+    }
+}
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'eclipse'
 apply plugin: 'com.github.node-gradle.node'
@@ -65,10 +81,20 @@ configurations {
     args = ['install']
 }*/
 
+
+
 task webpack(type: NpmTask, dependsOn: 'npmInstall') {
     args = ['run','build']
 }
 
+// 추가
+
+tasks {
+
+    processResources {
+        duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.INCLUDE
+    }
+}
 // processResources is a Java task. Run the webpack bundling before this task using the 'build' task in the package.json
 processResources.dependsOn 'webpack'
 
