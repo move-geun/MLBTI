@@ -1,4 +1,4 @@
-FROM java:8
+FROM openjdk:8
 VOLUME /tmp
 EXPOSE 8081
 ARG JAR_FILE=build/libs/mlb-analysis-project-1.0-SNAPSHOT.jar
