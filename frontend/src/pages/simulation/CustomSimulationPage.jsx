@@ -7,9 +7,8 @@ import {
   TeamCase,
   ModalBox,
 } from "./CustomSimulationPage.style";
+
 // 모달 연결
-// 모달 수정(연결이 왜 안되지)
-// 전체 width 조절
 // 승률 높은 곳에 색 변경
 // 수정필요
 
@@ -20,7 +19,7 @@ const CustomSimulationPage = () => {
   const handleClose = () => setOpen(false);
   const handleOpensec = () => setOpenSec(true);
   const handleClosesec = () => setOpenSec(false);
-  const chat = () => console.log("눌러짐");
+  // const chat = () => console.log("눌러짐");
 
   return (
     <CustomConatiner>
@@ -37,12 +36,43 @@ const CustomSimulationPage = () => {
           >
             <ModalBox>
               <div className="title">1팀 선택하기</div>
+              <br />
               <div className="content">
-                <span>날씨</span>
-                <input type="checkbox" />
-                <span>팀</span>
-                <input type="text" />
-                <button>검색하기</button>
+                날씨
+                <div className="weather">
+                  <input type="checkbox" />
+                  <span>맑음</span>
+                </div>
+                <div className="weather">
+                  <input type="checkbox" />
+                  <span>흐림</span>
+                </div>
+                <div className="weather">
+                  <input type="checkbox" />
+                  <span>태풍</span>
+                </div>
+                <div className="weather">
+                  <input type="checkbox" />
+                  <span>흘김</span>
+                </div>
+              </div>
+              <br />
+              <div className="team">
+                팀
+                <div>
+                  <input type="text" />
+                  <button>검색하기</button>
+                </div>
+                <div className="filter">
+                  <input type="drop" placeholder="연도" />
+                  <input type="drop" placeholder="리그" />
+                  <input type="drop" placeholder="팀명" />
+                </div>
+                <div className="candidates">
+                  <div className="candi">초코맛팀</div>
+                  <div className="candi">딸기맛팀</div>
+                  <div className="candi">바나나맛팀</div>
+                </div>
               </div>
               <button className="change" onClick={handleClose}>
                 매치업
@@ -63,12 +93,43 @@ const CustomSimulationPage = () => {
           >
             <ModalBox>
               <div className="title">2팀 선택하기</div>
+              <br />
               <div className="content">
-                <span>날씨</span>
-                <input type="checkbox" />
-                <span>팀</span>
-                <input type="text" />
-                <button>검색하기</button>
+                날씨
+                <div className="weather">
+                  <input type="checkbox" />
+                  <span>맑음</span>
+                </div>
+                <div className="weather">
+                  <input type="checkbox" />
+                  <span>흐림</span>
+                </div>
+                <div className="weather">
+                  <input type="checkbox" />
+                  <span>태풍</span>
+                </div>
+                <div className="weather">
+                  <input type="checkbox" />
+                  <span>흘김</span>
+                </div>
+              </div>
+              <br />
+              <div className="team">
+                팀
+                <div>
+                  <input type="text" />
+                  <button>검색하기</button>
+                </div>
+                <div className="filter">
+                  <input type="drop" placeholder="연도" />
+                  <input type="drop" placeholder="리그" />
+                  <input type="drop" placeholder="팀명" />
+                </div>
+                <div className="candidates">
+                  <div className="candi">초코맛팀</div>
+                  <div className="candi">딸기맛팀</div>
+                  <div className="candi">바나나맛팀</div>
+                </div>
               </div>
               <button className="change" onClick={handleClose}>
                 매치업
