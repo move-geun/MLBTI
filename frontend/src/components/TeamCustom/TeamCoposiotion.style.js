@@ -9,10 +9,19 @@ const Header = styled.div`
   align-items: center;
   font-size: 40px;
   height: 50%;
+  p {
+    @media screen and (max-width: 830px) {
+    font-size: 25px;
+  }
+}
 `
 
 const MyNickname = styled.div`
   color: #2565d0;
+  @media screen and (max-width: 830px) {
+    font-size: 25px;
+  }
+  
 `
 
 const ListWrapper = styled.div`
