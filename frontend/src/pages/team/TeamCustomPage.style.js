@@ -17,7 +17,7 @@ const Header = styled.div`
 const CenterWrapper = styled.div`
   display: flex;
   width: 95%;
-  height: 65%;
+  /* height: 65%; */
   @media screen and (max-width: 830px) {
     flex-direction: column;
     align-items: center;
@@ -26,9 +26,10 @@ const CenterWrapper = styled.div`
 `
 const MyteamWrapper = styled.div`
   width: 50%;
-  height: 100%;
+  /* height: 100%; */
   @media screen and (max-width: 830px) {
-    width: 90%
+    width: 90%;
+    height: 500px;
   }  
 `
 
@@ -67,7 +68,7 @@ const Img = styled.img`
   &.ground{
     width: 400px;
     height: 400px;
-    padding-top: 5.5rem;
+    /* padding-top: 5.5rem; */
     @media screen and (max-width: 830px) {
       width: 350px;
       height: 350px;
@@ -83,6 +84,7 @@ const Img = styled.img`
 const SimulationWrapper = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 50%;
   height: 100%;
 `
