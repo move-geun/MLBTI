@@ -11,16 +11,11 @@ import {
   SearchDiv,
   Img,
   EditBtn,
+  SearchInput,
 } from "./TeamCustomPage.style";
-import styled from "styled-components";
-import TextField from "@mui/material/TextField";
 import Dropdown from "../../components/TeamCustom/Dropdown";
 import PlyaerList from "../../components/TeamCustom/PlayerList";
 import TeamCoposition from "../../components/TeamCustom/TeamComposition";
-
-const SearchInput = styled(TextField)`
-  margin: 1rem;
-`;
 
 const TeamCustomPage = () => {
   return (
@@ -61,7 +56,6 @@ const TeamCustomPage = () => {
         
         {/* 팀 전력 */}
         <TeamCoposition>
-          
         </TeamCoposition>
       </Background>
     </>

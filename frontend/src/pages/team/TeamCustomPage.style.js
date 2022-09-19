@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import TextField from "@mui/material/TextField";
 import { FiEdit } from "react-icons/fi";
 
 const Background = styled.div`
@@ -58,6 +59,11 @@ const SearchDiv = styled.div`
   display: flex;
   align-items: center;  
 `
+
+const SearchInput = styled(TextField)`
+  margin: 1rem;
+`;
+
 const Img = styled.img`
 
   &.magnifying{
@@ -101,4 +107,5 @@ export {
   SearchDiv,
   Img,
   EditBtn,
+  SearchInput,
 }
