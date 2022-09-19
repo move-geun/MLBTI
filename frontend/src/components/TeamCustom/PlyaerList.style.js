@@ -5,8 +5,8 @@ const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: scroll;
-  height: 60%;
+  overflow-y: auto;
+  height: 500px;
   width: 90%;
   margin: auto;
   &::-webkit-scrollbar {
