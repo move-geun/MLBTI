@@ -1,7 +1,7 @@
 package com.ssafy.api.response;
 
 import com.ssafy.common.model.response.BaseResponseBody;
-import com.ssafy.db.entity.User;
+import com.ssafy.db.entity.Users;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -18,9 +18,9 @@ public class UserRes{
 	@ApiModelProperty(name="User ID")
 	String userId;
 	
-	public static UserRes of(User user) {
+	public static UserRes of(Users user) {
 		UserRes res = new UserRes();
-		res.setUserId(user.getUserId());
+		res.setUserId(user.getEmail());
 		return res;
 	}
 }

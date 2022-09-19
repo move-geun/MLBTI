@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.ssafy.api.service.UserService;
-import com.ssafy.db.entity.User;
+import com.ssafy.db.entity.Users;
 import com.ssafy.db.repository.UserRepository;
 
 
@@ -23,7 +23,7 @@ public class SsafyUserDetailService implements UserDetailsService{
 	
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    		User user = userService.getUserByUserId(username);
+    		Users user = userService.getUserByEmail(username);
     		if(user != null) {
     			SsafyUserDetails userDetails = new SsafyUserDetails(user);
     			return userDetails;

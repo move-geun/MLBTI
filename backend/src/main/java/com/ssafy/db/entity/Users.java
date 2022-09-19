@@ -9,16 +9,21 @@ import lombok.Setter;
 import javax.persistence.Entity;
 
 /**
- * 유저 모델 정의.
- */
+
+* @FileName : Users.java
+* @Date : 2022. 9. 16
+* @작성자 : 인예림
+* @변경이력 : x
+* @프로그램 설명 : Users 모델 정의
+*/
 @Entity
 @Getter
 @Setter
-public class User extends BaseEntity{
-    String position;
-    String department;
-    String name;
-    String userId;
+public class Users extends BaseEntity{
+    String email;
+    String nickname;
+    String grade;
+    Integer user_teams_uid;
 
     @JsonIgnore
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
