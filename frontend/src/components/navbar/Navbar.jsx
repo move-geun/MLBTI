@@ -56,7 +56,7 @@ const Navbar = () => {
 
   return (
     <AppBar style={{ background: "white" }} position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth='0'>
         <Toolbar disableGutters>
           {/* 로고 이미지  */}
           <LogoImgDesk src={"/assets/cap.png"}></LogoImgDesk>

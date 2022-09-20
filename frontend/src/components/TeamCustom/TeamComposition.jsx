@@ -1,5 +1,5 @@
 import React from "react";
-import { PlyaerDetail } from "./PlyaerList.style";
+import { PlyaerDetail } from "./PlayerList.style";
 import {
   CompositionWrapper,
   Header,
@@ -26,6 +26,7 @@ function createData(position, name, team, stats) {
 }
 
 const playerList = [
+  
   createData("투수", "이동근", "남포동", 99),
   createData("투수", "이동근", "남포동", 99),
   createData("투수", "이동근", "남포동", 99),
