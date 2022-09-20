@@ -1,9 +1,17 @@
+import React from "react"
+import { 
+  Background, 
+} from "./PlayerDetailPage.style"
+
 const PlayerDetailPage = () => {
 
   return (
+    <Background>
+      
 
-    <div>playerdetail</div>
-  )
+    </Background>
+    
+    )
 } 
 
 export default PlayerDetailPage
