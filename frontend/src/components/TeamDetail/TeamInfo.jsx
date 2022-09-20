@@ -32,7 +32,7 @@ const TeamInfo = () => {
           <TableContainer component={Paper}>
             <Table aria-label="simple table">
               <TableHead>
-                <TableRow sx={{ borderBottom:'0.1rem solid'}} >
+                <TableRow sx={{ }} >
                   <TableList>승</TableList>
                   <TableList align="right">패</TableList>
                   <TableList align="right">승률</TableList>
