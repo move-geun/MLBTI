@@ -21,6 +21,14 @@ const Logo = styled.img`
     width: 190px;
     height: 190px;
   }
+  @media screen and (max-width: 560px) {
+    width: 150px;
+    height: 150px;
+  }
+  @media screen and (max-width: 480px) {
+    width: 120px;
+    height: 120px;
+  }
 `;
 
 const InfoWrapper = styled.div`
@@ -34,18 +42,25 @@ const InfoWrapper = styled.div`
 
 const Info = styled.div`
   margin-bottom: 2rem;
+  display: flex;
 
-  .name {
+  &.name {
     font-size: 50px;
     @media screen and (max-width: 830px) {
-      font-size: 40px;
+      font-size: 30px;
+    }
+    @media screen and (max-width: 480px) {
+      font-size: 27px;
     }
   }
 
-  .rank {
+  &.rank {
     font-size: 30px;
     @media screen and (max-width: 830px) {
-      font-size: 20px;
+      font-size: 15px;
+    }
+    @media screen and (max-width: 480px) {
+      font-size: 12px;
     }
   }
   th,
