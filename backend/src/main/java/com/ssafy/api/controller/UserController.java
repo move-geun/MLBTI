@@ -1,5 +1,9 @@
 package com.ssafy.api.controller;
 
+import java.io.IOException;
+
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -18,7 +22,9 @@ import com.ssafy.api.service.UserService;
 import com.ssafy.common.auth.SsafyUserDetails;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.common.util.JwtTokenUtil;
-import com.ssafy.db.entity.User;
+import com.ssafy.common.util.MailServiceUtil;
+import com.ssafy.db.entity.Mail;
+import com.ssafy.db.entity.Users;
 import com.ssafy.db.repository.UserRepositorySupport;
 
 import io.swagger.annotations.Api;
@@ -39,8 +45,11 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@PostMapping()
-	@ApiOperation(value = "회원 가입", notes = "<strong>아이디와 패스워드</strong>를 통해 회원가입 한다.") 
+	@Autowired
+	MailServiceUtil mailService;
+	
+	@PostMapping("/signin")
+	@ApiOperation(value = "회원 가입", notes = "<strong>email, password, nickname</strong>을 통해 회원가입 한다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
         @ApiResponse(code = 401, message = "인증 실패"),
@@ -49,9 +58,9 @@ public class UserController {
     })
 	public ResponseEntity<? extends BaseResponseBody> register(
 			@RequestBody @ApiParam(value="회원가입 정보", required = true) UserRegisterPostReq registerInfo) {
-		
+		System.out.println("hihi");
 		//임의로 리턴된 User 인스턴스. 현재 코드는 회원 가입 성공 여부만 판단하기 때문에 굳이 Insert 된 유저 정보를 응답하지 않음.
-		User user = userService.createUser(registerInfo);
+		Users user = userService.createUsers(registerInfo);
 		
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
@@ -71,8 +80,19 @@ public class UserController {
 		 */
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
 		String userId = userDetails.getUsername();
-		User user = userService.getUserByUserId(userId);
+		Users user = userService.getUsersByUserId(userId);
 		
 		return ResponseEntity.status(200).body(UserRes.of(user));
 	}
+	
+    @PostMapping("/mail/send")
+    public String sendMail(@RequestBody @ApiParam(value="메일 보내기 정보", required = true) Mail mailDto) throws MessagingException, IOException {
+    	System.out.println("==============");
+    	System.out.println(mailDto.getAddress());
+    	
+    	mailService.sendSimpleMessage(mailDto);
+        System.out.println("메일 전송 완료");
+        return "result";
+    }
+	
 }

@@ -8,26 +8,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.ssafy.db.entity.User;
+import com.ssafy.db.entity.Users;
 
 /**
  * 현재 액세스 토큰으로 부터 인증된 유저의 부가 상세정보(활성화 여부, 만료, 롤 등) 정의.
  */
 public class SsafyUserDetails implements UserDetails {
 	@Autowired
-	User user;
+	Users user;
 	boolean accountNonExpired;
     boolean accountNonLocked;
     boolean credentialNonExpired;
     boolean enabled = false;
     List<GrantedAuthority> roles = new ArrayList<>();
     
-    public SsafyUserDetails(User user) {
+    public SsafyUserDetails(Users user) {
     		super();
     		this.user = user;
     }
     
-    public User getUser() {
+    public Users getUser() {
     		return this.user;
     }
 	@Override
