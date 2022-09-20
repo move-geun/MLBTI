@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Wrapper, Logo, InfoWrapper, Info } from "./TeamInfo.style";
+import { Wrapper, Logo, InfoWrapper, Info, LogoDiv } from "./TeamInfo.style";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -17,22 +17,22 @@ const player = {
   recentGame: "6-4",
 };
 
-const TableList = styled(TableCell)`
-
-`;
+const TableList = styled(TableCell)``;
 
 const TeamInfo = () => {
   return (
     <Wrapper>
-      <Logo src={"/logo512.png"}></Logo>
+      <LogoDiv>
+        <Logo src={"/logo512.png"} />
+      </LogoDiv>
       <InfoWrapper>
         <Info className="name">LA 다져스</Info>
         <Info className="rank">2위</Info>
         <Info className="detail">
           <TableContainer component={Paper}>
-            <Table aria-label="simple table">
+            <Table sx={{ minWidth:'200px' }} aria-label="simple table">
               <TableHead>
-                <TableRow sx={{ }} >
+                <TableRow sx={{}}>
                   <TableList>승</TableList>
                   <TableList align="right">패</TableList>
                   <TableList align="right">승률</TableList>
@@ -41,10 +41,7 @@ const TeamInfo = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow
-                  key={player.name}
-                  sx={{ backgroundColor:'#f2f0f0' }}
-                >
+                <TableRow key={player.name} sx={{ backgroundColor: "#f2f0f0" }}>
                   <TableList component="th" scope="player">
                     {player.win}
                   </TableList>
