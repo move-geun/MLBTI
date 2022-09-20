@@ -5,14 +5,17 @@ const Wrapper = styled.div`
   align-items: center;
   height: 40%;
   width: 90%;
-  outline: 1px solid;
   margin-top: 2rem;
-`
+`;
 
 const Logo = styled.img`
-  width: 30%;
-  height: 60%;
-`
+  width: 300px;
+  height: 300px;
+  @media screen and (max-width: 830px) {
+    width: 200px;
+    height: 200px;
+  }
+`;
 
 const InfoWrapper = styled.div`
   display: flex;
@@ -20,28 +23,29 @@ const InfoWrapper = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-`
-
+  margin-left: 1rem;
+`;
 
 const Info = styled.div`
   margin-bottom: 2rem;
 
   &.name {
     font-size: 50px;
+    @media screen and (max-width: 830px) {
+      font-size: 40px;
+    }
   }
 
   &.rank {
     font-size: 30px;
+    @media screen and (max-width: 830px) {
+      font-size: 20px;
+    }
   }
-  th, td{
-    font-family: 'MICEGothic Bold';
+  th,
+  td {
+    font-family: "MICEGothic Bold";
   }
-  
-`
+`;
 
-export {
-  Wrapper,
-  Logo,
-  InfoWrapper,
-  Info,
-}
+export { Wrapper, Logo, InfoWrapper, Info };

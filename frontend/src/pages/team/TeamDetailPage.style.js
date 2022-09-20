@@ -11,14 +11,12 @@ const Background = styled.div`
 const TeamWrapper = styled.div`
   width: 90%;
   height: 40%;
-  outline: 2px solid;
 `
 
 
 const InfoWrapper = styled.div`
   width: 90%;
   height: 40%;
-  outline: 2px solid;
 `
 
 const Schedule = styled.div`
