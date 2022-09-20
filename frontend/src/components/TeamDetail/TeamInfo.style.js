@@ -11,8 +11,7 @@ const Wrapper = styled.div`
 const LogoDiv = styled.div`
   display: flex;
   align-items: center;
-
-`
+`;
 
 const Logo = styled.img`
   width: 100%;
@@ -26,8 +25,8 @@ const Logo = styled.img`
     height: 150px;
   }
   @media screen and (max-width: 480px) {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
   }
 `;
 
@@ -37,30 +36,31 @@ const InfoWrapper = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-  /* margin-left: 1rem; */
 `;
 
-const Info = styled.div`
+const Info = styled.span`
   margin-bottom: 2rem;
   display: flex;
 
   &.name {
     font-size: 50px;
     @media screen and (max-width: 830px) {
-      font-size: 30px;
+      font-size: 45px;
     }
+
     @media screen and (max-width: 480px) {
-      font-size: 27px;
+      font-size: 20px;
     }
   }
 
   &.rank {
-    font-size: 30px;
+    font-size: 40px;
     @media screen and (max-width: 830px) {
-      font-size: 15px;
+      font-size: 30px;
     }
+
     @media screen and (max-width: 480px) {
-      font-size: 12px;
+      font-size: 15px;
     }
   }
   th,
