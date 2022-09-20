@@ -1,12 +1,12 @@
 import React from "react";
 import Navbar from "../../components/navbar/Navbar";
 import TeamInfo from "../../components/TeamDetail/TeamInfo";
+import DetailInfo from "../../components/TeamDetail/DetailInfo";
+
 
 import {
   Background,
-  TeamWrapper,
-  InfoWrapper,
-  Schedule,
+
 } from "./TeamDetailPage.style";
 
 const TeamDetailPage = () => {
@@ -15,11 +15,9 @@ const TeamDetailPage = () => {
       <Navbar/>
       <Background>
         <TeamInfo>
-
-          
         </TeamInfo>
-        <InfoWrapper>
-        </InfoWrapper>
+        <DetailInfo>
+        </DetailInfo>
       </Background>
     </>
   );

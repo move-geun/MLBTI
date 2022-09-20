@@ -5,11 +5,11 @@ import {
   PlyaerName,
   PlyaerDetailWrapper,
   PlyaerDetail,
-} from "./PlyaerList.style";
+} from "./PlayerList.style";
 
 
 
-const PlyaerList = () => {
+const PlayerList = () => {
   return (
     <ListWrapper>
       <List>
@@ -96,4 +96,4 @@ const PlyaerList = () => {
   );
 };
 
-export default PlyaerList;
+export default PlayerList;
