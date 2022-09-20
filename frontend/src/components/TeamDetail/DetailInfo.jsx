@@ -15,7 +15,6 @@ const DetailInfo = () => {
 
   const handlePage = (e) => {
     setPage(e.target.value);
-    console.log("이게뭘까", e.target.value);
   };
 
   // console.log(page)

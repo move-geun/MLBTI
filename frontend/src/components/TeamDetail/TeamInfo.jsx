@@ -29,10 +29,16 @@ const TeamInfo = () => {
         <Info className="name">LA 다져스</Info>
         <Info className="rank">2위</Info>
         <Info className="detail">
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth:'200px' }} aria-label="simple table">
+          <TableContainer sx={{ 
+            '@media screen and (max-width: 480px)': {
+              // width: '40%',
+            },
+            }}component={Paper}>
+            <Table sx={{ 
+              }} 
+              aria-label="simple table">
               <TableHead>
-                <TableRow sx={{}}>
+                <TableRow sx={{backgroundColor:'#7ce0ff'}}>
                   <TableList>승</TableList>
                   <TableList align="right">패</TableList>
                   <TableList align="right">승률</TableList>

@@ -30,34 +30,39 @@ const Schedule = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 90%;
   margin: 2rem auto;
+  /* outline: 1px solid blue; */
 `;
 
 const ScheduleDetail = styled.div`
   display: flex;
+  justify-content: space-evenly;
+  width: 100%;
   font-size: 25px;
   margin-bottom: 1.5rem;
+  /* outline: 1px solid green; */
   @media screen and (max-width: 830px) {
     font-size: 20px;
   }
 
   @media screen and (max-width: 480px) {
-    font-size: 0.8rem;
+    font-size: 15px;
   }
   .day {
     display: flex;
     justify-content: space-evenly;
-    width: 400px;
-    min-width: 200px;
+    width: 30%;
+    /* min-width: 200px; */
     border-right: 1px solid;
+    /* outline: 1px solid; */
   }
 
   .content {
+    /* outline: 2px solid; */
     display: flex;
     justify-content: space-evenly;
-    width: 600px;
-    min-width: 400px;
+    width: 40%;
+    
   }
 
   .date {

@@ -12,6 +12,7 @@ import MatchSimultaionPage from "./pages/simulation/MatchSimulationPage";
 import SimulationPage from "./pages/simulation/SimulationPage";
 import TeamCustomPage from "./pages/team/TeamCustomPage";
 import TeamDetailPage from "./pages/team/TeamDetailPage";
+import Navbar from "./components/navbar/Navbar";
 
 import GlobalStyle from "./styles/global";
 
@@ -19,6 +20,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
+      <Navbar/>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
