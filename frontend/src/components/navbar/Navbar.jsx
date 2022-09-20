@@ -1,43 +1,41 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
 import styled from "styled-components";
 
 let pages = [
-  { 'MLB': "https://www.mlb.com/" },
-  { "시뮬레이션": "/matchsimulation" },
-  { '경기일정': "/" },
-  { '메이저 리그 팀': "/" },
+  { MLB: "https://www.mlb.com/" },
+  { 시뮬레이션: "/matchsimulation" },
+  { 경기일정: "/" },
+  { "메이저 리그 팀": "/" },
 ];
 
-
-const settings = ['프로필', '나만의 팀 만들기', '로그아웃'];
+const settings = ["프로필", "나만의 팀 만들기", "로그아웃"];
 
 const LogoImgDesk = styled.img`
   width: 40px;
-  @media screen and (max-width: 900px) {
-        display: none;
-    }
-  
+  @media screen and (max-width: 830px) {
+    display: none;
+  }
 `;
 const LogoImgMoblie = styled.img`
   width: 40px;
-  @media screen and (min-width: 900px) {
-        display: none;
-    }
+  @media screen and (min-width: 830px) {
+    display: none;
+  }
 `;
 
-const ResponsiveAppBar = () => {
+const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -58,7 +56,7 @@ const ResponsiveAppBar = () => {
 
   return (
     <AppBar style={{ background: "white" }} position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth='0'>
         <Toolbar disableGutters>
           {/* 로고 이미지  */}
           <LogoImgDesk src={"/assets/cap.png"}></LogoImgDesk>
@@ -72,7 +70,9 @@ const ResponsiveAppBar = () => {
             sx={{
               mr: 2,
               fontSize: "30px",
-              display: { xs: "none", md: "flex" },
+              "@media screen and (max-width: 830px)": {
+                display: "none",
+              },
               fontWeight: 1000,
               letterSpacing: ".3rem",
               color: "#2565d0",
@@ -82,7 +82,16 @@ const ResponsiveAppBar = () => {
             MLBTI
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          {/* 모바일 일 때 메뉴 */}
+          <Box
+            sx={{
+              flexGrow: 1,
+
+              "@media screen and (min-width: 830px)": {
+                display: "none",
+              },
+            }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -91,24 +100,24 @@ const ResponsiveAppBar = () => {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon style={{ color:'black'}} />
+              <MenuIcon style={{ color: "black" }} />
             </IconButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
@@ -122,7 +131,7 @@ const ResponsiveAppBar = () => {
           </Box>
 
           {/* 모바일 일 때 보임 */}
-          <LogoImgMoblie src={"/assets/cap.png"} ></LogoImgMoblie>
+          <LogoImgMoblie src={"/assets/cap.png"}></LogoImgMoblie>
           <Typography
             variant="h1"
             noWrap
@@ -130,19 +139,31 @@ const ResponsiveAppBar = () => {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              "@media screen and (min-width: 830px)": {
+                display: "none",
+              },
               flexGrow: 1,
               fontWeight: 1000,
               fontSize: "30px",
-              letterSpacing: '.3rem',
-              color: '#2565d0',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "#2565d0",
+              textDecoration: "none",
             }}
           >
             MLBTI
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          {pages.map((page) => (
+
+          {/* 데스크탑 일 때 보이는 메뉴 */}
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              "@media screen and (max-width: 830px)": {
+                display: "none",
+              },
+            }}
+          >
+            {pages.map((page) => (
               <Button
                 component="a"
                 href={Object.values(page)}
@@ -151,7 +172,7 @@ const ResponsiveAppBar = () => {
                   my: 2,
                   color: "black",
                   display: "block",
-                  fontFamily: 'MICEGothic Bold'
+                  fontFamily: "MICEGothic Bold",
                 }}
               >
                 {Object.keys(page)}
@@ -166,17 +187,17 @@ const ResponsiveAppBar = () => {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
@@ -193,4 +214,4 @@ const ResponsiveAppBar = () => {
     </AppBar>
   );
 };
-export default ResponsiveAppBar;
+export default Navbar;

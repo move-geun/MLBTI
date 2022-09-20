@@ -1,9 +1,17 @@
+import React from "react";
+import Navbar from "../../components/navbar/Navbar";
+import TeamInfo from "../../components/TeamDetail/TeamInfo";
+import DetailInfo from "../../components/TeamDetail/DetailInfo";
+
+import { Background } from "./TeamDetailPage.style";
+
 const TeamDetailPage = () => {
-
   return (
+    <Background>
+      <TeamInfo></TeamInfo>
+      <DetailInfo></DetailInfo>
+    </Background>
+  );
+};
 
-    <div>팀상세</div>
-  )
-} 
-
-export default TeamDetailPage
+export default TeamDetailPage;
