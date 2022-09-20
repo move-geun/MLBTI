@@ -12,6 +12,9 @@ import MatchSimultaionPage from "./pages/simulation/MatchSimulationPage";
 import SimulationPage from "./pages/simulation/SimulationPage";
 import TeamCustomPage from "./pages/team/TeamCustomPage";
 import TeamDetailPage from "./pages/team/TeamDetailPage";
+import GameHistory from "./pages/game/GameHistory";
+import GameSchedule from "./pages/game/GameSchedule";
+import TeamComparison from "./pages/game/TeamComparison";
 import Navbar from "./components/navbar/Navbar";
 
 import GlobalStyle from "./styles/global";
@@ -20,7 +23,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Navbar/>
+      <Navbar />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
@@ -36,6 +39,9 @@ function App() {
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/simulation" element={<SimulationPage />} />
           <Route path="/live" element={<LivePage />} />
+          <Route path="/gamehistory" element={<GameHistory />} />
+          <Route path="/gameschedule" element={<GameSchedule />} />
+          <Route path="/teamcomparison" element={<TeamComparison />} />
         </Routes>
       </BrowserRouter>
     </>

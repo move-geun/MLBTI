@@ -8,7 +8,7 @@ const Main = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 1rem auto 0 auto;
   justify-content: center;
   font-size: 1.5rem;
 
