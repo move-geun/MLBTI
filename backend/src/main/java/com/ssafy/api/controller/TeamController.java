@@ -88,7 +88,7 @@ public class TeamController {
 		return ResponseEntity.status(200).body(team_list);
 	}
 	
-	@GetMapping("/search")
+	@GetMapping("/list")
 	@ApiOperation(value = "season, sport_id, league_id, division_id으로 팀 조회", notes = "<strong>season, sport_id, league_id, division_id</strong>의 조건으로 팀을 조회한다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
