@@ -10,41 +10,39 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QUser is a Querydsl query type for User
+ * QUsers is a Querydsl query type for Users
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QUser extends EntityPathBase<Users> {
+public class QUsers extends EntityPathBase<Users> {
 
-    private static final long serialVersionUID = 846542477L;
+    private static final long serialVersionUID = 473013126L;
 
-    public static final QUser user = new QUser("user");
+    public static final QUsers users = new QUsers("users");
 
     public final QBaseEntity _super = new QBaseEntity(this);
 
-    public final StringPath department = createString("department");
+    public final StringPath email = createString("email");
 
-    //inherited
-    public final NumberPath<Integer> uid = _super.uid;
+    public final StringPath grade = createString("grade");
 
     public final StringPath nickname = createString("nickname");
 
     public final StringPath password = createString("password");
 
-    public final StringPath email = createString("email");
+    //inherited
+    public final NumberPath<Integer> uid = _super.uid;
 
-    public final StringPath grade = createString("grade");
-    
     public final NumberPath<Integer> user_teams_uid = createNumber("user_teams_uid", Integer.class);
 
-    public QUser(String variable) {
+    public QUsers(String variable) {
         super(Users.class, forVariable(variable));
     }
 
-    public QUser(Path<? extends Users> path) {
+    public QUsers(Path<? extends Users> path) {
         super(path.getType(), path.getMetadata());
     }
 
-    public QUser(PathMetadata metadata) {
+    public QUsers(PathMetadata metadata) {
         super(Users.class, metadata);
     }
 
