@@ -8,8 +8,10 @@ const Main = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 1rem auto 0 auto;
   justify-content: center;
+  font-size: 1.5rem;
+
   /* 스켈레톤용 */
   .skel {
     margin-bottom: 10px;
@@ -19,6 +21,33 @@ const Main = styled.div`
 `;
 
 const Notice = styled(Slider)`
+  height: 90%;
+  .slick-list {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 4px 0;
+  }
+
+  .slick-slide div {
+    cursor: pointer;
+    background-color: white;
+    font-size: 1rem;
+  }
+
+  .slick-dots {
+    display: none;
+  }
+
+  .slick-track {
+    width: 100%;
+  }
+`;
+
+const DownChart = styled(Slider)`
   height: 90%;
   .slick-list {
     width: 100%;
@@ -68,23 +97,36 @@ const CheckBox = styled.div`
   .title {
     height: 25px;
   }
+  @media screen and (max-width: 830px) {
+    font-size: 1rem;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.625rem;
+  }
 `;
 
 const Predict = styled.div`
-  width: 30%;
+  width: 100%;
   text-align: center;
   border-left: 2px solid rgba(0, 0, 0, 0.2);
-  border-right: 2px solid rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
 
   .content {
     margin-bottom: 5px;
+  }
+
+  @media screen and (max-width: 830px) {
+    font-size: 1rem;
+    border-left: none;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.625rem;
   }
 `;
 
 const Today = styled.div`
-  width: 30%;
+  width: 100%;
   text-align: center;
   border-left: 2px solid rgba(0, 0, 0, 0.2);
   border-right: 2px solid rgba(0, 0, 0, 0.2);
@@ -94,15 +136,40 @@ const Today = styled.div`
   .content {
     margin-bottom: 5px;
   }
+
+  @media screen and (max-width: 830px) {
+    font-size: 1rem;
+    border-left: none;
+    border-right: none;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.625rem;
+  }
 `;
 
 const Rank = styled.div`
-  width: 30%;
+  width: 100%;
   text-align: center;
-  border-left: 2px solid rgba(0, 0, 0, 0.2);
   border-right: 2px solid rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 830px) {
+    font-size: 1rem;
+    border-right: none;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.625rem;
+  }
 `;
 
-export { Notice, Main, SimulationCase, CheckBox, Predict, Today, Rank };
+export {
+  Notice,
+  Main,
+  SimulationCase,
+  CheckBox,
+  Predict,
+  Today,
+  Rank,
+  DownChart,
+};
