@@ -1,5 +1,12 @@
 package com.ssafy.api.controller;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -8,17 +15,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.api.request.UserLoginPostReq;
 import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.api.response.UserLoginPostRes;
 import com.ssafy.api.response.UserRes;
+import com.ssafy.api.service.MailService;
+import com.ssafy.api.service.MailServiceImpl;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.auth.SsafyUserDetails;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.common.util.JwtTokenUtil;
-import com.ssafy.db.entity.User;
+import com.ssafy.db.entity.Mail;
+import com.ssafy.db.entity.MailConfirmKeys;
+import com.ssafy.db.entity.Users;
 import com.ssafy.db.repository.UserRepositorySupport;
 
 import io.swagger.annotations.Api;
@@ -38,9 +50,12 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
+	@Autowired
+	MailService mailService;
 	
-	@PostMapping()
-	@ApiOperation(value = "회원 가입", notes = "<strong>아이디와 패스워드</strong>를 통해 회원가입 한다.") 
+	
+	@PostMapping("/signin")
+	@ApiOperation(value = "회원 가입", notes = "<strong>email, password, nickname</strong>을 통해 회원가입 한다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
         @ApiResponse(code = 401, message = "인증 실패"),
@@ -50,10 +65,34 @@ public class UserController {
 	public ResponseEntity<? extends BaseResponseBody> register(
 			@RequestBody @ApiParam(value="회원가입 정보", required = true) UserRegisterPostReq registerInfo) {
 		
-		//임의로 리턴된 User 인스턴스. 현재 코드는 회원 가입 성공 여부만 판단하기 때문에 굳이 Insert 된 유저 정보를 응답하지 않음.
-		User user = userService.createUser(registerInfo);
+		Optional<MailConfirmKeys> mailkey = mailService.findMailKey(registerInfo.getEmail());
+		System.out.println("=================================");
+		System.out.println(registerInfo.getRandomNumber());
+		System.out.println(mailkey.get().getRandomNumber());
+		System.out.println("==================================");
+		LocalDateTime nowTime = LocalDateTime.now().minusMinutes(5);
 		
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+		// timeout check
+		if(nowTime.isBefore(mailkey.get().getCreateDate())){
+			if(mailkey.isPresent()) {
+				if(registerInfo.getRandomNumber().equals(mailkey.get().getRandomNumber())){
+					System.out.println("dasdasasdasdasdasdasdasdasdas");
+					Users user = userService.createUsers(registerInfo);
+					return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));	
+				}
+				else {
+	
+					return ResponseEntity.status(400).body(BaseResponseBody.of(403, "Email token is invalid"));	
+				}
+			}
+			else {
+				return ResponseEntity.status(403).body(BaseResponseBody.of(403, "Mail key is not sended"));	
+			}
+		}
+		else {
+			return ResponseEntity.status(403).body(BaseResponseBody.of(405, "Email token timed out(5 minuate"));	
+		}
+
 	}
 	
 	@GetMapping("/me")
@@ -69,10 +108,22 @@ public class UserController {
 		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
 		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
 		 */
+		
+		
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-		String userId = userDetails.getUsername();
-		User user = userService.getUserByUserId(userId);
+		String email = userDetails.getUsername();
+		Users user = userService.getUsersByEmail(email);
 		
 		return ResponseEntity.status(200).body(UserRes.of(user));
 	}
+    
+    @PostMapping("/mail/send/certify")
+    public ResponseEntity<BaseResponseBody> sendCertifyMail(@ApiParam(value = "mail 인증 정보", required = true) @RequestParam("email") String email) throws MessagingException, IOException {    	
+    	if(mailService.findMailKey(email).isPresent()) {
+    		mailService.deleteMailKey(email);
+    	}
+    	mailService.certificateMail(email);
+        System.out.println("메일 전송 완료");
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "email is submited"));
+    }
 }

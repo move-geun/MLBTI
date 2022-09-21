@@ -2,7 +2,7 @@ package com.ssafy.db.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.db.entity.QUser;
-import com.ssafy.db.entity.User;
+import com.ssafy.db.entity.Users;
 
 import java.util.Optional;
 
@@ -18,9 +18,11 @@ public class UserRepositorySupport {
     private JPAQueryFactory jpaQueryFactory;
     QUser qUser = QUser.user;
 
-    public Optional<User> findUserByUserId(String userId) {
-        User user = jpaQueryFactory.select(qUser).from(qUser)
-                .where(qUser.userId.eq(userId)).fetchOne();
+    public Optional<Users> findUserByEmail(String email) {
+    	
+    	
+        Users user = jpaQueryFactory.select(qUser).from(qUser)
+                .where(qUser.email.eq(email)).fetchOne();
         if(user == null) return Optional.empty();
         return Optional.ofNullable(user);
     }
