@@ -3,25 +3,38 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   margin-top: 2rem;
-  width: 70%;
+  width: 80%;
   height: 50%;
-  /* outline: 1px solid; */
+  /* outline: 1px solid green; */
+  @media screen and (max-width: 830px) {
+    height: 40%;
+  }
+  @media screen and (max-width: 480px) {
+    height: 20%;
+  }
 `
 
 const ProfileDiv = styled.div`
   display: flex;
+  margin-left: 5rem;
   flex-direction: column;
   width: 40%;
-  height: 100%;
   align-items: center;
   justify-content: center;
 `
 
 const ImgDiv = styled.div`
-  width: 70%;
+  width: 40%;
   overflow: hidden;
   margin-bottom: 1rem;
+  @media screen and (max-width: 830px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
 `
 const ProfileImg = styled.img`
   max-width: 100%;
@@ -30,20 +43,59 @@ const ProfileImg = styled.img`
 `
 
 const Name = styled.div`
-  font-size: 30px;
+  font-size: 50px;
+  @media screen and (max-width: 830px) {
+    font-size: 20px;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 15px;
+  }
 `
 
 const InfoDiv = styled.div`
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
   height: 100%;
-  outline: 1px solid;
-`
-
-const InfoTitle = styled.div`
+  /* outline: 1px solid; */
 
 `
 
-const InfoContent = styled.div`
+const InfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 90%;
+  height: 60%;
+  /* outline: 1px solid; */
+  @media screen and (max-width: 830px) {
+    height: 50%;
+  }
+  @media screen and (max-width: 480px) {
+    height: 40%;
+  }
+`
+const Content = styled.div`
+  display: flex;
+  font-size: 25px;
+  @media screen and (max-width: 830px) {
+    font-size: 20px;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 15px;
+  }
+  
+  
+`
+
+const Title = styled.div`
+  width: 100px;
+  margin-left: 2rem;
+  
+`
+
+const Detail = styled.div`
 
 `
 
@@ -54,6 +106,8 @@ export {
   ProfileImg,
   Name,
   InfoDiv,
-  InfoTitle,
-  InfoContent,
+  InfoBox,
+  Content,
+  Title,
+  Detail,
 }

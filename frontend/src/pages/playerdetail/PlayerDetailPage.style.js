@@ -8,6 +8,11 @@ const Background = styled.div`
   height: 100vh;
 `
 
+const Header = styled.div`
+
+`
+
 export {
-  Background
+  Background,
+  Header,
 }
