@@ -13,13 +13,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * 유저 모델 정의.
- */
+
+* @FileName : Users.java
+* @Date : 2022. 9. 16
+* @작성자 : 인예림
+* @변경이력 : x
+* @프로그램 설명 : Users 모델 정의
+*/
 @Entity
 @Getter
 @Setter
 public class Users extends BaseEntity{
-
 
 	@Column(name="email")
     String email;

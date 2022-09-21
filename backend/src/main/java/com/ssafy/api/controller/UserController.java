@@ -7,11 +7,15 @@ import java.util.Optional;
 
 import javax.mail.MessagingException;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,8 +45,13 @@ import io.swagger.annotations.ApiResponses;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
- * 유저 관련 API 요청 처리를 위한 컨트롤러 정의.
- */
+
+* @FileName : UserController.java
+* @Date : 2022. 9. 16
+* @작성자 : 인예림
+* @변경이력 : x
+* @프로그램 설명 : 유저 API 요청 처리를 위한 컨트롤러 정의.
+*/
 @Api(value = "유저 API", tags = {"User"})
 @RestController
 @RequestMapping("/api/v1/users")
@@ -95,6 +104,34 @@ public class UserController {
 
 	}
 	
+	@DeleteMapping("/{uid}")
+	@ApiOperation(value = "회원 삭제", notes = "<strong>uid</strong>를 통해 회원을 삭제한다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 401, message = "인증 실패"),
+        @ApiResponse(code = 404, message = "사용자 없음"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<? extends BaseResponseBody> deleteByUid(
+			@PathVariable @ApiParam(value="uid", required = true) Integer uid) {
+		userService.deleteUserByUid(uid);
+		
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+	}
+	
+	@GetMapping("/list")
+	@ApiOperation(value = "전체 회원 정보 조회", notes = "전체 회원 정보를 응답한다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 401, message = "인증 실패"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<List<Users>> getUserAllInfo() {
+		List<Users> user_list = userService.getUserAll();
+		
+		return ResponseEntity.status(200).body(user_list);
+	}
+	
 	@GetMapping("/me")
 	@ApiOperation(value = "회원 본인 정보 조회", notes = "로그인한 회원 본인의 정보를 응답한다.") 
     @ApiResponses({
@@ -126,4 +163,5 @@ public class UserController {
         System.out.println("메일 전송 완료");
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "email is submited"));
     }
+
 }

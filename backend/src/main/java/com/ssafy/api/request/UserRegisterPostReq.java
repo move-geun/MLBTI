@@ -6,8 +6,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 유저 회원가입 API ([POST] /api/v1/users) 요청에 필요한 리퀘스트 바디 정의.
- */
+
+* @FileName : UserRegisterPostRequest.java
+* @Date : 2022. 9. 16
+* @작성자 : 인예림
+* @변경이력 : x
+* @프로그램 설명 : 유저 회원가입 API ([POST] /api/user) 요청에 필요한 리퀘스트 바디 정의.
+*/
 @Getter
 @Setter
 @ApiModel("UserRegisterPostRequest")
