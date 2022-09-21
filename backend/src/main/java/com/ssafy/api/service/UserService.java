@@ -1,10 +1,10 @@
 package com.ssafy.api.service;
 
-<<<<<<< backend/src/main/java/com/ssafy/api/service/UserService.java
+
 import java.util.Optional;
-=======
+
 import java.util.List;
->>>>>>> backend/src/main/java/com/ssafy/api/service/UserService.java
+
 
 import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.db.entity.Users;
