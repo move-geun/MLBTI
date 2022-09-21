@@ -58,8 +58,9 @@ public class NoticeController {
 		// uid, email 중 무엇을 기준으로 찾을지
 		Users user = userService.getUserByUid(registerInfo.getUser_uid());
 		if(user == null) {
-			return ResponseEntity.status(200).body(BaseResponseBody.of(400, "Not user"));
+			return ResponseEntity.status(404).body(BaseResponseBody.of(404, "Not user"));
 		}
+		
 		Notices notice = noticeService.createNotice(user, registerInfo);
 		
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
