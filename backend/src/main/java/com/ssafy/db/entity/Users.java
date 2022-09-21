@@ -20,9 +20,9 @@ import javax.persistence.Id;
 @Setter
 public class Users extends BaseEntity{
 
-	
+
 	@Column(name="email")
-    String userId;
+    String email;
 	
 	@Column(name="nickname")
 	String nickname;

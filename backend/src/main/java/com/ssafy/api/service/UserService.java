@@ -8,5 +8,5 @@ import com.ssafy.db.entity.Users;
  */
 public interface UserService {
 	Users createUsers(UserRegisterPostReq userRegisterInfo);
-	Users getUsersByUserId(String userId);
+	Users getUsersByEmail(String userId);
 }

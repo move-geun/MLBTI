@@ -16,6 +16,6 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id = null;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long uid = null;
 }

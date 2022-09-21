@@ -20,7 +20,7 @@ public class UserRes{
 	
 	public static UserRes of(Users user) {
 		UserRes res = new UserRes();
-		res.setUserId(user.getUserId());
+		res.setUserId(user.getEmail());
 		return res;
 	}
 }

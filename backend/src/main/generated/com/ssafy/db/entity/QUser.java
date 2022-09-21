@@ -32,7 +32,7 @@ public class QUser extends EntityPathBase<Users> {
 
     public final StringPath position = createString("position");
 
-    public final StringPath userId = createString("userId");
+    public final StringPath email = createString("email");
 
     public QUser(String variable) {
         super(Users.class, forVariable(variable));

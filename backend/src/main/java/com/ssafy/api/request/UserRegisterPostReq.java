@@ -18,4 +18,6 @@ public class UserRegisterPostReq {
 	String password;
 	@ApiModelProperty(name="유저 nickname", example="우동맛집")
 	String nickname;
-}
+	@ApiModelProperty(name="email 인증을 위한 인증넘버", example="114372")
+	String randomNumber;
+}	
