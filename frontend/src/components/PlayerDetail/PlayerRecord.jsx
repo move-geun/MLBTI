@@ -7,7 +7,7 @@ const PlayerRecord = () => {
     <Wrapper>
       <Title>기록</Title>
       <Table>
-        <Header style={{ color: "blue" }}>
+        <Header style={{ color: "blue" ,margin:'2rem' }}>
           <tr>
             <Td>경기</Td>
             <Td>AB</Td>

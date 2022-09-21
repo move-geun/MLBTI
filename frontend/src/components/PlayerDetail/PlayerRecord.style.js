@@ -1,8 +1,11 @@
 import styled from "styled-components";
+import TextField from "@mui/material/TextField";
 
 const Wrapper = styled.div`
   margin-top: 5rem;
   width: 90%;
+  background-color: #ceddf7;
+  border-radius: 2rem;
 `;
 
 const Title = styled.div`
@@ -25,13 +28,15 @@ const Table = styled.table`
   font-size: 30px;
 `;
 
-const Header = styled.thead`
+const Header = styled.thead` 
   /* outline: 1px solid; */
   width: 40%;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 `;
 
 const Td = styled.td`
+  /* text-align: center; */
+  padding: 1rem;
   @media screen and (max-width: 830px) {
     font-size: 20px;
   }
@@ -39,5 +44,7 @@ const Td = styled.td`
     font-size: 15px;
   }
 `;
+
+
 
 export { Wrapper, Title, Table, Header, Td };
