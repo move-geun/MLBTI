@@ -23,6 +23,7 @@ public interface UserService {
 	void modifyUserInfo(String email, String newPassword,String nickName);
 	Optional<Users> getUsersByNickName(String nickname);
 	void deleteUserByUid(Integer uid);
+	void deleteUserByEmail(String email);
 	List<Users> getUserAll();
 	Users getUserByUid(Integer uid);
 }

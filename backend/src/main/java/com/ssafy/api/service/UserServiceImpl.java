@@ -72,7 +72,6 @@ public class UserServiceImpl implements UserService {
 	public Users getUsersByEmail(String Email) {
 		// 디비에 유저 정보 조회 (userId 를 통한 조회).
 		Users user = userRepositorySupport.findUserByEmail(Email).get();
-
 		return user;
 	}
 
@@ -114,6 +113,21 @@ public class UserServiceImpl implements UserService {
 	public Optional<Users> getUsersByNickName(String nickname) {
 		return userRepository.findByNickname(nickname);
 	}
-	
 
+	/**
+	  * @Method Name : getUserByEmail
+	  * @작성일 : 2022. 9. 21
+	  * @작성자 : 김동우
+	  * @변경이력 : 
+	
+	  * @Method 설명 :
+	  * @param email
+	  * @return
+	  */
+
+	@Override
+	public void deleteUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		userRepository.delete(userRepositorySupport.findUserByEmail(email).get());
+	}
 }
