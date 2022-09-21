@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.mail.MessagingException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import com.ssafy.api.request.UserLoginPostReq;
 import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.api.response.UserLoginPostRes;
 import com.ssafy.api.response.UserRes;
+import com.ssafy.api.response.UsersRes;
 import com.ssafy.api.service.MailService;
 import com.ssafy.api.service.MailServiceImpl;
 import com.ssafy.api.service.UserService;
@@ -162,17 +164,33 @@ public class UserController {
 	}
 	
 	
+//	@GetMapping("/list")
+//	@ApiOperation(value = "전체 회원 정보 조회", notes = "전체 회원 정보를 응답한다.") 
+//    @ApiResponses({
+//        @ApiResponse(code = 200, message = "성공"),
+//        @ApiResponse(code = 500, message = "서버 오류")
+//    })
+//	public ResponseEntity<List<Users>> getUserAllInfo() {
+//		List<Users> user_list = userService.getUserAll();
+//		
+//		return ResponseEntity.status(200).body(user_list);
+//	}
+	
 	@GetMapping("/list")
 	@ApiOperation(value = "전체 회원 정보 조회", notes = "전체 회원 정보를 응답한다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
-	public ResponseEntity<List<Users>> getUserAllInfo() {
-		List<Users> user_list = userService.getUserAll();
-		
-		return ResponseEntity.status(200).body(user_list);
+	public ResponseEntity<List<UsersRes>> agetUserAllInfo() {
+		List<Users> userList = userService.getUserAll();
+		List<UsersRes> userResList = new ArrayList();
+		for(int i=0;i<userList.size();++i) {
+			userResList.add(UsersRes.of(userList.get(i)));
+		}
+		return ResponseEntity.status(200).body(userResList);
 	}
+	
 	
 	@GetMapping("/me")
 	@ApiOperation(value = "회원 본인 정보 조회", notes = "로그인한 회원 본인의 정보를 응답한다.") 
