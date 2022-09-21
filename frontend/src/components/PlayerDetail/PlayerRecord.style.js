@@ -23,7 +23,7 @@ const Title = styled.div`
 
 const Table = styled.table`
   width: 70%;
-  margin: auto; 
+  margin: auto;
   /* outline: 1px solid; */
   font-size: 30px;
 `;
