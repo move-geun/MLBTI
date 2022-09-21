@@ -63,9 +63,14 @@ const Info = styled.span`
       font-size: 15px;
     }
   }
+
+  &.detail {
+    outline: 2px solid;
+  }
   th,
   td {
     font-family: "MICEGothic Bold";
+    padding: 1rem;
   }
 `;
 
