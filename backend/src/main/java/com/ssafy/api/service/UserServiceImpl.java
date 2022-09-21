@@ -1,6 +1,7 @@
 package com.ssafy.api.service;
 
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,8 +15,13 @@ import com.ssafy.db.repository.UserRepository;
 import com.ssafy.db.repository.UserRepositorySupport;
 
 /**
- *	유저 관련 비즈니스 로직 처리를 위한 서비스 구현 정의.
- */
+
+* @FileName : UserServiceImpl.java
+* @Date : 2022. 9. 16
+* @작성자 : 인예림
+* @변경이력 : x
+* @프로그램 설명 : 유저 관련 비즈니스 로직 처리를 위한 서비스 구현 정의.
+*/
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	@Autowired
@@ -40,6 +46,17 @@ public class UserServiceImpl implements UserService {
 		user.setNickname(userRegisterInfo.getNickname());
 		return userRepository.save(user);
 	}
+	
+	@Override
+	public void deleteUserByUid(Integer uid) {
+		userRepository.deleteById(uid);
+	}
+	
+	@Override
+	public List<Users> getUserAll() {
+		List<Users> user_list = userRepository.findAll();
+		return user_list;
+	}
 
 	/**
 	  * @Method Name : getUsersByEmail
@@ -55,6 +72,12 @@ public class UserServiceImpl implements UserService {
 	public Users getUsersByEmail(String Email) {
 		// 디비에 유저 정보 조회 (userId 를 통한 조회).
 		Users user = userRepositorySupport.findUserByEmail(Email).get();
+
+		return user;
+	}
+
+	public Users getUserByUid(Integer uid) {
+		Users user = userRepository.findById(uid).get();
 		return user;
 	}
 

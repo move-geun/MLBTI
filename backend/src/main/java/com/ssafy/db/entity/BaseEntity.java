@@ -17,5 +17,5 @@ import javax.persistence.MappedSuperclass;
 public class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long uid = null;
+    int uid = 0;
 }
