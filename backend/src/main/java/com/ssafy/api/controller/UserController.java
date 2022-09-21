@@ -54,7 +54,7 @@ import springfox.documentation.annotations.ApiIgnore;
 */
 @Api(value = "유저 API", tags = {"User"})
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/user")
 public class UserController {
 	
 	@Autowired
@@ -92,12 +92,10 @@ public class UserController {
 		if(nowTime.isBefore(mailkey.get().getCreateDate())){
 			if(mailkey.isPresent()) {
 				if(registerInfo.getRandomNumber().equals(mailkey.get().getRandomNumber())){
-					System.out.println("dasdasasdasdasdasdasdasdasdas");
 					Users user = userService.createUsers(registerInfo);
 					return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));	
 				}
 				else {
-	
 					return ResponseEntity.status(400).body(BaseResponseBody.of(401, "Email token is invalid"));	
 				}
 			}
@@ -110,19 +108,15 @@ public class UserController {
 		}
 	}
 	
-	@PutMapping("/info")
-	@ApiOperation(value = "회원 가입", notes = "개인 정보를 변경한다.") 
+	@PutMapping("/id-info")
+	@ApiOperation(value = "정보 변경", notes = "개인 정보를 변경한다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
         @ApiResponse(code = 401, message = "이미 있는 nickname"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<? extends BaseResponseBody> changeInfo(
-			@ApiParam(value = "사용자 정보 변경", required = true) @RequestParam("email") String email, @RequestParam("newPassword") String newPassword,@RequestParam("newNickname") String newNickname) {
-		
-		System.out.println("hi");
-		System.out.println(email);
-		System.out.println(newPassword);
+			@ApiParam(value = "email", required = true) @RequestParam("email") String email, @RequestParam("newPassword") String newPassword,@RequestParam("newNickname") String newNickname) {
 
 		if(userService.getUsersByNickName(newNickname).isPresent()){
 			if(userService.getUsersByNickName(newNickname).get().getEmail().equals(email)) {
@@ -137,26 +131,41 @@ public class UserController {
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "nickname is modified"));
 	}
 	
-	@DeleteMapping("/{uid}")
-	@ApiOperation(value = "회원 삭제", notes = "<strong>uid</strong>를 통해 회원을 삭제한다.") 
+//	@DeleteMapping("/{uid}")
+//	@ApiOperation(value = "회원 삭제", notes = "<strong>uid</strong>를 통해 회원을 삭제한다.") 
+//    @ApiResponses({
+//        @ApiResponse(code = 200, message = "성공"),
+//        @ApiResponse(code = 401, message = "인증 실패"),
+//        @ApiResponse(code = 404, message = "사용자 없음"),
+//        @ApiResponse(code = 500, message = "서버 오류")
+//    })
+//	public ResponseEntity<? extends BaseResponseBody> deleteByUid(
+//			@PathVariable @ApiParam(value="uid", required = true) Integer uid) {
+//		userService.deleteUserByUid(uid);
+//		
+//		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+//	}
+	
+	@DeleteMapping("/{email}")
+	@ApiOperation(value = "회원 삭제", notes = "<strong>email</strong>를 통해 회원을 삭제한다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
         @ApiResponse(code = 401, message = "인증 실패"),
         @ApiResponse(code = 404, message = "사용자 없음"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
-	public ResponseEntity<? extends BaseResponseBody> deleteByUid(
-			@PathVariable @ApiParam(value="uid", required = true) Integer uid) {
-		userService.deleteUserByUid(uid);
+	public ResponseEntity<? extends BaseResponseBody> deleteByemail(
+			@PathVariable @ApiParam(value="email", required = true) String email) {
+		userService.deleteUserByEmail(email);
 		
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
+	
 	
 	@GetMapping("/list")
 	@ApiOperation(value = "전체 회원 정보 조회", notes = "전체 회원 정보를 응답한다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
-        @ApiResponse(code = 401, message = "인증 실패"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<List<Users>> getUserAllInfo() {
@@ -206,7 +215,7 @@ public class UserController {
         @ApiResponse(code = 404, message = "사용자 없음"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
-    public ResponseEntity<BaseResponseBody> sendCertifyMail(@ApiParam(value = "mail 인증 정보", required = true) @RequestParam("email") String email) throws MessagingException, IOException {    	
+    public ResponseEntity<BaseResponseBody> sendCertifyMail(@ApiParam(value = "email", required = true) @RequestParam("email") String email) throws MessagingException, IOException {    	
     	if(mailService.findMailKey(email).isPresent()) {
     		mailService.deleteMailKey(email);
     	}
@@ -232,7 +241,7 @@ public class UserController {
 	  * @throws MessagingException
 	  * @throws IOException
 	  */
-	@PostMapping("/mail/find")
+	@PostMapping("/find-password")
 	@ApiOperation(value = "비밀번호 찾기 및 변경 ", notes = "비밀번호를 변경하고 변경된 비밀번호를 이메일로 전송합니다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
