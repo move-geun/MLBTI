@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../../components/navbar/Navbar";
 import TeamInfo from "../../components/TeamDetail/TeamInfo";
 import DetailInfo from "../../components/TeamDetail/DetailInfo";
 
