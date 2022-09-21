@@ -19,7 +19,7 @@ public class QBaseEntity extends EntityPathBase<BaseEntity> {
 
     public static final QBaseEntity baseEntity = new QBaseEntity("baseEntity");
 
-    public final NumberPath<Long> id = createNumber("id", Long.class);
+    public final NumberPath<Integer> uid = createNumber("uid", Integer.class);
 
     public QBaseEntity(String variable) {
         super(BaseEntity.class, forVariable(variable));
