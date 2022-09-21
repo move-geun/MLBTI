@@ -6,8 +6,10 @@ import {
   ProfileImg,
   Name,
   InfoDiv,
-  InfoTitle,
-  InfoContent,
+  InfoBox,
+  Content,
+  Title,
+  Detail,
 } from "./PlayerInfo.style";
 
 const PlayerInfo = () => {
@@ -21,7 +23,28 @@ const PlayerInfo = () => {
       </ProfileDiv>
 
       <InfoDiv>
-        <InfoTitle>포지션</InfoTitle>
+        <InfoBox>
+          <Content>
+            <Title>포지션</Title>
+            <Detail>우익수</Detail>
+          </Content>
+          <Content>
+            <Title>출생</Title>
+            <Detail>1999.03.02</Detail>
+          </Content>
+          <Content>
+            <Title>키</Title>
+            <Detail>188 (cm)</Detail>
+          </Content>
+          <Content>
+            <Title>체중</Title>
+            <Detail>99 (kg)</Detail>
+          </Content>
+          <Content>
+            <Title>소속팀</Title>
+            <Detail>롯데 프링글스</Detail>
+          </Content>
+        </InfoBox>
       </InfoDiv>
     </Wrapper>
   );
