@@ -5,6 +5,8 @@ import {
   ResultTable,
 } from "./TeamComparison.style";
 
+import TeamTable from "../../components/game/TeamTable";
+
 const TeamComparison = () => {
   return (
     <CompareContainer>
@@ -61,6 +63,7 @@ const TeamComparison = () => {
         </div>
       </ResultTable>
       <div className="center">선수명단</div>
+      <TeamTable></TeamTable>
     </CompareContainer>
   );
 };

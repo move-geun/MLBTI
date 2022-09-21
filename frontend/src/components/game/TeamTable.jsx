@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-import { Team, TeamBox } from "./TeamTable.style";
+import { Team, TeamBox, TeamTableContainer } from "./TeamTable.style";
 
 function createData(name, a, b, c, d, e, f, g, h) {
   return { name, a, b, c, d, e, f, g, h };
@@ -26,7 +26,7 @@ const TeamTable = () => {
     createData("Frozen yoghurt", 3, 2, 2, 2, 0, 2, 1, 0.283),
   ];
   return (
-    <div>
+    <TeamTableContainer>
       {/* 1팀 */}
       <Team>
         <img src="/assets/cap.png" alt="" />
@@ -185,7 +185,7 @@ const TeamTable = () => {
           </Table>
         </TeamBox>
       </TableContainer>
-    </div>
+    </TeamTableContainer>
   );
 };
 export default TeamTable;
