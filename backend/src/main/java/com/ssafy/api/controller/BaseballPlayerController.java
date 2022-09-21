@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiResponses;
 */
 @Api(value = "선수 API", tags = {"BaseballPlayer"})
 @RestController
-@RequestMapping("/api/baseball_player")
+@RequestMapping("/api/v1/baseball_players")
 public class BaseballPlayerController {
 	@Autowired
 	BaseballPlayerService baseballPlayerService;

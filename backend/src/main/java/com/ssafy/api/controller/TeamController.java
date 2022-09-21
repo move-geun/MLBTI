@@ -31,7 +31,7 @@ import io.swagger.annotations.ApiResponses;
 */
 @Api(value = "팀 API", tags = {"Team"})
 @RestController
-@RequestMapping("/api/team")
+@RequestMapping("/api/v1/teams")
 public class TeamController {
 	@Autowired
 	TeamService teamService;
