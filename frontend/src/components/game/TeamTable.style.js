@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+const TeamTableContainer = styled.div`
+  width: 100%;
+  margin: 0 auto;
+`;
+
 const TeamBox = styled.div`
   display: flex;
   flex-direction: row;
@@ -33,4 +38,4 @@ const Team = styled.div`
     font-size: 2rem;
   }
 `;
-export { TeamBox, Team };
+export { TeamBox, Team, TeamTableContainer };
