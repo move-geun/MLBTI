@@ -43,7 +43,7 @@ const ProfileImg = styled.img`
 `
 
 const Name = styled.div`
-  font-size: 50px;
+  font-size: 40px;
   @media screen and (max-width: 830px) {
     font-size: 20px;
   }
