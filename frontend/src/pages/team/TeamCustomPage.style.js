@@ -8,13 +8,14 @@ const Background = styled.div`
   flex-direction: column;
   width: 100vw;
   height: 100vh;
-  
 `
+
 const Header = styled.div`
   font-size: 20px;
   margin-top: 1rem;
   width: 100%;
 `
+
 const CenterWrapper = styled.div`
   display: flex;
   width: 95%;
