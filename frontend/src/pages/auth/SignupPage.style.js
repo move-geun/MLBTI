@@ -67,13 +67,13 @@ const InputDiv = styled.div`
   align-items: center;
 `;
 
-const CertBtn = styled.button`
-  background-color: rgba(0, 0, 0, 0.1);
-  color: black;
-  padding: 3px 3px;
-  margin-left: 5px;
-  font-size: 15px;
-`;
+// const CertBtn = styled.button`
+//   background-color: rgba(0, 0, 0, 0.1);
+//   color: black;
+//   padding: 3px 3px;
+//   margin-left: 5px;
+//   font-size: 15px;
+// `;
 
 const Text = styled.div`
   font-size: 20px;

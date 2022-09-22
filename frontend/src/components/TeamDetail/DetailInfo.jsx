@@ -3,7 +3,6 @@ import {
   Wrapper,
   ContentSwitch,
   Switch,
-  Content,
   Schedule,
   ScheduleDetail,
   Player,
