@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: center;
-  font-size: 60px;
+  font-size: 50px;
   margin-bottom: 2rem;
   @media screen and (max-width: 830px) {
     font-size: 40px;

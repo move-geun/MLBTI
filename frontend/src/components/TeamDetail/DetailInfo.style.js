@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import TableCell from "@mui/material/TableCell";
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,10 +36,11 @@ const Schedule = styled.div`
 
 const ScheduleDetail = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  width: 100%;
+  justify-content: space-between;
+  width: 70%;
   font-size: 25px;
   margin-bottom: 1.5rem;
+  border-bottom: 2px solid;
   @media screen and (max-width: 830px) {
     font-size: 20px;
   }
@@ -50,7 +52,6 @@ const ScheduleDetail = styled.div`
     display: flex;
     justify-content: space-evenly;
     width: 30%;
-    border-right: 1px solid;
   }
 
   .content {
@@ -80,6 +81,11 @@ const PlayerDetail = styled.div`
   width: 70%;
   
 `
+
+const Cell = styled(TableCell)`
+    font-family: 'MICEGothic Bold';
+
+`
 export {
   Wrapper,
   ContentSwitch,
@@ -89,4 +95,6 @@ export {
   ScheduleDetail,
   Player,
   PlayerDetail,
+  Cell,
+  
 };

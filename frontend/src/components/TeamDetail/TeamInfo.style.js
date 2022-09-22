@@ -6,6 +6,9 @@ const Wrapper = styled.div`
   height: 40%;
   width: 90%;
   margin-top: 2rem;
+  @media screen and (max-width: 830px) {
+    margin-top: 0;
+  }
 `;
 
 const LogoDiv = styled.div`
