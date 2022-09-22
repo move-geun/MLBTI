@@ -40,7 +40,7 @@ const ScheduleDetail = styled.div`
   width: 70%;
   font-size: 25px;
   margin-bottom: 1.5rem;
-  border-bottom: 2px solid;
+  /* border-bottom: 2px solid; */
   @media screen and (max-width: 830px) {
     font-size: 20px;
   }
@@ -48,10 +48,12 @@ const ScheduleDetail = styled.div`
   @media screen and (max-width: 480px) {
     font-size: 15px;
   }
+  
   .day {
     display: flex;
     justify-content: space-evenly;
     width: 30%;
+    color: #AEAEAE ;
   }
 
   .content {
@@ -62,6 +64,7 @@ const ScheduleDetail = styled.div`
   }
 
   .date {
+  
   }
 `;
 

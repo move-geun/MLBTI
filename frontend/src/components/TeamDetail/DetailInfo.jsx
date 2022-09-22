@@ -3,17 +3,13 @@ import {
   Wrapper,
   ContentSwitch,
   Switch,
-  Content,
   Schedule,
   ScheduleDetail,
-  Player,
-  PlayerDetail,
   Cell,
 } from "./DetailInfo.style";
 import { TeamBox } from "../game/TeamTable.style";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-// import Cell from "@mui/material/Cell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";

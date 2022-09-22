@@ -5,10 +5,8 @@ const Wrapper = styled.div`
   align-items: center;
   height: 40%;
   width: 90%;
-  margin-top: 2rem;
-  @media screen and (max-width: 830px) {
-    margin-top: 0;
-  }
+  margin-top: 3rem;
+
 `;
 
 const LogoDiv = styled.div`
@@ -39,13 +37,21 @@ const InfoWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  @media screen and (max-width: 830px) {
+      margin-left: 2rem;
+    }
+
+    @media screen and (max-width: 480px) {
+      margin-left: 2rem;
+    }
 `;
 
 const Info = styled.div`
   margin-bottom: 2rem;
   display: flex;
-
+  justify-content: center;
   &.name {
+    margin-left: 1rem;
     font-size: 50px;
     @media screen and (max-width: 830px) {
       font-size: 45px;
@@ -57,6 +63,8 @@ const Info = styled.div`
   }
 
   &.rank {
+    margin-left: 1rem;
+
     font-size: 40px;
     @media screen and (max-width: 830px) {
       font-size: 30px;
@@ -67,12 +75,18 @@ const Info = styled.div`
     }
   }
 
-  &.header {
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid;
+  &.content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-row-gap: 1rem;
+    place-items: center;
+    text-align: center;
+    margin: 0;
+  }
+  div {
+    font-size: 25px;
     @media screen and (max-width: 830px) {
-      font-size: 30px;
+      font-size: 20px;
     }
 
     @media screen and (max-width: 480px) {
@@ -82,18 +96,6 @@ const Info = styled.div`
 
   table {
     width: 20px;
-  }
-
-  div {
-    font-size: 25px;
-    width: 20%;
-    @media screen and (max-width: 830px) {
-      font-size: 20px;
-    }
-
-    @media screen and (max-width: 480px) {
-      font-size: 15px;
-    }
   }
 `;
 

@@ -4,8 +4,7 @@ const Background = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
 `
 
 const TeamWrapper = styled.div`
