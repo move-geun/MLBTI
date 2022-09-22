@@ -17,8 +17,8 @@ import lombok.Setter;
 @Setter
 @ApiModel("NoticeRegisterPostReq")
 public class NoticeRegisterPostReq {
-	@ApiModelProperty(name="공지사항 작성자 uid", example="1")
-	Integer user_uid;
+	@ApiModelProperty(name="공지사항 작성자 이메일", example="test@naver.com")
+	String email;
 	@ApiModelProperty(name="공지사항 제목", example="사이트 점검 공지")
 	String title;
 	@ApiModelProperty(name="공지사항 내용", example="금일 오후 11시 사이트 점검 예정입니다.")

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ssafy.api.request.NoticeRegisterPostReq;
 import com.ssafy.api.request.NoticeUpdatePutReq;
+import com.ssafy.api.response.NoticesRes;
 import com.ssafy.db.entity.Notices;
 import com.ssafy.db.entity.Users;
 
@@ -17,7 +18,8 @@ import com.ssafy.db.entity.Users;
 */
 public interface NoticeService {
 	Notices createNotice(Users user, NoticeRegisterPostReq noticeRegisterInfo);
+	Notices getNoticeByUid(Integer uid);
 	void deleteNoticeByUid(Integer uid);
-	List<Notices> getNoticeAll();
+	List<NoticesRes> getNoticeAll();
 	Notices updateNotice(NoticeUpdatePutReq noticeUpdateInfo);
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ssafy.api.request.NoticeRegisterPostReq;
 import com.ssafy.api.request.NoticeUpdatePutReq;
+import com.ssafy.api.response.NoticesRes;
 import com.ssafy.api.service.NoticeService;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.model.response.BaseResponseBody;
@@ -55,8 +56,7 @@ public class NoticeController {
     })
 	public ResponseEntity<? extends BaseResponseBody> register(
 			@RequestBody @ApiParam(value="공지사항 정보", required = true) NoticeRegisterPostReq registerInfo) {
-		// uid, email 중 무엇을 기준으로 찾을지
-		Users user = userService.getUserByUid(registerInfo.getUser_uid());
+		Users user = userService.getUsersByEmail(registerInfo.getEmail());
 		if(user == null) {
 			return ResponseEntity.status(404).body(BaseResponseBody.of(404, "Not user"));
 		}
@@ -74,14 +74,14 @@ public class NoticeController {
         @ApiResponse(code = 404, message = "공지사항 없음"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
-	public ResponseEntity<Notices> update(
+	public ResponseEntity<NoticesRes> update(
 			@RequestBody @ApiParam(value="공지사항 수정 정보", required = true) NoticeUpdatePutReq updateInfo) {
 		Notices notice = noticeService.updateNotice(updateInfo);
 		if(notice == null) {
-			return ResponseEntity.status(404).body(notice);
+			return ResponseEntity.status(404).body(null);
 		}
 		
-		return ResponseEntity.status(200).body(notice);
+		return ResponseEntity.status(200).body(NoticesRes.of(notice));
 	}
 	
 	@GetMapping()
@@ -91,10 +91,24 @@ public class NoticeController {
         @ApiResponse(code = 401, message = "인증 실패"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
-	public ResponseEntity<List<Notices>> getNoticeAllInfo() {
-		List<Notices> notice_list = noticeService.getNoticeAll();
+	public ResponseEntity<List<NoticesRes>> getNoticeAllInfo() {
+		List<NoticesRes> notice_list = noticeService.getNoticeAll();
 		
 		return ResponseEntity.status(200).body(notice_list);
+	}
+	
+	@GetMapping("/{uid}")
+	@ApiOperation(value = "공지사항 상세 조회", notes = "<strong>uid(notices)를 통해 공지사항을 상세 조회한다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 401, message = "인증 실패"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<NoticesRes> getNoticeByUid(
+			@PathVariable @ApiParam(value="uid", required = true) Integer uid) {
+		Notices notice = noticeService.getNoticeByUid(uid);
+		
+		return ResponseEntity.status(200).body(NoticesRes.of(notice));
 	}
 	
 	@DeleteMapping("/{uid}")

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssafy.api.request.NoticeRegisterPostReq;
 import com.ssafy.api.request.NoticeUpdatePutReq;
+import com.ssafy.api.response.NoticesRes;
 import com.ssafy.db.entity.Notices;
 import com.ssafy.db.entity.Users;
 import com.ssafy.db.repository.NoticeRepository;
@@ -35,13 +36,20 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
+	public Notices getNoticeByUid(Integer uid) {
+		Notices notice = noticeRepository.findById(uid).orElse(null);
+		return notice;
+	}
+
+	
+	@Override
 	public void deleteNoticeByUid(Integer uid) {
 		noticeRepository.deleteById(uid);
 	}
 
 	@Override
-	public List<Notices> getNoticeAll() {
-		List<Notices> notice_list = noticeRepository.findAll();
+	public List<NoticesRes> getNoticeAll() {
+		List<NoticesRes> notice_list = noticeRepository.findAllBy();
 		return notice_list;
 	}
 

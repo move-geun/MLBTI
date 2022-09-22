@@ -1,8 +1,11 @@
 package com.ssafy.db.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.ssafy.api.response.NoticesRes;
 import com.ssafy.db.entity.Notices;
 
 /**
@@ -15,5 +18,6 @@ import com.ssafy.db.entity.Notices;
 */
 @Repository
 public interface NoticeRepository extends JpaRepository<Notices, Integer>{
-
+	NoticesRes findByUid(Integer uid);
+	List<NoticesRes> findAllBy();
 }
