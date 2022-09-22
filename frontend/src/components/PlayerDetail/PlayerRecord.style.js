@@ -1,11 +1,17 @@
 import styled from "styled-components";
+<<<<<<< HEAD
 import TextField from "@mui/material/TextField";
+=======
+>>>>>>> 01670c4 (add: 선수 상세 페이지 구현중)
 
 const Wrapper = styled.div`
   margin-top: 5rem;
   width: 90%;
+<<<<<<< HEAD
   background-color: #ceddf7;
   border-radius: 2rem;
+=======
+>>>>>>> 01670c4 (add: 선수 상세 페이지 구현중)
 `;
 
 const Title = styled.div`
@@ -23,11 +29,16 @@ const Title = styled.div`
 
 const Table = styled.table`
   width: 70%;
+<<<<<<< HEAD
   margin: auto; 
+=======
+  margin: auto;
+>>>>>>> 01670c4 (add: 선수 상세 페이지 구현중)
   /* outline: 1px solid; */
   font-size: 30px;
 `;
 
+<<<<<<< HEAD
 const Header = styled.thead` 
   /* outline: 1px solid; */
   width: 40%;
@@ -37,6 +48,15 @@ const Header = styled.thead`
 const Td = styled.td`
   /* text-align: center; */
   padding: 1rem;
+=======
+const Header = styled.thead`
+  /* outline: 1px solid; */
+  width: 40%;
+  margin-bottom: 1rem;
+`;
+
+const Td = styled.td`
+>>>>>>> 01670c4 (add: 선수 상세 페이지 구현중)
   @media screen and (max-width: 830px) {
     font-size: 20px;
   }
@@ -45,6 +65,9 @@ const Td = styled.td`
   }
 `;
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 01670c4 (add: 선수 상세 페이지 구현중)
 export { Wrapper, Title, Table, Header, Td };
