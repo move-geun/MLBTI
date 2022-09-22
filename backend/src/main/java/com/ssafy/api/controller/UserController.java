@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.mail.MessagingException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +28,7 @@ import com.ssafy.api.request.UserLoginPostReq;
 import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.api.response.UserLoginPostRes;
 import com.ssafy.api.response.UserRes;
+import com.ssafy.api.response.UsersRes;
 import com.ssafy.api.service.MailService;
 import com.ssafy.api.service.MailServiceImpl;
 import com.ssafy.api.service.UserService;
@@ -45,7 +48,6 @@ import io.swagger.annotations.ApiResponses;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
-
 * @FileName : UserController.java
 * @Date : 2022. 9. 16
 * @작성자 : 인예림
@@ -54,7 +56,7 @@ import springfox.documentation.annotations.ApiIgnore;
 */
 @Api(value = "유저 API", tags = {"User"})
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/user")
 public class UserController {
 	
 	@Autowired
@@ -63,35 +65,40 @@ public class UserController {
 	MailService mailService;
 	
 	
+	/**
+	  * @Method Name : register
+	  * @작성일 : 2022. 9. 21
+	  * @작성자 : 김동우
+	  * @변경이력 : 
+	
+	  * @Method 설명 : 회원가입 로직, 이메일에 인증 토큰을 보내어 인증토큰의 제한 시간과 번호가 맞는 지 확인하고  맞다면 회원가입 성공
+	  * @param registerInfo
+	  * @return
+	  */
 	@PostMapping("/signin")
-	@ApiOperation(value = "회원 가입", notes = "<strong>email, password, nickname</strong>을 통해 회원가입 한다.") 
+	@ApiOperation(value = "회원 가입", notes = "<strong>email, password, nickname, randomNumber</strong>을 통해 회원가입 한다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
-        @ApiResponse(code = 401, message = "인증 실패"),
-        @ApiResponse(code = 404, message = "사용자 없음"),
+        @ApiResponse(code = 401, message = "이메일 토큰 인증 실패"),
+        @ApiResponse(code = 404, message = "메일을 보내지 않았음"),
+        @ApiResponse(code = 405, message = "메일 인증 시간 초과"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<? extends BaseResponseBody> register(
 			@RequestBody @ApiParam(value="회원가입 정보", required = true) UserRegisterPostReq registerInfo) {
 		
 		Optional<MailConfirmKeys> mailkey = mailService.findMailKey(registerInfo.getEmail());
-		System.out.println("=================================");
-		System.out.println(registerInfo.getRandomNumber());
-		System.out.println(mailkey.get().getRandomNumber());
-		System.out.println("==================================");
 		LocalDateTime nowTime = LocalDateTime.now().minusMinutes(5);
 		
 		// timeout check
 		if(nowTime.isBefore(mailkey.get().getCreateDate())){
 			if(mailkey.isPresent()) {
 				if(registerInfo.getRandomNumber().equals(mailkey.get().getRandomNumber())){
-					System.out.println("dasdasasdasdasdasdasdasdasdas");
 					Users user = userService.createUsers(registerInfo);
 					return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));	
 				}
 				else {
-	
-					return ResponseEntity.status(400).body(BaseResponseBody.of(403, "Email token is invalid"));	
+					return ResponseEntity.status(400).body(BaseResponseBody.of(401, "Email token is invalid"));	
 				}
 			}
 			else {
@@ -99,38 +106,91 @@ public class UserController {
 			}
 		}
 		else {
-			return ResponseEntity.status(403).body(BaseResponseBody.of(405, "Email token timed out(5 minuate"));	
+			return ResponseEntity.status(405).body(BaseResponseBody.of(405, "Email token timed out(5 minuate"));	
 		}
-
 	}
 	
-	@DeleteMapping("/{uid}")
-	@ApiOperation(value = "회원 삭제", notes = "<strong>uid</strong>를 통해 회원을 삭제한다.") 
+	@PutMapping("/id-info")
+	@ApiOperation(value = "정보 변경", notes = "개인 정보를 변경한다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 401, message = "이미 있는 nickname"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<? extends BaseResponseBody> changeInfo(
+			@ApiParam(value = "email", required = true) @RequestParam("email") String email, @RequestParam("newPassword") String newPassword,@RequestParam("newNickname") String newNickname) {
+
+		if(userService.getUsersByNickName(newNickname).isPresent()){
+			if(userService.getUsersByNickName(newNickname).get().getEmail().equals(email)) {
+				userService.modifyUserInfo(email,newPassword,newNickname);
+				return ResponseEntity.status(200).body(BaseResponseBody.of(200, "nick name is not modified"));
+			}
+			else {
+				return ResponseEntity.status(401).body(BaseResponseBody.of(401, "nickname is existed"));
+			}
+		}
+		userService.modifyUserInfo(email,newPassword,newNickname);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "nickname is modified"));
+	}
+	
+//	@DeleteMapping("/{uid}")
+//	@ApiOperation(value = "회원 삭제", notes = "<strong>uid</strong>를 통해 회원을 삭제한다.") 
+//    @ApiResponses({
+//        @ApiResponse(code = 200, message = "성공"),
+//        @ApiResponse(code = 401, message = "인증 실패"),
+//        @ApiResponse(code = 404, message = "사용자 없음"),
+//        @ApiResponse(code = 500, message = "서버 오류")
+//    })
+//	public ResponseEntity<? extends BaseResponseBody> deleteByUid(
+//			@PathVariable @ApiParam(value="uid", required = true) Integer uid) {
+//		userService.deleteUserByUid(uid);
+//		
+//		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+//	}
+	
+	@DeleteMapping("/{email}")
+	@ApiOperation(value = "회원 삭제", notes = "<strong>email</strong>를 통해 회원을 삭제한다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
         @ApiResponse(code = 401, message = "인증 실패"),
         @ApiResponse(code = 404, message = "사용자 없음"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
-	public ResponseEntity<? extends BaseResponseBody> deleteByUid(
-			@PathVariable @ApiParam(value="uid", required = true) Integer uid) {
-		userService.deleteUserByUid(uid);
+	public ResponseEntity<? extends BaseResponseBody> deleteByemail(
+			@PathVariable @ApiParam(value="email", required = true) String email) {
+		userService.deleteUserByEmail(email);
 		
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
+	
+	
+//	@GetMapping("/list")
+//	@ApiOperation(value = "전체 회원 정보 조회", notes = "전체 회원 정보를 응답한다.") 
+//    @ApiResponses({
+//        @ApiResponse(code = 200, message = "성공"),
+//        @ApiResponse(code = 500, message = "서버 오류")
+//    })
+//	public ResponseEntity<List<Users>> getUserAllInfo() {
+//		List<Users> user_list = userService.getUserAll();
+//		
+//		return ResponseEntity.status(200).body(user_list);
+//	}
 	
 	@GetMapping("/list")
 	@ApiOperation(value = "전체 회원 정보 조회", notes = "전체 회원 정보를 응답한다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
-        @ApiResponse(code = 401, message = "인증 실패"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
-	public ResponseEntity<List<Users>> getUserAllInfo() {
-		List<Users> user_list = userService.getUserAll();
-		
-		return ResponseEntity.status(200).body(user_list);
+	public ResponseEntity<List<UsersRes>> agetUserAllInfo() {
+		List<Users> userList = userService.getUserAll();
+		List<UsersRes> userResList = new ArrayList();
+		for(int i=0;i<userList.size();++i) {
+			userResList.add(UsersRes.of(userList.get(i)));
+		}
+		return ResponseEntity.status(200).body(userResList);
 	}
+	
 	
 	@GetMapping("/me")
 	@ApiOperation(value = "회원 본인 정보 조회", notes = "로그인한 회원 본인의 정보를 응답한다.") 
@@ -146,7 +206,6 @@ public class UserController {
 		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
 		 */
 		
-		
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
 		String email = userDetails.getUsername();
 		Users user = userService.getUsersByEmail(email);
@@ -154,14 +213,67 @@ public class UserController {
 		return ResponseEntity.status(200).body(UserRes.of(user));
 	}
     
-    @PostMapping("/mail/send/certify")
-    public ResponseEntity<BaseResponseBody> sendCertifyMail(@ApiParam(value = "mail 인증 정보", required = true) @RequestParam("email") String email) throws MessagingException, IOException {    	
+    /**
+      * @Method Name : sendCertifyMail
+      * @작성일 : 2022. 9. 21
+      * @작성자 : 김동우
+      * @변경이력 : 
+    
+      * @Method 설명 : 이메일에 인증 토큰 보내는 로직 
+      * @param email
+      * @return
+      * @throws MessagingException
+      * @throws IOException
+      */
+	@PostMapping("/mail/send/certify")
+	@ApiOperation(value = "본인 인증 메일 전송", notes = "본인 인증 메일을 전송합니다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 401, message = "인증 메일 전송 실패"),
+        @ApiResponse(code = 404, message = "사용자 없음"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+    public ResponseEntity<BaseResponseBody> sendCertifyMail(@ApiParam(value = "email", required = true) @RequestParam("email") String email) throws MessagingException, IOException {    	
     	if(mailService.findMailKey(email).isPresent()) {
     		mailService.deleteMailKey(email);
     	}
-    	mailService.certificateMail(email);
+    	try {
+    		mailService.certificateMail(email);
+    		System.out.println("메일 전송 완료");
+            return ResponseEntity.status(200).body(BaseResponseBody.of(200, "email is submited"));
+    	}
+    	catch (Exception e){
+    		return ResponseEntity.status(401).body(BaseResponseBody.of(401, "email is not submitted"));
+    	}
+    }
+	
+	/**
+	  * @Method Name : findMail
+	  * @작성일 : 2022. 9. 21
+	  * @작성자 : 김동우
+	  * @변경이력 : 
+	
+	  * @Method 설명 : 비밀번호를 까먹었을 시에 메일을 찾는 API입니다.
+	  * @param email
+	  * @return
+	  * @throws MessagingException
+	  * @throws IOException
+	  */
+	@PostMapping("/find-password")
+	@ApiOperation(value = "비밀번호 찾기 및 변경 ", notes = "비밀번호를 변경하고 변경된 비밀번호를 이메일로 전송합니다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 401, message = "인증 메일 전송 실패"),
+        @ApiResponse(code = 404, message = "사용자 없음"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+    public ResponseEntity<BaseResponseBody> findMail(@ApiParam(value = "mail 정보", required = true) @RequestParam("email") String email) throws MessagingException, IOException {
+    	if(mailService.findMailKey(email).isPresent()) {
+    		mailService.deleteMailKey(email);
+    	}
+    	mailService.findUserPassword(email);
         System.out.println("메일 전송 완료");
-        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "email is submited"));
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "password change email is submited"));
     }
 
 }
