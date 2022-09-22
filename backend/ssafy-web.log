@@ -288,3 +288,43 @@ java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'sunbi5252@na
 2022-09-22 11:11:21.862 DEBUG 9884 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/resources/**, /swagger-ui.html, /webjars/**, /css/**, /fonts/**, /icons/**, /img/**, /js/**, /swagger-ui/**] in 'resourceHandlerMapping'
 2022-09-22 11:11:21.870 DEBUG 9884 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
 2022-09-22 11:11:21.986  INFO 9884 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2022-09-22 11:11:22.147  INFO 9884 --- [restartedMain] com.ssafy.GroupCallApplication           : Started GroupCallApplication in 3.827 seconds (JVM running for 880.719)
+2022-09-22 11:11:22.151  INFO 9884 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-09-22 11:19:31.917  INFO 9884 --- [Thread-9] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-09-22 11:19:31.920  INFO 9884 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-09-22 11:19:31.921  INFO 9884 --- [Thread-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2022-09-22 11:19:31.927  INFO 9884 --- [Thread-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2022-09-22 11:19:32.238  INFO 9884 --- [restartedMain] com.ssafy.GroupCallApplication           : Starting GroupCallApplication using Java 1.8.0_192 on DESKTOP-KVCQHCD with PID 9884 (C:\Users\SSAFY\github_repository\ssafy\specialization_project\S07P22E202\backend\bin\main started by SSAFY in C:\Users\SSAFY\github_repository\ssafy\specialization_project\S07P22E202\backend)
+2022-09-22 11:19:32.238  INFO 9884 --- [restartedMain] com.ssafy.GroupCallApplication           : No active profile set, falling back to default profiles: default
+2022-09-22 11:19:32.899  INFO 9884 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-09-22 11:19:32.974  INFO 9884 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 74 ms. Found 7 JPA repository interfaces.
+2022-09-22 11:19:33.060  INFO 9884 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@2358fbb6' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-09-22 11:19:33.062  INFO 9884 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-09-22 11:19:33.214  INFO 9884 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2022-09-22 11:19:33.215  INFO 9884 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-09-22 11:19:33.215  INFO 9884 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-09-22 11:19:33.242  INFO 9884 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2022-09-22 11:19:33.242  INFO 9884 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1001 ms
+2022-09-22 11:19:33.287 DEBUG 9884 --- [restartedMain] o.s.w.s.r.ResourceUrlEncodingFilter      : Filter 'resourceUrlEncodingFilter' configured for use
+2022-09-22 11:19:33.288 DEBUG 9884 --- [restartedMain] o.s.web.filter.CharacterEncodingFilter   : Filter 'characterEncodingFilter' configured for use
+2022-09-22 11:19:33.288 DEBUG 9884 --- [restartedMain] o.s.w.f.CommonsRequestLoggingFilter      : Filter 'commonsRequestLoggingFilter' configured for use
+2022-09-22 11:19:33.335  INFO 9884 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-09-22 11:19:33.342  INFO 9884 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2022-09-22 11:19:33.549  INFO 9884 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2022-09-22 11:19:33.550  INFO 9884 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-09-22 11:19:33.892  INFO 9884 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-09-22 11:19:33.892  INFO 9884 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-09-22 11:19:33.911  INFO 9884 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-09-22 11:19:34.015  WARN 9884 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-09-22 11:19:34.181 DEBUG 9884 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 29 mappings in 'requestMappingHandlerMapping'
+2022-09-22 11:19:34.218  INFO 9884 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-09-22 11:19:34.266  INFO 9884 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@458116fc, org.springframework.security.web.context.SecurityContextPersistenceFilter@109a9777, org.springframework.security.web.header.HeaderWriterFilter@571a47bb, org.springframework.web.filter.CorsFilter@314e38dd, org.springframework.security.web.authentication.logout.LogoutFilter@37182c30, com.ssafy.common.auth.JwtAuthenticationFilter@ffb451f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@34c10e2c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@31e3a090, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@74440bf0, org.springframework.security.web.session.SessionManagementFilter@3f2fae6d, org.springframework.security.web.access.ExceptionTranslationFilter@74da14bc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@67cb281b]
+2022-09-22 11:19:34.305  INFO 9884 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-09-22 11:19:34.309 DEBUG 9884 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-09-22 11:19:34.321 DEBUG 9884 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-09-22 11:19:34.332 DEBUG 9884 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-09-22 11:19:34.430 DEBUG 9884 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/resources/**, /swagger-ui.html, /webjars/**, /css/**, /fonts/**, /icons/**, /img/**, /js/**, /swagger-ui/**] in 'resourceHandlerMapping'
+2022-09-22 11:19:34.436 DEBUG 9884 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-09-22 11:19:34.510  INFO 9884 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2022-09-22 11:19:34.604  INFO 9884 --- [restartedMain] com.ssafy.GroupCallApplication           : Started GroupCallApplication in 2.401 seconds (JVM running for 1373.176)
+2022-09-22 11:19:34.606  INFO 9884 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
