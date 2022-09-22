@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.api.response.TeamsRes;
 import com.ssafy.api.service.TeamService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.entity.Teams;
@@ -43,15 +44,15 @@ public class TeamController {
         @ApiResponse(code = 404, message = "팀 없음"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
-	public ResponseEntity<Teams> getTeamById(
+	public ResponseEntity<TeamsRes> getTeamById(
 			@PathVariable @ApiParam(value="id", required = true) Integer id) {
 		Teams team = teamService.getTeamById(id);
 		
 		if(team == null) {
-			return ResponseEntity.status(404).body(team);
+			return ResponseEntity.status(404).body(null);
 		}
 		
-		return ResponseEntity.status(200).body(team);
+		return ResponseEntity.status(200).body(TeamsRes.of(team));
 	}
 	
 	@GetMapping("/nationalMLB")
