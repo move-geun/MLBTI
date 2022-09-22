@@ -37,7 +37,7 @@ import io.swagger.annotations.ApiResponses;
 */
 @Api(value = "공지사항 API", tags = {"Notice"})
 @RestController
-@RequestMapping("/api/v1/notices")
+@RequestMapping("/api/notices")
 public class NoticeController {
 	@Autowired
 	UserService userService;
