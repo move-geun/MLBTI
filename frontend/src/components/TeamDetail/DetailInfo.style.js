@@ -31,7 +31,6 @@ const Schedule = styled.div`
   align-items: center;
   width: 100%;
   margin: 2rem auto;
-  /* outline: 1px solid blue; */
 `;
 
 const ScheduleDetail = styled.div`
@@ -40,7 +39,6 @@ const ScheduleDetail = styled.div`
   width: 100%;
   font-size: 25px;
   margin-bottom: 1.5rem;
-  /* outline: 1px solid green; */
   @media screen and (max-width: 830px) {
     font-size: 20px;
   }
@@ -52,13 +50,10 @@ const ScheduleDetail = styled.div`
     display: flex;
     justify-content: space-evenly;
     width: 30%;
-    /* min-width: 200px; */
     border-right: 1px solid;
-    /* outline: 1px solid; */
   }
 
   .content {
-    /* outline: 2px solid; */
     display: flex;
     justify-content: space-evenly;
     width: 40%;
