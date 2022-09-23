@@ -1,16 +1,5 @@
 import React from "react";
-import {
-  Wrapper,
-  ProfileDiv,
-  ImgDiv,
-  ProfileImg,
-  Name,
-  InfoDiv,
-  InfoBox,
-  Content,
-  Title,
-  Detail,
-} from "./PlayerInfo.style";
+import { Wrapper, ProfileDiv, ProfileImg, Name } from "./PlayerInfo.style";
 
 const PlayerInfo = () => {
   return (
@@ -37,7 +26,6 @@ const PlayerInfo = () => {
           <div className="title">입단일</div>
           <div className="content">2022.01.01</div>
         </ProfileDiv>
-
       </div>
       <Name>박찬호</Name>
     </Wrapper>
