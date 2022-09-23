@@ -9,8 +9,10 @@ import {
   InBtn,
   ErrorText,
   ContentCase,
-  InputBtnDiv,
+  CertBtn,
 } from "./SignupPage.style";
+import { checkEmail, getTeam } from "./signup-slice";
+import { useDispatch } from 'react-redux'
 
 const SignupPage = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -23,6 +25,8 @@ const SignupPage = () => {
   const [defaultNickname, setDefaultNickname] = useState(false);
   const [nicknameValid, setNicknameValid] = useState(true);
 
+
+  
   // 이메일 유효성 검사
   const validateEmail = (e) => {
     if (e.target.value) {
@@ -55,6 +59,15 @@ const SignupPage = () => {
     else return setNicknameValid(false);
   };
 
+  console.log("디폴트이메일",defaultEmail);
+
+  const dispatch = useDispatch()
+
+  function sendNumber() {
+    dispatch(getTeam(userEmail))
+
+  }
+
   return (
     <FormInputsBlock>
       <Header>회원가입</Header>
@@ -62,34 +75,35 @@ const SignupPage = () => {
         <InputDiv>
           <Text>이메일</Text>
           <ContentCase>
-            <InputBtnDiv>
-            <StyledInput
-              type="email"
-              placeholder="example@exam.com"
-              onChange={(e) => {
-                setUserEmail(e.target.value);
-              }}
-              value={userEmail}
-              className="email"
-              onBlur={(e) => {
-                validateEmail(e);
-              }}>
-              </StyledInput>
-              {/* <button>인증하기</button> */}
-              </InputBtnDiv>
+            <div>
+              <StyledInput
+                type="email"
+                placeholder="example@exam.com"
+                onChange={(e) => {
+                  setUserEmail(e.target.value);
+                }}
+                value={userEmail}
+                className="email"
+                onBlur={(e) => {
+                  validateEmail(e);
+                }}
+              ></StyledInput>
+            
             {defaultEmail && !emailValid ? (
               <ErrorText>올바르지 않은 이메일 형식 입니다.</ErrorText>
-            ) : null}
-
+              ) : null}
+              </div>
           </ContentCase>
+              <CertBtn type='button' onClick={sendNumber} >인증번호 전송</CertBtn>
         </InputDiv>
 
+        {/* 인정번호 확인 */}
         <InputDiv>
           <Text>인증번호 확인</Text>
           <ContentCase>
             <StyledInput
               type="text"
-              placeholder="인증번호를 입력해주세요"
+              placeholder="인증번호 입력"
               onChange={(e) => {
                 setEmailCert(e.target.value);
               }}
@@ -97,13 +111,17 @@ const SignupPage = () => {
               className="cert"
             />
           </ContentCase>
+            <CertBtn>인증번호 확인</CertBtn>
         </InputDiv>
+
+        {/* 닉네임 */}
         <InputDiv>
           <Text>닉네임</Text>
           <ContentCase>
+            <div>
             <StyledInput
               type="text"
-              placeholder="닉네임을 입력해주세요"
+              placeholder="닉네임은 2~10자 이하의 한글,영어,숫자"
               onChange={(e) => {
                 setUserNick(e.target.value);
               }}
@@ -115,9 +133,10 @@ const SignupPage = () => {
             />
             {defaultNickname && !nicknameValid ? (
               <ErrorText>
-                닉네임은 2~10자 이하의 한글,영어,숫자만 입력할 수 있어요
+                올바르지 않은 닉네임 입니다.
               </ErrorText>
             ) : null}
+            </div>
           </ContentCase>
         </InputDiv>
         <InputDiv>
@@ -139,7 +158,7 @@ const SignupPage = () => {
           <ContentCase>
             <StyledInput
               type="text"
-              placeholder="비밀번호를 다시 입력해주세요"
+              placeholder="비밀번호 입력"
               onChange={(e) => {
                 setUserPwdCheck(e.target.value);
               }}
