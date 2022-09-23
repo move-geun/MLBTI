@@ -1,28 +1,15 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, minmax(50px, auto));
   margin-top: 2rem;
-  width: 80%;
-  height: 50%;
-  /* outline: 1px solid green; */
-  @media screen and (max-width: 830px) {
-    height: 40%;
-  }
-  @media screen and (max-width: 480px) {
-    height: 20%;
-  }
 `
 
 const ProfileDiv = styled.div`
-  display: flex;
-  margin-left: 5rem;
-  flex-direction: column;
-  width: 40%;
-  align-items: center;
-  justify-content: center;
+
 `
 
 const ImgDiv = styled.div`
@@ -37,9 +24,7 @@ const ImgDiv = styled.div`
   }
 `
 const ProfileImg = styled.img`
-  max-width: 100%;
-  height: auto;
-  display: block;
+  width: 50%;
 `
 
 const Name = styled.div`
