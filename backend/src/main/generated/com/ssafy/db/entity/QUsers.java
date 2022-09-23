@@ -32,8 +32,6 @@ public class QUsers extends EntityPathBase<Users> {
     //inherited
     public final NumberPath<Integer> uid = _super.uid;
 
-    public final NumberPath<Integer> user_teams_uid = createNumber("user_teams_uid", Integer.class);
-
     public QUsers(String variable) {
         super(Users.class, forVariable(variable));
     }
