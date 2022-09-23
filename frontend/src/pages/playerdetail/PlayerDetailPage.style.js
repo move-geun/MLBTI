@@ -25,7 +25,7 @@ const SearchDiv = styled.div`
       height: 40%;
     }
     @media screen and (max-width: 480px) {
-      font-size: 10px;
+      font-size: 15px;
       height: 40%;
     }
   }
