@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   SimulationContainer,
   Score,
@@ -9,6 +10,27 @@ import {
 } from "./SimulationPage.style";
 
 const SimulationPage = () => {
+
+  const [currentTab, setCurrentTab] = useState(0);
+
+  const tabList = [
+    {tabName: '1회', id: 'game1', content:'타자 1 : 스트라이크2'},
+    {tabName: '2회', id: 'game2', content:'타자 2 : 스트라이크2'},
+    {tabName: '3회', id: 'game3'},
+    {tabName: '4회', id: 'game4'},
+    {tabName: '5회', id: 'game5'},
+    {tabName: '6회', id: 'game6'},
+    {tabName: '7회', id: 'game7'},
+    {tabName: '8회', id: 'game8'},
+    {tabName: '9회', id: 'game9'},
+];
+
+const selectTabHandler = (index) => {
+  setCurrentTab(index);
+}
+
+
+
   return (
     <SimulationContainer>
       <div className="title">경기 시뮬레이션</div>
@@ -106,9 +128,24 @@ const SimulationPage = () => {
         </ScoreInfo>
       </Score>
       <ScoreHistory>
-        <div className="tab">
-          <div className="result">B</div>
-        </div>
+      <TabMenu>
+          {tabList.map((ele, index)=>{
+            return (
+              <li
+              key={index}
+              className={currentTab === index ? "submenu focused" : "submenu"}
+              onClick={()=> selectTabHandler(index)}
+            >
+              {ele.tabName}
+            </li>
+              )
+          })}
+
+        </TabMenu>
+        <Desc>
+          <h1>{tabList[currentTab].content}</h1>
+         
+        </Desc>
       </ScoreHistory>
     </SimulationContainer>
   );

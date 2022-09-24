@@ -1,7 +1,7 @@
 import { style } from "@mui/system";
 import styled from "styled-components";
 
-const SimulationContainer = styled.div`
+const LiveContainer = styled.div`
   width: 95%;
   height: 100%;
   display: flex;
@@ -147,7 +147,8 @@ const ScoreHistory = styled.div`
     .tab{
 
     }
-
+ 
+  
 `;
 
 const TabMenu = styled.ul`
@@ -188,7 +189,7 @@ const Desc = styled.div`
 `;
 
 export {
-  SimulationContainer,
+  LiveContainer,
   Score,
   ScoreTitle,
   ScoreInfo,
