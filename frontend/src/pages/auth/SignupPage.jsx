@@ -64,8 +64,7 @@ const SignupPage = () => {
   const dispatch = useDispatch()
 
   function sendNumber() {
-    dispatch(getTeam(userEmail))
-
+    dispatch(checkEmail(userEmail))
   }
 
   return (
