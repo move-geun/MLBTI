@@ -10,6 +10,7 @@ import {
 } from "./LivePage.style";
 
 import Cheer from "../../components/cheer/Cheer";
+import LiveComment from "../../components/livecomment/LiveComment";
 
 const LivePage = () => {
 
@@ -35,7 +36,9 @@ const selectTabHandler = (index) => {
 
   return (
     <LiveContainer>
+     
       <div className="title">문자 중계</div>
+      <LiveComment />
       <Cheer />
       <Score>
         <ScoreTitle>
