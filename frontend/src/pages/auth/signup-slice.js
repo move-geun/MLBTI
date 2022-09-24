@@ -4,10 +4,11 @@ import axios from '../../api/http';
 // 이메일 인증번호 전송
 export const checkEmail = createAsyncThunk(
   'CHECK_EMAIL',
-  async (userEmail, { rejectWithValue }) => {
+  async (email, { rejectWithValue }) => {
     try {
-      
-      const res = await axios.post('/user/mail/send/certify/', {email: userEmail})
+      // query 로 보내기
+      const res = await axios.post('/user/mail/send/certify', null, { params: { email } })
+      console.log(res)
       return res
     } catch (err) {
       return rejectWithValue(err.response)
@@ -15,18 +16,18 @@ export const checkEmail = createAsyncThunk(
   }
 )
 
-export const getTeam = createAsyncThunk(
-  'GET_TEAM',
-  async (teamNo, {rejectWithValue}) => {
-    try {
-      console.log(teamNo)
-      const res = await axios.get('/user/list')
-      console.log(res);
-    } catch(err) {
-      return rejectWithValue(err.response)
-    }
-  }
-)
+// export const getTeam = createAsyncThunk(
+//   'GET_TEAM',
+//   async (teamNo, {rejectWithValue}) => {
+//     try {
+//       console.log(teamNo)
+//       const res = await axios.get('/user/list')
+//       console.log(res);
+//     } catch(err) {
+//       return rejectWithValue(err.response)
+//     }
+//   }
+// )
 
 const initialState = {
   isLoading: false,
