@@ -99,9 +99,6 @@ const StyledInput = styled.input`
 const ContentCase = styled.div`
   display: flex;
   flex-direction: column;
-
-  /* margin: 0 0 0.5rem 0.5rem; */
-  /* outline: 1px solid; */
   div {
     display: flex;
     flex-direction: column;
@@ -143,6 +140,10 @@ const ErrorText = styled.span`
   color: #ff0000;
   font-size: 17px;
   left: 110px;
+  
+  &.correct {
+    color: #02C302;
+  }
 `;
 
 export {
