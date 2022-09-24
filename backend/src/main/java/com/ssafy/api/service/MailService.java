@@ -29,4 +29,7 @@ public interface MailService {
 	
 	// 유저 비밀번호 찾기 -> 메일로 변경된 비밀번호가 전성됨
 	public String findUserPassword(String email);
+	
+	// 메일 valid 세팅하기
+	public void setMailValid(String email);
 }

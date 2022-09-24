@@ -93,8 +93,43 @@ public class UserController {
 		// timeout check
 		if(nowTime.isBefore(mailkey.get().getCreateDate())){
 			if(mailkey.isPresent()) {
-				if(registerInfo.getRandomNumber().equals(mailkey.get().getRandomNumber())){
-					Users user = userService.createUsers(registerInfo);
+				if(mailkey.get().isValid()==true) {
+					userService.createUsers(registerInfo);
+					return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+				}
+				else {
+					return ResponseEntity.status(400).body(BaseResponseBody.of(401, "Email token is invalid"));	
+				}
+			}
+			else {
+				return ResponseEntity.status(403).body(BaseResponseBody.of(403, "Mail key is not sended"));	
+			}
+		}
+		else {
+			return ResponseEntity.status(405).body(BaseResponseBody.of(405, "Email token timed out(5 minuate"));	
+		}
+	}
+	
+	@PostMapping("/mail/valid/check")
+	@ApiOperation(value = "메일 인증", notes = "이메일과 메일 인증 키를 통해 한다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 401, message = "이메일 토큰 인증 실패"),
+        @ApiResponse(code = 404, message = "메일을 보내지 않았음"),
+        @ApiResponse(code = 405, message = "메일 인증 시간 초과"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<? extends BaseResponseBody> register(
+			@ApiParam(value = "email", required = true) @RequestParam("email") String email, @RequestParam("randomNumber") String randomNumber ) {
+		
+		Optional<MailConfirmKeys> mailkey = mailService.findMailKey(email);
+		LocalDateTime nowTime = LocalDateTime.now().minusMinutes(5);
+		
+		// timeout check
+		if(nowTime.isBefore(mailkey.get().getCreateDate())){
+			if(mailkey.isPresent()) {
+				if(randomNumber.equals(mailkey.get().getRandomNumber())){
+					mailService.setMailValid(email);
 					return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));	
 				}
 				else {
@@ -109,6 +144,9 @@ public class UserController {
 			return ResponseEntity.status(405).body(BaseResponseBody.of(405, "Email token timed out(5 minuate"));	
 		}
 	}
+	
+	
+	
 	
 	@PutMapping("/id-info")
 	@ApiOperation(value = "정보 변경", notes = "개인 정보를 변경한다.") 
