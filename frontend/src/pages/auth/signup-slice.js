@@ -16,6 +16,16 @@ export const checkEmail = createAsyncThunk(
   }
 )
 
+// export const checkNumber = createAsyncThunk(
+//   'CHECK_NUMBER',
+//   async (number, {rejectWithValue}) => {
+//     try {
+//       const res = await axios.post('/user/signin')
+//     }
+//   }
+// )
+
+// 팀 받아오는 slice
 // export const getTeam = createAsyncThunk(
 //   'GET_TEAM',
 //   async (teamNo, {rejectWithValue}) => {
