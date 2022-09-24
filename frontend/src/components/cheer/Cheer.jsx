@@ -41,7 +41,6 @@ const Cheer = () => {
         setTotalScore(totalScore + 1);
         setFirstTeam(firstTeam + 1);
         scoreHandler();
-        console.log("로고1 누름");
         
     }
 
@@ -49,8 +48,7 @@ const Cheer = () => {
         setTotalScore(totalScore + 1);
         setSecondTeam(secondTeam + 1);
         scoreHandler();
-        console.log("로고2 누름");
-        console.log("두번째 팀 값", secondTeam);
+  
        
     }
 
@@ -64,7 +62,7 @@ const Cheer = () => {
     }, []);
 
     useEffect(() => {
-        console.log("전체 응원 수", totalScore);
+
         // axios.put()
         // .then(function(result){
         //     setCheerScore(result.data);
@@ -77,10 +75,10 @@ const Cheer = () => {
     return (
 
         <CheerContainer >
-            <LogoFirstTeam onClick={onCheer1TeamHandler} src={"/assets/teamlogo1.png"} />
-            <div>{Math.round(100 -rate)}</div>
+            <LogoFirstTeam onClick={onCheer1TeamHandler} src={"/assets/teamlogo1.png"}  />
+            <span>{Math.round(100 -rate)}</span>
             <LogoSecondTeam onClick={onCheer2TeamHandler} src={"/assets/teamlogo2.png"} />
-            <div>{Math.round(rate)}</div>
+            <span>{Math.round(rate)}</span>
             
             <BarContainer>
                 <ProgressBar>

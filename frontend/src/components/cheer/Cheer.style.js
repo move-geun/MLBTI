@@ -4,7 +4,6 @@ import styled from "styled-components";
 const CheerContainer = styled.div`
   width: 40%;
   height: 100%;
-  display: flex;
   margin: 2rem 0 1rem 2rem;
 `;
 
