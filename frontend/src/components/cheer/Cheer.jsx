@@ -31,11 +31,16 @@ const Cheer = () => {
     const [firstTeam, setFirstTeam] = useState();
     const [secondTeam, setSecondTeam] = useState();
 
+    let rate = (secondTeam/totalScore)* 100;
+    const scoreHandler = () => {
+        let rate = (secondTeam/totalScore)* 100;
+        console.log("비율", rate);
+    }
     
     const onCheer1TeamHandler = () => {
         setTotalScore(totalScore + 1);
         setFirstTeam(firstTeam + 1);
-
+        scoreHandler();
         console.log("로고1 누름");
         
     }
@@ -43,7 +48,7 @@ const Cheer = () => {
     const onCheer2TeamHandler = () => {
         setTotalScore(totalScore + 1);
         setSecondTeam(secondTeam + 1);
-
+        scoreHandler();
         console.log("로고2 누름");
         console.log("두번째 팀 값", secondTeam);
        
@@ -56,27 +61,9 @@ const Cheer = () => {
         setSecondTeam(cheerScore.team2);
         setTotalScore(cheerScore.total);
 
-      
-        // axios.get()
-        // .then(function(result){
-        //     setCheerScore(result.data);
-
-            
-        //     setFirstTeam();
-        //     setSecondTeam();
-
-        //     // style에 prop 전달하기
-        //     // <Progress data = {50} />
-        //     console.log(secondTeam , "ㅎㅎㅎ")
-
-
-        //   }).catch(function(err){
-        //     console.log(err);
-        //   });
     }, []);
 
     useEffect(() => {
-
         console.log("전체 응원 수", totalScore);
         // axios.put()
         // .then(function(result){
@@ -91,12 +78,13 @@ const Cheer = () => {
 
         <CheerContainer >
             <LogoFirstTeam onClick={onCheer1TeamHandler} src={"/assets/teamlogo1.png"} />
+            <div>{Math.round(100 -rate)}</div>
             <LogoSecondTeam onClick={onCheer2TeamHandler} src={"/assets/teamlogo2.png"} />
-
+            <div>{Math.round(rate)}</div>
             
             <BarContainer>
                 <ProgressBar>
-                    <Progress data = {secondTeam} />
+                    <Progress data = {rate} />
                 </ProgressBar>
             </BarContainer>
 

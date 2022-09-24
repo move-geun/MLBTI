@@ -38,8 +38,9 @@ const selectTabHandler = (index) => {
     <LiveContainer>
      
       <div className="title">문자 중계</div>
-      <LiveComment />
+      
       <Cheer />
+      <LiveComment />
       <Score>
         <ScoreTitle>
           <div className="title">
