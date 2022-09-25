@@ -1,5 +1,9 @@
 import { LoginBox, FlexRow, InputBox, FlexSpan } from "./LoginPage.style";
 
+// 로그인 기능 구현
+// api 연결
+// 토큰 저장
+
 const LoginPage = () => {
   return (
     <LoginBox>
