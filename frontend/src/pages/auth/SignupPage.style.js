@@ -136,7 +136,7 @@ const InBtn = styled.button`
   }
 `;
 
-const ErrorText = styled.span`
+const AlertText = styled.span`
   color: #ff0000;
   font-size: 17px;
   left: 110px;
@@ -154,7 +154,7 @@ export {
   Text,
   StyledInput,
   InBtn,
-  ErrorText,
+  AlertText,
   ContentCase,
   InputBtnDiv,
   CertBtn,

@@ -7,28 +7,38 @@ import {
   Text,
   StyledInput,
   InBtn,
-  ErrorText,
+  AlertText,
   ContentCase,
   CertBtn,
 } from "./SignupPage.style";
-import { checkEmail } from "./signup-slice";
+import { checkEmail, getUserList } from "./signup-slice";
 import { useDispatch } from "react-redux";
 
 const SignupPage = () => {
+  const dispatch = useDispatch();
+
+  // form에 입력한 정보
   const [userEmail, setUserEmail] = useState("");
   const [emailCert, setEmailCert] = useState("");
   const [userNick, setUserNick] = useState("");
   const [userPwd, setUserPwd] = useState("");
 
+  // 유효성 검사 변수
   const [emailValid, setEmailValid] = useState(true);
   const [nicknameValid, setNicknameValid] = useState(true);
   const [pwdValid, setPwdValid] = useState(true);
 
-  // 비밀번호 재확인 value
+  // 비밀번호 재확인 변수
   const [userPwdCheck, setUserPwdCheck] = useState("");
-  // 비밀번호 재확인 됐는지 여부 판별
+  // 비밀번호 재확인 여부 판별
   const [checkedPwd, setCheckedPwd] = useState(false);
 
+  // 닉네임 중복 검사 변수
+  const [isDuplicateNickname, setisDuplicateNickname] = useState(false);
+  // 중복 확인 여부 판별
+  const [confirmNickname, setConfirmNickname] = useState(false);
+
+  // 에러 메시지 방지 (입력이 들어오면 값 변경)
   const [defaultEmail, setDefaultEmail] = useState(false);
   const [defaultNickname, setDefaultNickname] = useState(false);
   const [defaultPwd, setDefaultPwd] = useState(false);
@@ -93,15 +103,39 @@ const SignupPage = () => {
     } else return setCheckedPwd(false);
   };
 
-  const dispatch = useDispatch();
-
+  // 인증확인 메일 전송
   function sendNumber() {
     dispatch(checkEmail(userEmail));
   }
 
+  // 닉네임 중복 검사 함수
+  const availableNickname = () => {
+    dispatch(getUserList(userNick))
+      .unwrap()
+      .then((res) => {
+        setisDuplicateNickname(res);
+      })
+      .catch((err) => {
+        if (err.status === 500) {
+          // 나중에 에러 페이지 추가
+        }
+      });
+  };
+
+
+  let btnDisabled = true
+  if(
+    // checkedEmail && // 이메일 인증
+    checkedPwd && // 비밀번호 재확인
+    pwdValid && // 비밀번호 유효성
+    isDuplicateNickname && // 닉네임 중복
+    nicknameValid // 닉네임 유효성
+  ) {btnDisabled = false}
+
   return (
     <FormInputsBlock>
       <Header>회원가입</Header>
+
       <SingupWrapper>
         <InputDiv>
           <Text>이메일</Text>
@@ -119,12 +153,10 @@ const SignupPage = () => {
               ></StyledInput>
 
               {defaultEmail && !emailValid ? (
-                <ErrorText>올바르지 않은 이메일 형식 입니다.</ErrorText>
+                <AlertText>올바르지 않은 이메일 형식 입니다</AlertText>
               ) : null}
               {defaultEmail && emailValid ? (
-                <ErrorText className="correct">
-                  올바른 이메일 형식 입니다.
-                </ErrorText>
+                <AlertText className="correct">올바른 이메일 형식 입니다</AlertText>
               ) : null}
             </div>
           </ContentCase>
@@ -147,7 +179,7 @@ const SignupPage = () => {
               className="cert"
             />
           </ContentCase>
-          <CertBtn>인증번호 확인</CertBtn>
+          <CertBtn type="button">인증번호 확인</CertBtn>
         </InputDiv>
 
         {/* 닉네임 */}
@@ -157,9 +189,15 @@ const SignupPage = () => {
             <div>
               <StyledInput
                 type="text"
-                placeholder="닉네임은 2~10자 이하의 한글,영어,숫자"
+                placeholder="2~10자 이하의 한글,영어,숫자"
                 onChange={(e) => {
                   setUserNick(e.target.value);
+                  if (isDuplicateNickname) {
+                    setisDuplicateNickname(false);
+                  }
+                  if (confirmNickname) {
+                    setConfirmNickname(false);
+                  }
                   validateNickname(e);
                 }}
                 value={userNick}
@@ -169,13 +207,39 @@ const SignupPage = () => {
                 className="nickname"
               />
               {defaultNickname && !nicknameValid ? (
-                <ErrorText>올바르지 않은 닉네임 입니다.</ErrorText>
+                <AlertText>올바르지 않은 닉네임 입니다.</AlertText>
               ) : null}
-              {defaultNickname && nicknameValid ? (
-                <ErrorText className="correct">올바른 닉네임 입니다.</ErrorText>
+
+              {defaultNickname &&
+              nicknameValid &&
+              !isDuplicateNickname &&
+              !confirmNickname ? (
+                <AlertText>닉네임 중복확인이 필요합니다.</AlertText>
+              ) : null}
+              {defaultNickname &&
+              nicknameValid &&
+              !isDuplicateNickname &&
+              confirmNickname ? (
+                <AlertText>중복된 닉네임입니다</AlertText>
+              ) : null}
+              {isDuplicateNickname ? (
+                <AlertText className="correct">
+                  사용 가능한 닉네임입니다
+                </AlertText>
               ) : null}
             </div>
           </ContentCase>
+          <CertBtn
+            type="button"
+            onClick={(e) => {
+              if (nicknameValid && defaultNickname) {
+                availableNickname(e);
+              }
+              setConfirmNickname(true);
+            }}
+          >
+            중복 확인
+          </CertBtn>
         </InputDiv>
 
         <InputDiv>
@@ -183,7 +247,7 @@ const SignupPage = () => {
           <ContentCase>
             <div>
               <StyledInput
-                type="text"
+                type="password"
                 name="userPassword"
                 className="userPassword"
                 placeholder="대소문자, 숫자 포함 9~16자"
@@ -194,12 +258,12 @@ const SignupPage = () => {
                 value={userPwd}
               />
               {defaultPwd && !pwdValid ? (
-                <ErrorText>올바르지 않은 비밀번호 양식 입니다.</ErrorText>
+                <AlertText>올바르지 않은 비밀번호 양식 입니다.</AlertText>
               ) : null}
               {defaultPwd && pwdValid ? (
-                <ErrorText className="correct">
+                <AlertText className="correct">
                   올바른 비밀번호 양식 입니다.
-                </ErrorText>
+                </AlertText>
               ) : null}
             </div>
           </ContentCase>
@@ -210,7 +274,7 @@ const SignupPage = () => {
           <ContentCase>
             <div>
               <StyledInput
-                type="text"
+                type="password"
                 placeholder="비밀번호 입력"
                 className="passwordcheck"
                 onChange={(e) => {
@@ -220,18 +284,18 @@ const SignupPage = () => {
               />
               {userPwdCheck ? (
                 checkedPwd && userPwdCheck === userPwd ? (
-                  <ErrorText className="correct">
+                  <AlertText className="correct">
                     비밀번호가 일치 합니다.
-                  </ErrorText>
+                  </AlertText>
                 ) : (
-                  <ErrorText>비밀번호가 일치하지 않습니다</ErrorText>
+                  <AlertText>비밀번호가 일치하지 않습니다</AlertText>
                 )
               ) : null}
             </div>
           </ContentCase>
         </InputDiv>
       </SingupWrapper>
-      <InBtn>계정 생성하기</InBtn>
+      <InBtn disabled={btnDisabled}>계정 생성하기</InBtn>
     </FormInputsBlock>
   );
 };
