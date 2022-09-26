@@ -1,9 +1,9 @@
-package com.ssafy.db.entity;
+package com.ssafy.db.qentity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
 import com.querydsl.core.types.dsl.*;
-
+import com.ssafy.db.entity.BaseEntity;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
