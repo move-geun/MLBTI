@@ -1,6 +1,7 @@
 import { LoginBox, FlexRow, InputBox, FlexSpan } from "./LoginPage.style";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { login, logout } from "./login-slice";
 
 // 로그인 기능 구현
@@ -9,9 +10,11 @@ import { login, logout } from "./login-slice";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [userEmail, setEmail] = useState("");
   const [userPassword, setPassword] = useState("");
 
+  // 로그인 기능
   function loginSubmit(e) {
     e.preventDefault();
     const data = {
@@ -21,8 +24,7 @@ const LoginPage = () => {
     dispatch(login(data))
       .unwrap()
       .then((res) => {
-        console.log(res.data);
-        // save token
+        navigate("/");
       })
       .catch((err) => {
         if (err.status === 401) {
@@ -36,10 +38,10 @@ const LoginPage = () => {
         }
       });
   }
-  function logoutFunc(e) {
-    e.preventDefault();
-    dispatch(logout());
-  }
+  // function logoutFunc(e) {
+  //   e.preventDefault();
+  //   dispatch(logout());
+  // }
 
   return (
     <LoginBox>
@@ -75,7 +77,7 @@ const LoginPage = () => {
         <a href="/signup">회원가입하기</a>
       </FlexSpan>
       <button onClick={(e) => loginSubmit(e)}>로그인</button>
-      <button onClick={(e) => logoutFunc(e)}>로그아웃</button>
+      {/* <button onClick={(e) => logoutFunc(e)}>로그아웃</button> */}
     </LoginBox>
   );
 };
