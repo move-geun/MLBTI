@@ -76,7 +76,7 @@ public class UserController {
 	  * @return
 	  */
 	@PostMapping("/signin")
-	@ApiOperation(value = "회원 가입", notes = "<strong>email, password, nickname, randomNumber</strong>을 통해 회원가입 한다.") 
+	@ApiOperation(value = "회원 가입", notes = "<strong>email, password, nickname</strong>을 통해 회원가입 한다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
         @ApiResponse(code = 401, message = "이메일 토큰 인증 실패"),
@@ -121,7 +121,9 @@ public class UserController {
     })
 	public ResponseEntity<? extends BaseResponseBody> register(
 			@ApiParam(value = "email", required = true) @RequestParam("email") String email, @RequestParam("randomNumber") String randomNumber ) {
-		
+		System.out.println("hhhhhhhh");
+		System.out.println(email);
+		System.out.println(randomNumber);
 		Optional<MailConfirmKeys> mailkey = mailService.findMailKey(email);
 		LocalDateTime nowTime = LocalDateTime.now().minusMinutes(5);
 		
@@ -129,6 +131,8 @@ public class UserController {
 		if(nowTime.isBefore(mailkey.get().getCreateDate())){
 			if(mailkey.isPresent()) {
 				if(randomNumber.equals(mailkey.get().getRandomNumber())){
+					System.out.println("===================================");
+					System.out.println("saklfsdlakfsadlfjslajfkladjl");
 					mailService.setMailValid(email);
 					return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));	
 				}
@@ -238,7 +242,7 @@ public class UserController {
         @ApiResponse(code = 404, message = "사용자 없음"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
-	public ResponseEntity<UserRes> getUserInfo(@ApiIgnore Authentication authentication) {
+	public ResponseEntity<UserRes> getUserInfo(@ApiParam(value = "token을 헤더에 추가한다.", required = true)@ApiIgnore Authentication authentication) {
 		/**
 		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
 		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
@@ -250,6 +254,7 @@ public class UserController {
 		
 		return ResponseEntity.status(200).body(UserRes.of(user));
 	}
+
     
     /**
       * @Method Name : sendCertifyMail
