@@ -12,7 +12,7 @@ import {
 const SimulationPage = () => {
 
   const [currentTab, setCurrentTab] = useState(0);
-
+  console.log("teststes");
   const tabList = [
     {tabName: '1회', id: 'game1', content:'타자 1 : 스트라이크2'},
     {tabName: '2회', id: 'game2', content:'타자 2 : 스트라이크2'},
