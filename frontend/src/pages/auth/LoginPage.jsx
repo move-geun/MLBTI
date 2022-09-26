@@ -1,10 +1,10 @@
 import { LoginBox, FlexRow, InputBox, FlexSpan } from "./LoginPage.style";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import login from "./login-slice";
+import { login, logout } from "./login-slice";
 
 // 로그인 기능 구현
-// api 연결
+// apiloginSubmit 연결
 // 토큰 저장
 
 const LoginPage = () => {
@@ -18,12 +18,10 @@ const LoginPage = () => {
       email: userEmail,
       password: userPassword,
     };
-    console.log(data);
     dispatch(login(data))
       .unwrap()
       .then((res) => {
-        console.log("디스패치 됐?");
-        console.log("1번 성공");
+        console.log(res.data);
         // save token
       })
       .catch((err) => {
@@ -33,8 +31,14 @@ const LoginPage = () => {
           alert("해당 정보로 가입된 유저 정보가 없습니다");
         } else if (err.status === 500) {
           alert("서버 오류입니다. 1분 뒤 재시도해주세요");
+        } else {
+          alert("아몰랑");
         }
       });
+  }
+  function logoutFunc(e) {
+    e.preventDefault();
+    dispatch(logout());
   }
 
   return (
@@ -43,7 +47,7 @@ const LoginPage = () => {
         <img src="/assets/cap.png" alt="로고" />
         <h1>로그인</h1>
       </div>
-      <form onSubmit={loginSubmit}>
+      <form onSubmit={(e) => loginSubmit(e)}>
         <FlexRow>
           <div>이메일</div>
           <InputBox
@@ -70,7 +74,8 @@ const LoginPage = () => {
         <div>아직 회원이 아니신가요?</div>
         <a href="/signup">회원가입하기</a>
       </FlexSpan>
-      <button onClick={loginSubmit}>로그인</button>
+      <button onClick={(e) => loginSubmit(e)}>로그인</button>
+      <button onClick={(e) => logoutFunc(e)}>로그아웃</button>
     </LoginBox>
   );
 };
