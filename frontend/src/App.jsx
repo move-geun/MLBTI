@@ -18,7 +18,6 @@ import TeamComparison from "./pages/game/TeamComparison";
 import Navbar from "./components/navbar/Navbar";
 
 import GlobalStyle from "./styles/global";
-import AmdinNoticeDetail from "./components/admin_notice/AdminNoticeDetail";
 
 function App() {
   return (
@@ -37,16 +36,12 @@ function App() {
           <Route path="/playerdetail" element={<PlayerDetailPage />} />
           <Route path="/matchsimulation" element={<MatchSimultaionPage />} />
           <Route path="/customsimultaion" element={<CustomSimulationPage />} />
-          
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="/simulation" element={<SimulationPage />} />
           <Route path="/live" element={<LivePage />} />
           <Route path="/gamehistory" element={<GameHistory />} />
           <Route path="/gameschedule" element={<GameSchedule />} />
           <Route path="/teamcomparison" element={<TeamComparison />} />
-
-          {/* 관리자 페이지 */}
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/notice/:id" element={<AmdinNoticeDetail />} />
         </Routes>
       </BrowserRouter>
     </>
