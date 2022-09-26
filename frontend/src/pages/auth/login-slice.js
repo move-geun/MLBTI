@@ -1,19 +1,27 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../api/http";
+import { deleteToken, saveToken } from "../../api/JWT";
 
 // 로그인
 export const login = createAsyncThunk(
   "LOGIN",
   async (userData, { rejectWithValue }) => {
     try {
-      console.log("왜 안호대");
       const res = await axios.post("/auth/login", userData);
-      // console.log(res);
-      console.log("슬라이스~");
+      const token = res.data.accessToken;
+      saveToken(token);
       return res;
     } catch (err) {
       return rejectWithValue(err.response);
     }
+  }
+);
+
+// 로그아웃
+export const logout = createAsyncThunk(
+  "LOGOUT",
+  async (arg, { rejectWithValue }) => {
+    deleteToken();
   }
 );
 
