@@ -1,5 +1,5 @@
 import React from "react";
-import { PlyaerDetail } from "./PlayerList.style";
+// import { PlyaerDetail } from "./PlayerList.style";
 import {
   CompositionWrapper,
   Header,

@@ -54,13 +54,21 @@ const Cheer = () => {
     }
 
 
+    // useEffect(() => {
+        
+    //     setFirstTeam(cheerScore.team1);
+    //     setSecondTeam(cheerScore.team2);
+    //     setTotalScore(cheerScore.total);
+
+    // }, []);
+    // 원래는 위에 껀데 useEffect에 데이터가 없어서 일단 넣음
     useEffect(() => {
         
         setFirstTeam(cheerScore.team1);
         setSecondTeam(cheerScore.team2);
         setTotalScore(cheerScore.total);
 
-    }, []);
+    }, ["test"]);
 
     useEffect(() => {
 
