@@ -48,5 +48,7 @@ public class MailConfirmKeys extends BaseEntity{
 	@CreatedDate
     @Column(updatable = false)
     private LocalDateTime createDate;
+	
+	private boolean isValid;
 }
 
