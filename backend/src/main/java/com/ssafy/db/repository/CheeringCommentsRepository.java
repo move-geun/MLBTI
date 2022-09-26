@@ -20,6 +20,6 @@ import com.ssafy.db.entity.CheeringComments;
   * @프로그램 설명 : 응원 댓글 관련 디비 쿼리 생성을 위한 JPA Query Method 인터페이스 정의.
   */
 @Repository
-public interface CheeringCommentsRepository extends JpaRepository<BaseballPlayers, Integer>{
-	Optional<CheeringComments> findByGameUid(int uid);
+public interface CheeringCommentsRepository extends JpaRepository<CheeringComments, Integer>{
+	Optional<CheeringComments> findById(int sssid);
 }

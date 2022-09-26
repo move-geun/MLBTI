@@ -15,21 +15,10 @@ import com.ssafy.db.entity.CheeringComments;
   * @변경이력 :
   * @프로그램 설명 : 실시간 응원 구현을 위한 서비스
   */
-public interface CheeringService {
-	public Optional<CheeringComments> getCheeringCommentsByUid(int uid);
-	
 
-	/**
-	  * @Method Name : saveCheeringComments
-	  * @작성일 : 2022. 9. 26
-	  * @작성자 : 김동우
-	  * @변경이력 : 
-	
-	  * @Method 설명 :
-	  * @param uid
-	  * @param isHome
-	  */
-	
+public interface CheeringService {
+	public Optional<CheeringComments> getCheeringCommentsByGamePk(int gamePk);
+
 	void saveCheeringComments(int uid, boolean isHome);
 
 }

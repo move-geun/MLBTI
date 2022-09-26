@@ -3,6 +3,11 @@
  */
 package com.ssafy.db.entity;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
@@ -20,10 +25,16 @@ import lombok.Setter;
   */
 @Getter
 @Setter
+@Entity
 public class CheeringComments {
-	@OneToOne
-	@JoinColumn(name="game_uid")
-	LiveGames liveGame;
+	@Id
+	@Column(name="game_uid")
+	int gamePk;
+	
+//	@OneToOne
+//	@JoinColumn(name="liveGames_gamePk")
+//	LiveGames gamePk;
+
 
 	int homeId;
 	String homeTeamName;
