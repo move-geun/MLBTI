@@ -40,21 +40,21 @@ const LiveComment = () => {
 
 
     // 웹소켓
-    // const webSocket = new WebSocket("ws://localhost:8081");
+    const webSocket = new WebSocket("ws:/j7e202.p.ssafy.io:8081/teamName");
 
-    // webSocket.onopen = function(){
-    //     console.log("서버와 웹소켓 연결 성공");
-    // };
+    webSocket.onopen = function(){
+        console.log("서버와 웹소켓 연결 성공");
+    };
 
-    // //서버에서 메세지가 왔을 때, 데이터 파싱후 serverMesageList에 넣은 후 서버 메세지의 상태에 추가
-    // webSocket.onmessage = function(event) {
-    //     console.log(event.data);
-    //     webSocket.send("클라이언트에서 서버로 답장 보내요~");
+    //서버에서 메세지가 왔을 때, 데이터 파싱후 serverMesageList에 넣은 후 서버 메세지의 상태에 추가
+    webSocket.onmessage = function(event) {
+        console.log(event.data);
+        webSocket.send("클라이언트에서 서버로 답장 보내요~");
 
-    //     let parse = JSON.parse(event.data);
-    //     serverMessagesList.push(parse);
-    //     setServerMessages([...serverMessagesList]);
-    // }
+        let parse = JSON.parse(event.data);
+        serverMessagesList.push(parse);
+        setServerMessages([...serverMessagesList]);
+    }
 
 
 
