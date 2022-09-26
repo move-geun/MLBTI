@@ -206,6 +206,10 @@ dependencies {
 	
 	// 20220924 채팅을 위한 웹소캣 추가
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.webjars:sockjs-client:1.1.2'
+	implementation 'org.webjars:stomp-websocket:2.3.3-1'
+	implementation 'com.google.code.gson:gson:2.8.0'
+
 
     compile("javax.annotation:javax.annotation-api:1.2")
 

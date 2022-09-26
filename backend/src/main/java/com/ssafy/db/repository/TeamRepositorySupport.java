@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.db.entity.QTeams;
 import com.ssafy.db.entity.Teams;
+import com.ssafy.db.qentity.QTeams;
 
 /**
 
