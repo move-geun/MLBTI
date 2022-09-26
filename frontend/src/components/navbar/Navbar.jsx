@@ -17,7 +17,7 @@ let pages = [
   { MLB: "https://www.mlb.com/" },
   { 시뮬레이션: "/matchsimulation" },
   { 경기일정: "/" },
-  { "메이저 리그 팀": "/" },
+  
 ];
 
 const settings = ["프로필", "나만의 팀 만들기", "로그아웃"];
