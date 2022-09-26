@@ -2,7 +2,8 @@ import { LoginBox, FlexRow, InputBox, FlexSpan } from "./LoginPage.style";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login, logout } from "./login-slice";
+import { login } from "./login-slice";
+// import { login, logout } from "./login-slice";
 
 // 로그인 기능 구현
 // apiloginSubmit 연결
