@@ -6,15 +6,12 @@ const FormInputsBlock = styled.form`
   align-items: center;
   height: 100%;
   min-width: 320px;
-  max-width: 500px;
+  max-width: 600px;
   margin: auto;
 
   @media screen and (max-width: 830px) {
     h1 {
       font-size: 50px;
-    }
-    button {
-      font-size: 20px;
     }
     span {
       font-size: 17px;
@@ -27,9 +24,6 @@ const FormInputsBlock = styled.form`
   @media screen and (max-width: 480px) {
     h1 {
       font-size: 30px;
-    }
-    button {
-      font-size: 15px;
     }
     span {
       font-size: 13px;
@@ -60,29 +54,40 @@ const SingupWrapper = styled.div`
 
 const InputDiv = styled.div`
   display: flex;
+  /* grid-template-columns: 0.5fr 1fr 30%; */
   flex-direction: row;
   width: 90%;
   margin: 0 0 2rem 2rem;
-  justify-content: space-between;
   align-items: center;
+
+
 `;
 
-// const CertBtn = styled.button`
-//   background-color: rgba(0, 0, 0, 0.1);
-//   color: black;
-//   padding: 3px 3px;
-//   margin-left: 5px;
-//   font-size: 15px;
-// `;
+const CertBtn = styled.button`
+  background-color: rgba(0, 0, 0, 0.1);
+  color: black;
+  padding: 3px 3px;
+  margin-left: 15px;
+  font-size: 20px;
+
+  @media screen and (max-width: 830px) {
+    font-size: 15px;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 10px;
+  }
+`;
 
 const Text = styled.div`
   font-size: 20px;
-  min-width: 110px;
+  width: 150px;
   @media screen and (max-width: 830px) {
     font-size: 20px;
+    width: 130px;
   }
   @media screen and (max-width: 480px) {
     font-size: 15px;
+    width: 100px;
   }
 `;
 
@@ -97,8 +102,10 @@ const StyledInput = styled.input`
 const ContentCase = styled.div`
   display: flex;
   flex-direction: column;
-  /* margin: 0 0 0.5rem 0.5rem; */
-  /* outline: 1px solid; */
+  div {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const InputBtnDiv = styled.div`
@@ -107,17 +114,6 @@ const InputBtnDiv = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  button {
-    background-color: rgba(0, 0, 0, 0.1);
-    color: black;
-    padding: 3px 3px;
-    margin-left: 5px;
-    font-size: 20px;
-    width: 30%;
-    @media screen and (max-width: 480px) {
-      font-size: 0.625rem;
-    }
-  }
 `;
 
 const InBtn = styled.button`
@@ -125,17 +121,38 @@ const InBtn = styled.button`
   padding: 1rem;
   margin: 1rem 0;
   font-size: 25px;
+  :disabled {
+    background-color: #7da4e8 ;
+    cursor: not-allowed;
 
+    
+  }
   &:hover {
     background-color: #2565d0;
     font-size: 27px;
   }
+  @media screen and (max-width: 830px) {
+    font-size: 20px;
+    &:hover {
+      font-size: 23px;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 13px;
+    &:hover {
+      font-size: 15px;
+    }
+  }
 `;
 
-const ErrorText = styled.span`
+const AlertText = styled.span`
   color: #ff0000;
   font-size: 17px;
   left: 110px;
+  
+  &.correct {
+    color: #02C302;
+  }
 `;
 
 export {
@@ -146,7 +163,8 @@ export {
   Text,
   StyledInput,
   InBtn,
-  ErrorText,
+  AlertText,
   ContentCase,
   InputBtnDiv,
+  CertBtn,
 };
