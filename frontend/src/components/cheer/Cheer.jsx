@@ -68,7 +68,7 @@ const Cheer = () => {
         setSecondTeam(cheerScore.team2);
         setTotalScore(cheerScore.total);
 
-    }, ["test"]);
+    }, [cheerScore.team1]);
 
     useEffect(() => {
 
