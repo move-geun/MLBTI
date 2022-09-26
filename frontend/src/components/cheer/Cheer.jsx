@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
+
 import {
     LogoFirstTeam,
     LogoSecondTeam,
@@ -63,12 +64,12 @@ const Cheer = () => {
 
     useEffect(() => {
 
-        // axios.put()
-        // .then(function(result){
-        //     setCheerScore(result.data);
-        //   }).catch(function(err){
-        //     console.log(err);
-        //   });
+        axios.put()
+        .then(function(result){
+            setCheerScore(result.data);
+          }).catch(function(err){
+            console.log(err);
+          });
     }, [totalScore]);
 
     

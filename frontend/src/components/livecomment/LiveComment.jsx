@@ -1,6 +1,6 @@
-import { useEffect, useImperativeHandle } from "react";
+
 import { useState } from "react";
-import axios from 'axios';
+
 
 import {
     LiveCommentContainer,
@@ -14,10 +14,10 @@ import {
 
 const LiveComment = () => {
 
-// 서버 상태 저장, input창에 받아온 메세지 저장, 서버에서 받아온 메세지 저장
-    const [serverState, setServerState] = useState('Loading...');
+// input창에 받아온 메세지 저장, 서버에서 받아온 메세지 저장
+
     const [typingComments, setTypingComments] = useState('');
-    const [messageText, setMessageText] = useState('');
+    // const [messageText, setMessageText] = useState('');
     const [serverMessages, setServerMessages] = useState(
         [{
             user: 'MM',
@@ -33,9 +33,9 @@ const LiveComment = () => {
 
 
 
-    const serverMessagesList = new Array();
-    const Message = new Object();
-    serverMessagesList.push(Message);
+    const serverMessagesList = [];
+    // const Message = new Object();
+    // serverMessagesList.push(Message);
 
 
 
@@ -75,40 +75,6 @@ const LiveComment = () => {
         setTypingComments('');
       
     })
-
-    
-
-    useEffect(()=> {
-
-        // const comments = [...allComments];
-        // const {email, content, time} = comments;
-        
-       
-
-        // axios.get()
-        // .then(function(result){
-        //     setAllComments(result);
-    
-        //   }).catch(function(err){
-        //     console.log(err);
-        //   });
-    }, [])
-
-    useEffect(()=> {
-
-        // const comments = [...allComments];
-        // const {email, content, time} = comments;
-        
-       
-
-        // axios.get()
-        // .then(function(result){
-        //     setAllComments(result);
-    
-        //   }).catch(function(err){
-        //     console.log(err);
-        //   });
-    }, [setServerMessages])
 
 
 
