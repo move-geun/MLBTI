@@ -36,7 +36,7 @@ public class LiveGameDatas {
 	String pitcherName;
 	Integer pitcherId;
 	String pitchHand;
-	Integer innning;
+	Integer inning;
 	String half;
 	Integer index;
 }

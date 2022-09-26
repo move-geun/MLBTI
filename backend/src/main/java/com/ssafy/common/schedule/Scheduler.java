@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.JsonObject;
 import com.ssafy.db.entity.LiveGameDataPitchs;
@@ -28,6 +29,7 @@ public class Scheduler {
 	private LiveGameDataPitchsRepository liveGameDataPitchsRepository;
 	
     @Scheduled(cron = "*/5 * * * * *")//5초마다 1번씩 실행
+    @Transactional
     public void updateGames () {
     	try {
 			URL url = new URL("http://j7e202.p.ssafy.io:8001/"); //fastAPI에서 호출
@@ -88,12 +90,14 @@ public class Scheduler {
 						//LGD.setBatterName(gameData.getString("batterName"));
 						LGD.setBatterId(gameData.getInt("batterId"));
 						LGD.setBatSide(gameData.getString("batSide"));
-						LGD.setPitcherName(gameData.getString("PitcherName"));
+						LGD.setPitcherName(gameData.getString("pitcherName"));
 						LGD.setPitcherId(gameData.getInt("pitcherId"));
 						LGD.setPitchHand(gameData.getString("pitchHand"));
-						LGD.setInnning(j/2+1);
+						LGD.setInning(j/2+1);
 						LGD.setHalf(j%2==0 ? "top" : "bottom");
 						LGD.setIndex(k);
+						LGD.setLive_gamePk(game.getInt("gamePk"));
+						LGD.setUid(Integer.parseInt(game.getInt("gamePk")+""+k));
 						liveGameDatasRepository.save(LGD);
 						JSONArray playEvents = gameData.getJSONArray("playEvents");
 						for(int l=0; l<playEvents.length(); l++) {
