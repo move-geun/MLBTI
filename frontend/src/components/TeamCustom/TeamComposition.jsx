@@ -1,16 +1,9 @@
 import React from "react";
-import { PlyaerDetail } from "./PlayerList.style";
+
 import {
   CompositionWrapper,
   Header,
-  ListWrapper,
   MyNickname,
-  ListHeader,
-  ListTable,
-  ListBody,
-  HeaderDetail,
-  PlyaerList,
-  PlayerDetail,
 } from "./TeamCoposiotion.style";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -26,7 +19,6 @@ function createData(position, name, team, stats) {
 }
 
 const playerList = [
-  
   createData("투수", "이동근", "남포동", 99),
   createData("투수", "이동근", "남포동", 99),
   createData("투수", "이동근", "남포동", 99),
