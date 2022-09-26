@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import {
     LogoFirstTeam,
     LogoSecondTeam,
@@ -23,8 +23,9 @@ import {
 
 const Cheer = () => {
 
-    const [cheerScore, setCheerScore] = useState(
-        {team1: 25, team2: 31, total: 56}
+    // const [cheerScore, setCheerScore] = useState(
+    const [cheerScore] = useState(
+            {team1: 25, team2: 31, total: 56}
     );
 
     const [totalScore, setTotalScore] = useState(); 

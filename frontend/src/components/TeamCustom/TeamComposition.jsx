@@ -3,14 +3,14 @@ import { PlyaerDetail } from "./PlayerList.style";
 import {
   CompositionWrapper,
   Header,
-  ListWrapper,
+  // ListWrapper,
   MyNickname,
-  ListHeader,
-  ListTable,
-  ListBody,
-  HeaderDetail,
-  PlyaerList,
-  PlayerDetail,
+  // ListHeader,
+  // ListTable,
+  // ListBody,
+  // HeaderDetail,
+  // PlyaerList,
+  // PlayerDetail,
 } from "./TeamCoposiotion.style";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";

@@ -1,6 +1,7 @@
-import { useEffect, useImperativeHandle } from "react";
+// import { useEffect, useImperativeHandle } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
-import axios from 'axios';
+// import axios from 'axios';
 
 import {
     LiveCommentContainer,
@@ -15,9 +16,11 @@ import {
 const LiveComment = () => {
 
 // 서버 상태 저장, input창에 받아온 메세지 저장, 서버에서 받아온 메세지 저장
-    const [serverState, setServerState] = useState('Loading...');
-    const [typingComments, setTypingComments] = useState('');
-    const [messageText, setMessageText] = useState('');
+// const [serverState, setServerState] = useState('Loading...');
+const [setServerState] = useState('Loading...');
+const [typingComments, setTypingComments] = useState('');
+// const [messageText, setMessageText] = useState('');
+const [setMessageText] = useState('');
     const [serverMessages, setServerMessages] = useState(
         [{
             user: 'MM',
