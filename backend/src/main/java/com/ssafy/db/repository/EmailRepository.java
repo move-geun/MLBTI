@@ -16,7 +16,7 @@ import com.ssafy.db.entity.MailConfirmKeys;
   * @Date : 2022. 9. 21 
   * @작성자 : 김동우
   * @변경이력 :
-  * @프로그램 설명 :
+  * @프로그램 설명 : 이메일 인증 관련 디비 쿼리 생성을 위한 JPA Query Method 인터페이스 정의.
   */
 
 @Repository
