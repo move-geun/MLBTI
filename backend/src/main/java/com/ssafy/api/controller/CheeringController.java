@@ -18,6 +18,7 @@ import com.ssafy.api.request.NoticeRegisterPostReq;
 import com.ssafy.api.response.BaseRes;
 import com.ssafy.api.service.CheeringService;
 import com.ssafy.api.service.NoticeService;
+import com.ssafy.api.service.TeamService;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.entity.CheeringComments;
@@ -47,6 +48,8 @@ public class CheeringController {
 	
 	@Autowired
 	CheeringService cheeringService;
+	@Autowired
+	TeamService teamService;
 	
 	@GetMapping()
 	@ApiOperation(value = "응원 댓글 수 가져오기", notes = "응원 댓글을 가져온다.") 
@@ -76,11 +79,18 @@ public class CheeringController {
 	@ApiOperation(value = "응원 댓글 저장하기", notes = "응원 댓글을 가져온다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
-        @ApiResponse(code = 404, message = "사용자 없음"),
+        @ApiResponse(code = 404, message = "해당 경기 없음"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
-	public ResponseEntity<? extends BaseResponseBody> setCheeringComments(
-			@RequestBody @ApiParam(value="응원 수를 추가하는 로직", required = true) int gameId){
-				return null;
+	public ResponseEntity<BaseRes> setCheeringComments(
+			@RequestBody @ApiParam(value="응원 수를 추가하기 위해 찾는 gameUid", required = true) int gameUid, @ApiParam(value="응원하는 팀이 home이 맞는지  여부", required = true) Boolean isHome){
+		Optional<CheeringComments> ojt=  cheeringService.getCheeringCommentsByUid(gameUid);
+		if(ojt.isPresent()){
+			cheeringService.saveCheeringComments(gameUid, isHome);
+			return ResponseEntity.status(200).body(BaseRes.of(200, "Success",ojt.get()));
+		}
+		else {
+			return ResponseEntity.status(404).body(BaseRes.of(404, "user not found failed",ojt.get()));
+		}
 	}
 }

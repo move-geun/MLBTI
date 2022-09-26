@@ -27,13 +27,20 @@ public class CheeringServiceImpl implements CheeringService{
 	CheeringCommentsRepository cheeringCommentsRepository;
 	
 	@Override
-	public Optional<CheeringComments> getCheeringCommentsByUid(Integer uid) {
+	public Optional<CheeringComments> getCheeringCommentsByUid(int uid) {
 		return cheeringCommentsRepository.findByGameUid(uid);
 	};
 	
 	@Override
-	public void saveCheeringComments() {
-		
+	public void saveCheeringComments(int uid, boolean isHome) {
+		CheeringComments cheering = cheeringCommentsRepository.findByGameUid(uid).get();
+		if(isHome) {
+			cheering.setHomeCommentsNum(cheering.getHomeCommentsNum()+1);
+		}
+		else {
+			cheering.setAwayCommentsNum(cheering.getAwayCommentsNum()+1);
+		}
 	}
+
 
 }
