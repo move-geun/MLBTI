@@ -1,36 +1,36 @@
-package com.ssafy.common.schedule;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.google.gson.JsonObject;
-import com.ssafy.db.entity.LiveGameDataPitchs;
-import com.ssafy.db.entity.LiveGameDatas;
-import com.ssafy.db.entity.LiveGames;
-import com.ssafy.db.repository.LiveGameDataPitchsRepository;
-import com.ssafy.db.repository.LiveGameDatasRepository;
-import com.ssafy.db.repository.LiveGamesRepository;
-@Component
-public class Scheduler {
-	@Autowired
-	private LiveGamesRepository liveGamesRepository;
-	@Autowired
-	private LiveGameDatasRepository liveGameDatasRepository;
-	@Autowired
-	private LiveGameDataPitchsRepository liveGameDataPitchsRepository;
-	
-    @Scheduled(cron = "*/5 * * * * *")//5초마다 1번씩 실행
-    @Transactional
-    public void updateGames () {
+//package com.ssafy.common.schedule;
+//
+//import java.io.BufferedReader;
+//import java.io.InputStreamReader;
+//import java.net.HttpURLConnection;
+//import java.net.URL;
+//
+//import org.json.JSONArray;
+//import org.json.JSONObject;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.scheduling.annotation.Scheduled;
+//import org.springframework.stereotype.Component;
+//import org.springframework.transaction.annotation.Transactional;
+//
+//import com.google.gson.JsonObject;
+//import com.ssafy.db.entity.LiveGameDataPitchs;
+//import com.ssafy.db.entity.LiveGameDatas;
+//import com.ssafy.db.entity.LiveGames;
+//import com.ssafy.db.repository.LiveGameDataPitchsRepository;
+//import com.ssafy.db.repository.LiveGameDatasRepository;
+//import com.ssafy.db.repository.LiveGamesRepository;
+//@Component
+//public class Scheduler {
+//	@Autowired
+//	private LiveGamesRepository liveGamesRepository;
+//	@Autowired
+//	private LiveGameDatasRepository liveGameDatasRepository;
+//	@Autowired
+//	private LiveGameDataPitchsRepository liveGameDataPitchsRepository;
+//	
+//    @Scheduled(cron = "*/5 * * * * *")//5초마다 1번씩 실행
+//    @Transactional
+//    public void updateGames () {
 //    	try {
 //			URL url = new URL("http://j7e202.p.ssafy.io:8001/"); //fastAPI에서 호출
 //			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
@@ -116,5 +116,5 @@ public class Scheduler {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-    }
-}
+//    }
+//}
