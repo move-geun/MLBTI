@@ -32,7 +32,7 @@ export const checkEmail = createAsyncThunk(
 );
 
 // 인증번호 확인 slice
-export const changwan = createAsyncThunk(
+export const checkCertNumber = createAsyncThunk(
   "CHECK_NUMBER",
   async (data, { rejectWithValue }) => {
     try {

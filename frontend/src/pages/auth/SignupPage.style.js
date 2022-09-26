@@ -59,6 +59,8 @@ const InputDiv = styled.div`
   width: 90%;
   margin: 0 0 2rem 2rem;
   align-items: center;
+
+
 `;
 
 const CertBtn = styled.button`
@@ -67,6 +69,7 @@ const CertBtn = styled.button`
   padding: 3px 3px;
   margin-left: 15px;
   font-size: 20px;
+
   @media screen and (max-width: 830px) {
     font-size: 15px;
   }
@@ -118,6 +121,12 @@ const InBtn = styled.button`
   padding: 1rem;
   margin: 1rem 0;
   font-size: 25px;
+  :disabled {
+    background-color: #7da4e8 ;
+    cursor: not-allowed;
+
+    
+  }
   &:hover {
     background-color: #2565d0;
     font-size: 27px;
