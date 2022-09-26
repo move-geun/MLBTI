@@ -1,18 +1,31 @@
-import axios from "../../api/http"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "../../api/http";
 
 // 로그인
 export const login = createAsyncThunk(
-  'LOGIN',
-  async (userData:any, { rejectWithValue }) => {
+  "LOGIN",
+  async (userData, { rejectWithValue }) => {
     try {
-      const res = await http.post('member/login.do', userData)
-      const accessToken = res.data.accessToken
-      const refreshToken = res.data.refreshToken
-      window.localStorage.setItem('access-Token', accessToken);
-      window.localStorage.setItem('refresh-Token', refreshToken);
-      return res
-    } catch (err:any) {
-      return rejectWithValue(err.response) //err안에 response로 담겨있음
+      console.log("왜 안호대");
+      const res = await axios.post("/auth/login", userData);
+      // console.log(res);
+      console.log("슬라이스~");
+      return res;
+    } catch (err) {
+      return rejectWithValue(err.response);
     }
-  },
-)
+  }
+);
+
+const initialState = {
+  isLoading: false,
+};
+
+const loginSlice = createSlice({
+  name: "login",
+  initialState,
+  reducers: {},
+  extraReducers: {},
+});
+
+export default loginSlice.reducer;
