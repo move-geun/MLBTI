@@ -56,7 +56,7 @@ public class CheeringController {
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<BaseRes> getCheeringComments(
-			@RequestBody @ApiParam(value="응원 댓글을 가져올 게임", required = true) int gameId) {
+			@RequestBody @ApiParam(value="응원 수 가져올 게임", required = true) int gameId) {
 		/*
 		1. game id를 가져옴
 		2. 가져온 id로 livegames 에 있는 away_id, away_name, home_id, home_name을 가져온다.
@@ -80,7 +80,7 @@ public class CheeringController {
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<? extends BaseResponseBody> setCheeringComments(
-			@RequestBody @ApiParam(value="응원 댓글을 저장할 게임", required = true) String gameId){
+			@RequestBody @ApiParam(value="응원 수를 추가하는 로직", required = true) int gameId){
 				return null;
 	}
 }
