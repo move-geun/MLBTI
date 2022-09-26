@@ -92,6 +92,13 @@ public class MailServiceImpl implements MailService {
 	}
 	
 	@Override
+	public void setMailValid(String email) {
+		MailConfirmKeys mailKey = emailRepository.findByEmail(email).get();
+		mailKey.setValid(true);
+		emailRepository.save(mailKey);
+	}
+	
+	@Override
 	public String findUserPassword(String email) {
 		// TODO Auto-generated method stub
 		SimpleMailMessage message = new SimpleMailMessage();

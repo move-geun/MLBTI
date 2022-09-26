@@ -1,9 +1,9 @@
-package com.ssafy.db.entity;
+package com.ssafy.db.qentity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
 import com.querydsl.core.types.dsl.*;
-
+import com.ssafy.db.entity.Users;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
@@ -31,8 +31,6 @@ public class QUsers extends EntityPathBase<Users> {
 
     //inherited
     public final NumberPath<Integer> uid = _super.uid;
-
-    public final NumberPath<Integer> user_teams_uid = createNumber("user_teams_uid", Integer.class);
 
     public QUsers(String variable) {
         super(Users.class, forVariable(variable));

@@ -18,6 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BaseballPlayers {
+	
 	@Id
 	Integer uid;
 	String fullName;
