@@ -1,51 +1,33 @@
 import React from "react";
-import {
-  Wrapper,
-  ProfileDiv,
-  ImgDiv,
-  ProfileImg,
-  Name,
-  InfoDiv,
-  InfoBox,
-  Content,
-  Title,
-  Detail,
-} from "./PlayerInfo.style";
+import { Wrapper, ProfileDiv, ProfileImg, Name } from "./PlayerInfo.style";
 
 const PlayerInfo = () => {
   return (
     <Wrapper>
-      <ProfileDiv>
-        <ImgDiv>
-          <ProfileImg src={"assets/chanho.jpg"} />
-        </ImgDiv>
-        <Name>박찬호</Name>
-      </ProfileDiv>
-
-      <InfoDiv>
-        <InfoBox>
-          <Content>
-            <Title>포지션</Title>
-            <Detail>우익수</Detail>
-          </Content>
-          <Content>
-            <Title>출생</Title>
-            <Detail>1999.03.02</Detail>
-          </Content>
-          <Content>
-            <Title>키</Title>
-            <Detail>188 (cm)</Detail>
-          </Content>
-          <Content>
-            <Title>체중</Title>
-            <Detail>99 (kg)</Detail>
-          </Content>
-          <Content>
-            <Title>소속팀</Title>
-            <Detail>롯데 프링글스</Detail>
-          </Content>
-        </InfoBox>
-      </InfoDiv>
+      <ProfileImg src={"assets/chanho.jpg"}></ProfileImg>
+      <div className="detail">
+        <ProfileDiv>
+          <div className="title">포지션</div>
+          <div className="content">우익수</div>
+        </ProfileDiv>
+        <ProfileDiv>
+          <div className="title">출생</div>
+          <div className="content">1999.03.02</div>
+        </ProfileDiv>
+        <ProfileDiv>
+          <div className="title">키</div>
+          <div className="content">188 (cm)</div>
+        </ProfileDiv>
+        <ProfileDiv>
+          <div className="title">소속팀</div>
+          <div className="content">롯데 프링글스</div>
+        </ProfileDiv>
+        <ProfileDiv>
+          <div className="title">입단일</div>
+          <div className="content">2022.01.01</div>
+        </ProfileDiv>
+      </div>
+      <Name>박찬호</Name>
     </Wrapper>
   );
 };

@@ -5,9 +5,15 @@ import {
   Switch,
   Schedule,
   ScheduleDetail,
-  Player,
-  PlayerDetail,
+  Cell,
 } from "./DetailInfo.style";
+import { TeamBox } from "../game/TeamTable.style";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 const DetailInfo = () => {
   const [page, setPage] = useState("경기일정");
@@ -16,7 +22,15 @@ const DetailInfo = () => {
     setPage(e.target.value);
   };
 
-  // console.log(page)
+  function createData(name, a, b) {
+    return { name, a, b };
+  }
+
+  const rows = [
+    createData("Frozen yoghurt", 3, 2),
+    createData("Frozen yoghurt", 3, 2),
+    createData("Frozen yoghurt", 3, 2),
+  ];
 
   return (
     <Wrapper>
@@ -70,13 +84,48 @@ const DetailInfo = () => {
       ) : null}
 
       {page === "선수보기" ? (
-        <Player>
-          <PlayerDetail>
-            <div className="name">이동근</div>
-            <div className="포지션">투수</div>
-            <div className="스탯">99</div>
-          </PlayerDetail>
-        </Player>
+        <TableContainer
+          sx={{ marginTop: "2rem", fontFamily: "MICEGothic Bold" }}
+          component={Paper}
+        >
+          <TeamBox>
+            <Table sx={{ minWidth: 400 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <Cell sx={{ fontFamily: "MICEGothic Bold" }}>선수명</Cell>
+                  <Cell sx={{ fontFamily: "MICEGothic Bold" }} align="right">
+                    포지션
+                  </Cell>
+                  <Cell sx={{ fontFamily: "MICEGothic Bold" }} align="right">
+                    스탯
+                  </Cell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow
+                    key={row.name}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <Cell
+                      sx={{ fontFamily: "MICEGothic Bold" }}
+                      component="th"
+                      scope="row"
+                    >
+                      {row.name}
+                    </Cell>
+                    <Cell sx={{ fontFamily: "MICEGothic Bold" }} align="right">
+                      {row.a}
+                    </Cell>
+                    <Cell sx={{ fontFamily: "MICEGothic Bold" }} align="right">
+                      {row.b}
+                    </Cell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TeamBox>
+        </TableContainer>
       ) : null}
     </Wrapper>
   );

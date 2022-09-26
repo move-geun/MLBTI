@@ -8,7 +8,9 @@ const PlayerDetailPage = () => {
   return (
     <Background>
       <SearchDiv>
-        <div className="title">선수 프로필</div>
+        <div className="title">
+          <span>선수 프로필</span>
+        </div>
         <div className="search">
           <SearchInput
             id="standard-basic"
@@ -16,6 +18,10 @@ const PlayerDetailPage = () => {
             variant="standard"
             sx={{
               marginLeft: "1rem",
+              "@media screen and (max-width: 480px)": {
+                fontSize: "100px",
+                width: "40%",
+              },
             }}
           />
           <Img className="magnifying  " src={"/assets/MagnifyingGlass.png"} />

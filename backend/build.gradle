@@ -184,7 +184,8 @@ dependencies {
     //Json
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 	implementation ('org.json:json:20190722')
-	//implementation group: 'org.json', name: 'org.json', version: '2.0'
+	//gson
+	implementation 'com.google.code.gson:gson:2.9.1'
 	
     //IntelliJ용
     //IntelliJ에서는 하기 annotationProcessor를 쓰면 별도의 querydsl 플러그인 및 플러그인 설정이 불필요.
