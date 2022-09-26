@@ -11,32 +11,29 @@ import {
   ContentCase,
   CertBtn,
 } from "./SignupPage.style";
-import { checkEmail, getUserList, changwan, signup } from "./signup-slice";
+import { checkEmail, getUserList } from "./signup-slice";
 import { useDispatch } from "react-redux";
 
 const SignupPage = () => {
   const dispatch = useDispatch();
 
   // form에 입력한 정보
-  const [userEmail, setUserEmail] = useState('');
-  const [emailCert, setEmailCert] = useState('');
-  const [userNick, setUserNick] = useState('');
-  const [userPwd, setUserPwd] = useState('');
+  const [userEmail, setUserEmail] = useState("");
+  const [emailCert, setEmailCert] = useState("");
+  const [userNick, setUserNick] = useState("");
+  const [userPwd, setUserPwd] = useState("");
 
   // 유효성 검사 변수
   const [emailValid, setEmailValid] = useState(true);
   const [nicknameValid, setNicknameValid] = useState(true);
   const [pwdValid, setPwdValid] = useState(true);
 
-  // 이메일 인증 성공 여부 
-  const [successCert, setSuccssCert] = useState(false)
-  
   // 비밀번호 재확인 변수
-  const [userPwdCheck, setUserPwdCheck] = useState('');
+  const [userPwdCheck, setUserPwdCheck] = useState("");
   // 비밀번호 재확인 여부 판별
   const [checkedPwd, setCheckedPwd] = useState(false);
 
-  // 닉네임 중복 여부 판별 (중복 = false, 사용가능 = true)
+  // 닉네임 중복 검사 변수
   const [isDuplicateNickname, setisDuplicateNickname] = useState(false);
   // 중복 확인 여부 판별
   const [confirmNickname, setConfirmNickname] = useState(false);
@@ -88,7 +85,7 @@ const SignupPage = () => {
     } else {
       setDefaultPwd(false);
     }
-    
+
     if (
       patternEngAtListOne.test(e.target.value) &&
       patternNumAtListOne.test(e.target.value) &&
@@ -111,22 +108,6 @@ const SignupPage = () => {
     dispatch(checkEmail(userEmail));
   }
 
-  // 인증 하기 
-  async function checkCertNumber() {
-    console.log('이것도 되나')
-    const data = {
-      email : userEmail,
-      randomNumber : emailCert
-    }
-    await dispatch(changwan(data))
-      .unwrap()
-      .then((res) => {
-        
-        setSuccssCert(res)
-        
-      })
-  }
-
   // 닉네임 중복 검사 함수
   const availableNickname = () => {
     dispatch(getUserList(userNick))
@@ -141,29 +122,6 @@ const SignupPage = () => {
       });
   };
 
-  // 폼 제출 함수
-  const handleSubmit= (e) => {
-    e.preventDefault()
-    const data = {
-      "email": userEmail,
-      "nickname" : userNick,
-      "password": userPwd,
-      "randomNumber": emailCert
-    }
-    console.log("실행되나?",)
-    dispatch(signup(data))
-      .unwrap()
-      .then()//history login
-      .catch((err) => {
-        if (err.status === 401) {
-          alert('입력하신 정보를 한번 더 확인해주세요')
-        } else if (err.status === 500) {
-          
-        }
-      })
-  }
-
-  
 
   let btnDisabled = true
   if(
@@ -175,14 +133,7 @@ const SignupPage = () => {
   ) {btnDisabled = false}
 
   return (
-    <FormInputsBlock onSubmit={(e) => {
-      if ( 
-        checkEmail && 
-        checkedPwd && 
-        isDuplicateNickname &&
-        confirmNickname
-        ) { handleSubmit(e)}}}>
-
+    <FormInputsBlock>
       <Header>회원가입</Header>
 
       <SingupWrapper>
@@ -218,7 +169,6 @@ const SignupPage = () => {
         <InputDiv>
           <Text>인증번호 확인</Text>
           <ContentCase>
-            <div>
             <StyledInput
               type="text"
               placeholder="인증번호 입력"
@@ -228,14 +178,8 @@ const SignupPage = () => {
               value={emailCert}
               className="cert"
             />
-
-            {successCert ? (
-              <AlertText>성공</AlertText>
-            )
-            :<AlertText>실패</AlertText>}
-            </div>
           </ContentCase>
-          <CertBtn type="button" onClick={checkCertNumber}>인증번호 확인</CertBtn>
+          <CertBtn type="button">인증번호 확인</CertBtn>
         </InputDiv>
 
         {/* 닉네임 */}
@@ -305,7 +249,6 @@ const SignupPage = () => {
               <StyledInput
                 type="password"
                 name="userPassword"
-                autoComplete="userPwd"
                 className="userPassword"
                 placeholder="대소문자, 숫자 포함 9~16자"
                 onChange={(e) => {
@@ -332,7 +275,6 @@ const SignupPage = () => {
             <div>
               <StyledInput
                 type="password"
-                autoComplete="userPwd"
                 placeholder="비밀번호 입력"
                 className="passwordcheck"
                 onChange={(e) => {
