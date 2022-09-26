@@ -11,28 +11,35 @@ import {
   ContentCase,
   CertBtn,
 } from "./SignupPage.style";
-import { checkEmail, getUserList, changwan, signup } from "./signup-slice";
+import {
+  checkEmail,
+  getUserList,
+  checkCertNumber,
+  signup,
+} from "./signup-slice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom'
 
 const SignupPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // form에 입력한 정보
-  const [userEmail, setUserEmail] = useState('');
-  const [emailCert, setEmailCert] = useState('');
-  const [userNick, setUserNick] = useState('');
-  const [userPwd, setUserPwd] = useState('');
+  const [userEmail, setUserEmail] = useState("");
+  const [emailCert, setEmailCert] = useState("");
+  const [userNick, setUserNick] = useState("");
+  const [userPwd, setUserPwd] = useState("");
 
   // 유효성 검사 변수
   const [emailValid, setEmailValid] = useState(true);
   const [nicknameValid, setNicknameValid] = useState(true);
   const [pwdValid, setPwdValid] = useState(true);
 
-  // 이메일 인증 성공 여부 
-  const [successCert, setSuccssCert] = useState(false)
-  
+  // 이메일 인증 성공 여부
+  const [successCert, setSuccssCert] = useState(false);
+
   // 비밀번호 재확인 변수
-  const [userPwdCheck, setUserPwdCheck] = useState('');
+  const [userPwdCheck, setUserPwdCheck] = useState("");
   // 비밀번호 재확인 여부 판별
   const [checkedPwd, setCheckedPwd] = useState(false);
 
@@ -88,7 +95,7 @@ const SignupPage = () => {
     } else {
       setDefaultPwd(false);
     }
-    
+
     if (
       patternEngAtListOne.test(e.target.value) &&
       patternNumAtListOne.test(e.target.value) &&
@@ -111,20 +118,18 @@ const SignupPage = () => {
     dispatch(checkEmail(userEmail));
   }
 
-  // 인증 하기 
-  async function checkCertNumber() {
-    console.log('이것도 되나')
+  // 인증 하기
+  async function checkNumber() {
+    console.log("이것도 되나");
     const data = {
-      email : userEmail,
-      randomNumber : emailCert
-    }
-    await dispatch(changwan(data))
+      email: userEmail,
+      randomNumber: emailCert,
+    };
+    await dispatch(checkCertNumber(data))
       .unwrap()
       .then((res) => {
-        
-        setSuccssCert(res)
-        
-      })
+        setSuccssCert(res);
+      });
   }
 
   // 닉네임 중복 검사 함수
@@ -142,47 +147,52 @@ const SignupPage = () => {
   };
 
   // 폼 제출 함수
-  const handleSubmit= (e) => {
-    e.preventDefault()
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const data = {
-      "email": userEmail,
-      "nickname" : userNick,
-      "password": userPwd,
-      "randomNumber": emailCert
-    }
-    console.log("실행되나?",)
+      email: userEmail,
+      nickname: userNick,
+      password: userPwd,
+      randomNumber: emailCert,
+    };
+    console.log("실행되나?");
     dispatch(signup(data))
       .unwrap()
-      .then()//history login
+      .then(
+        navigate('/login')
+      ) 
       .catch((err) => {
         if (err.status === 401) {
-          alert('입력하신 정보를 한번 더 확인해주세요')
+          alert("입력하신 정보를 한번 더 확인해주세요");
         } else if (err.status === 500) {
-          
         }
-      })
-  }
+      });
+  };
 
-  
-
-  let btnDisabled = true
-  if(
-    // checkedEmail && // 이메일 인증
+  let btnDisabled = true;
+  if (
+    successCert && // 이메일 인증
     checkedPwd && // 비밀번호 재확인
     pwdValid && // 비밀번호 유효성
     isDuplicateNickname && // 닉네임 중복
     nicknameValid // 닉네임 유효성
-  ) {btnDisabled = false}
+  ) {
+    btnDisabled = false;
+  }
 
   return (
-    <FormInputsBlock onSubmit={(e) => {
-      if ( 
-        checkEmail && 
-        checkedPwd && 
-        isDuplicateNickname &&
-        confirmNickname
-        ) { handleSubmit(e)}}}>
-
+    <FormInputsBlock
+      onSubmit={(e) => {
+        if (
+          checkEmail &&
+          checkedPwd &&
+          isDuplicateNickname &&
+          confirmNickname
+        ) {
+          handleSubmit(e);
+        }
+      }}
+    >
       <Header>회원가입</Header>
 
       <SingupWrapper>
@@ -205,7 +215,9 @@ const SignupPage = () => {
                 <AlertText>올바르지 않은 이메일 형식 입니다</AlertText>
               ) : null}
               {defaultEmail && emailValid ? (
-                <AlertText className="correct">올바른 이메일 형식 입니다</AlertText>
+                <AlertText className="correct">
+                  올바른 이메일 형식 입니다
+                </AlertText>
               ) : null}
             </div>
           </ContentCase>
@@ -219,23 +231,28 @@ const SignupPage = () => {
           <Text>인증번호 확인</Text>
           <ContentCase>
             <div>
-            <StyledInput
-              type="text"
-              placeholder="인증번호 입력"
-              onChange={(e) => {
-                setEmailCert(e.target.value);
-              }}
-              value={emailCert}
-              className="cert"
-            />
+              <StyledInput
+                type="text"
+                placeholder="인증번호 입력"
+                onChange={(e) => {
+                  setEmailCert(e.target.value);
+                }}
+                value={emailCert}
+                className="cert"
+              />
 
-            {successCert ? (
-              <AlertText>성공</AlertText>
-            )
-            :<AlertText>실패</AlertText>}
+              {successCert ? (
+                <AlertText className="correct">인증에 성공 했습니다.</AlertText>
+              ) : null}
+
+              {!emailCert && !successCert ? (
+                <AlertText >인증이 필요 합니다.</AlertText>
+              ) : null}
             </div>
           </ContentCase>
-          <CertBtn type="button" onClick={checkCertNumber}>인증번호 확인</CertBtn>
+          <CertBtn type="button" onClick={checkNumber}>
+            인증번호 확인
+          </CertBtn>
         </InputDiv>
 
         {/* 닉네임 */}
