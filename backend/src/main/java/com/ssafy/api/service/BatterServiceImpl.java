@@ -3,6 +3,16 @@
  */
 package com.ssafy.api.service;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ssafy.db.entity.Batters;
+import com.ssafy.db.repository.BatterRepository;
+
+
 /**
 
   * @FileName : BatterService.java
@@ -12,8 +22,30 @@ package com.ssafy.api.service;
   * @변경이력 :
   * @프로그램 설명 :
   */
+@Service("batterService")
 public class BatterServiceImpl implements BatterService{
 	
+	/**
+	  * @Method Name : getAllBatters
+	  * @작성일 : 2022. 9. 27
+	  * @작성자 : 김동우
+	  * @변경이력 : 
+	
+	  * @Method 설명 : 모든 batters 를 가져온다.
+	  * @return
+	  */
+	@Autowired
+	BatterRepository battersRepository; 
+	
+	@Override
+	public List<Batters> getAllBatters() {
+		return battersRepository.findAll();
+	}
+	
+	@Override
+	public Batters getBatterBySeasonAndUid(int season, int uid) {
+		return battersRepository.findBySeasonAndPlayerUid(season, uid);
+	}
 	
 
 }

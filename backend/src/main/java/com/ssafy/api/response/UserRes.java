@@ -17,10 +17,11 @@ import lombok.Setter;
 public class UserRes{
 	@ApiModelProperty(name="User ID")
 	String userId;
-	
+	String teamName;
 	public static UserRes of(Users user) {
 		UserRes res = new UserRes();
 		res.setUserId(user.getEmail());
+		res.setTeamName(user.getMyTeamName());
 		return res;
 	}
 }
