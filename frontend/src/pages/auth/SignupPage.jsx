@@ -245,7 +245,7 @@ const SignupPage = () => {
                 <AlertText className="correct">인증에 성공 했습니다.</AlertText>
               ) : null}
 
-              {!emailCert && !successCert ? (
+              {emailCert && !successCert ? (
                 <AlertText >인증이 필요 합니다.</AlertText>
               ) : null}
             </div>

@@ -14,7 +14,7 @@ import {
   SearchInput,
 } from "./TeamCustomPage.style";
 import Dropdown from "../../components/TeamCustom/Dropdown";
-import PlyaerList from "../../components/TeamCustom/PlayerList";
+import PlayerList from "../../components/TeamCustom/PlayerList";
 import TeamCoposition from "../../components/TeamCustom/TeamComposition";
 
 const TeamCustomPage = () => {
@@ -41,7 +41,7 @@ const TeamCustomPage = () => {
             <Img className="magnifying  " src={"/assets/MagnifyingGlass.png"} />
           </SearchDiv>
           <Dropdown />
-          <PlyaerList />
+          <PlayerList />
         </MyteamWrapper>
         {/* 오른쪽 박스 */}
         <SimulationWrapper>
