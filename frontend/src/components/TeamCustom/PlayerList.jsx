@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { useDispatch } from "react-redux";
 import {
   ListWrapper,
   List,
@@ -6,30 +7,33 @@ import {
   PlyaerDetailWrapper,
   PlyaerDetail,
 } from "./PlayerList.style";
-import { getData, getUserTeam } from "./teamCustom-slice";
-import { useDispatch } from "react-redux";
-
-
+import { getBatters, getPitchers } from "./teamCustom-slice";
 
 
 const PlayerList = () => {
+  const [season, setSeason] = useState()
+  const [teamName, setTeamName] = useState()
+  const [position, setPosition] = useState()
+  const [league, setLeague] = useState()
 
-  const dispatch = useDispatch()
-  
-  // 선수 목록 가져오기
-  const getPlayer = () =>{
-    dispatch(getData(100))
+ const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getPitchers())
       .unwrap()
-      .then((res) => {
+      .then((res)=> {
+        console.log('투수', res.data);
       })
-  }
-
-
+    dispatch(getBatters())
+      .unwrap()
+      .then((res)=> {
+        console.log('타자', res.data);
+      })
+  }, [])
 
   return (
     <ListWrapper>
       <List>
-        <div type='button' onClick={getPlayer}>이거 누르면 나옴</div>
         <PlyaerName>박찬호</PlyaerName>
         <PlyaerDetailWrapper>
           <PlyaerDetail>18년도</PlyaerDetail>

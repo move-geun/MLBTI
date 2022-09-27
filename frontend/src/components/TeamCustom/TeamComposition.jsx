@@ -1,16 +1,8 @@
 import React, {useEffect, useState} from "react";
-// import { PlyaerDetail } from "./PlayerList.style";
 import {
   CompositionWrapper,
   Header,
-  // ListWrapper,
   MyNickname,
-  // ListHeader,
-  // ListTable,
-  // ListBody,
-  // HeaderDetail,
-  // PlyaerList,
-  // PlayerDetail,
 } from "./TeamCoposiotion.style";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -23,26 +15,33 @@ import Paper from "@mui/material/Paper";
 import { getUserTeam } from "./teamCustom-slice";
 import { useDispatch } from "react-redux";
 
+
 const TaBleList = styled(TableCell)`
   font-family: "MICEGothic Bold";
 `;
 
-const TeamCoposition = () => {
+const TeamCoposition = ({userInfo}) => {
   const dispatch = useDispatch()
   const [myTeam, setMyTeam] = useState([])
+  
+  async function getTeam () {
+    const res = await dispatch(getUserTeam(userInfo['userId']))
+    
+    if (res.meta.requestStatus === "fulfilled") {
+      setMyTeam(res.payload)
+    }
+  }
 
   useEffect(() => {
-    dispatch(getUserTeam('nename8@naver.com'))
-    .unwrap()
-    .then((res) => {
-        setMyTeam(res)
-      })
-    }, [])
-    
+    if(userInfo['userId']){
+      getTeam()
+    }
+  }, [userInfo])
+  
   return (
     <CompositionWrapper>
       <Header>
-        <MyNickname>홈런맞아부러쓰 </MyNickname>
+        <MyNickname>{userInfo['teamName']}</MyNickname>
         <p>의 전력</p>
       </Header>
       <TableContainer component={Paper}>
