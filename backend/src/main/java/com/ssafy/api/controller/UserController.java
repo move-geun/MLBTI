@@ -175,6 +175,21 @@ public class UserController {
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "nickname is modified"));
 	}
 	
+	@PutMapping("/teamName")
+	@ApiOperation(value = "팀 이름 변경", notes = "이메일과 바꿀이름을 전송하면 나의 팀 이름을 변경한다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<? extends BaseResponseBody> changeTeamName(
+			@ApiParam(value = "email", required = true) @RequestParam("email") String email,@ApiParam(value = "newTeamName", required = true) @RequestParam("newTeamName") String newTeamName) {
+		System.out.println("=============teamName change");	
+		Users u = userService.getUsersByEmail(email);
+			userService.modifyUserTeamName(u,newTeamName);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "nickname is modified"));
+	}
+	
+	
 //	@DeleteMapping("/{uid}")
 //	@ApiOperation(value = "회원 삭제", notes = "<strong>uid</strong>를 통해 회원을 삭제한다.") 
 //    @ApiResponses({
@@ -254,6 +269,8 @@ public class UserController {
 		
 		return ResponseEntity.status(200).body(UserRes.of(user));
 	}
+	
+	
 
     
     /**
