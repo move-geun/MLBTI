@@ -6,13 +6,30 @@ import {
   PlyaerDetailWrapper,
   PlyaerDetail,
 } from "./PlayerList.style";
+import { getData, getUserTeam } from "./teamCustom-slice";
+import { useDispatch } from "react-redux";
+
 
 
 
 const PlayerList = () => {
+
+  const dispatch = useDispatch()
+  
+  // 선수 목록 가져오기
+  const getPlayer = () =>{
+    dispatch(getData(100))
+      .unwrap()
+      .then((res) => {
+      })
+  }
+
+
+
   return (
     <ListWrapper>
       <List>
+        <div type='button' onClick={getPlayer}>이거 누르면 나옴</div>
         <PlyaerName>박찬호</PlyaerName>
         <PlyaerDetailWrapper>
           <PlyaerDetail>18년도</PlyaerDetail>
