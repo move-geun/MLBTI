@@ -26,5 +26,6 @@ public interface UserService {
 	void deleteUserByEmail(String email);
 	List<Users> getUserAll();
 	Users getUserByUid(Integer uid);
+	void modifyUserTeamName(Users user, String teamName);
 }
 

@@ -38,4 +38,6 @@ public class Users extends BaseEntity{
 	@Column(name="grade")
 	String grade;
     
+	@Column(name="my_team_name")
+	String myTeamName;
 }

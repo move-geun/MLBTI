@@ -130,4 +130,23 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		userRepository.delete(userRepositorySupport.findUserByEmail(email).get());
 	}
+
+	/**
+	  * @Method Name : modifyUserTeamNameByEmail
+	  * @작성일 : 2022. 9. 27
+	  * @작성자 : 김동우
+	  * @변경이력 : 
+	
+	  * @Method 설명 :
+	  * @param email
+	  * @return
+	  */
+	
+	@Override
+	public void modifyUserTeamName(Users user, String teamName) {
+		user.setMyTeamName(teamName);
+		userRepository.save(user);
+		// TODO Auto-generated method stub
+
+	}
 }
