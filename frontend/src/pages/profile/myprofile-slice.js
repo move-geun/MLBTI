@@ -15,6 +15,23 @@ export const myprofile = createAsyncThunk(
   }
 );
 
+export const myteam = createAsyncThunk(
+  "MYTEAM",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await axios.get("/user_team/list", {
+        params: {
+          email: data.email,
+        },
+      });
+      return res;
+    } catch (err) {
+      alert("팀 정보 조회 실패");
+      return rejectWithValue(err.response);
+    }
+  }
+);
+
 const initialState = {
   isLoading: false,
 };
