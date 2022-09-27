@@ -99,8 +99,8 @@ public class CheeringController {
 			Teams homeTeam = teamService.getTeamById(homeId);
 			Teams awayTeam = teamService.getTeamById(awayId);
 			CheeringDto cheeringDto = new CheeringDto();
-			cheeringDto.setAwayCount(0);
-			cheeringDto.setHomeCount(0);
+			cheeringDto.setAwayCount(ojt.get().getAwayCommentsNum());
+			cheeringDto.setHomeCount(ojt.get().getHomeCommentsNum());
 			cheeringDto.setAwayLogo(awayTeam.getLogo());
 			cheeringDto.setHomeLogo(homeTeam.getLogo());
 			cheeringDto.setAwayName(awayTeam.getTeamName());
