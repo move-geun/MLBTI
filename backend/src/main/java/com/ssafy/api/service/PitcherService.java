@@ -7,17 +7,18 @@ import java.util.List;
 import java.util.Optional;
 
 import com.ssafy.db.entity.Batters;
+import com.ssafy.db.entity.Pitchers;
 
 /**
 
-  * @FileName : BatterService.java
+  * @FileName : PitcherService.java
   * @Project : mlb-analysis-project
   * @Date : 2022. 9. 22 
   * @작성자 : 김동우
   * @변경이력 :
   * @프로그램 설명 :
   */
-public interface BatterService {
-	List<Batters> getAllBatters();
-	Batters getBatterBySeasonAndUid(int season, int uid);
+public interface PitcherService {
+	List<Pitchers> getAllPitchers();
+	Pitchers getPitcherBySeasonAndUid(int season, int uid);
 }
