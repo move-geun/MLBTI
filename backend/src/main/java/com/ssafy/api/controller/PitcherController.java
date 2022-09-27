@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.api.request.NoticeRegisterPostReq;
 import com.ssafy.api.response.BaseRes;
 import com.ssafy.api.service.BatterService;
+import com.ssafy.api.service.PitcherService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.dto.BattersDto;
+import com.ssafy.db.dto.PitchersDto;
 import com.ssafy.db.entity.Batters;
 import com.ssafy.db.entity.Notices;
+import com.ssafy.db.entity.Pitchers;
 import com.ssafy.db.entity.Users;
 
 import io.swagger.annotations.Api;
@@ -30,48 +33,49 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+
+
 /**
 
-  * @FileName : BatterController.java
+  * @FileName : PitcherController.java
   * @Project : mlb-analysis-project
-  * @Date : 2022. 9. 22 
+  * @Date : 2022. 9. 27 
   * @작성자 : 김동우
   * @변경이력 :
-  * @프로그램 설명 :
+  * @프로그램 설명 : 투수 정보 가져오는 api
   */
-
-@Api(value = "타자 API", tags = {"Batter"})
+@Api(value = "투수 API", tags = {"Pitcher"})
 @RestController
-@RequestMapping("/api/batter")
-public class BatterController {
+@RequestMapping("/api/pitcher")
+public class PitcherController {
 	@Autowired
-	BatterService batterService;
+	PitcherService pitcherService;
 
 	@GetMapping("/list")
-	@ApiOperation(value = "모든 batter 정보 얻기", notes = "<strong>batters에서 모든 batter 정보를 가져온다.") 
+	@ApiOperation(value = "모든 pitcher 정보 얻기", notes = "<strong>pitchers에서 모든 pitcher 정보를 가져온다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<BaseRes> getAll() {
-		ArrayList<Batters> l = (ArrayList<Batters>) batterService.getAllBatters();
-		List<BattersDto> battersList = new ArrayList();
+		ArrayList<Pitchers> l = (ArrayList<Pitchers>) pitcherService.getAllPitchers();
+		List<PitchersDto> pitchersList = new ArrayList();
 		for(int i=0;i<l.size();++i) {
-			battersList.add(BattersDto.of(l.get(i)));
+			pitchersList.add(PitchersDto.of(l.get(i)));
 		}
 		
-		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",battersList));
+		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",pitchersList));
 	}
 	
 		@GetMapping()
-		@ApiOperation(value = "batter 정보 얻기", notes = "<strong>batters에서 한 명의 batter 정보를 가져온다.") 
+		@ApiOperation(value = "pitcher 정보 얻기", notes = "<strong>pitchers에서 한 명의 pitcher 정보를 가져온다.") 
 	    @ApiResponses({
 	        @ApiResponse(code = 200, message = "성공"),
 	        @ApiResponse(code = 500, message = "서버 오류")
 	    })
 		public ResponseEntity<BaseRes> getOne(@ApiParam(value = "season", required = true) @RequestParam("season") int season, @ApiParam(value = "playerUid", required = true) @RequestParam("playerUid") int playerUid ){
-			Batters b = batterService.getBatterBySeasonAndUid(season, playerUid);
+			Pitchers p = pitcherService.getPitcherBySeasonAndUid(season, playerUid);
 			
-		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",BattersDto.of(b)));
+		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",PitchersDto.of(p)));
 	}
 }
