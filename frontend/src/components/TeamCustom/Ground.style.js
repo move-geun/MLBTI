@@ -7,14 +7,11 @@ const Background = styled.div`
   align-items: center;
   width: 50%;
   height: 100%;
-  /* outline: 1px solid; */
   margin-top: 3rem;
   
 `
 
 const ImgDiv = styled.div`
-/* outline: 1px solid; */
-
 `
 
 const Img = styled.img`

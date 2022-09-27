@@ -41,5 +41,18 @@ export const getUserTeam = createAsyncThunk(
 );
 
 // POST - 유저팀 등록 (저장 버튼 누르면 post 되게)
+export const registTeam = createAsyncThunk(
+  "REGITS_TEAM",
+  async (data, {rejectWithValue}) => {
+    try {
+      console.log(data)
+      const res = await axios.post("/user_team", data)
+      console.log('성공했나?',res)
+    } catch (err) {
+      return rejectWithValue(err.resposne)
+    }
+  }
+)
+
 
 // DELETE - 유저팀 삭제 (uid: 구단 id 를 delete하면 될 듯)
