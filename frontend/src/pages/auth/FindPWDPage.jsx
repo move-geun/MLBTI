@@ -1,7 +1,9 @@
 import { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
-// import { changePwd } from "./findpwd-slice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { changePwd } from "./findpwd-slice";
+import { checkEmail, checkCertNumber } from "./signup-slice";
+import { AlertText } from "./SignupPage.style";
 import {
   FindPWDBox,
   InputBox,
@@ -9,16 +11,134 @@ import {
   StyledInput,
 } from "./FindPWDPage.style";
 
+// 유저 닉네임 바로 가져오기
+
 const FindPWDPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // form에 입력한 정보
   const [userEmail, setUserEmail] = useState("");
   const [emailCert, setEmailCert] = useState("");
   const [userPwd, setUserPwd] = useState("");
   const [userPwdCheck, setUserPwdCheck] = useState("");
 
+  // 유효성 검사 변수
+  const [emailValid, setEmailValid] = useState(true);
+  const [pwdValid, setPwdValid] = useState(true);
+
+  // 이메일 인증 성공 여부
+  const [successCert, setSuccssCert] = useState(false);
+
+  // 비밀번호 재확인 여부 판별
+  const [checkedPwd, setCheckedPwd] = useState(false);
+
+  // 에러 메시지 방지 (입력이 들어오면 값 변경)
+  const [defaultEmail, setDefaultEmail] = useState(false);
+  const [defaultPwd, setDefaultPwd] = useState(false);
+
+  // 이메일 유효성 검사
+  const validateEmail = (e) => {
+    if (e.target.value) {
+      setDefaultEmail(true);
+    } else {
+      setDefaultEmail(false);
+    }
+
+    let regexp =
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    if (regexp.test(e.target.value)) return setEmailValid(true);
+    else return setEmailValid(false);
+  };
+
+  // 비밀번호 유효성 검사 | 대소문자, 숫자 포함 9~16자
+  const validatePwd = (e) => {
+    var patternEngAtListOne = new RegExp(/[a-zA-Z]+/); // + for at least one
+    var patternNumAtListOne = new RegExp(/[0-9]+/); // + for at least one
+
+    if (e.target.value) {
+      setDefaultPwd(true);
+    } else {
+      setDefaultPwd(false);
+    }
+
+    if (
+      patternEngAtListOne.test(e.target.value) &&
+      patternNumAtListOne.test(e.target.value) &&
+      e.target.value.length >= 8 &&
+      e.target.value.length <= 16
+    ) {
+      return setPwdValid(true);
+    } else return setPwdValid(false);
+  };
+
+  // 비밀번호 재확인
+  const checkPassword = (e) => {
+    if (defaultPwd && pwdValid && e.target.value === userPwd) {
+      return setCheckedPwd(true);
+    } else return setCheckedPwd(false);
+  };
+
+  // 인증확인 메일 전송
+  function sendNumber(e) {
+    e.preventDefault();
+    dispatch(checkEmail(userEmail));
+  }
+
+  // 인증 하기
+  async function checkMailNumber(e) {
+    e.preventDefault();
+    const data = {
+      email: userEmail,
+      randomNumber: emailCert,
+    };
+    await dispatch(checkCertNumber(data))
+      .unwrap()
+      .then((res) => {
+        setSuccssCert(res);
+      });
+  }
+  // 폼 제출 함수
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      email: userEmail,
+      newNickname: "배송윤아님",
+      newPassword: userPwd,
+    };
+    dispatch(changePwd(data))
+      .unwrap()
+      .then((res) => {
+        navigate("/login");
+      })
+      .catch((err) => {
+        if (err.status === 401) {
+          alert("입력하신 정보를 한번 더 확인해주세요");
+        } else if (err.status === 500) {
+          alert("서버 오류입니다.");
+        }
+      });
+  };
+
+  let btnDisabled = true;
+  if (
+    successCert && // 이메일 인증
+    checkedPwd && // 비밀번호 재확인
+    pwdValid // 비밀번호 유효성
+  ) {
+    btnDisabled = false;
+  }
+
   return (
     <FindPWDBox>
       <h1> 비밀번호 변경하기</h1>
-      <form action="">
+      <form
+        onSubmit={(e) => {
+          if (checkEmail && checkedPwd) {
+            handleSubmit(e);
+          }
+        }}
+      >
         {/* 이메일 입력박스 */}
         <InputBox>
           <div>E-Mail</div>
@@ -29,14 +149,24 @@ const FindPWDPage = () => {
                 placeholder="example@exam.com"
                 onChange={(e) => {
                   setUserEmail(e.target.value);
+                  validateEmail(e);
                 }}
                 value={userEmail}
               />
-              <button>인증하기</button>
+              <button onClick={sendNumber}>인증하기</button>
             </StyledInput>
-            <span>메일 형식이 아닙니다.</span>
+            {/* 오류메시지 */}
+            {defaultEmail && !emailValid ? (
+              <AlertText>올바르지 않은 이메일 형식 입니다</AlertText>
+            ) : null}
+            {defaultEmail && emailValid ? (
+              <AlertText className="correct">
+                올바른 이메일 형식 입니다
+              </AlertText>
+            ) : null}
           </ContentCase>
         </InputBox>
+
         {/* 메일 인증확인 */}
         <InputBox>
           <div>메일 인증 확인</div>
@@ -50,46 +180,83 @@ const FindPWDPage = () => {
                 }}
                 value={emailCert}
               />
-              <button>인증하기</button>
+              <button onClick={checkMailNumber}>인증하기</button>
             </StyledInput>
-            <span>인증번호가 일치하지 않습니다.</span>
+            {/* 오류메세지 */}
+            {successCert ? (
+              <AlertText className="correct">인증에 성공 했습니다.</AlertText>
+            ) : null}
+            {emailCert && !successCert ? (
+              <AlertText>인증이 필요 합니다.</AlertText>
+            ) : null}
           </ContentCase>
         </InputBox>
+
         {/* 변경할 비밀번호 입력 */}
         <InputBox>
           <div>비밀번호 변경</div>
           <ContentCase>
             <StyledInput>
               <input
-                type="text"
-                placeholder="대,소문자 포함 8자리"
+                type="password"
+                placeholder="대,소문자,숫자 포함 8자리 이상"
                 onChange={(e) => {
                   setUserPwd(e.target.value);
+                  validatePwd(e);
                 }}
                 value={userPwd}
               />
             </StyledInput>
-            <span>비밀번호를 확인해주세요.</span>
+            {/* 오류메세지 */}
+            {defaultPwd && !pwdValid ? (
+              <AlertText>올바르지 않은 비밀번호 양식 입니다.</AlertText>
+            ) : null}
+            {defaultPwd && pwdValid ? (
+              <AlertText className="correct">
+                올바른 비밀번호 양식 입니다.
+              </AlertText>
+            ) : null}
           </ContentCase>
         </InputBox>
+
         {/* 비밀번호 재확인 */}
         <InputBox>
           <div>비밀번호 확인</div>
           <ContentCase>
             <StyledInput>
               <input
-                type="text"
+                type="password"
                 placeholder="비밀번호를 다시 입력해주세요"
                 onChange={(e) => {
+                  checkPassword(e);
                   setUserPwdCheck(e.target.value);
                 }}
                 value={userPwdCheck}
               />
             </StyledInput>
-            <span>비밀번호가 일치하지 않습니다.</span>
+            {userPwdCheck ? (
+              checkedPwd && userPwdCheck === userPwd ? (
+                <AlertText className="correct">
+                  비밀번호가 일치 합니다.
+                </AlertText>
+              ) : (
+                <AlertText>비밀번호가 일치하지 않습니다</AlertText>
+              )
+            ) : null}
           </ContentCase>
         </InputBox>
       </form>
+
+      <button
+        onClick={(e) => {
+          if (checkEmail && checkedPwd) {
+            handleSubmit(e);
+          }
+        }}
+        disabled={btnDisabled}
+      >
+        비밀번호 변경하기
+      </button>
     </FindPWDBox>
   );
 };
