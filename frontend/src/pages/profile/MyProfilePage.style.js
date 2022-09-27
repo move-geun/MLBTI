@@ -77,6 +77,8 @@ const Id = styled.div`
 const ChangePwd = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: left;
 
   img {
     width: 1.5rem;

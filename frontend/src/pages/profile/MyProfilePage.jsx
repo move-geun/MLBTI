@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as React from "react";
 import Modal from "@mui/material/Modal";
 import {
@@ -10,13 +10,28 @@ import {
   GraphBox,
   ModalBox,
 } from "./MyProfilePage.style";
+import { myprofile } from "./myprofile-slice";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 // const [nickName, setNickname] = useState("");
 
 const MyProfilePage = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [usermail, setUsermail] = useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(myprofile())
+      .unwrap()
+      .then((res) => {
+        setUsermail(res.data.userId);
+        console.log(res);
+      })
+      .catch((err) => alert("오류"));
+  }, []);
 
   return (
     <PageContainer>
@@ -25,7 +40,7 @@ const MyProfilePage = () => {
           <div>배송윤 아님</div>
           <span>님</span>
           <img
-            src="/assets/cap.png"
+            src="/assets/edit.png"
             alt="편집이미지였던것.."
             onClick={handleOpen}
           />
@@ -48,11 +63,13 @@ const MyProfilePage = () => {
             </ModalBox>
           </Modal>
         </Name>
-        <Id>example@naver.com</Id>
+        <Id>{usermail}</Id>
       </NameBox>
       <ChangePwd>
-        <img src="/assets/cap.png" alt="자물쇠였던것.." />
-        비밀번호 변경하기
+        <Link to="/findPwd">
+          <img src="/assets/cap.png" alt="자물쇠였던것.." />
+          비밀번호 변경하기
+        </Link>
       </ChangePwd>
       <div className="divide">배송윤아님 님의 선구안</div>
       <GraphBox>
