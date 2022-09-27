@@ -5,7 +5,6 @@ import {
   Header,
   CenterWrapper,
   MyteamWrapper,
-  SimulationWrapper,
   Nickname,
   CustomTeamName,
   SearchDiv,
@@ -57,7 +56,7 @@ const TeamCustomPage = () => {
           <PlayerList />
         </MyteamWrapper>
         {/* 오른쪽 박스 */}
-        <Ground/>
+        <Ground email={userInfo['userId']}/>
       </CenterWrapper>
 
       {/* 팀 전력 */}
