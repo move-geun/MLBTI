@@ -18,10 +18,12 @@ public class UserRes{
 	@ApiModelProperty(name="User ID")
 	String userId;
 	String teamName;
+	String nickname;
 	public static UserRes of(Users user) {
 		UserRes res = new UserRes();
 		res.setUserId(user.getEmail());
 		res.setTeamName(user.getMyTeamName());
+		res.setNickname(user.getNickname());
 		return res;
 	}
 }
