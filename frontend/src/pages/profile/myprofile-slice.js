@@ -33,15 +33,25 @@ export const myteam = createAsyncThunk(
   }
 );
 
-// 닉네임 변경하기
-// export const changeName = createAsyncThunk(
-//     'CHANGENAME',
-//     async (data, { rejectWithValue }) => {
-//         try {
-//             const res = await axios
-//         }
-//     }
-// )
+// 팀 이름 변경하기
+export const changeTeamName = createAsyncThunk(
+  "CHANGETEAMNAME",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await axios.put("/user/teamName", null, {
+        params: {
+          email: data.email,
+          newTeamName: data.newTeamName,
+        },
+      });
+      console.log(res);
+      return res;
+    } catch (err) {
+      alert("팀 이름 변경 실패");
+      return rejectWithValue(err.response);
+    }
+  }
+);
 
 const initialState = {
   isLoading: false,
