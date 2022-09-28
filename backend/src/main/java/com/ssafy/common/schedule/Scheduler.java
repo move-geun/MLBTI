@@ -31,6 +31,8 @@
 //    @Scheduled(cron = "*/5 * * * * *")//5초마다 1번씩 실행
 //    @Transactional
 //    public void updateGames () {
+//
+//		System.out.println("start updateGames");
 //    	try {
 //			URL url = new URL("http://j7e202.p.ssafy.io:8001/"); //fastAPI에서 호출
 //			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
@@ -48,9 +50,9 @@
 //			while((line = br.readLine()) != null) { // 읽을 수 있을 때 까지 반복
 //				sb.append(line);
 //			}
-//			liveGamesRepository.truncateLiveGames();
-//			liveGameDatasRepository.truncateLiveGameDatas();
-//			liveGameDataPitchsRepository.truncateLiveGameDataPitchs();
+////			liveGamesRepository.truncateLiveGames();
+////			liveGameDatasRepository.truncateLiveGameDatas();
+////			liveGameDataPitchsRepository.truncateLiveGameDataPitchs();
 //			JSONObject obj = new JSONObject(sb.toString()); // json으로 변경 (역직렬화)
 //			JSONArray games = obj.getJSONArray("games");
 //			for(int i=0; i<games.length(); i++) {
@@ -76,10 +78,12 @@
 //				liveGame.setWeatherWind(game.getString("weather_wind"));
 //				liveGamesRepository.save(liveGame);
 //				JSONArray gameDatas = game.getJSONArray("gameData");
+//				int indexCount = 0;
 //				for(int j=0; j<24; j++) {
 //					JSONArray gameDataArray = gameDatas.getJSONArray(j);
 //					if(gameDataArray.length()==0) break;
 //					for(int k=0; k<gameDataArray.length(); k++) {
+//						// 타석 데이터
 //						JSONObject gameData = gameDataArray.getJSONObject(k);
 //						LiveGameDatas LGD = new LiveGameDatas();
 //						LGD.setEvent(gameData.getString("event"));
@@ -101,15 +105,56 @@
 //						liveGameDatasRepository.save(LGD);
 //						JSONArray playEvents = gameData.getJSONArray("playEvents");
 //						for(int l=0; l<playEvents.length(); l++) {
+//
+//							// 투구 데이터
 //							JSONObject gameDataPitch = playEvents.getJSONObject(l);
 //							LiveGameDataPitchs LGDP = new LiveGameDataPitchs();
+//							// 공통부분
+//							LGDP.setIndex(indexCount);
+//							indexCount+=1;
 //							LGDP.setType(gameDataPitch.getString("type"));
-//							LGDP.setDescription(gameDataPitch.getString("description"));
-////							LGDP.setCode(gameDataPitch.getString("type"));
-//							LGDP.setType(gameDataPitch.getString("type"));
-//							LGDP.setType(gameDataPitch.getString("type"));
+//							if((gameDataPitch).length()==2) {
+//								LGDP.setCode(gameDataPitch.getString("code"));
+//							}
+//							
+//							// pick off 같은 경우
+//							else if((gameDataPitch).length()==3) {
+//								LGDP.setDescription(gameDataPitch.getString("description"));
+//								LGDP.setCode(gameDataPitch.getString("code"));
+//							}
+//							// 견제와 같은 pitch가 아닌 엑션
+//							else if (gameDataPitch.length()==4) {
+//								LGDP.setDescription(gameDataPitch.getString("description"));
+//								LGDP.setEvent(gameDataPitch.getString("event"));
+//								LGDP.setEventType(gameDataPitch.getString("eventType"));
+//								/*
+//								type": "action",
+//								"description": "Mound visit.",
+//								"event": "Game Advisory",
+//								"eventType": "game_advisory"
+//								*/
+//							}
+//							else if (gameDataPitch.length()==6) {
+//								{
+//									LGDP.setDescription(gameDataPitch.getString("description"));
+//									LGDP.setCode(gameDataPitch.getString("code"));
+//									LGDP.setBallCode(gameDataPitch.getString("ballCode"));
+//									LGDP.setBallDescription(gameDataPitch.getString("ballDescription"));
+//									LGDP.setBallSpeed(gameDataPitch.getFloat("ballSpeed"));
+//									/*
+//									"type": "pitch",
+//									"description": "Ball",
+//									"code": "B",
+//									"ballCode": "FF",
+//									"ballDescription": "Four-Seam Fastball",
+//									"ballSpeed": 95
+//									*/
+//									}
+//							}
+//							liveGameDataPitchsRepository.save(LGDP);
 //						}
 //					}
+//					
 //				}
 //			}
 //				

@@ -45,9 +45,6 @@ public class Batters{
 	
 	String teamName;
 	String name;
-	String birthday;
-	Float height;
-	Float weight;
 	String position;
 	Integer leftHitNum;
 	Integer rightHitNum;

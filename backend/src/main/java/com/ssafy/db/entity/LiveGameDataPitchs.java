@@ -3,6 +3,7 @@ package com.ssafy.db.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import lombok.Getter;
@@ -21,11 +22,19 @@ import lombok.Setter;
 @Setter
 public class LiveGameDataPitchs {
 	@Id
+	@GeneratedValue
 	Integer uid;
-	Integer live_game_data_uid;
-	String type;
-	String description;
-	String event;
-	String eventType;
+	Integer live_game_data_uid; // id
+	String type; // action인지 or pitch 인지
+	String description; // 상황 설명
+	String event; // action 일 경우 존재 ex) Wild Pitch
+	String eventType; // action 일 경우 존재  ex)wild_pitch
+
 	Integer index;
+
+	String code; // 상황에 대한 코드
+	String ballCode; //구종 코드
+	String ballDescription; // 구종 설명
+	Float ballSpeed;
+
 }

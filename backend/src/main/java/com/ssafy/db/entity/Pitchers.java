@@ -44,9 +44,6 @@ public class Pitchers {
 	String league;
 	String teamName;
 	String name;
-	String birthday;
-	Float height;
-	Float weight;
 	String position;
 	Integer leftHitNum;
 	Integer rightHitNum;

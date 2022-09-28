@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class WebSocketHandler extends TextWebSocketHandler{
 
     private static final ConcurrentHashMap<String, WebSocketSession> CLIENTS = new ConcurrentHashMap<String, WebSocketSession>();
-	
+   
     ObjectMapper json = new ObjectMapper();
     
     @Override
@@ -36,13 +36,17 @@ public class WebSocketHandler extends TextWebSocketHandler{
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 
-    	Map<String, Object> dataMap = new HashMap<>();
-    	String payload = message.getPayload();
+       Map<String, Object> dataMap = new HashMap<>();
+       System.out.println("=========================textMessage"+ message);
+       System.out.println("타입 확익!!!!  " + message.getPayload().getClass().getSimpleName());
+       String payload = message.getPayload();
+       String[] payloadArr = payload.split("csendTosMessage");
+
         String senderId = (String) session.getAttributes().get("sessionId");  //메시지를 보낸 아이디
         String id = session.getId();
         System.out.println("payload: "+payload);
-        dataMap.put("message",payload);
-        dataMap.put("id",senderId);
+        dataMap.put("message",payloadArr[1].substring(3, payloadArr[1].length()-2));
+        dataMap.put("id",payloadArr[0].substring(16, payloadArr[0].length()-3));
         
      // Convert Map to byte array
 //        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
@@ -54,7 +58,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
             if(!arg.getKey().equals(id)) {  //같은 아이디가 아니면 메시지를 전달합니다.
                 try {
 //                    arg.getValue().sendMessage(new TextMessage(byteOut.toByteArray()));
-                	arg.getValue().sendMessage(new TextMessage(msg));
+                   arg.getValue().sendMessage(new TextMessage(msg));
                     } catch (IOException e) {
                     e.printStackTrace();
                 }
