@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 // slice 불러오기
 import signupReducer from "../pages/auth/signup-slice";
 import loginReducer from "../pages/auth/login-slice";
+import teamCustomReducer from "../components/TeamCustom/teamCustom-slice";
 
 // thunk 관련
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
@@ -17,6 +18,7 @@ const rootPersistConfig = {
 const rootReducers = combineReducers({
   signup: signupReducer,
   login: loginReducer,
+  teamCustom: teamCustomReducer,
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducers);

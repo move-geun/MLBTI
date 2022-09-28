@@ -38,6 +38,7 @@ const TeamCoposition = ({userInfo}) => {
     }
   }, [userInfo])
   
+
   return (
     <CompositionWrapper>
       <Header>

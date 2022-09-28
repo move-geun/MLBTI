@@ -1,33 +1,21 @@
 import axios from "../../api/http";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 
-// GET - MLB 투수
-export const getPitchers = createAsyncThunk(
-  "GET_PITCHERS",
+// GET - MLB 선수 목록
+export const getPlayer = createAsyncThunk(
+  "GET_Player",
   async (uid, { rejectWithValue }) => {
     try{
-      const res = await axios.get("/pitcher/list")
+      const res = await axios.get("/allPlayers/list")
+      
       return res.data
     } catch (err) {
       return rejectWithValue(err.resposne);
-    }
+    } 
   }
 );
 
-// GET - MLB 타자
-export const getBatters = createAsyncThunk(
-  "GET_BATTERS",
-  async (uid, { rejectWithValue }) => {
-    try{
-      const res = await axios.get("/batter/list")
-      return res.data
-    } catch (err) {
-      return rejectWithValue(err.resposne);
-    }
-  }
-);
-
-// GET - 유저 전력
+// GET - 커스텀 팀 전력 
 export const getUserTeam = createAsyncThunk(
   "GET_USER_TEAM",
   async (email, { rejectWithValue }) => {
@@ -45,9 +33,8 @@ export const registTeam = createAsyncThunk(
   "REGITS_TEAM",
   async (data, {rejectWithValue}) => {
     try {
-      console.log(data)
+      alert ('선수가 추가 되었습니다.')
       const res = await axios.post("/user_team", data)
-      console.log('성공했나?',res)
     } catch (err) {
       return rejectWithValue(err.resposne)
     }
@@ -55,4 +42,19 @@ export const registTeam = createAsyncThunk(
 )
 
 
-// DELETE - 유저팀 삭제 (uid: 구단 id 를 delete하면 될 듯)
+// DELETE - 유저팀 선수 삭제 (uid: 구단 id 를 delete하면 될 듯)
+
+// DELETE - 유저팀 전체 삭제
+
+const initialState = {
+  isLoading: false,
+};
+
+const teamCusomSlice = createSlice({
+  name: "teamCustom",
+  initialState,
+  reducers: {},
+  extraReducers: {},
+});
+
+export default teamCusomSlice.reducer;
