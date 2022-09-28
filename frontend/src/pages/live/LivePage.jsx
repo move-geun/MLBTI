@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   LiveContainer,
   Score,
@@ -7,30 +7,54 @@ import {
   ScoreHistory,
   TabMenu,
   Desc,
+  TopContainer,
+  LiveEnjoyContainer,
+  MLBPlayer,
+  Img,
 } from "./LivePage.style";
 
 import Cheer from "../../components/cheer/Cheer";
 import LiveComment from "../../components/livecomment/LiveComment";
+import axios from "../../api/http";
+
 
 const LivePage = () => {
 
   const [currentTab, setCurrentTab] = useState(0);
+  const [simulData, setSimulData] = useState({});
+  const [innings, setInnings] = useState([]);
+
 
   const tabList = [
+    
     {tabName: '1회', id: 'game1', content:'타자 1 : 스트라이크2'},
     {tabName: '2회', id: 'game2', content:'타자 2 : 스트라이크2'},
     {tabName: '3회', id: 'game3'},
-    {tabName: '4회', id: 'game4'},
-    {tabName: '5회', id: 'game5'},
-    {tabName: '6회', id: 'game6'},
-    {tabName: '7회', id: 'game7'},
-    {tabName: '8회', id: 'game8'},
-    {tabName: '9회', id: 'game9'},
+
 ];
 
 const selectTabHandler = (index) => {
   setCurrentTab(index);
 }
+
+useEffect(()=> {
+  axios.post(process.env.REACT_APP_DB_HOST+`/simul`)
+  .then((res) =>{
+    console.log("시뮬레이션 정보 가져옴 ", res.data);
+    // setInnings(res.data[innings]);
+    console.log("ㅠㅠㅠㅠ ",res.data['innings']);
+    // innings.push(res.data.innings);
+    setSimulData(res.data);
+  })
+
+}, []);
+
+useEffect(()=> {
+  console.log("ssss" ,simulData);
+  console.log("이닝 확인", innings);
+
+ 
+}, [simulData])
 
 
 
@@ -38,9 +62,16 @@ const selectTabHandler = (index) => {
     <LiveContainer>
      
       <div className="title">문자 중계</div>
+      <TopContainer>
+        <MLBPlayer>
+          <Img className="ground" src={"/assets/Ground.png"} />
+        </MLBPlayer>
       
-      <Cheer />
-      <LiveComment />
+        {/* <LiveEnjoyContainer>
+          <Cheer />
+          <LiveComment />
+        </LiveEnjoyContainer> */}
+      </TopContainer>
       <Score>
         <ScoreTitle>
           <div className="title">

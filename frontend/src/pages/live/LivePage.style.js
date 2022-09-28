@@ -188,6 +188,42 @@ const Desc = styled.div`
   padding-left: 180px;
 `;
 
+
+const TopContainer = styled.div`
+    display: flex;
+
+`;
+
+const LiveEnjoyContainer = styled.div`
+
+
+`;
+
+
+const MLBPlayer = styled.div`
+
+`;
+
+
+
+const Img = styled.img`
+
+  &.ground{
+    width: 450px;
+    height: 450px;
+    
+    @media screen and (max-width: 830px) {
+      width: 350px;
+      height: 350px;
+      
+    }
+    @media screen and (max-width: 480px) {
+      width: 250px;
+      height: 250px;
+    }
+  }
+`
+
 export {
   LiveContainer,
   Score,
@@ -196,4 +232,8 @@ export {
   ScoreHistory,
   TabMenu,
   Desc,
+  TopContainer,
+  LiveEnjoyContainer,
+  MLBPlayer,
+  Img,
 };
