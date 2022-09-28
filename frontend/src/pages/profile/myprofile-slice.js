@@ -15,6 +15,7 @@ export const myprofile = createAsyncThunk(
   }
 );
 
+// 나의 팀 불러오기
 export const myteam = createAsyncThunk(
   "MYTEAM",
   async (data, { rejectWithValue }) => {
@@ -27,6 +28,26 @@ export const myteam = createAsyncThunk(
       return res;
     } catch (err) {
       alert("팀 정보 조회 실패");
+      return rejectWithValue(err.response);
+    }
+  }
+);
+
+// 팀 이름 변경하기
+export const changeTeamName = createAsyncThunk(
+  "CHANGETEAMNAME",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await axios.put("/user/teamName", null, {
+        params: {
+          email: data.email,
+          newTeamName: data.newTeamName,
+        },
+      });
+      console.log(res);
+      return res;
+    } catch (err) {
+      alert("팀 이름 변경 실패");
       return rejectWithValue(err.response);
     }
   }

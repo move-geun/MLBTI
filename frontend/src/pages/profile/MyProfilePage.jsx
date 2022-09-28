@@ -10,20 +10,19 @@ import {
   GraphBox,
   ModalBox,
 } from "./MyProfilePage.style";
-import { myprofile, myteam } from "./myprofile-slice";
+import { myprofile, myteam, changeTeamName } from "./myprofile-slice";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-// 닉네임 변경 모달 활성화
-// 팀 이름 설정 모달 활성화
-// 만약 등록 선수 없다? 선수 등록하러가기 링크 활성화 : 선수 목록 뿌려주기
+// 선수 목록 받아와서 뿌리기 남음
 
 const MyProfilePage = () => {
   const [nickName, setNickname] = useState("");
-  const [open, setOpen] = useState(false);
   const [usermail, setUsermail] = useState("");
   const [teamName, setTeamName] = useState("");
   const [userTeam, setUserTeam] = useState([]);
+  const [tmpteam, setTmpTeam] = useState("");
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const dispatch = useDispatch();
@@ -62,6 +61,23 @@ const MyProfilePage = () => {
     return res;
   }
 
+  // 팀 이름 변경
+  function teamChange(e) {
+    e.preventDefault();
+    const data = {
+      email: usermail,
+      newTeamName: tmpteam,
+    };
+    dispatch(changeTeamName(data))
+      .unwrap()
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        alert("에러떴다");
+      });
+  }
+
   useEffect(() => {
     getInfo();
   }, []);
@@ -82,51 +98,57 @@ const MyProfilePage = () => {
       .catch((err) => alert("오류"));
   }, []);
 
-  // 유저 팀 정보 받아오기
-
   return (
     <PageContainer>
       <NameBox>
         <Name>
           <div>{nickName}</div>
           <span>님</span>
-          <img
-            src="/assets/edit.png"
-            alt="편집이미지였던것.."
-            onClick={handleOpen}
-          />
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <ModalBox>
-              <div className="title">닉네임 변경</div>
-              <div className="content">
-                <span>닉네임</span>
-                <input type="text" />
-                <button>중복확인</button>
-              </div>
-              <button className="change" onClick={handleClose}>
-                변경하기
-              </button>
-            </ModalBox>
-          </Modal>
         </Name>
         <Id>{usermail}</Id>
       </NameBox>
       <ChangePwd>
         <Link to="/findPwd">
-          <img src="/assets/cap.png" alt="자물쇠였던것.." />
-          비밀번호 변경하기
+          <img src="/assets/edit.png" alt="편집이미지였던것.." />
+          개인정보 변경하기
         </Link>
       </ChangePwd>
-      <div className="divide">{nickName} 님의 구단</div>
+      <div className="divide">
+        {nickName} 님의 구단
+        <img
+          src="/assets/edit.png"
+          alt="편집이미지였던것.."
+          onClick={handleOpen}
+        />
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <ModalBox>
+            <div className="title">팀 이름 변경하기</div>
+            <div className="content">
+              <form onSubmit={(e) => teamChange(e)}>
+                <span>팀 이름</span>
+                <input
+                  type="text"
+                  value={tmpteam}
+                  onChange={(e) => setTmpTeam(e.target.value)}
+                />
+                <button onClick={(e) => teamChange(e)}>설정하기</button>
+              </form>
+            </div>
+            <button className="change" onClick={handleClose}>
+              닫기
+            </button>
+          </ModalBox>
+        </Modal>
+      </div>
       <div>{teamName}</div>
       <GraphBox>
         <div>현재 {nickName}의 선수정보</div>
-        <div>{userTeam}</div>
+        <Link to="/teamcustom">{userTeam}</Link>
         {/* 실경기 박스
         <div className="GraphDraw">
           <div className="nameDraw">
