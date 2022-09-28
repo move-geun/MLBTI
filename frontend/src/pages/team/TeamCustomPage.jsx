@@ -21,7 +21,9 @@ import { myprofile } from "../profile/myprofile-slice";
 const TeamCustomPage = () => {
   const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState([]);
+  // const [addPlayer, setAddPlayer] = useState(false);
 
+  
   useEffect(() => {
     dispatch(myprofile())
       .unwrap()
@@ -52,15 +54,15 @@ const TeamCustomPage = () => {
             />
             <Img className="magnifying  " src={"/assets/MagnifyingGlass.png"} />
           </SearchDiv>
-          <Dropdown />
-          <PlayerList />
+          {/* <Dropdown /> */}
+          <PlayerList email={userInfo['userId']}/>
         </MyteamWrapper>
         {/* 오른쪽 박스 */}
-        <Ground email={userInfo['userId']}/>
+        <Ground />
       </CenterWrapper>
 
       {/* 팀 전력 */}
-      <TeamCoposition userInfo={userInfo}></TeamCoposition>
+      <TeamCoposition userInfo={userInfo} ></TeamCoposition>
     </Background>
   );
 };

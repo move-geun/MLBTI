@@ -46,6 +46,14 @@ const PlyaerName = styled.div`
 const PlyaerDetailWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  
+  .save {
+    position: relative;
+    bottom: 1rem;
+    font-size: 3rem;
+    color: green;
+    cursor: pointer;
+  }
 `
 const PlyaerDetail = styled.div`
   color: #333333;
