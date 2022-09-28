@@ -35,6 +35,7 @@ const Cheer = () => {
     const [totalScore, setTotalScore] = useState(); 
     const [homeTeam, setHomeTeam] = useState();
     const [awayTeam, setAwayTeam] = useState();
+    const [cheerRate, setCheerRate] = useState();
     const [isHome, setisHome] = useState(true);
  
     useEffect(() => {
@@ -59,9 +60,10 @@ const Cheer = () => {
                 homeCount: resData.homeCount,
                 awayCount: resData.awayCount,
            });
-           setTotalScore((cheerScore.homeCount + cheerScore.awayCount));
+           setTotalScore(resData.homeCount + resData.awayCount);
            setHomeTeam(cheerScore.homeCount);
            setAwayTeam(cheerScore.awayCount);
+           setCheerRate((awayTeam/totalScore)*100);
      
         })
         .catch(function(error) {
@@ -93,9 +95,10 @@ const Cheer = () => {
      
    }, [totalScore]);
 
-    let rate = (awayTeam/totalScore)* 100;
+    
     const scoreHandler = () => {
         let rate = (awayTeam/totalScore)* 100;
+        setCheerRate(rate);
     }
     
     const onCheerHomeTeamHandler = () => {
@@ -117,14 +120,15 @@ const Cheer = () => {
         <CheerContainer >
             <LogoFirstTeam onClick={onCheerHomeTeamHandler} src={"/assets/teamlogo1.png"}  />
             <span>{cheerScore.homeName} </span>
-            <span>{Math.round(100 -rate)} %</span>
+            <span>{Math.round(cheerRate)} %</span>
+            {console.log("2222 ", totalScore )}
             <LogoSecondTeam onClick={onCheerAwayTeamHandler} src={"/assets/teamlogo2.png"} />
             <span>{cheerScore.awayName} </span>
-            <span>{Math.round(rate)} %</span>
+            <span>{Math.round(cheerRate)} %</span>
             
             <BarContainer>
                 <ProgressBar>
-                    <Progress data = {rate} />
+                    <Progress data = {cheerRate} />
                 </ProgressBar>
             </BarContainer>
         </CheerContainer>
