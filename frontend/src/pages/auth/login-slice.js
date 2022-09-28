@@ -25,6 +25,25 @@ export const logout = createAsyncThunk(
   }
 );
 
+// 임시비밀번호 발급
+export const tmppwd = createAsyncThunk(
+  "TMPPWD",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await axios.post("/user/find-password", null, {
+        params: {
+          email: data.email,
+        },
+      });
+      console.log(res);
+      return res;
+    } catch (err) {
+      alert("실패");
+      return rejectWithValue(err.response);
+    }
+  }
+);
+
 const initialState = {
   isLoading: false,
 };
