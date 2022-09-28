@@ -12,12 +12,14 @@ import {
     CommentText, 
     CommentBtn,
 } from "./LiveComment.style";
-
+import { useDispatch } from "react-redux";
+import { myprofile } from "../../pages/profile/myprofile-slice";
 
 const LiveComment = () => {
 
 const [typingComments, setTypingComments] = useState('');
 const [serverMessageList, setServerMessageList] = useState([]);
+const dispatch = useDispatch();
 
     // 웹소켓
     const webSocket = new WebSocket("ws://localhost:8081/teamName"); 
@@ -58,19 +60,9 @@ const [serverMessageList, setServerMessageList] = useState([]);
         webSocket.onopen = function(){
             console.log("서버와 웹소켓 연결 성공");
         };
-
-        axios.get(process.env.REACT_APP_DB_HOST+`/user/me`)
-            .then((res) => {
-              console.log("Res    ", res);
-            
-        
-            }).catch(function(err){
-              console.log(err);
-            });
-
-
-
-   
+        dispatch(myprofile()).unwrap().then((res) => {
+            console.log("Resssssss ", res);
+        })
     }, []);
 
 
