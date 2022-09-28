@@ -24,6 +24,7 @@ import lombok.Setter;
 public class PlayersDto {
 	String name;
 	int season;
+	int playerUid;
 	String league;
 	String teamName;
 	String position;
@@ -31,6 +32,7 @@ public class PlayersDto {
 	
 	public static PlayersDto of(Batters batters) {
 		PlayersDto b = new PlayersDto();
+		b.setPlayerUid(batters.getPlayerUid());
 		b.setName(batters.getName());
 		b.setLeague(batters.getLeague());
 		b.setSeason(batters.getSeason());
@@ -43,6 +45,7 @@ public class PlayersDto {
 	
 	public static PlayersDto of(Pitchers pitchers) {
 		PlayersDto b = new PlayersDto();
+		b.setPlayerUid(pitchers.getPlayerUid());
 		b.setName(pitchers.getName());
 		b.setLeague(pitchers.getLeague());
 		b.setSeason(pitchers.getSeason());

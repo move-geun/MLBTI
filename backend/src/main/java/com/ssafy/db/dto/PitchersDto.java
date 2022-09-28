@@ -23,6 +23,8 @@ import lombok.Setter;
 @Setter
 public class PitchersDto {
 	String name;
+
+	int playerUid;
 	int season;
 	String league;
 	String teamName;
@@ -31,6 +33,7 @@ public class PitchersDto {
 	
 	public static PitchersDto of(Pitchers pitchers) {
 		PitchersDto b = new PitchersDto();
+		b.setPlayerUid(pitchers.getPlayerUid());
 		b.setName(pitchers.getName());
 		b.setLeague(pitchers.getLeague());
 		b.setSeason(pitchers.getSeason());
