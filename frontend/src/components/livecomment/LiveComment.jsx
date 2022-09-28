@@ -1,6 +1,7 @@
 // import { useEffect, useImperativeHandle } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import axios from "../../api/http";
 
 
 import {
@@ -15,17 +16,11 @@ import {
 
 const LiveComment = () => {
 
-// 서버 상태 저장, input창에 받아온 메세지 저장, 서버에서 받아온 메세지 저장
-// const [serverState, setServerState] = useState('Loading...');
-// const [setServerState] = useState('Loading...');
 const [typingComments, setTypingComments] = useState('');
-// const [messageText, setMessageText] = useState('');
-// const [setMessageText] = useState('');
 const [serverMessageList, setServerMessageList] = useState([]);
 
     // 웹소켓
     const webSocket = new WebSocket("ws://localhost:8081/teamName"); 
-
 
     const onEnter = (e) => {
         if(e.key === 'Enter'){
@@ -38,7 +33,14 @@ const [serverMessageList, setServerMessageList] = useState([]);
 
     webSocket.onmessage = function(message) {
         console.log("서버에서 온 메세지", message);
-        setServerMessageList([...serverMessageList, message.data]);
+       
+        var data = JSON.parse(message.data);
+        const obj = {};
+        obj.id = data.id;
+        obj.message = data.message;
+        
+        console.log("obj", obj);
+        setServerMessageList([...serverMessageList, obj]);
 
     }
 
@@ -46,25 +48,30 @@ const [serverMessageList, setServerMessageList] = useState([]);
     const onSendComments = ((e) => {
         const deleteContent = typingComments.trim() === "";
         e.preventDefault();
-        console.log("클라 send");
-        // let str = JSON.stringify({user: 'MM', message: messageText});
-        // let str = {user: 'MM', messageText: typingComments};
-
-        webSocket.send(typingComments);
-        // ServerMessagesList([...serverMessageList, typingComments]);
+         webSocket.send(typingComments);
         setTypingComments('');
       
     })
 
     
-
     useEffect(()=> {
-
         webSocket.onopen = function(){
             console.log("서버와 웹소켓 연결 성공");
         };
+
+        axios.get(process.env.REACT_APP_DB_HOST+`/user/me`)
+            .then((res) => {
+              console.log("Res    ", res);
+            
+        
+            }).catch(function(err){
+              console.log(err);
+            });
+
+
+
    
-    }, [])
+    }, []);
 
 
 
@@ -75,7 +82,7 @@ const [serverMessageList, setServerMessageList] = useState([]);
                     console.log("commnet", comment);
                     if(comment !== null) {
                         return(
-                            <Bubble>{comment}</Bubble>
+                            <Bubble>{comment.message}</Bubble>
                         )
                     }
                 
