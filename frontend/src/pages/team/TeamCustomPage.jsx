@@ -1,11 +1,10 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   Background,
   Header,
   CenterWrapper,
   MyteamWrapper,
-  SimulationWrapper,
   Nickname,
   CustomTeamName,
   SearchDiv,
@@ -16,17 +15,30 @@ import {
 import Dropdown from "../../components/TeamCustom/Dropdown";
 import PlayerList from "../../components/TeamCustom/PlayerList";
 import TeamCoposition from "../../components/TeamCustom/TeamComposition";
+import Ground from "../../components/TeamCustom/Ground";
+import { myprofile } from "../profile/myprofile-slice";
 
 const TeamCustomPage = () => {
+  const dispatch = useDispatch();
+  const [userInfo, setUserInfo] = useState([]);
+
+  useEffect(() => {
+    dispatch(myprofile())
+      .unwrap()
+      .then((res) => {
+        setUserInfo(res.data);
+      });
+  }, []);
+
   return (
     <Background>
       <Header>My team 구성하기</Header>
       <CenterWrapper>
         {/* 왼쪽 박스 */}
         <MyteamWrapper>
-          <Nickname>배송윤 아님 님의 구단</Nickname>
+          <Nickname>{userInfo["nickname"]} 님의 구단</Nickname>
           <CustomTeamName>
-            홈런 맞아부러쓰
+            {userInfo["teamName"]}
             <EditBtn />
           </CustomTeamName>
           <SearchDiv>
@@ -44,13 +56,11 @@ const TeamCustomPage = () => {
           <PlayerList />
         </MyteamWrapper>
         {/* 오른쪽 박스 */}
-        <SimulationWrapper>
-          <Img className="ground" src={"/assets/Ground.png"} />
-        </SimulationWrapper>
+        <Ground email={userInfo['userId']}/>
       </CenterWrapper>
 
       {/* 팀 전력 */}
-      <TeamCoposition></TeamCoposition>
+      <TeamCoposition userInfo={userInfo}></TeamCoposition>
     </Background>
   );
 };
