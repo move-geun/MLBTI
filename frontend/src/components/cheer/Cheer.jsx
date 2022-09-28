@@ -60,7 +60,8 @@ const Cheer = () => {
                 homeCount: resData.homeCount,
                 awayCount: resData.awayCount,
            });
-           setTotalScore(resData.homeCount + resData.awayCount);
+           setTotalScore((resData.homeCount + resData.awayCount), ()=> {console.log("total값 변경", totalScore)});
+           console.log("2222222");
            setHomeTeam(cheerScore.homeCount);
            setAwayTeam(cheerScore.awayCount);
            setCheerRate((awayTeam/totalScore)*100);
@@ -73,27 +74,27 @@ const Cheer = () => {
     }, []);
 
     
-    useEffect(() => {
+//     useEffect(() => {
+//         console.log("1111111");
+//         // axios({
+//         //     method: "put", // [요청 타입]
+//         //     url: process.env.REACT_APP_DB_HOST+`/cheering`, // [요청 주소]
+//         //     params: {gamePk: 100, isHome: isHome}, // [요청 데이터]
+//         //     headers: {
+//         //         "Content-Type" : "application/x-www-form-urlencoded;"
+//         //     }, // [요청 헤더]
+//         //     timeout: 5000 // [타임 아웃 시간]
 
-        axios({
-            method: "put", // [요청 타입]
-            url: process.env.REACT_APP_DB_HOST+`/cheering`, // [요청 주소]
-            params: {gamePk: 100, isHome: isHome}, // [요청 데이터]
-            headers: {
-                "Content-Type" : "application/x-www-form-urlencoded;"
-            }, // [요청 헤더]
-            timeout: 5000 // [타임 아웃 시간]
-
-            //responseType: "json" // [응답 데이터 : stream , json]
-        })
-        .then(function(response) {
-            console.log("성공~~~");
-        })
-         .catch(function(error) {
-             console.log("ERROR : " + JSON.stringify(error));
-         });
+//         //     //responseType: "json" // [응답 데이터 : stream , json]
+//         // })
+//         // .then(function(response) {
+//         //     console.log("성공~~~");
+//         // })
+//         //  .catch(function(error) {
+//         //      console.log("ERROR : " + JSON.stringify(error));
+//         //  });
      
-   }, [totalScore]);
+//    }, [totalScore]);
 
     
     const scoreHandler = () => {
@@ -117,12 +118,14 @@ const Cheer = () => {
     
     return (
 
-        <CheerContainer >
+
+        cheerRate !== null ? 
+            (
+            <CheerContainer >
             <LogoFirstTeam onClick={onCheerHomeTeamHandler} src={"/assets/teamlogo1.png"}  />
             <span>{cheerScore.homeName} </span>
             <span>{Math.round(cheerRate)} %</span>
-            {console.log("2222 ", totalScore )}
-            <LogoSecondTeam onClick={onCheerAwayTeamHandler} src={"/assets/teamlogo2.png"} />
+                <LogoSecondTeam onClick={onCheerAwayTeamHandler} src={"/assets/teamlogo2.png"} />
             <span>{cheerScore.awayName} </span>
             <span>{Math.round(cheerRate)} %</span>
             
@@ -132,6 +135,12 @@ const Cheer = () => {
                 </ProgressBar>
             </BarContainer>
         </CheerContainer>
+        )
+        :
+        <div> 값을 불러오는 중입니다.</div>
+        
+        
+       
     )
 } 
 
