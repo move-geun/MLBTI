@@ -15,6 +15,7 @@ export const myprofile = createAsyncThunk(
   }
 );
 
+// 나의 팀 불러오기
 export const myteam = createAsyncThunk(
   "MYTEAM",
   async (data, { rejectWithValue }) => {
@@ -31,6 +32,16 @@ export const myteam = createAsyncThunk(
     }
   }
 );
+
+// 닉네임 변경하기
+// export const changeName = createAsyncThunk(
+//     'CHANGENAME',
+//     async (data, { rejectWithValue }) => {
+//         try {
+//             const res = await axios
+//         }
+//     }
+// )
 
 const initialState = {
   isLoading: false,

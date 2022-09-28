@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import * as React from "react";
-import Modal from "@mui/material/Modal";
 import {
   PageContainer,
   NameBox,
@@ -8,7 +6,6 @@ import {
   Id,
   ChangePwd,
   GraphBox,
-  ModalBox,
 } from "./MyProfilePage.style";
 import { myprofile, myteam } from "./myprofile-slice";
 import { Link } from "react-router-dom";
@@ -20,12 +17,9 @@ import { useDispatch } from "react-redux";
 
 const MyProfilePage = () => {
   const [nickName, setNickname] = useState("");
-  const [open, setOpen] = useState(false);
   const [usermail, setUsermail] = useState("");
   const [teamName, setTeamName] = useState("");
   const [userTeam, setUserTeam] = useState([]);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const dispatch = useDispatch();
 
   //  유저 팀 받아오기
@@ -90,36 +84,13 @@ const MyProfilePage = () => {
         <Name>
           <div>{nickName}</div>
           <span>님</span>
-          <img
-            src="/assets/edit.png"
-            alt="편집이미지였던것.."
-            onClick={handleOpen}
-          />
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <ModalBox>
-              <div className="title">닉네임 변경</div>
-              <div className="content">
-                <span>닉네임</span>
-                <input type="text" />
-                <button>중복확인</button>
-              </div>
-              <button className="change" onClick={handleClose}>
-                변경하기
-              </button>
-            </ModalBox>
-          </Modal>
         </Name>
         <Id>{usermail}</Id>
       </NameBox>
       <ChangePwd>
         <Link to="/findPwd">
-          <img src="/assets/cap.png" alt="자물쇠였던것.." />
-          비밀번호 변경하기
+          <img src="/assets/edit.png" alt="편집이미지였던것.." />
+          개인정보 변경하기
         </Link>
       </ChangePwd>
       <div className="divide">{nickName} 님의 구단</div>
