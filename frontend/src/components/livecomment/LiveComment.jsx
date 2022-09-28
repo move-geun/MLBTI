@@ -19,6 +19,7 @@ const LiveComment = () => {
 
 const [typingComments, setTypingComments] = useState('');
 const [serverMessageList, setServerMessageList] = useState([]);
+const [userEmail, setUserEmail] = useState();
 const dispatch = useDispatch();
 
     // 웹소켓
@@ -37,6 +38,7 @@ const dispatch = useDispatch();
         console.log("서버에서 온 메세지", message);
        
         var data = JSON.parse(message.data);
+        console.log("daaataaa  ", data);
         const obj = {};
         obj.id = data.id;
         obj.message = data.message;
@@ -50,8 +52,12 @@ const dispatch = useDispatch();
     const onSendComments = ((e) => {
         const deleteContent = typingComments.trim() === "";
         e.preventDefault();
-         webSocket.send(typingComments);
+        const obj2 = {};
+        obj2.csendTosId = userEmail;
+        obj2.csendTosMessage = typingComments;
+        webSocket.send(JSON.stringify(obj2));
         setTypingComments('');
+
       
     })
 
@@ -62,6 +68,7 @@ const dispatch = useDispatch();
         };
         dispatch(myprofile()).unwrap().then((res) => {
             console.log("Resssssss ", res);
+            setUserEmail(res.data.userId);
         })
     }, []);
 
@@ -74,7 +81,7 @@ const dispatch = useDispatch();
                     console.log("commnet", comment);
                     if(comment !== null) {
                         return(
-                            <Bubble>{comment.message}</Bubble>
+                            <Bubble>{comment.id} : {comment.message}</Bubble>
                         )
                     }
                 
