@@ -202,7 +202,7 @@ const PlayerList = ({ email }) => {
                 </MdOutlineDataSaverOn>
               </PlyaerDetailWrapper>
             </List>
-            ): null
+            ): <div>조건을 선택해 주세요</div>
         ))}
       </ListWrapper>
     </>
