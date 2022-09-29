@@ -42,9 +42,18 @@ useEffect(()=> {
   .then((res) =>{
     console.log("시뮬레이션 정보 가져옴 ", res.data);
     // setInnings(res.data[innings]);
-    console.log("ㅠㅠㅠㅠ ",res.data['innings']);
+    console.log("ㅠㅠㅠㅠ ", res.data.innings);
+    console.log("res.data ", res.data.gamePk);
     // innings.push(res.data.innings);
     setSimulData(res.data);
+    console.log("(=====================")
+    console.log(res.data.awayName)
+    console.log(res.data.gamePk)
+    console.log(res.data.homeName)
+    console.log(res.data.season)
+    console.log(res.data.inngings)
+    console.log("(=====================")
+    
   })
 
 }, []);
