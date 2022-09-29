@@ -43,5 +43,4 @@ export {
   Background,
   Img,
   ImgDiv,
-  BtnDiv,
 }

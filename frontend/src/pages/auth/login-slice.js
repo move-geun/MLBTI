@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../api/http";
 import { deleteToken, saveToken } from "../../api/JWT";
+import http from "../../api/http";
 
 // 로그인
 export const login = createAsyncThunk(
   "LOGIN",
   async (userData, { rejectWithValue }) => {
     try {
-      const res = await axios.post("http://j7e202.p.ssafy.io:8081/api/auth/login", userData);
+      const res = await http.axios.post("/auth/login", userData);
       const token = res.data.accessToken;
       saveToken(token);
       return res;
@@ -22,6 +22,25 @@ export const logout = createAsyncThunk(
   "LOGOUT",
   async (arg, { rejectWithValue }) => {
     deleteToken();
+  }
+);
+
+// 임시비밀번호 발급
+export const tmppwd = createAsyncThunk(
+  "TMPPWD",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await http.axios.post("/user/find-password", null, {
+        params: {
+          email: data.email,
+        },
+      });
+      console.log(res);
+      return res;
+    } catch (err) {
+      alert("실패");
+      return rejectWithValue(err.response);
+    }
   }
 );
 

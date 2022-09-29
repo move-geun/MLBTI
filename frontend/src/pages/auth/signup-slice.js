@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../api/http";
+import http from "../../api/http";
 
 // 회원가입
 export const signup = createAsyncThunk(
@@ -7,7 +7,7 @@ export const signup = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       console.log("회원가입 정보", userData);
-      const res = await axios.post("/user/signin", userData);
+      const res = await http.axios.post("/user/signin", userData);
       return res;
     } catch (err) {
       return rejectWithValue(err.response);
@@ -21,7 +21,7 @@ export const checkEmail = createAsyncThunk(
   async (email, { rejectWithValue }) => {
     try {
       // query 로 보내기
-      const res = await axios.post("/user/mail/send/certify", null, {
+      const res = await http.axios.post("/user/mail/send/certify", null, {
         params: { email },
       });
       return res;
@@ -39,10 +39,10 @@ export const checkCertNumber = createAsyncThunk(
       let result = false;
 
       // const res = await axios.post('/user/mail/valid/check', null, {params: { email: email, randomNumber: `${randomNumber}` }})
-      const res = await axios.post("/user/mail/valid/check", null, {
+      const res = await http.axios.post("/user/mail/valid/check", null, {
         params: { email: data.email, randomNumber: data.randomNumber },
       });
-      console.log(res.status)
+      console.log(res.status);
       if (res.status === 200) {
         result = true;
       } else {
@@ -61,7 +61,7 @@ export const getUserList = createAsyncThunk(
   async (UserNick, { rejectWithValue }) => {
     try {
       let result = true;
-      const res = await axios.get("/user/list");
+      const res = await http.axios.get("/user/list");
       for (let idx = 0; idx < res.data.length; idx++) {
         if (UserNick === res.data[idx].nickname) {
           result = false;

@@ -9,16 +9,47 @@ import {
   DownChart,
 } from "./MainPage.style";
 
+import { getNotice } from "./mainpage-slice";
+
 // 시뮬레이션 스켈레톤용
 import * as React from "react";
 import Skeleton from "@mui/material/Skeleton";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 // 너비 지정해놔서 크기 줄 때 바꿔줘야함
 // title 안내려오게끔 고정
 
 const MainPage = () => {
+  const dispatch = useDispatch();
+  const [notices, setNotice] = useState([]);
+
+  function floatingNotice() {
+    dispatch(getNotice())
+      .unwrap()
+      .then((res) => {
+        let step = 0;
+        for (step = 0; step < res.data.length; step++) {
+          // let obj = {
+          //   uid: res.data[step].uid,
+          //   title: res.data[step].title,
+          // };
+          // console.log(obj);
+          setNotice([...notices, res.data[step]]);
+          console.log("난 지나감");
+        }
+        console.log(notices);
+      })
+      .catch((err) => {
+        alert("공지 불러오기 실패");
+      });
+  }
+
+  useEffect(() => {
+    floatingNotice();
+  }, []);
+
   const settings = {
     dots: false,
     infinite: true,
