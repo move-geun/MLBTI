@@ -56,9 +56,9 @@ const TeamCoposition = ({userInfo}) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {myTeam.map((player) => (
+            {myTeam.map((player,idx) => (
               <TableRow
-                key={player['baseballPlayer']['fullName']}
+                key={idx}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TaBleList >{player['baseballPlayer']['fullName']}</TaBleList>

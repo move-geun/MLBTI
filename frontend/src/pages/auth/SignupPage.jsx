@@ -120,7 +120,6 @@ const SignupPage = () => {
 
   // 인증 하기
   async function checkNumber() {
-    console.log("이것도 되나");
     const data = {
       email: userEmail,
       randomNumber: emailCert,

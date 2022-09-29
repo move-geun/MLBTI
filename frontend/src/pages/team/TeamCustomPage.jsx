@@ -12,15 +12,16 @@ import {
   EditBtn,
   SearchInput,
 } from "./TeamCustomPage.style";
-import Dropdown from "../../components/TeamCustom/Dropdown";
 import PlayerList from "../../components/TeamCustom/PlayerList";
 import TeamCoposition from "../../components/TeamCustom/TeamComposition";
 import Ground from "../../components/TeamCustom/Ground";
 import { myprofile } from "../profile/myprofile-slice";
+import ModifiedModal from "../../components/TeamCustom/ModifiedModal";
 
 const TeamCustomPage = () => {
   const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   // const [addPlayer, setAddPlayer] = useState(false);
 
   
@@ -30,7 +31,14 @@ const TeamCustomPage = () => {
       .then((res) => {
         setUserInfo(res.data);
       });
-  }, []);
+    }, []);
+    
+  
+  const onCreate = () => {
+    setIsOpen(true);
+  }
+    
+
 
   return (
     <Background>
@@ -41,7 +49,12 @@ const TeamCustomPage = () => {
           <Nickname>{userInfo["nickname"]} 님의 구단</Nickname>
           <CustomTeamName>
             {userInfo["teamName"]}
-            <EditBtn />
+            <EditBtn onClick = {onCreate} />
+            {isOpen && (<ModifiedModal userInfo={userInfo} open = {isOpen} onClose = { ()=> {
+      setIsOpen(false);
+    }}
+    
+    />)}
           </CustomTeamName>
           <SearchDiv>
             <SearchInput
@@ -54,9 +67,9 @@ const TeamCustomPage = () => {
             />
             <Img className="magnifying  " src={"/assets/MagnifyingGlass.png"} />
           </SearchDiv>
-          {/* <Dropdown /> */}
+          
           <PlayerList email={userInfo['userId']}/>
-        </MyteamWrapper>
+        </MyteamWrapper >
         {/* 오른쪽 박스 */}
         <Ground />
       </CenterWrapper>
