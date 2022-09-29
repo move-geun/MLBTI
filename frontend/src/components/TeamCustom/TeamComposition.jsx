@@ -20,23 +20,33 @@ const TaBleList = styled(TableCell)`
   font-family: "MICEGothic Bold";
 `;
 
-const TeamCoposition = ({userInfo}) => {
+const TeamCoposition = ({userInfo, addPlayer}) => {
   const dispatch = useDispatch()
   const [myTeam, setMyTeam] = useState([])
   
+  // 팀 불러오기
   async function getTeam () {
     const res = await dispatch(getUserTeam(userInfo['userId']))
     
+    // 성공적으로 dispatatch 했을 때 payload에 팀이 담겨 옴
     if (res.meta.requestStatus === "fulfilled") {
       setMyTeam(res.payload)
     }
   }
 
+  // userId에 값이 들어왔을 때 해당 유저의 팀 불러오기
   useEffect(() => {
     if(userInfo['userId']){
       getTeam()
     }
   }, [userInfo])
+
+  // 선수 추가 시 팀 다시 불러옴
+  useEffect(() => {
+    if(userInfo['userId']){
+      getTeam()
+    }
+  }, [addPlayer])
   
 
   return (
