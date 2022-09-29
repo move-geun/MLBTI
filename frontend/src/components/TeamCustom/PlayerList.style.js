@@ -28,6 +28,10 @@ const ListWrapper = styled.div`
     height: 50%;
     font-size: 15px;
   }
+
+  .noCondition {
+    font-size: 2rem;
+  }
 `
 
 const List = styled.div`

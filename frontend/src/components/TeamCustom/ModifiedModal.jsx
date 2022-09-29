@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Overlay,
   ModalWrap,
@@ -10,14 +10,13 @@ import { SearchDiv } from "../../pages/team/TeamCustomPage.style";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux/es/exports";
 import { modifiedTeamName } from "./teamCustom-slice";
-import {useNavigate} from 'react-router-dom' 
+import { useNavigate } from "react-router-dom";
 
+function ModifiedModal({ userInfo, onClose, isChangeName, setIsChangeName }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [newName, setNewName] = useState("");
 
-function ModifiedModal({ userInfo,onClose }) {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [newName, setNewName] = useState('')
-  
   // 모달 닫기
   const handleClose = () => {
     onClose?.();
@@ -25,25 +24,25 @@ function ModifiedModal({ userInfo,onClose }) {
 
   // 입력 대로 값 변경
   const changeHandle = (e) => {
-    setNewName(e.target.value)
-  }
+    setNewName(e.target.value);
+  };
 
-  // 저장 버튼 클릭 
+  // 저장 버튼 클릭
   const saveHandle = () => {
-      const data = {
+    const data = {
       email: userInfo.userId,
-      newTeamName: newName
-    }
+      newTeamName: newName,
+    };
     dispatch(modifiedTeamName(data))
       .unwrap()
       .then((res) => {
-        window.location.reload();
+        setIsChangeName(!isChangeName)
+        handleClose()
       })
       .catch((err) => {
         alert("에러떴다");
       });
-
-  }
+  };
   return (
     <Overlay>
       <ModalWrap>
@@ -61,8 +60,12 @@ function ModifiedModal({ userInfo,onClose }) {
             />
           </SearchDiv>
           <div className="buttonDiv">
-            <Button className="save" onClick={saveHandle}>저장</Button>
-            <Button className="close" onClick={handleClose}>닫기</Button>
+            <Button className="save" onClick={saveHandle}>
+              저장
+            </Button>
+            <Button className="close" onClick={handleClose}>
+              닫기
+            </Button>
           </div>
         </Contents>
       </ModalWrap>
