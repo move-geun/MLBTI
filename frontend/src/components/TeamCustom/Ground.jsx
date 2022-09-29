@@ -3,7 +3,7 @@ import { Background, Img, ImgDiv} from "./Ground.style";
 
 
 
-const Ground = () => {
+const Ground = ({myTeam}) => {
   
   return (
     <Background>
