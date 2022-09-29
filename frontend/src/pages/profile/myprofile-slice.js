@@ -60,7 +60,9 @@ const initialState = {
 const myprofileSlice = createSlice({
   name: "myprofile",
   initialState,
-  reducers: {},
+  reducers: {
+    
+  },
   extraReducers: {},
 });
 

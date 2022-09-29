@@ -82,13 +82,14 @@ const PlayerList = ({ email }) => {
       });
   }, []);
 
+  useEffect(() => {});
+
   const saveTeam = ({ player }) => {
     const data = {
       email: email,
       player_uid: player.playerUid,
       position: player.position,
     };
-    console.log(data);
     dispatch(registTeam(data));
   };
 
@@ -99,6 +100,22 @@ const PlayerList = ({ email }) => {
     else return 0;
   });
 
+  let filterdList = playerList;
+
+  if (year !== "") {
+    filterdList = filterdList.filter((person) => person.season);
+  }
+  if (team !== "") {
+    filterdList = filterdList.filter((person) => person.teamName);
+  }
+  if (league !== "") {
+    filterdList = filterdList.filter((person) => person.league);
+  }
+  if (position !== "") {
+    filterdList = filterdList.filter((person) => person.position);
+  }
+
+  console.log('year',year)
   return (
     <>
       {/* 드롭다운 필터 */}
@@ -113,6 +130,9 @@ const PlayerList = ({ email }) => {
             label="연도"
             onChange={handleChangeYear}
           >
+            <MenuItem key={""} value={""}>
+              "없음"
+            </MenuItem>
             {yearFilter.map((season) => (
               <MenuItem key={season} value={season}>
                 {season}
@@ -176,33 +196,29 @@ const PlayerList = ({ email }) => {
         {/* 플레이어 리스트 */}
       </Wrapper>
       <ListWrapper>
-        {playerList.map((player, idx) => (
-          player.season === year &&
-          player.team === team &&
-          player.league === league &&
-          player.position === position ? (
-            <List key={player.name}>
-              <PlyaerName>{player.name}</PlyaerName>
-              <PlyaerDetailWrapper>
-                <PlyaerDetail>{player.season}</PlyaerDetail>
-                <PlyaerDetail>{player.league}</PlyaerDetail>
-                <PlyaerDetail>{player.teamName}</PlyaerDetail>
-                <PlyaerDetail>{player.position}</PlyaerDetail>
-                {player.position === "P" ? (
-                  <PlyaerDetail>방어율: {player.indicator}</PlyaerDetail>
-                ) : (
-                  <PlyaerDetail>타율: {player.indicator}</PlyaerDetail>
-                )}
-                <MdOutlineDataSaverOn
-                  onClick={() => saveTeam({ player })}
-                  className="save"
-                  type="button"
-                >
-                  담기
-                </MdOutlineDataSaverOn>
-              </PlyaerDetailWrapper>
-            </List>
-            ): <div>조건을 선택해 주세요</div>
+        {/*  */}
+        {filterdList.map((player, idx) => (
+          <List key={idx+1000}>
+            <PlyaerName>{player.name}</PlyaerName>
+            <PlyaerDetailWrapper>
+              <PlyaerDetail>{player.season}</PlyaerDetail>
+              <PlyaerDetail>{player.league}</PlyaerDetail>
+              <PlyaerDetail>{player.teamName}</PlyaerDetail>
+              <PlyaerDetail>{player.position}</PlyaerDetail>
+              {player.position === "P" ? (
+                <PlyaerDetail>방어율: {player.indicator}</PlyaerDetail>
+              ) : (
+                <PlyaerDetail>타율: {player.indicator}</PlyaerDetail>
+              )}
+              <MdOutlineDataSaverOn
+                onClick={() => saveTeam({ player })}
+                className="save"
+                type="button"
+              >
+                담기
+              </MdOutlineDataSaverOn>
+            </PlyaerDetailWrapper>
+          </List>
         ))}
       </ListWrapper>
     </>
