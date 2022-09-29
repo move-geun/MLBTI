@@ -7,29 +7,42 @@ import {
   MyteamWrapper,
   Nickname,
   CustomTeamName,
-  SearchDiv,
-  Img,
   EditBtn,
-  SearchInput,
 } from "./TeamCustomPage.style";
 import PlayerList from "../../components/TeamCustom/PlayerList";
 import TeamCoposition from "../../components/TeamCustom/TeamComposition";
 import Ground from "../../components/TeamCustom/Ground";
 import { myprofile } from "../profile/myprofile-slice";
 import ModifiedModal from "../../components/TeamCustom/ModifiedModal";
+import { getUserTeam } from "../../components/TeamCustom/teamCustom-slice";
 
 const TeamCustomPage = () => {
   const dispatch = useDispatch();
 
   // 유저 정보
   const [userInfo, setUserInfo] = useState([]);
-  // 모달 띄우기
+
+  // 내 구단 선수 목록
+  const [myTeam, setMyTeam] = useState([]);
+
+  // 구단명 변경 모달 띄우기
   const [isOpen, setIsOpen] = useState(false);
   // 선수 추가 시 팀 전력 다시 불러오기 위한 변수
   const [addPlayer, setAddPlayer] = useState(true);
-  // 구단 명 수정 시 유저 정보 다시 불러오기 
+  // 구단 명 수정 시 유저 정보 다시 불러오기
   const [isChangeName, setIsChangeName] = useState(true);
 
+  // 팀 불러오기
+  async function getTeam() {
+    const res = await dispatch(getUserTeam(userInfo["userId"]));
+
+    // 성공적으로 dispatatch 했을 때 payload에 팀이 담겨 옴
+    if (res.meta.requestStatus === "fulfilled") {
+      setMyTeam(res.payload);
+    }
+  }
+
+  // 유저 정보 받아옴 (구단 명 변경 시 새로 받아옴)
   useEffect(() => {
     dispatch(myprofile())
       .unwrap()
@@ -37,6 +50,16 @@ const TeamCustomPage = () => {
         setUserInfo(res.data);
       });
   }, [isChangeName]);
+
+  // userId에 값이 들어왔을 때 해당 유저의 팀 불러오기
+  useEffect(() => {
+    getTeam();
+  }, [userInfo]);
+
+  // 선수 추가 시 팀 다시 불러옴
+  useEffect(() => {
+    getTeam();
+  }, [addPlayer]);
 
   // 구단 명 수정 모달 띄우기
   const onCreate = () => {
@@ -65,18 +88,6 @@ const TeamCustomPage = () => {
               />
             )}
           </CustomTeamName>
-          <SearchDiv>
-            <SearchInput
-              id="standard-basic"
-              label="선수검색"
-              variant="standard"
-              sx={{
-                marginLeft: "1rem",
-              }}
-            />
-            <Img className="magnifying  " src={"/assets/MagnifyingGlass.png"} />
-          </SearchDiv>
-
           <PlayerList
             email={userInfo["userId"]}
             addPlayer={addPlayer}
@@ -84,14 +95,11 @@ const TeamCustomPage = () => {
           />
         </MyteamWrapper>
         {/* 오른쪽 박스 */}
-        <Ground />
+        <Ground myTeam={myTeam}/>
       </CenterWrapper>
 
       {/* 팀 전력 */}
-      <TeamCoposition
-        userInfo={userInfo}
-        addPlayer={addPlayer}
-      ></TeamCoposition>
+      <TeamCoposition userInfo={userInfo} myTeam={myTeam}></TeamCoposition>
     </Background>
   );
 };

@@ -15,6 +15,11 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Wrapper } from "./Dropdown.style";
+import {
+  SearchDiv,
+  Img,
+} from "../../pages/team/TeamCustomPage.style";
+import { TextField } from "@mui/material";
 
 const PlayerList = ({ email, addPlayer, setAddPlayer }) => {
   const dispatch = useDispatch();
@@ -66,7 +71,7 @@ const PlayerList = ({ email, addPlayer, setAddPlayer }) => {
           if (!yearData.includes(item.season) && item.season !== null) {
             yearData.push(parseInt(item.season));
           }
-          if (!leagueData.includes(item.league) && item.league !== null ) {
+          if (!leagueData.includes(item.league) && item.league !== null) {
             leagueData.push(item.league);
           }
           if (!teamData.includes(item.teamName) && item.teamName !== null) {
@@ -85,7 +90,7 @@ const PlayerList = ({ email, addPlayer, setAddPlayer }) => {
       });
   }, []);
 
-  // 선수 내 팀에 등록 
+  // 선수 내 팀에 등록
   const saveTeam = ({ player }) => {
     const data = {
       email: email,
@@ -93,10 +98,7 @@ const PlayerList = ({ email, addPlayer, setAddPlayer }) => {
       position: player.position,
     };
 
-    dispatch(
-      registTeam(data))
-      .unwrap()
-      .then(setAddPlayer(!addPlayer));
+    dispatch(registTeam(data)).unwrap().then(setAddPlayer(!addPlayer));
   };
 
   // 연도 오름차순 필터
@@ -106,6 +108,7 @@ const PlayerList = ({ email, addPlayer, setAddPlayer }) => {
     else return 0;
   });
 
+  // 필터링
   let filterdList = playerList;
 
   if (year !== "") {
@@ -125,6 +128,17 @@ const PlayerList = ({ email, addPlayer, setAddPlayer }) => {
     <>
       {/* Dropdown */}
       <Wrapper>
+        <SearchDiv className="playerSearch">
+          <TextField
+            style={{ textAlign: "center" }}
+            id="outlined-basic"
+            label="선수명 검색"
+            variant="outlined"
+            size="small"
+          />
+        </SearchDiv>
+        <Img className="magnifying" src={"/assets/MagnifyingGlass.png"} />
+        
         {/* 연도 */}
         <FormControl sx={{ m: 1, minWidth: "15%" }} size="small">
           <InputLabel id="demo-select-small">연도</InputLabel>
@@ -235,7 +249,7 @@ const PlayerList = ({ email, addPlayer, setAddPlayer }) => {
             </List>
           ))
         ) : (
-          <div className="noCondition">"조건을 선택해 주세요"</div>
+          <div className="noCondition">조건을 선택해 주세요</div>
         )}
       </ListWrapper>
     </>

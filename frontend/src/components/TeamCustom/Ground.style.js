@@ -8,10 +8,10 @@ const Background = styled.div`
   width: 50%;
   height: 100%;
   margin-top: 3rem;
-  
 `
 
 const ImgDiv = styled.div`
+  outline: 1px solid blue
 `
 
 const Img = styled.img`
