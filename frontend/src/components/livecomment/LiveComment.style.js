@@ -3,19 +3,21 @@ import styled from "styled-components";
 
 const LiveCommentContainer= styled.form`
   position: relative;
-  width: 300px;
-  height: 350px;
+  width: 80%;
+  height: 80%;
   border : 1px solid #ccc;
 
 `
 const CommentBox = styled.div`
-  width: 300px;
-  height: 320px;
+  width: 100%;
+  height: 80%;
+  background-color: white;
 `
 const Bubble = styled.div`
   background-color: lightgrey;
   border-radius: 5px;
   box-shadow: 0px 0px 6px #B2B2B2;
+
   height: 2em;
   margin: 10px;
   width:  200px;
@@ -27,8 +29,8 @@ const Bubble = styled.div`
 
 const CommentSendContainer = styled.div`
   position: relative;
-  margin-top: 20px;
-  width: 300px;
+  margin-top: 5rem;
+  width: 100%;
 
 
 `;
