@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../api/http";
 import { deleteToken, saveToken } from "../../api/JWT";
+import http from "../../api/http";
 
 // 로그인
 export const login = createAsyncThunk(
   "LOGIN",
   async (userData, { rejectWithValue }) => {
     try {
-      const res = await axios.post("/auth/login", userData);
+      const res = await http.axios.post("/auth/login", userData);
       const token = res.data.accessToken;
       saveToken(token);
       return res;
@@ -30,7 +30,7 @@ export const tmppwd = createAsyncThunk(
   "TMPPWD",
   async (data, { rejectWithValue }) => {
     try {
-      const res = await axios.post("/user/find-password", null, {
+      const res = await http.axios.post("/user/find-password", null, {
         params: {
           email: data.email,
         },
