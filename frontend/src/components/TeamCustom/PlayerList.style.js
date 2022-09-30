@@ -54,7 +54,7 @@ const PlyaerDetailWrapper = styled.div`
   .save {
     position: relative;
     bottom: 1rem;
-    font-size: 3rem;
+    font-size: 2rem;
     color: green;
     cursor: pointer;
   }

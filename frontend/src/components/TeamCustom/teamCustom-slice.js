@@ -30,7 +30,7 @@ export const getUserTeam = createAsyncThunk(
   }
 );
 
-// POST - 유저팀 등록 (저장 버튼 누르면 post 되게)
+// POST - 선수 추가
 export const registTeam = createAsyncThunk(
   "REGITS_TEAM",
   async (data, { rejectWithValue }) => {
@@ -44,6 +44,20 @@ export const registTeam = createAsyncThunk(
 );
 
 // DELETE - 유저팀 선수 삭제 (uid: 구단 id 를 delete하면 될 듯)
+export const deletePlayer = createAsyncThunk(
+  "DELETE_PLAYER",
+  async (uid, {rejectWithValue}) => {
+    try {
+      alert("선수가 삭제 되었습니다.");
+      const res = await http.auth_axios.delete(`/user_team/${uid}`, uid);
+      return res
+    } catch (err) {
+      alert("선수 삭제를 실패 했습니다.")
+      return rejectWithValue(err.response)
+    }
+  }
+)
+
 
 // DELETE - 유저팀 전체 삭제
 

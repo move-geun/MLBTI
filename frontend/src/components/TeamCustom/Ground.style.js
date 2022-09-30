@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 const Background = styled.div`
   display: flex;
@@ -8,39 +8,39 @@ const Background = styled.div`
   width: 50%;
   height: 100%;
   margin-top: 3rem;
-`
+`;
 
 const ImgDiv = styled.div`
-  outline: 1px solid blue
-`
+  position: relative;
+  outline: 1px solid blue;
+`;
 
 const Img = styled.img`
-
-  &.ground{
+  &.ground {
     width: 450px;
     height: 450px;
-    
+
     @media screen and (max-width: 830px) {
       width: 350px;
       height: 350px;
-      
     }
     @media screen and (max-width: 480px) {
       width: 250px;
       height: 250px;
     }
   }
-`
-
-const BtnDiv = styled.div`
-  
-  .save {
-    margin-top: 2rem;
+`;
+const Player = styled.div`
+  &.FB {
+    position: absolute;
+    top: 12rem;
+    left: 20rem;
   }
-`
+  
+  .img {
+    width: 50px;
+    height: 50px;
+  }
+`;
 
-export {
-  Background,
-  Img,
-  ImgDiv,
-}
+export { Background, Img, ImgDiv, Player };
