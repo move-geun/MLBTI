@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssafy.db.entity.Batters;
 import com.ssafy.db.repository.BatterRepository;
+import com.ssafy.db.repository.BatterRepositorySupport;
 
 
 /**
@@ -37,6 +38,9 @@ public class BatterServiceImpl implements BatterService{
 	@Autowired
 	BatterRepository battersRepository; 
 	
+	@Autowired
+	BatterRepositorySupport battersRepositorySupport; 
+	
 	@Override
 	public List<Batters> getAllBatters() {
 		return battersRepository.findAll();
@@ -45,6 +49,22 @@ public class BatterServiceImpl implements BatterService{
 	@Override
 	public Batters getBatterBySeasonAndUid(int season, int uid) {
 		return battersRepository.findBySeasonAndPlayerUid(season, uid);
+	}
+
+	/**
+	  * @Method Name : getBatterByName
+	  * @작성일 : 2022. 9. 30
+	  * @작성자 : 김동우
+	  * @변경이력 : 
+	
+	  * @Method 설명 :
+	  * @param searchName
+	  * @return
+	  */
+	
+	@Override
+	public List<Batters> getBatterByName(String searchName) {
+		return battersRepositorySupport.findTeamBySearchName(searchName);
 	}
 	
 
