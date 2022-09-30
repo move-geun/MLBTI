@@ -13,6 +13,7 @@ import com.ssafy.db.entity.Batters;
 import com.ssafy.db.entity.Pitchers;
 import com.ssafy.db.repository.BatterRepository;
 import com.ssafy.db.repository.PitcherRepository;
+import com.ssafy.db.repository.PitcherRepositorySupport;
 
 
 /**
@@ -29,6 +30,8 @@ public class PitcherServiceImpl implements PitcherService{
 
 	@Autowired
 	PitcherRepository pitcherRepository; 
+	@Autowired
+	PitcherRepositorySupport pitcherRepositorySupport; 
 	
 	@Override
 	public List<Pitchers> getAllPitchers() {
@@ -39,6 +42,9 @@ public class PitcherServiceImpl implements PitcherService{
 	public Pitchers getPitcherBySeasonAndUid(int season, int uid) {
 		return pitcherRepository.findBySeasonAndPlayerUid(season, uid);
 	}
-	
+	@Override
+	public List<Pitchers> getPitcherByName(String searchName) {
+		return pitcherRepositorySupport.findPitcherBySearchName(searchName);
+	}
 
 }

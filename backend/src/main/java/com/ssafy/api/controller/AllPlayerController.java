@@ -76,4 +76,26 @@ public class AllPlayerController {
 		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",playersList));
 	}
 	
+	@GetMapping()
+	@ApiOperation(value = "검색한 선수 정보 얻기", notes = "검색 단어가 포함된 선수들을 가져온다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<BaseRes> getBySearchName(@RequestParam(value="searchName", required = false) String searchName ) {
+		ArrayList<Batters> b_l = (ArrayList<Batters>) batterService.getBatterByName(searchName);
+		ArrayList<Pitchers> p_l = (ArrayList<Pitchers>) pitcherService.getPitcherByName(searchName);
+		List<PlayersDto> playersList = new ArrayList();
+		List<PlayersDto> PitchersList = new ArrayList();
+		for(int i=0;i<b_l.size();++i) {
+			playersList .add(PlayersDto.of(b_l.get(i)));
+		}
+		
+		for(int i=0;i<p_l.size();++i) {
+			playersList .add(PlayersDto.of(p_l.get(i)));
+		}
+		
+		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",playersList));
+	}
+	
 }
