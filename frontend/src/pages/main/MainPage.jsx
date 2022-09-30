@@ -96,7 +96,7 @@ const MainPage = () => {
         <Notice {...settings}>
           {notices ? (
             notices.map((notice, idx) => (
-              <Link to="/login" key={idx}>
+              <Link to={`/login/${notice.uid}`} key={idx}>
                 [공지] {notice.title}
               </Link>
             ))
