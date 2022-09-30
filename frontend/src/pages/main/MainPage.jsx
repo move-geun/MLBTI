@@ -9,6 +9,7 @@ import {
   DownChart,
 } from "./MainPage.style";
 
+import { Link } from "react-router-dom";
 import { getNotice } from "./mainpage-slice";
 
 // 시뮬레이션 스켈레톤용
@@ -51,9 +52,6 @@ const MainPage = () => {
 
   useEffect(() => {
     floatingNotice();
-    setTimeout(() => {
-      console.log(notices);
-    }, 5000);
     // let step = 0;
     // for (step = 0; step < res.data.length; step++) {
     //   setNotice([...notices, res.data[step]]);
@@ -98,7 +96,9 @@ const MainPage = () => {
         <Notice {...settings}>
           {notices ? (
             notices.map((notice, idx) => (
-              <div key={idx}>[공지] {notice.title}</div>
+              <Link to="/login" key={idx}>
+                [공지] {notice.title}
+              </Link>
             ))
           ) : (
             <div>공지사항이 없습니다</div>
