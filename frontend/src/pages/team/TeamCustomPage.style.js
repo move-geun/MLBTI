@@ -59,6 +59,11 @@ const EditBtn = styled(FiEdit)`
 const SearchDiv = styled.div`
   display: flex;
   align-items: center;  
+  
+  &.playerSearch {
+    margin-right: 0.5rem;
+    
+  }
 `
 
 const SearchInput = styled(TextField)`
@@ -68,7 +73,8 @@ const SearchInput = styled(TextField)`
 const Img = styled.img`
 
   &.magnifying{
-    width:20px;
+    width: 1.6rem;
+    height: 1.6rem;
     cursor: pointer;
   }
 

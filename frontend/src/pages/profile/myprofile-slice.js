@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../api/http";
+import http from "../../api/http";
 
 // 내 정보 불러오기
 export const myprofile = createAsyncThunk(
   "MYPROFILE",
   async (ar, { rejectWithValue }) => {
     try {
-      const res = await axios.get("/user/me");
+      const res = await http.auth_axios.get("/user/me");
       return res;
     } catch (err) {
       alert("에러입니다");
@@ -20,7 +20,7 @@ export const myteam = createAsyncThunk(
   "MYTEAM",
   async (data, { rejectWithValue }) => {
     try {
-      const res = await axios.get("/user_team/list", {
+      const res = await http.auth_axios.get("/user_team/list", {
         params: {
           email: data.email,
         },
@@ -38,7 +38,7 @@ export const changeTeamName = createAsyncThunk(
   "CHANGETEAMNAME",
   async (data, { rejectWithValue }) => {
     try {
-      const res = await axios.put("/user/teamName", null, {
+      const res = await http.auth_axios.put("/user/teamName", null, {
         params: {
           email: data.email,
           newTeamName: data.newTeamName,
@@ -60,7 +60,9 @@ const initialState = {
 const myprofileSlice = createSlice({
   name: "myprofile",
   initialState,
-  reducers: {},
+  reducers: {
+    
+  },
   extraReducers: {},
 });
 

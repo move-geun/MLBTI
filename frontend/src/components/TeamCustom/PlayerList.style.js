@@ -28,6 +28,10 @@ const ListWrapper = styled.div`
     height: 50%;
     font-size: 15px;
   }
+
+  .noCondition {
+    font-size: 2rem;
+  }
 `
 
 const List = styled.div`
@@ -50,7 +54,7 @@ const PlyaerDetailWrapper = styled.div`
   .save {
     position: relative;
     bottom: 1rem;
-    font-size: 3rem;
+    font-size: 2rem;
     color: green;
     cursor: pointer;
   }

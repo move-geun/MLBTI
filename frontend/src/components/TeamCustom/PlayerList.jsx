@@ -9,31 +9,37 @@ import {
 } from "./PlayerList.style";
 import { getPlayer } from "./teamCustom-slice";
 import { registTeam } from "./teamCustom-slice";
-import { MdOutlineDataSaverOn } from "react-icons/md";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Wrapper } from "./Dropdown.style";
-import { red } from "@mui/material/colors";
-
-const PlayerList = ({ email }) => {
+import { SearchDiv, Img } from "../../pages/team/TeamCustomPage.style";
+import { TextField } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPersonCirclePlus } from "@fortawesome/free-solid-svg-icons";
+const PlayerList = ({
+  email,
+  isModifiedPlayer,
+  setIsModifiedPlayer,
+  myTeam,
+}) => {
   const dispatch = useDispatch();
-  
+
   // MLB 선수 리스트
   const [playerList, setPlayerList] = useState([]);
-  
-  // 필터링 변수 (렌더링 조건) 
+
+  // 필터링 변수 (렌더링 조건)
   const [year, setYear] = React.useState("");
   const [league, setLeague] = React.useState("");
   const [team, setTeam] = React.useState("");
   const [position, setPosition] = React.useState("");
 
   // 필터(드롭다운)에 표시할 리스트
-  const [yearFilter, setYearFilter] = useState([])
-  const [leagueFilter, setLeagueFilter] = useState([])
-  const [positionFilter, setPositionFilter] = useState([])
-  const [teamFilter, setTeamFilter] = useState([])
+  const [yearFilter, setYearFilter] = useState([]);
+  const [leagueFilter, setLeagueFilter] = useState([]);
+  const [positionFilter, setPositionFilter] = useState([]);
+  const [teamFilter, setTeamFilter] = useState([]);
 
   // 조건 갱신 함수
   const handleChangeYear = (event) => {
@@ -49,7 +55,6 @@ const PlayerList = ({ email }) => {
     setPosition(event.target.value);
   };
 
-
   useEffect(() => {
     // MLB 선수 목록 받아오고 저장
     dispatch(getPlayer())
@@ -58,34 +63,96 @@ const PlayerList = ({ email }) => {
         console.log("선수정보", res.data);
         setPlayerList(res.data);
 
-        const yearData = []
-        res.data.map((item) => {
-          console.log(item.season)
-          if (!(yearData.includes(item.season))) {
-            yearData.push(item.season)
-          }
-        })
+        // Dropdown에 표시 할 조건 리스트 전처리
+        const yearData = [];
+        const leagueData = [];
+        const teamData = [];
+        const positionData = [];
 
-        setYearFilter(yearData)
+        // 선수마다 가지고 있는, 조건이 될 정보 뽑아오기
+        res.data.map((item, idx) => {
+          if (!yearData.includes(item.season) && item.season !== null) {
+            yearData.push(parseInt(item.season));
+          }
+          if (!leagueData.includes(item.league) && item.league !== null) {
+            leagueData.push(item.league);
+          }
+          if (!teamData.includes(item.teamName) && item.teamName !== null) {
+            teamData.push(item.teamName);
+          }
+          if (!positionData.includes(item.position) && item.position !== null) {
+            positionData.push(item.position);
+          }
+        });
+
+        // 조건 리스트 filter 목록에 담기
+        setYearFilter(yearData);
+        setLeagueFilter(leagueData);
+        setTeamFilter(teamData);
+        setPositionFilter(positionData);
       });
-      
-    }, []);
-    
-    const saveTeam = ({ player }) => {
-      const data = {
-        email: email,
-        player_uid: player.playerUid,
-        position: player.position,
-      };
-      console.log(data);
-      dispatch(registTeam(data));
+  }, []);
+
+  // 선수 내 팀에 등록
+  const saveTeam = ({ player }) => {
+    const data = {
+      email: email,
+      player_uid: player.playerUid,
+      position: player.position,
     };
-    // yearFilter.sort()
-    // console.log(yearFilter)
+
+    // 추가 하려는 선수와 기존 선수들 포지션 비교
+    myTeam.map((player) => {
+      if (player.baseballPlayer.primaryPositionName === data.position) {
+        alert(
+          "포지션이 겹치는 선수가 있습니다. 해당 선수를 삭제 후 추가 해주십시오"
+        );
+      } else {
+        dispatch(registTeam(data))
+          .unwrap()
+          .then(setIsModifiedPlayer(!isModifiedPlayer));
+      }
+    });
+  };
+
+  // 연도 오름차순 필터
+  yearFilter.sort(function (a, b) {
+    if (a > b) return -1;
+    else if (b > a) return 1;
+    else return 0;
+  });
+
+  // 필터링
+  let filterdList = playerList;
+  console.log("year", year);
+  if (year !== "") {
+    filterdList = filterdList.filter((person) => person.season === year);
+  }
+  if (team !== "") {
+    filterdList = filterdList.filter((person) => person.teamName === team);
+  }
+  if (league !== "") {
+    filterdList = filterdList.filter((person) => person.league === league);
+  }
+  if (position !== "") {
+    filterdList = filterdList.filter((person) => person.position === position);
+  }
+
   return (
     <>
-      {/* 드롭다운 필터 */}
+      {/* Dropdown */}
       <Wrapper>
+        <SearchDiv className="playerSearch">
+          <TextField
+            style={{ textAlign: "center" }}
+            id="outlined-basic"
+            label="선수명 검색"
+            variant="outlined"
+            size="small"
+          />
+        </SearchDiv>
+        <Img className="magnifying" src={"/assets/MagnifyingGlass.png"} />
+
         {/* 연도 */}
         <FormControl sx={{ m: 1, minWidth: "15%" }} size="small">
           <InputLabel id="demo-select-small">연도</InputLabel>
@@ -96,9 +163,15 @@ const PlayerList = ({ email }) => {
             label="연도"
             onChange={handleChangeYear}
           >
-            <MenuItem value={'2011'}>2011</MenuItem>
-            <MenuItem value={'2022'}>2022</MenuItem>
-            <MenuItem value={'2023'}>2023</MenuItem>
+            <MenuItem key={""} value={""}>
+              전체
+            </MenuItem>
+            {yearFilter.map((season) => (
+              <MenuItem key={season} value={season}>
+                {season}
+              </MenuItem>
+            ))}
+            ;
           </Select>
         </FormControl>
 
@@ -112,9 +185,13 @@ const PlayerList = ({ email }) => {
             label="리그"
             onChange={handleChangeLeague}
           >
-            <MenuItem value={10}>동부</MenuItem>
-            <MenuItem value={20}>서부</MenuItem>
-            <MenuItem value={30}>중부</MenuItem>
+            <MenuItem key={""} value={""}>
+              전체
+            </MenuItem>
+            {leagueFilter.map((league) => (
+              <MenuItem value={league}>{league}</MenuItem>
+            ))}
+            ;
           </Select>
         </FormControl>
 
@@ -128,9 +205,13 @@ const PlayerList = ({ email }) => {
             label="팀명"
             onChange={handleChangeTeam}
           >
-            <MenuItem value={10}>다저스</MenuItem>
-            <MenuItem value={20}>양키스</MenuItem>
-            <MenuItem value={30}>자이언츠</MenuItem>
+            <MenuItem key={""} value={""}>
+              전체
+            </MenuItem>
+            {teamFilter.map((team) => (
+              <MenuItem value={team}>{team}</MenuItem>
+            ))}
+            ;
           </Select>
         </FormControl>
 
@@ -144,38 +225,46 @@ const PlayerList = ({ email }) => {
             label="포지션"
             onChange={handleChangePostion}
           >
-            <MenuItem value={10}>투수</MenuItem>
-            <MenuItem value={20}>포수</MenuItem>
-            <MenuItem value={30}>타자</MenuItem>
+            <MenuItem key={""} value={""}>
+              전체
+            </MenuItem>
+            {positionFilter.map((position) => (
+              <MenuItem value={position}>{position}</MenuItem>
+            ))}
+            ;
           </Select>
         </FormControl>
 
-        {/* 플레이어 리스트 */}
+        {/* PlayerList */}
       </Wrapper>
       <ListWrapper>
-        {playerList.map((player) => (
-          <List key={player.name}>
-            <PlyaerName>{player.name}</PlyaerName>
-            <PlyaerDetailWrapper>
-              <PlyaerDetail>{player.season}</PlyaerDetail>
-              <PlyaerDetail>{player.league}</PlyaerDetail>
-              <PlyaerDetail>{player.teamName}</PlyaerDetail>
-              <PlyaerDetail>{player.position}</PlyaerDetail>
-              {player.position === "P" ? (
-                <PlyaerDetail>방어율: {player.indicator}</PlyaerDetail>
-              ) : (
-                <PlyaerDetail>타율: {player.indicator}</PlyaerDetail>
-              )}
-              <MdOutlineDataSaverOn
-                onClick={() => saveTeam({ player })}
-                className="save"
-                type="button"
-              >
-                담기
-              </MdOutlineDataSaverOn>
-            </PlyaerDetailWrapper>
-          </List>
-        ))}
+        {year || team || league || position ? (
+          filterdList.map((player, idx) => (
+            <List key={idx + 1000}>
+              <PlyaerName>{player.name}</PlyaerName>
+              <PlyaerDetailWrapper>
+                <PlyaerDetail>{player.season}</PlyaerDetail>
+                <PlyaerDetail>{player.league}</PlyaerDetail>
+                <PlyaerDetail>{player.teamName}</PlyaerDetail>
+                <PlyaerDetail>{player.position}</PlyaerDetail>
+                {player.position === "P" ? (
+                  <PlyaerDetail>방어율: {player.indicator}</PlyaerDetail>
+                ) : (
+                  <PlyaerDetail>타율: {player.indicator}</PlyaerDetail>
+                )}
+                <FontAwesomeIcon
+                  onClick={() => saveTeam({ player })}
+                  className="save"
+                  type="button"
+                  color="#139e3d"
+                  icon={faPersonCirclePlus}
+                />
+              </PlyaerDetailWrapper>
+            </List>
+          ))
+        ) : (
+          <div className="noCondition">조건을 선택해 주세요</div>
+        )}
       </ListWrapper>
     </>
   );
