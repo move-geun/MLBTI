@@ -28,7 +28,7 @@ const Bubble = styled.div`
 `
 
 const CommentSendContainer = styled.div`
-  position: relative;
+
   margin-top: 5rem;
   width: 100%;
 
@@ -47,7 +47,7 @@ const CommentText = styled.input`
 
 
 const CommentBtn = styled.button`
-  position: absolute;
+
   right: 3px; 
   top: 3px;
   bottom: 3px;

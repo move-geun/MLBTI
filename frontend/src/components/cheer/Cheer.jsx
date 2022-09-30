@@ -23,8 +23,6 @@ import {
 
 const Cheer = () => {
 
-
-
     // API에서 가져온 전체 정보 저장
     const [cheerScore, setCheerScore] = useState({
         homeName: '',

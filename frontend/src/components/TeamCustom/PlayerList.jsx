@@ -203,6 +203,7 @@ const PlayerList = ({ email }) => {
               </PlyaerDetailWrapper>
             </List>
             ): <div>조건을 선택해 주세요</div>
+
         ))}
       </ListWrapper>
     </>
