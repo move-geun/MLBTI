@@ -41,31 +41,29 @@ function App() {
     <BrowserRouter>
       <GlobalStyle />
       <Navbar />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/findPwd" element={<FindPWDPage />} />
-          <Route path="/myprofile" element={<MyProfilePage />} />
-          <Route path="/teamcustom" element={<TeamCustomPage />} />
-          <Route path="/teamdetail" element={<TeamDetailPage />} />
-          <Route path="/playerdetail" element={<PlayerDetailPage />} />
-          <Route path="/matchsimulation" element={<MatchSimultaionPage />} />
-          <Route path="/customsimultaion" element={<CustomSimulationPage />} />
-          
-          <Route path="/simulation" element={<SimulationPage />} />
-          <Route path="/live" element={<LivePage />} />
-          <Route path="/gamehistory" element={<GameHistory />} />
-          <Route path="/gameschedule" element={<GameSchedule />} />
-          <Route path="/teamcomparison" element={<TeamComparison />} />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/findPwd" element={<FindPWDPage />} />
+        <Route path="/myprofile" element={<MyProfilePage />} />
+        <Route path="/teamcustom" element={<TeamCustomPage />} />
+        <Route path="/teamdetail" element={<TeamDetailPage />} />
+        <Route path="/playerdetail" element={<PlayerDetailPage />} />
+        <Route path="/matchsimulation" element={<MatchSimultaionPage />} />
+        <Route path="/customsimultaion" element={<CustomSimulationPage />} />
 
-          {/* 관리자 페이지 */}
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/notice/:id" element={<AmdinNoticeDetail />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+        <Route path="/simulation" element={<SimulationPage />} />
+        <Route path="/live" element={<LivePage />} />
+        <Route path="/gamehistory" element={<GameHistory />} />
+        <Route path="/gameschedule" element={<GameSchedule />} />
+        <Route path="/teamcomparison" element={<TeamComparison />} />
+
+        {/* 관리자 페이지 */}
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/notice/:id" element={<AmdinNoticeDetail />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
