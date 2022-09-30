@@ -9,19 +9,21 @@ import {
 } from "./PlayerList.style";
 import { getPlayer } from "./teamCustom-slice";
 import { registTeam } from "./teamCustom-slice";
-import { MdOutlineDataSaverOn } from "react-icons/md";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Wrapper } from "./Dropdown.style";
-import {
-  SearchDiv,
-  Img,
-} from "../../pages/team/TeamCustomPage.style";
+import { SearchDiv, Img } from "../../pages/team/TeamCustomPage.style";
 import { TextField } from "@mui/material";
-
-const PlayerList = ({ email, addPlayer, setAddPlayer }) => {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPersonCirclePlus } from "@fortawesome/free-solid-svg-icons";
+const PlayerList = ({
+  email,
+  isModifiedPlayer,
+  setIsModifiedPlayer,
+  myTeam,
+}) => {
   const dispatch = useDispatch();
 
   // MLB 선수 리스트
@@ -67,7 +69,8 @@ const PlayerList = ({ email, addPlayer, setAddPlayer }) => {
         const teamData = [];
         const positionData = [];
 
-        res.data.map((item) => {
+        // 선수마다 가지고 있는, 조건이 될 정보 뽑아오기
+        res.data.map((item, idx) => {
           if (!yearData.includes(item.season) && item.season !== null) {
             yearData.push(parseInt(item.season));
           }
@@ -98,7 +101,18 @@ const PlayerList = ({ email, addPlayer, setAddPlayer }) => {
       position: player.position,
     };
 
-    dispatch(registTeam(data)).unwrap().then(setAddPlayer(!addPlayer));
+    // 추가 하려는 선수와 기존 선수들 포지션 비교
+    myTeam.map((player) => {
+      if (player.baseballPlayer.primaryPositionName === data.position) {
+        alert(
+          "포지션이 겹치는 선수가 있습니다. 해당 선수를 삭제 후 추가 해주십시오"
+        );
+      } else {
+        dispatch(registTeam(data))
+          .unwrap()
+          .then(setIsModifiedPlayer(!isModifiedPlayer));
+      }
+    });
   };
 
   // 연도 오름차순 필터
@@ -110,18 +124,18 @@ const PlayerList = ({ email, addPlayer, setAddPlayer }) => {
 
   // 필터링
   let filterdList = playerList;
-
+  console.log("year", year);
   if (year !== "") {
-    filterdList = filterdList.filter((person) => person.season);
+    filterdList = filterdList.filter((person) => person.season === year);
   }
   if (team !== "") {
-    filterdList = filterdList.filter((person) => person.teamName);
+    filterdList = filterdList.filter((person) => person.teamName === team);
   }
   if (league !== "") {
-    filterdList = filterdList.filter((person) => person.league);
+    filterdList = filterdList.filter((person) => person.league === league);
   }
   if (position !== "") {
-    filterdList = filterdList.filter((person) => person.position);
+    filterdList = filterdList.filter((person) => person.position === position);
   }
 
   return (
@@ -138,7 +152,7 @@ const PlayerList = ({ email, addPlayer, setAddPlayer }) => {
           />
         </SearchDiv>
         <Img className="magnifying" src={"/assets/MagnifyingGlass.png"} />
-        
+
         {/* 연도 */}
         <FormControl sx={{ m: 1, minWidth: "15%" }} size="small">
           <InputLabel id="demo-select-small">연도</InputLabel>
@@ -238,13 +252,13 @@ const PlayerList = ({ email, addPlayer, setAddPlayer }) => {
                 ) : (
                   <PlyaerDetail>타율: {player.indicator}</PlyaerDetail>
                 )}
-                <MdOutlineDataSaverOn
+                <FontAwesomeIcon
                   onClick={() => saveTeam({ player })}
                   className="save"
                   type="button"
-                >
-                  담기
-                </MdOutlineDataSaverOn>
+                  color="#139e3d"
+                  icon={faPersonCirclePlus}
+                />
               </PlyaerDetailWrapper>
             </List>
           ))

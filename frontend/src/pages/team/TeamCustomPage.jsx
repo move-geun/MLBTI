@@ -27,8 +27,8 @@ const TeamCustomPage = () => {
 
   // 구단명 변경 모달 띄우기
   const [isOpen, setIsOpen] = useState(false);
-  // 선수 추가 시 팀 전력 다시 불러오기 위한 변수
-  const [addPlayer, setAddPlayer] = useState(true);
+  // 선수 추가 및 삭제 시 팀 전력 다시 불러오기 위한 변수
+  const [isModifiedPlayer, setIsModifiedPlayer] = useState(true);
   // 구단 명 수정 시 유저 정보 다시 불러오기
   const [isChangeName, setIsChangeName] = useState(true);
 
@@ -56,15 +56,17 @@ const TeamCustomPage = () => {
     getTeam();
   }, [userInfo]);
 
-  // 선수 추가 시 팀 다시 불러옴
+  // 선수 추가 및 삭제 시  팀 다시 불러옴
   useEffect(() => {
     getTeam();
-  }, [addPlayer]);
+  }, [isModifiedPlayer]);
 
   // 구단 명 수정 모달 띄우기
   const onCreate = () => {
     setIsOpen(true);
   };
+
+  
 
   return (
     <Background>
@@ -90,16 +92,22 @@ const TeamCustomPage = () => {
           </CustomTeamName>
           <PlayerList
             email={userInfo["userId"]}
-            addPlayer={addPlayer}
-            setAddPlayer={setAddPlayer}
+            isModifiedPlayer={isModifiedPlayer}
+            setIsModifiedPlayer={setIsModifiedPlayer}
+            myTeam={myTeam}
           />
         </MyteamWrapper>
         {/* 오른쪽 박스 */}
-        <Ground myTeam={myTeam}/>
+        <Ground myTeam={myTeam} />
       </CenterWrapper>
 
       {/* 팀 전력 */}
-      <TeamCoposition userInfo={userInfo} myTeam={myTeam}></TeamCoposition>
+      <TeamCoposition
+        isModifiedPlayer={isModifiedPlayer}
+        setIsModifiedPlayer={setIsModifiedPlayer}
+        userInfo={userInfo}
+        myTeam={myTeam}
+      ></TeamCoposition>
     </Background>
   );
 };
