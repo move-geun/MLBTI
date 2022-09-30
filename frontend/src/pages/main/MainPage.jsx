@@ -16,38 +16,48 @@ import * as React from "react";
 import Skeleton from "@mui/material/Skeleton";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // 너비 지정해놔서 크기 줄 때 바꿔줘야함
 // title 안내려오게끔 고정
 
 const MainPage = () => {
-  const dispatch = useDispatch();
-  const [notices, setNotice] = useState([]);
+  const notices = useSelector((state) => state.main.notices);
+  // const [notices, setNotices] = useState();
 
+  const dispatch = useDispatch();
   function floatingNotice() {
     dispatch(getNotice())
       .unwrap()
       .then((res) => {
-        let step = 0;
-        for (step = 0; step < res.data.length; step++) {
-          // let obj = {
-          //   uid: res.data[step].uid,
-          //   title: res.data[step].title,
-          // };
-          // console.log(obj);
-          setNotice([...notices, res.data[step]]);
-          console.log("난 지나감");
-        }
-        console.log(notices);
+        // setNotices(res.data);
+        // return res;
+        // let step = 0;
+        // for (step = 0; step < res.data.length; step++) {
+        //   // let obj = {
+        //   //   uid: res.data[step].uid,
+        //   //   title: res.data[step].title,
+        //   // };
+        //   // console.log(obj);
+        //   setNotice([...notices, res.data[step]]);
+        //   console.log("난 지나감");
+        // }
+        // console.log(notices);
       })
       .catch((err) => {
-        alert("공지 불러오기 실패");
+        console.log("공지 불러오기 실패");
       });
   }
 
   useEffect(() => {
     floatingNotice();
+    setTimeout(() => {
+      console.log(notices);
+    }, 5000);
+    // let step = 0;
+    // for (step = 0; step < res.data.length; step++) {
+    //   setNotice([...notices, res.data[step]]);
+    // }
   }, []);
 
   const settings = {
@@ -86,9 +96,13 @@ const MainPage = () => {
     return (
       <Main>
         <Notice {...settings}>
-          <div>[공지] 이동근 하기 싫은 중</div>
-          <div>[공지] 사장님 도박은 재미로만 하셔야합니다</div>
-          <div>[공지] 박찬호의 시선집중 사설 토토로 이용 금지</div>
+          {notices ? (
+            notices.map((notice, idx) => (
+              <div key={idx}>[공지] {notice.title}</div>
+            ))
+          ) : (
+            <div>공지사항이 없습니다</div>
+          )}
         </Notice>
         <SimulationCase>
           <div className="Main">
@@ -133,9 +147,13 @@ const MainPage = () => {
     return (
       <Main>
         <Notice {...settings}>
-          <div>[공지] 이동근 하기 싫은 중</div>
-          <div>[공지] 사장님 도박은 재미로만 하셔야합니다</div>
-          <div>[공지] 박찬호의 시선집중 사설 토토로 이용 금지</div>
+          {notices ? (
+            notices.map((notice, idx) => (
+              <div key={idx}>[공지] {notice.title}</div>
+            ))
+          ) : (
+            <div>공지사항이 없습니다</div>
+          )}
         </Notice>
         <SimulationCase>
           <div className="Main">
@@ -180,9 +198,13 @@ const MainPage = () => {
     return (
       <Main>
         <Notice {...settings}>
-          <div>[공지] 이동근 하기 싫은 중</div>
-          <div>[공지] 사장님 도박은 재미로만 하셔야합니다</div>
-          <div>[공지] 박찬호의 시선집중 사설 토토로 이용 금지</div>
+          {notices ? (
+            notices.map((notice, idx) => (
+              <div key={idx}>[공지] {notice.title}</div>
+            ))
+          ) : (
+            <div>공지사항이 없습니다</div>
+          )}
         </Notice>
         <SimulationCase>
           <div className="Main">
