@@ -20,4 +20,5 @@ import com.ssafy.db.entity.Schedules;
   */
 public interface ScheduleService {
 	public Optional<Schedules> getScheduleByGameId(int gameId);
+	public List<Schedules> getScheduleByDate(String Date);
 }

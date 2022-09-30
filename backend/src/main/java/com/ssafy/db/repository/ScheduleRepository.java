@@ -3,6 +3,7 @@
  */
 package com.ssafy.db.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,4 +26,5 @@ import com.ssafy.db.entity.Schedules;
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedules, Integer>{
 	Optional<Schedules> findByGameId(int gameId);
+	List<Schedules> findByGameDate(String date);
 }

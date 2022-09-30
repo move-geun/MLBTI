@@ -3,6 +3,8 @@
  */
 package com.ssafy.api.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +12,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.api.response.BaseRes;
 import com.ssafy.api.service.ScheduleService;
 import com.ssafy.common.model.response.BaseResponseBody;
+import com.ssafy.db.dto.ScheduleDto;
 import com.ssafy.db.entity.Schedules;
 
 import io.swagger.annotations.Api;
@@ -57,9 +61,33 @@ public class ScheduleController {
 		if(!schedule.isPresent()) {
 			return ResponseEntity.status(404).body(BaseRes.of(404, "failed"));
 		}
-		System.out.println("=====================");
-		System.out.println("=====================");
-		System.out.println(schedule.get().toString());
+
 		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",schedule.get()));
+	}
+	
+	@GetMapping()
+	@ApiOperation(value = "date로 스케줄 가져오기", notes = "<strong>date를 통해 스케줄을 가져온다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 401, message = "인증 실패"),
+        @ApiResponse(code = 404, message = "사용자 없음"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<BaseRes> getByDate(
+			@ApiParam(value="date", required = true)@RequestParam(name="20221001") String date) {
+		
+		String processedDate = date.substring(0,4)+"-"+date.substring(4,6)+"-"+date.substring(6,8);
+		System.out.println(processedDate);
+		List<Schedules> s = (ArrayList<Schedules>) scheduleService.getScheduleByDate(processedDate);
+		
+		if(s.size()==0) {
+			return ResponseEntity.status(404).body(BaseRes.of(404, "failed"));
+		}
+		List l = new ArrayList<Schedules>();
+		for(int i=0;i<s.size();++i) {
+			l.add(ScheduleDto.of(s.get(i)));
+		}
+
+		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",l));
 	}
 }
