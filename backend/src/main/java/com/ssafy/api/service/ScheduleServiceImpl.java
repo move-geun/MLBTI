@@ -3,6 +3,7 @@
  */
 package com.ssafy.api.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,24 @@ public class ScheduleServiceImpl implements ScheduleService {
 	@Override
 	public Optional<Schedules> getScheduleByGameId(int gameId) {
 		Optional<Schedules> s = scheduleRepository.findByGameId(gameId);
+		return s;
+	}
+
+	/**
+	  * @Method Name : getScheduleByDate
+	  * @작성일 : 2022. 10. 1
+	  * @작성자 : 김동우
+	  * @변경이력 : 
+	
+	  * @Method 설명 :
+	  * @param Date
+	  * @return
+	  */
+	
+	@Override
+	public List<Schedules> getScheduleByDate(String Date) {
+		// TODO Auto-generated method stub
+		List<Schedules> s = scheduleRepository.findByGameDate(Date);
 		return s;
 	}
 }
