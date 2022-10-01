@@ -9,11 +9,17 @@ import {
   DownChart,
 } from "./MainPage.style";
 
-import { getNotice } from "./mainpage-slice";
+import { Link } from "react-router-dom";
+import { getNotice, getToday } from "./mainpage-slice";
 
 // 시뮬레이션 스켈레톤용
 import * as React from "react";
 import Skeleton from "@mui/material/Skeleton";
+
+// 모달
+import Modal from "@mui/material/Modal";
+import { ModalBox } from "../simulation/CustomSimulationPage.style";
+
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,37 +29,38 @@ import { useDispatch, useSelector } from "react-redux";
 
 const MainPage = () => {
   const notices = useSelector((state) => state.main.notices);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    console.log("누르긴했다잉, 근데 안 닫힐거지롱");
+    setOpen(false);
+  };
   // const [notices, setNotices] = useState();
 
   const dispatch = useDispatch();
   function floatingNotice() {
     dispatch(getNotice())
       .unwrap()
-      .then((res) => {
-        // setNotices(res.data);
-        // return res;
-        // let step = 0;
-        // for (step = 0; step < res.data.length; step++) {
-        //   // let obj = {
-        //   //   uid: res.data[step].uid,
-        //   //   title: res.data[step].title,
-        //   // };
-        //   // console.log(obj);
-        //   setNotice([...notices, res.data[step]]);
-        //   console.log("난 지나감");
-        // }
-        // console.log(notices);
-      })
+      .then((res) => {})
       .catch((err) => {
         console.log("공지 불러오기 실패");
+      });
+  }
+  function floatingToday() {
+    const data = {
+      day: 20220930,
+    };
+    dispatch(getToday(data))
+      .unwrap()
+      .then((res) => {})
+      .catch((err) => {
+        console.log("스케줄 불러오기 실패");
       });
   }
 
   useEffect(() => {
     floatingNotice();
-    setTimeout(() => {
-      console.log(notices);
-    }, 5000);
+    floatingToday();
     // let step = 0;
     // for (step = 0; step < res.data.length; step++) {
     //   setNotice([...notices, res.data[step]]);
@@ -98,7 +105,31 @@ const MainPage = () => {
         <Notice {...settings}>
           {notices ? (
             notices.map((notice, idx) => (
-              <div key={idx}>[공지] {notice.title}</div>
+              // <Link to={`/notice/${notice.uid}`} key={idx}>
+              <div onClick={handleOpen} key={idx}>
+                [공지] {notice.title}
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <ModalBox>
+                    <div className="title">{notice.title}</div>
+                    <div className="content">
+                      <hr />
+                      <div>No : {notice.uid}</div>
+                      <hr />
+                      <div>작성자 : {notice.writer}</div>
+                      <hr />
+                      <div>내용 : {notice.content}</div>
+                    </div>
+                    <button className="change" onClick={handleClose}>
+                      닫기
+                    </button>
+                  </ModalBox>
+                </Modal>
+              </div>
             ))
           ) : (
             <div>공지사항이 없습니다</div>
@@ -149,7 +180,9 @@ const MainPage = () => {
         <Notice {...settings}>
           {notices ? (
             notices.map((notice, idx) => (
-              <div key={idx}>[공지] {notice.title}</div>
+              <Link to={`/notice/${notice.uid}`} key={idx}>
+                [공지] {notice.title}
+              </Link>
             ))
           ) : (
             <div>공지사항이 없습니다</div>
@@ -200,7 +233,9 @@ const MainPage = () => {
         <Notice {...settings}>
           {notices ? (
             notices.map((notice, idx) => (
-              <div key={idx}>[공지] {notice.title}</div>
+              <Link to={`/notice/${notice.uid}`} key={idx}>
+                [공지] {notice.title}
+              </Link>
             ))
           ) : (
             <div>공지사항이 없습니다</div>
