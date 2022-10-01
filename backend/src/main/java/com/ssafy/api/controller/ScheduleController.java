@@ -74,7 +74,7 @@ public class ScheduleController {
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<BaseRes> getByDate(
-			@ApiParam(value="date", required = true)@RequestParam(name="20221001") String date) {
+			@ApiParam(value="date", required = true)@RequestParam(name="date") String date) {
 		
 		String processedDate = date.substring(0,4)+"-"+date.substring(4,6)+"-"+date.substring(6,8);
 		System.out.println(processedDate);
