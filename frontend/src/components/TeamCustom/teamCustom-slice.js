@@ -58,6 +58,19 @@ export const deletePlayer = createAsyncThunk(
   }
 )
 
+// GET - 선수 검색 
+export const searchPlayer = createAsyncThunk(
+  "SEARCH_PLAYER",
+  async (data, {rejectWithValue}) => {
+    try {
+      const res = await http.auth_axios.get('allPlayers', {params : {searchName: data.name}})
+      return res.data
+    } catch (err) {
+      return rejectWithValue(err.response)
+    }
+  }
+)
+
 
 // DELETE - 유저팀 전체 삭제
 

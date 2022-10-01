@@ -7,7 +7,7 @@ import {
   PlyaerDetailWrapper,
   PlyaerDetail,
 } from "./PlayerList.style";
-import { getPlayer } from "./teamCustom-slice";
+import { getPlayer, searchPlayer } from "./teamCustom-slice";
 import { registTeam } from "./teamCustom-slice";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -41,18 +41,29 @@ const PlayerList = ({
   const [positionFilter, setPositionFilter] = useState([]);
   const [teamFilter, setTeamFilter] = useState([]);
 
-  // 조건 갱신 함수
+  // 선수 검색 인풋
+  const [userInput, setUserInput] = useState("");
+  // 선수 검색 유무
+  const [isSearch, setIsSearch] = useState(false);
+  // 검색 결과
+  const [searchRes, setSearchRes] = useState([]);
+
+  // 조건 갱신 함수 | 검색창 입력값 초기화
   const handleChangeYear = (event) => {
     setYear(event.target.value);
+    setUserInput("");
   };
   const handleChangeLeague = (event) => {
     setLeague(event.target.value);
+    setUserInput("");
   };
   const handleChangeTeam = (event) => {
     setTeam(event.target.value);
+    setUserInput("");
   };
   const handleChangePostion = (event) => {
     setPosition(event.target.value);
+    setUserInput("");
   };
 
   useEffect(() => {
@@ -60,7 +71,6 @@ const PlayerList = ({
     dispatch(getPlayer())
       .unwrap()
       .then((res) => {
-        // console.log("선수정보", res.data);
         setPlayerList(res.data);
 
         // Dropdown에 표시 할 조건 리스트 전처리
@@ -93,7 +103,7 @@ const PlayerList = ({
       });
   }, []);
 
-  // 선수 내 팀에 등록
+  // 내 팀에 선수 추가
   const saveTeam = ({ player }) => {
     const data = {
       email: email,
@@ -101,19 +111,20 @@ const PlayerList = ({
       position: player.position,
     };
 
-    // 기존 선수와 추가 하려는 선수 포지션 비교
-    myTeam.map((player) => {
-      // 중복 된다면 안내 띄우기
-      if (player.baseballPlayer.primaryPositionName === data.position) {
-        alert(
-          "포지션이 겹치는 선수가 있습니다. 해당 선수를 삭제 후 추가 해주십시오"
-        );
-      } else {
-        dispatch(registTeam(data))
-          .unwrap()
-          .then(setIsModifiedPlayer(!isModifiedPlayer));
-      }
-    });
+    // 내 팀에 같은 포지션의 선수가 있는지 확인할 변수
+    const findSamePosition = myTeam.find(function (n) {
+      return n.baseballPlayer.primaryPositionName === data.position;
+    })
+
+    if ( findSamePosition ) {
+      alert(
+        "해당 포지션의 선수가 이미 있습니다. 기존 선수를 방출 후 영입 해주십시오"
+      );
+    } else {
+      dispatch(registTeam(data))
+        .unwrap()
+        .then(setIsModifiedPlayer(!isModifiedPlayer));
+    }
   };
 
   // 연도 오름차순 필터
@@ -138,6 +149,23 @@ const PlayerList = ({
     filterdList = filterdList.filter((person) => person.position === position);
   }
 
+  // 선수 검색 버튼 클릭
+  const handleSearch = (e) => {
+    const data = {
+      name: userInput,
+    };
+    dispatch(searchPlayer(data))
+      .unwrap()
+      .then((res) => {
+        setSearchRes(res.data);
+        setIsSearch(true);
+        setYear("");
+        setLeague("");
+        setTeam("");
+        setPosition("");
+      });
+  };
+
   return (
     <>
       {/* Dropdown */}
@@ -145,13 +173,20 @@ const PlayerList = ({
         <SearchDiv className="playerSearch">
           <TextField
             style={{ textAlign: "center" }}
-            id="outlined-basic"
             label="선수명 검색"
             variant="outlined"
             size="small"
+            value={userInput}
+            onChange={(e) => {
+              setUserInput(e.target.value);
+            }}
           />
         </SearchDiv>
-        <Img className="magnifying" src={"/assets/MagnifyingGlass.png"} />
+        <Img
+          className="magnifying"
+          src={"/assets/MagnifyingGlass.png"}
+          onClick={handleSearch}
+        />
 
         {/* 연도 */}
         <FormControl sx={{ m: 1, minWidth: "15%" }} size="small">
@@ -239,32 +274,57 @@ const PlayerList = ({
       </Wrapper>
       <ListWrapper>
         {year || team || league || position ? (
-          filterdList.map((player, idx) => (
-            <List key={idx + 1000}>
-              <PlyaerName>{player.name}</PlyaerName>
-              <PlyaerDetailWrapper>
-                <PlyaerDetail>{player.season}</PlyaerDetail>
-                <PlyaerDetail>{player.league}</PlyaerDetail>
-                <PlyaerDetail>{player.teamName}</PlyaerDetail>
-                <PlyaerDetail>{player.position}</PlyaerDetail>
-                {player.position === "P" ? (
-                  <PlyaerDetail>방어율: {player.indicator}</PlyaerDetail>
-                ) : (
-                  <PlyaerDetail>타율: {player.indicator}</PlyaerDetail>
-                )}
-                <FontAwesomeIcon
-                  onClick={() => saveTeam({ player })}
-                  className="save"
-                  type="button"
-                  color="#139e3d"
-                  icon={faPersonCirclePlus}
-                />
-              </PlyaerDetailWrapper>
-            </List>
-          ))
-        ) : (
-          <div className="noCondition">조건을 선택해 주세요</div>
-        )}
+          filterdList.length !== 0 ? (
+            filterdList.map((player, idx) => (
+              <List key={idx + 1000}>
+                <PlyaerName>{player.name}</PlyaerName>
+                <PlyaerDetailWrapper>
+                  <PlyaerDetail>{player.season}</PlyaerDetail>
+                  <PlyaerDetail>{player.league}</PlyaerDetail>
+                  <PlyaerDetail>{player.teamName}</PlyaerDetail>
+                  <PlyaerDetail>{player.position}</PlyaerDetail>
+                  {player.position === "P" ? (
+                    <PlyaerDetail>방어율: {player.indicator}</PlyaerDetail>
+                  ) : (
+                    <PlyaerDetail>타율: {player.indicator}</PlyaerDetail>
+                  )}
+                  <FontAwesomeIcon
+                    onClick={() => saveTeam({ player })}
+                    className="save"
+                    type="button"
+                    color="#139e3d"
+                    icon={faPersonCirclePlus}
+                  />
+                </PlyaerDetailWrapper>
+              </List>
+            ))
+          ) : <div className="noCondition"> 조건에 맞는 선수가 없습니다.</div> ) : isSearch ? (
+            searchRes.map((player, idx) => (
+              <List key={idx + 1000}>
+                <PlyaerName>{player.name}</PlyaerName>
+                <PlyaerDetailWrapper>
+                  <PlyaerDetail>{player.season}</PlyaerDetail>
+                  <PlyaerDetail>{player.league}</PlyaerDetail>
+                  <PlyaerDetail>{player.teamName}</PlyaerDetail>
+                  <PlyaerDetail>{player.position}</PlyaerDetail>
+                  {player.position === "P" ? (
+                    <PlyaerDetail>방어율: {player.indicator}</PlyaerDetail>
+                  ) : (
+                    <PlyaerDetail>타율: {player.indicator}</PlyaerDetail>
+                  )}
+                  <FontAwesomeIcon
+                    onClick={() => saveTeam({ player })}
+                    className="save"
+                    type="button"
+                    color="#139e3d"
+                    icon={faPersonCirclePlus}
+                  />
+                </PlyaerDetailWrapper>
+              </List>
+            ))
+          ) : (
+            <div className="noCondition">조건을 선택해 주세요</div>
+          )}
       </ListWrapper>
     </>
   );
