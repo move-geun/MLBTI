@@ -35,7 +35,6 @@ const selectTabHandler = (index) => {
   setCurrentTab(index);
 }
 
-
   
 useEffect(() => {
   dispatch(playData())
@@ -82,11 +81,11 @@ let tabList = [{
         <MLBPlayer>
           <Img className="ground" src={"/assets/Ground.png"} />
         </MLBPlayer>
-{/*       
+      
         <LiveEnjoyContainer>
           <Cheer />
           <LiveComment />
-        </LiveEnjoyContainer> */}
+        </LiveEnjoyContainer>
       </TopContainer>
     
       <ScoreHistory>

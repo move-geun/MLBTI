@@ -8,6 +8,12 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
+import {
+  StatusBtn, BatContainer, BatterContainer, 
+  Batter, BatterResult, BatterResultList, 
+  CircleStrike, CircleBall, CircleSwing,
+} from "./LiveHistory.style";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -61,10 +67,12 @@ export default function TabLiveHistory(prop = defaultValue) {
   };
   const onClickTopPlay = (e) =>{
     e.preventDefault();
+    console.log("초 클릭함");
     setPlayStatus(true);
   };
   const onClickBottomPlay = (e) => {
     e.preventDefault();
+    console.log("말 클릭함");
     setPlayStatus(false);
   };
 
@@ -76,7 +84,7 @@ export default function TabLiveHistory(prop = defaultValue) {
     
     useEffect(()=>{
         if(value !== null){
-            cccc(value);
+            MakebatterList(value);
         }
     },[value])
 
@@ -85,22 +93,21 @@ export default function TabLiveHistory(prop = defaultValue) {
           console.log("이닝길이", prop.livedata.length);
           setInningsLength(prop.livedata.length/2);
             prop.livedata.map(inning => {
-                // setInnings([...innings, inning]);
                 setInnings(previnnings => [...previnnings, inning]);
             })           
         }
     }, [prop]);
 
     useEffect(()=> {
-        cccc(value);
+        MakebatterList(value);
     }, [innings]);
 
     useEffect(()=> {
-      cccc(value);
+      MakebatterList(value);
     }, [playStatus])
 
     useEffect(()=> {
-      BatterInfoHandler(batterInfo);
+      // BatterInfoHandler(batterInfo);
   },[batterInfo]);
 
     useEffect(()=> {
@@ -109,18 +116,18 @@ export default function TabLiveHistory(prop = defaultValue) {
 
 
 
-    const cccc = (value) => {
+    const MakebatterList = (value) => {
         console.log("Ccccccc", value);
         let batterList = []; 
         innings.map(batter => {
             if(batter.inning == value +1){
                 batterList.push(batter);
-                // console.log("batter   ", batter);    
+
             }      
         }) 
        
         if(batterList.length !== 0){
-            console.log("liiiiiiiiiii ", batterList)
+            // console.log("liiiiiiiiiii ", batterList)
             ContentTabValue(batterList);
         }
         
@@ -144,20 +151,24 @@ const ContentTabValue = (batterList) => {
 }
 
 
+const [firstBase, setFirstBase] = useState(false);
+const [secondBase, setSecondeBase] = useState(false);
+const [thirdBase, setThirdBase] = useState(false);
 
-const BatterInfoHandler = (batterInfo) => {
+
+const BatterInfoHandler = () => {
+  console.log("handler")
     if(batterInfo.length !== 0){
-        batterInfo.datas.map(info => {
-            // console.log("batterrrrrInfooo,  ", info);
-            
-            console.log("타자 ", info.batterName, "은  ", info.event , "  입니다.")
-        })
+      batterInfo.datas.map(info => {
+        return(
+            <div>타자 {info.batterName}은 {info.event}입니다. </div>
+        )
+      })} else {
+      return(<div>값을 불러오는 중입니다.</div>)
+
     }
-    
 }
-
-
-
+let checkBallList = [];
  
   return (
     <Box sx={{ width: '100%' }}>
@@ -175,32 +186,37 @@ const BatterInfoHandler = (batterInfo) => {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <button onClick={(()=> onClickTopPlay)}>초</button>
-        <button onClick={(()=> onClickBottomPlay)}>말</button>
+        <StatusBtn onClick={onClickTopPlay}>{value+1}회 초</StatusBtn>
+        <StatusBtn onClick={onClickBottomPlay}>{value+1}회 말</StatusBtn>
+        <BatContainer> 
           {batterInfo.length !== 0 ? 
               (batterInfo.datas.map(info => {
+              
+                
+                
                   return(
-                      <div>타자 {info.batterName}은 {info.event}입니다. </div>
+                      <BatterContainer>
+                        <Batter>타자 {info.batterName} </Batter>
+                        <BatterResult> {info.batterName} : {info.event}</BatterResult>
+                        <BatterResultList>{info.firstBase}</BatterResultList>
+                      </BatterContainer>
                   )
               })) :
               (<div>값을 불러오는 중입니다.</div>)
           }
+          </BatContainer>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <button onClick={(()=> onClickTopPlay)}>초</button>
-        <button onClick={(()=> onClickBottomPlay)}>말</button>
-            {batterInfo.length !== 0 ? 
-                (batterInfo.datas.map(info => {
-                    return(
-                        <div>타자 {info.batterName}은 {info.event}입니다. </div>
-                    )
-                })) :
-                (<div>값을 불러오는 중입니다.</div>)
-            }
+        <StatusBtn onClick={onClickTopPlay}>{value+1}회 초</StatusBtn>
+        <StatusBtn onClick={onClickBottomPlay}>{value+1}회 말</StatusBtn>
+        {BatterInfoHandler}
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <button onClick={(()=> onClickTopPlay)}>초</button>
-        <button onClick={(()=> onClickBottomPlay)}>말</button>
+        <StatusBtn onClick={onClickTopPlay}>{value+1}회 초</StatusBtn>
+        <StatusBtn onClick={onClickBottomPlay}>{value+1}회 말</StatusBtn>
+        
+        {/* <div onClick={onClickTopPlay}> {value+1}회 초</div>
+        <div onClick={onClickBottomPlay}>{value+1}회 말</div> */}
             {batterInfo.length !== 0 ? 
                 (batterInfo.datas.map(info => {
                     return(
@@ -211,8 +227,8 @@ const BatterInfoHandler = (batterInfo) => {
             }
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <button onClick={(()=> onClickTopPlay)}>초</button>
-        <button onClick={(()=> onClickBottomPlay)}>말</button>
+        <StatusBtn onClick={onClickTopPlay}>{value+1}회 초</StatusBtn>
+        <StatusBtn onClick={onClickBottomPlay}>{value+1}회 말</StatusBtn>
             {batterInfo.length !== 0 ? 
                 (batterInfo.datas.map(info => {
                     return(
@@ -223,8 +239,8 @@ const BatterInfoHandler = (batterInfo) => {
             }
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <button onClick={(()=> onClickTopPlay)}>초</button>
-        <button onClick={(()=> onClickBottomPlay)}>말</button>
+        <StatusBtn onClick={onClickTopPlay}>{value+1}회 초</StatusBtn>
+        <StatusBtn onClick={onClickBottomPlay}>{value+1}회 말</StatusBtn>
             {batterInfo.length !== 0 ? 
                 (batterInfo.datas.map(info => {
                     return(
@@ -236,8 +252,8 @@ const BatterInfoHandler = (batterInfo) => {
       </TabPanel>
       
       <TabPanel value={value} index={5}>
-        <button onClick={(()=> onClickTopPlay)}>초</button>
-        <button onClick={(()=> onClickBottomPlay)}>말</button>
+        <StatusBtn onClick={onClickTopPlay}>{value+1}회 초</StatusBtn>
+        <StatusBtn onClick={onClickBottomPlay}>{value+1}회 말</StatusBtn>
             {batterInfo.length !== 0 ? 
                 (batterInfo.datas.map(info => {
                     return(
@@ -249,8 +265,8 @@ const BatterInfoHandler = (batterInfo) => {
       </TabPanel>
 
       <TabPanel value={value} index={6}>
-        <button onClick={(()=> onClickTopPlay)}>초</button>
-        <button onClick={(()=> onClickBottomPlay)}>말</button>
+        <StatusBtn onClick={onClickTopPlay}>{value+1}회 초</StatusBtn>
+        <StatusBtn onClick={onClickBottomPlay}>{value+1}회 말</StatusBtn>
             {batterInfo.length !== 0 ? 
                 (batterInfo.datas.map(info => {
                     return(
@@ -262,8 +278,8 @@ const BatterInfoHandler = (batterInfo) => {
       </TabPanel>
 
       <TabPanel value={value} index={7}>
-        <button onClick={(()=> onClickTopPlay)}>초</button>
-        <button onClick={(()=> onClickBottomPlay)}>말</button>
+        <StatusBtn onClick={onClickTopPlay}>{value+1}회 초</StatusBtn>
+        <StatusBtn onClick={onClickBottomPlay}>{value+1}회 말</StatusBtn>
             {batterInfo.length !== 0 ? 
                 (batterInfo.datas.map(info => {
                     return(
@@ -275,8 +291,8 @@ const BatterInfoHandler = (batterInfo) => {
       </TabPanel>
 
       <TabPanel value={value} index={8}>
-        <button onClick={(()=> onClickTopPlay)}>초</button>
-        <button onClick={(()=> onClickBottomPlay)}>말</button>
+        <StatusBtn onClick={onClickTopPlay}>{value+1}회 초</StatusBtn>
+        <StatusBtn onClick={onClickBottomPlay}>{value+1}회 말</StatusBtn>
             {batterInfo.length !== 0 ? 
                 (batterInfo.datas.map(info => {
                     return(
@@ -331,3 +347,5 @@ const BatterInfoHandler = (batterInfo) => {
 
   
 // }
+
+// 사용 안 함

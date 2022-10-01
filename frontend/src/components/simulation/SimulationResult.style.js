@@ -1,6 +1,4 @@
-import styled from 'styled-components';
-
-
+import styled from "styled-components";
 
 const TabMenu = styled.ul`
   background-color: #dcdcdc;
@@ -18,5 +16,12 @@ const TabMenu = styled.ul`
   }
 `;
 
+const StatusBtn = styled.span`
+  background-color: darkgray;
+  color: white;
+  margin: 0 1rem 1rem 0;
+`
 
-export {TabMenu};
+
+
+export {TabMenu, StatusBtn };
