@@ -48,7 +48,7 @@ public class LeagueRankController {
 	LeagueRankService leagueRankService;
 	
 	@Autowired
-	TeamService getTeamById;
+	TeamService teamService;
 	
 	@GetMapping()
 	@ApiOperation(value = "오늘날짜와 리그 코드로 순위 가져오기", notes = "<strong>date와 league code로 스케줄을 가져온다.") 
@@ -71,8 +71,8 @@ public class LeagueRankController {
 		}
 		List l = new ArrayList<LeagueRank>();
 		for(int i=0;i<lr.size();++i) {
-			System.out.println(lr.get(i).getTeamId());
-			l.add(LeagueRankDto.of(lr.get(i),""));
+			String logo = teamService.getTeamById(lr.get(i).getTeamId()).getLogo();
+			l.add(LeagueRankDto.of(lr.get(i),logo));
 		}
 
 		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",l));
