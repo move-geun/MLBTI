@@ -12,7 +12,6 @@ const Background = styled.div`
 
 const ImgDiv = styled.div`
   position: relative;
-  outline: 1px solid blue;
 `;
 
 const Img = styled.img`
@@ -36,6 +35,50 @@ const Player = styled.div`
     top: 12rem;
     left: 20rem;
   }
+  
+  &.SB {
+    position: absolute;
+    top: 5rem;
+    left: 17rem;
+  }
+  &.TB {
+    position: absolute;
+    top: 12rem;
+    left: 4.5rem;
+  }
+
+  &.SS {
+    position: absolute;
+    top: 5rem;
+    left: 8rem;
+  }
+  &.LF {
+    position: absolute;
+    top: 5rem;
+    left: 3rem;
+  }
+  &.CF {
+    position: absolute;
+    top: 1rem;
+    left: 12.5rem;
+  }
+  &.RF {
+    position: absolute;
+    top: 5rem;
+    left: 22rem;
+  }
+  &.P {
+    position: absolute;
+    top: 12rem;
+    left: 12.5rem;
+  }
+
+  &.C {
+    position: absolute;
+    top: 20rem;
+    left: 12.5rem;
+  }
+  
   
   .img {
     width: 50px;

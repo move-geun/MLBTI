@@ -60,7 +60,7 @@ const PlayerList = ({
     dispatch(getPlayer())
       .unwrap()
       .then((res) => {
-        console.log("선수정보", res.data);
+        // console.log("선수정보", res.data);
         setPlayerList(res.data);
 
         // Dropdown에 표시 할 조건 리스트 전처리
@@ -101,8 +101,9 @@ const PlayerList = ({
       position: player.position,
     };
 
-    // 추가 하려는 선수와 기존 선수들 포지션 비교
+    // 기존 선수와 추가 하려는 선수 포지션 비교
     myTeam.map((player) => {
+      // 중복 된다면 안내 띄우기
       if (player.baseballPlayer.primaryPositionName === data.position) {
         alert(
           "포지션이 겹치는 선수가 있습니다. 해당 선수를 삭제 후 추가 해주십시오"
@@ -124,7 +125,6 @@ const PlayerList = ({
 
   // 필터링
   let filterdList = playerList;
-  console.log("year", year);
   if (year !== "") {
     filterdList = filterdList.filter((person) => person.season === year);
   }
