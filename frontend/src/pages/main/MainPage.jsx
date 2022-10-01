@@ -10,7 +10,7 @@ import {
 } from "./MainPage.style";
 
 import { Link } from "react-router-dom";
-import { getNotice } from "./mainpage-slice";
+import { getNotice, getToday } from "./mainpage-slice";
 
 // 시뮬레이션 스켈레톤용
 import * as React from "react";
@@ -41,28 +41,26 @@ const MainPage = () => {
   function floatingNotice() {
     dispatch(getNotice())
       .unwrap()
-      .then((res) => {
-        // setNotices(res.data);
-        // return res;
-        // let step = 0;
-        // for (step = 0; step < res.data.length; step++) {
-        //   // let obj = {
-        //   //   uid: res.data[step].uid,
-        //   //   title: res.data[step].title,
-        //   // };
-        //   // console.log(obj);
-        //   setNotice([...notices, res.data[step]]);
-        //   console.log("난 지나감");
-        // }
-        // console.log(notices);
-      })
+      .then((res) => {})
       .catch((err) => {
         console.log("공지 불러오기 실패");
+      });
+  }
+  function floatingToday() {
+    const data = {
+      day: 20220930,
+    };
+    dispatch(getToday(data))
+      .unwrap()
+      .then((res) => {})
+      .catch((err) => {
+        console.log("스케줄 불러오기 실패");
       });
   }
 
   useEffect(() => {
     floatingNotice();
+    floatingToday();
     // let step = 0;
     // for (step = 0; step < res.data.length; step++) {
     //   setNotice([...notices, res.data[step]]);
