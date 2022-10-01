@@ -1,5 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import http from "../../api/http";
+import qs from "qs";
+http.axios.defaults.paramsSerializer = params => {
+  return qs.stringify(params);
+}
 
 // 공지 받아오기
 export const getNotice = createAsyncThunk(
@@ -20,10 +24,9 @@ export const getToday = createAsyncThunk(
   "GETTODAY",
   async (data, { rejectWithValue }) => {
     try {
+      const params = { date: data.day }
       const res = await http.axios.get("/schedule", {
-        parmas: {
-          20221001: data.day,
-        },
+        params
       });
       return res;
     } catch (err) {

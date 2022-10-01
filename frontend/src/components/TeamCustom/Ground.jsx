@@ -9,10 +9,10 @@ const Ground = ({ myTeam }) => {
 
   }, []);
 
-  const cntOutFielder = () => {
-    setCnt(...cnt+1)
-    console.log(cnt)
-  }
+  // const cntOutFielder = () => {
+  //   setCnt(cnt+1)
+  //   console.log(cnt)
+  // }
   
   // console.log(myTeam);
   return (
@@ -72,7 +72,7 @@ const Ground = ({ myTeam }) => {
     
           
 
-        <Player className="TB"> {cntOutFielder}
+        <Player className="TB"> 
           <Img className="img" src={"/assets/shortStop3.png"}></Img>
         </Player>
         <Player className="SS">
