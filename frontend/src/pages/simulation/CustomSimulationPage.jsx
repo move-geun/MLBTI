@@ -34,7 +34,8 @@ const CustomSimulationPage = () => {
   const [legueName, setLegueName] = React.useState("nationalMLB");
 
   const [nationalList, setNationalList] = useState([]);
-  const [americanList, setAmericanList] = useState([]);
+  // const [americanList, setAmericanList] = useState([]);
+  const [setAmericanList] = useState([]);
 
   const handleChange = (event) => {
     setLegueName(event.target.value);

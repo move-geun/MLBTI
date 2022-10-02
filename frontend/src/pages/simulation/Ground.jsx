@@ -1,4 +1,4 @@
-import { letterSpacing } from "@mui/system";
+// import { letterSpacing } from "@mui/system";
 import { useEffect, useState } from "react";
 
 import {
@@ -11,7 +11,7 @@ import {
 const Ground = (prop) => { 
 
     const [inningList, setInningList] = useState([]);
-    const [batterList, setBatterList] = useState([]);
+    // const [batterList, setBatterList] = useState([]);
     const [firstBase, setFirstBase] = useState(false);
     const [secondBase, setSecondBase]= useState(false);
     const [thirdBase, setThirdBase] = useState(false);
@@ -45,12 +45,12 @@ const Ground = (prop) => {
         }
     }, [inningList]);
 
-    const fooor = () => {
+    // const fooor = () => {
         
-        inningList.map()
+    //     inningList.map()
 
 
-    }
+    // }
 
     const makeBatterList = (list) => {
         console.log("3초마다 메이커 들어오니   ", list);
@@ -62,13 +62,13 @@ const Ground = (prop) => {
 
 
 
-    const baseSetting = (batter) => {
-        console.log("10초마다 실행되고 있니");
-        setFirstBase(batter.firstBase);
-        setSecondBase(batter.secondBase);
-        setThirdBase(batter.thirdBase);
+    // const baseSetting = (batter) => {
+    //     console.log("10초마다 실행되고 있니");
+    //     setFirstBase(batter.firstBase);
+    //     setSecondBase(batter.secondBase);
+    //     setThirdBase(batter.thirdBase);
 
-    }
+    // }
 
     const showSimul = () => {
 
