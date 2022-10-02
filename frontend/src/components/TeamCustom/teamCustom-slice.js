@@ -40,7 +40,7 @@ export const registTeam = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       alert("선수가 추가 되었습니다.");
-      const res = await http.auth_axios.post("/user_team", data);
+      // const res = await http.auth_axios.post("/user_team", data);
     } catch (err) {
       return rejectWithValue(err.resposne);
     }

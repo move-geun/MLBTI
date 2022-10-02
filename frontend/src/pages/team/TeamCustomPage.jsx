@@ -5,7 +5,7 @@ import {
   Header,
   CenterWrapper,
   MyteamWrapper,
-  Nickname,
+  // Nickname,
   CustomTeamName,
   EditBtn,
 } from "./TeamCustomPage.style";

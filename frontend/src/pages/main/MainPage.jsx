@@ -118,7 +118,7 @@ const MainPage = () => {
     // for (step = 0; step < res.data.length; step++) {
     //   setNotice([...notices, res.data[step]]);
     // }
-  }, []);
+  }, [floatingNotice(),floatingToday(),,floatingYesterday(),todayFormal(),rank()]);
 
   const settings = {
     dots: false,

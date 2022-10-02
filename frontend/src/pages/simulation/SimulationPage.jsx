@@ -43,7 +43,7 @@ const SimulationPage = () => {
     })
   }
 
-  const baseInfo= [];
+  // const baseInfo= [];
 
 
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Background, Img, ImgDiv, Player, Nickname } from "./Ground.style";
 
 const Ground = ({ myTeam, userInfo }) => {
