@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import {
   LiveContainer,
-  Score,
-  ScoreTitle,
-  ScoreInfo,
+  // Score,
+  // ScoreTitle,
+  // ScoreInfo,
   ScoreHistory,
-  TabMenu,
-  Desc,
+  // TabMenu,
+  // Desc,
   TopContainer,
   LiveEnjoyContainer,
   MLBPlayer,
@@ -15,25 +15,25 @@ import {
 
 import Cheer from "../../components/cheer/Cheer";
 import LiveComment from "../../components/livecomment/LiveComment";
-import http from "../../api/http";
+// import http from "../../api/http";
 import {  playData } from "./live-slice";
 import { useDispatch } from "react-redux";
 import LiveHistory from "../../components/live_history/LiveHistory";
 
 const LivePage = () => {
 
-  const [currentTab, setCurrentTab] = useState(0);
+  // const [currentTab, setCurrentTab] = useState(0);
   const [liveData, setLiveData] = useState({});
-  const [innings, setInnings] = useState([]);
-  const [ statusIsTop, setStatusIsTop ] = useState(true);
+  // const [innings, setInnings] = useState([]);
+  // const [ statusIsTop, setStatusIsTop ] = useState(true);
 
   const dispatch = useDispatch();
 
 
 
-const selectTabHandler = (index) => {
-  setCurrentTab(index);
-}
+// const selectTabHandler = (index) => {
+//   setCurrentTab(index);
+// }
 
   
 useEffect(() => {
@@ -51,7 +51,7 @@ useEffect(() => {
  function inningsInfo(data) {
 
   let inningList = [];
-  const count = 0;
+  // const count = 0;
 
 
   data.forEach((value, index,array ) => {
@@ -60,16 +60,16 @@ useEffect(() => {
    })
 }
 
-function batterInfo(data){
-  let batterList = [];
-  batterList.push(data);
-}
+// function batterInfo(data){
+//   let batterList = [];
+//   batterList.push(data);
+// }
 
 
-let tabList = [{
-  tabName: '',
-  content: '',
-}];
+// let tabList = [{
+//   tabName: '',
+//   content: '',
+// }];
 
 
 

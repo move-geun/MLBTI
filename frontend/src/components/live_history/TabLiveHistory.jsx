@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import {
   StatusBtn, BatContainer, BatterContainer, 
   Batter, BatterResult, BatterResultList, 
-  CircleStrike, CircleBall, CircleSwing,
+  // CircleStrike, CircleBall, CircleSwing,
 } from "./LiveHistory.style";
 
 function TabPanel(props) {
@@ -60,7 +60,8 @@ export default function TabLiveHistory(prop = defaultValue) {
 //   const[batterList, setBatterList] = useState([]);
   const[batterInfo, setBatterInfo] = useState([]);
   const[playStatus, setPlayStatus] = useState(true);
-  const[inningsLength, setInningsLength] = useState();
+  // const[inningsLength, setInningsLength] = useState();
+  const[ setInningsLength] = useState();
   
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -151,9 +152,9 @@ const ContentTabValue = (batterList) => {
 }
 
 
-const [firstBase, setFirstBase] = useState(false);
-const [secondBase, setSecondeBase] = useState(false);
-const [thirdBase, setThirdBase] = useState(false);
+// const [firstBase, setFirstBase] = useState(false);
+// const [secondBase, setSecondeBase] = useState(false);
+// const [thirdBase, setThirdBase] = useState(false);
 
 
 const BatterInfoHandler = () => {

@@ -79,7 +79,7 @@ const PlayerList = ({
         const positionData = [];
 
         // 선수마다 가지고 있는, 조건이 될 정보 뽑아오기
-        res.data.map((item, idx) => {
+        res.data.map((item, _) => {
           if (!yearData.includes(item.season) && item.season !== null) {
             yearData.push(parseInt(item.season));
           }
