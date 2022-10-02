@@ -20,17 +20,10 @@ import { useDispatch } from "react-redux/es/exports";
 const TaBleList = styled(TableCell)`
   font-family: "MICEGothic Bold";
 `;
-const TeamCoposition = ({
-  userInfo,
-  myTeam,
-  isModifiedPlayer,
-  setIsModifiedPlayer,
-}) => {
+const TeamCoposition = ({ userInfo, myTeam }) => {
   const dispatch = useDispatch();
   const deleteHandle = (data) => {
-    dispatch(deletePlayer(data.uid))
-      .unwrap()
-      .then(setIsModifiedPlayer(!isModifiedPlayer));
+    dispatch(deletePlayer(data.uid));
   };
 
   return (

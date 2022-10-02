@@ -27,22 +27,23 @@ const TeamCustomPage = () => {
 
   // 구단명 변경 모달 띄우기
   const [isOpen, setIsOpen] = useState(false);
-  // 선수 추가 및 삭제 시 팀 전력 다시 불러오기 위한 변수
-  const [isModifiedPlayer, setIsModifiedPlayer] = useState(true);
+
   // 구단 명 수정 시 유저 정보 다시 불러오기
   const [isChangeName, setIsChangeName] = useState(true);
 
-  // 팀 불러오기
-  async function getTeam() {
-    const res = await dispatch(getUserTeam(userInfo["userId"]));
+  // userInfo가 들어왔을 때, 내 팀 목록을 불러옴
+  if (userInfo.length !== 0) {
+    async function getTeam() {
+      const res = await dispatch(getUserTeam(userInfo["userId"]));
 
-    // 성공적으로 dispatatch 했을 때 payload에 팀이 담겨 옴
-    if (res.meta.requestStatus === "fulfilled") {
-      setMyTeam(res.payload);
+      // 성공적으로 dispatatch 했을 때 payload에 팀이 담겨 옴
+      if (res.meta.requestStatus === "fulfilled") {
+        setMyTeam(res.payload);
+      }
     }
+    getTeam();
   }
 
-  // 유저 정보 받아옴 (구단 명 변경 시 새로 받아옴)
   useEffect(() => {
     dispatch(myprofile())
       .unwrap()
@@ -51,22 +52,10 @@ const TeamCustomPage = () => {
       });
   }, [isChangeName]);
 
-  // userId에 값이 들어왔을 때 해당 유저의 팀 불러오기
-  useEffect(() => {
-    getTeam();
-  }, [userInfo]);
-
-  // 선수 추가 및 삭제 시  팀 다시 불러옴
-  useEffect(() => {
-    getTeam();
-  }, [isModifiedPlayer]);
-
   // 구단 명 수정 모달 띄우기
   const onCreate = () => {
     setIsOpen(true);
   };
-
-  
 
   return (
     <Background>
@@ -90,24 +79,14 @@ const TeamCustomPage = () => {
               />
             )}
           </CustomTeamName>
-          <PlayerList
-            email={userInfo["userId"]}
-            isModifiedPlayer={isModifiedPlayer}
-            setIsModifiedPlayer={setIsModifiedPlayer}
-            myTeam={myTeam}
-          />
+          <PlayerList email={userInfo["userId"]} myTeam={myTeam} />
         </MyteamWrapper>
         {/* 오른쪽 박스 */}
         <Ground myTeam={myTeam} />
       </CenterWrapper>
 
       {/* 팀 전력 */}
-      <TeamCoposition
-        isModifiedPlayer={isModifiedPlayer}
-        setIsModifiedPlayer={setIsModifiedPlayer}
-        userInfo={userInfo}
-        myTeam={myTeam}
-      ></TeamCoposition>
+      <TeamCoposition userInfo={userInfo} myTeam={myTeam}></TeamCoposition>
     </Background>
   );
 };

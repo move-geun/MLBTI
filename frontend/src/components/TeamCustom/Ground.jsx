@@ -2,29 +2,22 @@ import React, { useEffect, useState } from "react";
 import { Background, Img, ImgDiv, Player } from "./Ground.style";
 
 const Ground = ({ myTeam }) => {
-  const [cnt, setCnt] = useState(0)
-  const [out, setOut] = useState([false, false, false])
-  useEffect(() => {}, []);
-  
-  // console.log('내팀',myTeam[0].baseballPlayer)
-  // const cntOutFielder = () => {
-  //   setCnt(cnt+1)
-  //   console.log(cnt)
-  // }
+  if (myTeam.length !== 0) {
+    let cnt = 0;
+    myTeam.map((item) =>
+      item.baseballPlayer.primaryPositionType === "Outfielder"
+        ? ((item.baseballPlayer.primaryPositionType = `Outfielder${cnt}`),
+          cnt++)
+        : null
+    );
+  }
 
-  // if (myTeam !== undefined) {
-  //   console.log(myTeam[0]);
-  // }
-
-  console.log(out)
-  return (
-   myTeam ?
+  return myTeam ? (
     <Background>
       <ImgDiv>
         <Img className="ground" src={"/assets/Ground.png"}></Img>
 
-        {myTeam.map((player) => (
-
+        {/* {myTeam.map((player) =>
           player.baseballPlayer.primaryPositionName === "First Base" ? (
             <Player className="FB">
               <Img className="img" src={"/assets/shortStop3.png"}></Img>
@@ -33,47 +26,41 @@ const Ground = ({ myTeam }) => {
             <Player className="SB">
               <Img className="img" src={"/assets/shortStop3.png"}></Img>
             </Player>
-
           ) : player.baseballPlayer.primaryPositionName === "Third Base" ? (
-            <Player className="SB">
+            <Player className="TB">
               <Img className="img" src={"/assets/shortStop3.png"}></Img>
             </Player>
-
           ) : player.baseballPlayer.primaryPositionName === "Short stop" ? (
-            <Player className="SB">
+            <Player className="SS">
               <Img className="img" src={"/assets/shortStop3.png"}></Img>
             </Player>
-
-          ) : player.baseballPlayer.primaryPositionName === "Outfielder" && out === [false,false,false] ? (
-            <Player className="LF">  
-              <Img className="img" src={"/assets/shortStop3.png"}></Img>
-              {setOut([true, false, false])}
+          ) : player.baseballPlayer.primaryPositionType === "Outfielder0" ? (
+            <Player className="LF">
+              <Img className="img" src={"/assets/outFielder3.png"}></Img>
             </Player>
-          ) : player.baseballPlayer.primaryPositionName === "Outfielder" && out === [true,false,false]  ? (
+          ) : player.baseballPlayer.primaryPositionType === "Outfielder1" ? (
             <Player className="CF">
-              {setOut([true, true, false])}
-              <Img className="img" src={"/assets/shortStop3.png"}></Img>
+              <Img className="img" src={"/assets/outFielder3.png"}></Img>
             </Player>
-
-          ) : player.baseballPlayer.primaryPositionName === "Outfielder" && out[2] === false ? (
+          ) : player.baseballPlayer.primaryPositionType === "Outfielder2" ? (
             <Player className="RF">
-              {setOut([true, true, true])}
-              <Img className="img" src={"/assets/shortStop3.png"}></Img>
+              <Img className="img" src={"/assets/outFielder3.png"}></Img>
             </Player>
-
           ) : player.baseballPlayer.primaryPositionName === "Pitcher" ? (
-            <Player className="SB">
-              <Img className="img" src={"/assets/shortStop3.png"}></Img>
+            <Player className="P">
+              <Img className="img" src={"/assets/pitcher3.png"}></Img>
             </Player>
-
           ) : player.baseballPlayer.primaryPositionName === "Catcher" ? (
-            <Player className="SB">
-              <Img className="img" src={"/assets/shortStop3.png"}></Img>
+            <Player className="C">
+              <Img className="img" src={"/assets/catcher.png"}></Img>
             </Player>
+          ) : null
+        )} */}
 
-          ) : null ))}
-
-        {/* <Player className="TB"> 
+        <Player className="TB"> 
+          <Img className="img" src={"/assets/shortStop3.png"}></Img>
+        </Player>
+        <Player className="SB"> 
           <Img className="img" src={"/assets/shortStop3.png"}></Img>
         </Player>
         <Player className="SS">
@@ -93,11 +80,10 @@ const Ground = ({ myTeam }) => {
         </Player>
         <Player className="P">
           <Img className="img" src={"/assets/pitcher3.png"}></Img>
-        </Player> */}
+        </Player>
       </ImgDiv>
     </Background>
-  : null
-  );
+  ) : null;
 };
 
 export default Ground;
