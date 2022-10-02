@@ -52,6 +52,7 @@ const TeamCustomPage = () => {
       });
   }, [isChangeName]);
 
+
   // 구단 명 수정 모달 띄우기
   const onCreate = () => {
     setIsOpen(true);

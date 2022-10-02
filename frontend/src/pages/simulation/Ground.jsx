@@ -29,7 +29,7 @@ const Ground = (prop) => {
         if(inningList.length >0 ){
             let list = [];
                 inningList.map(inning => {        
-                console.log("innningggin", inning);   
+                console.log("innningggin", inning) 
                 // setInterval(()=> makeBatterList(inning), 3000); 
                 // setTimeout( ()=> makeBatterList(inning), 3000);
                 
