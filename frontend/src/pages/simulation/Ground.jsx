@@ -1,3 +1,4 @@
+import { letterSpacing } from "@mui/system";
 import { useEffect, useState } from "react";
 
 import {
@@ -10,6 +11,7 @@ import {
 const Ground = (prop) => { 
 
     const [inningList, setInningList] = useState([]);
+    const [batterList, setBatterList] = useState([]);
     const [firstBase, setFirstBase] = useState(false);
     const [secondBase, setSecondBase]= useState(false);
     const [thirdBase, setThirdBase] = useState(false);
@@ -22,16 +24,43 @@ const Ground = (prop) => {
 
     useEffect(()=> {
         if(inningList.length >0 ){
-            inningList.map(inning => {              
-                inning.datas.map(batter => {
-                    console.log("batttterrr  ", batter);
+            let list = [];
+                inningList.map(inning => {        
+                console.log("innningggin", inning);   
+                // setInterval(()=> makeBatterList(inning), 3000); 
+                // setTimeout( ()=> makeBatterList(inning), 3000);
+                
+                
+                list.push(inning);
+                makeBatterList(list);
+                
+                
+                // inning.datas.map(batter => {
+                //     // console.log("batttterrr  ", batter);
 
-                    setTimeout( baseSetting(batter), 10000)
                     
-                })
+                    
+                // })
             })
         }
     }, [inningList]);
+
+    const fooor = () => {
+        
+        inningList.map()
+
+
+    }
+
+    const makeBatterList = (list) => {
+        console.log("3초마다 메이커 들어오니   ", list);
+            // inning.dats.map(batter => {
+            //     baseSetting(batter);
+            // })
+       
+    }
+
+
 
     const baseSetting = (batter) => {
         console.log("10초마다 실행되고 있니");
@@ -64,7 +93,7 @@ const Ground = (prop) => {
         <>
             <Img className="ground" src={"/assets/Ground.png"} />
             <BaseBall src={"/assets/baseball.png"}/>
-            
+            {showSimul}
         </>
             
     );
