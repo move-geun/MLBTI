@@ -28,6 +28,10 @@ const ListWrapper = styled.div`
     height: 50%;
     font-size: 15px;
   }
+
+  .noCondition {
+    font-size: 2rem;
+  }
 `
 
 const List = styled.div`
@@ -46,6 +50,14 @@ const PlyaerName = styled.div`
 const PlyaerDetailWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  
+  .save {
+    position: relative;
+    bottom: 1rem;
+    font-size: 2rem;
+    color: green;
+    cursor: pointer;
+  }
 `
 const PlyaerDetail = styled.div`
   color: #333333;

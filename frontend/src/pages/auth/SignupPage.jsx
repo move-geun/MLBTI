@@ -120,7 +120,6 @@ const SignupPage = () => {
 
   // 인증 하기
   async function checkNumber() {
-    console.log("이것도 되나");
     const data = {
       email: userEmail,
       randomNumber: emailCert,
@@ -245,7 +244,7 @@ const SignupPage = () => {
                 <AlertText className="correct">인증에 성공 했습니다.</AlertText>
               ) : null}
 
-              {!emailCert && !successCert ? (
+              {emailCert && !successCert ? (
                 <AlertText >인증이 필요 합니다.</AlertText>
               ) : null}
             </div>

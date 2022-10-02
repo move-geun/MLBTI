@@ -7,7 +7,7 @@ const CustomConatiner = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin: 1rem auto;
   font-size: 1.5rem;
 
   @media screen and (max-width: 830px) {
@@ -33,12 +33,18 @@ const CustomConatiner = styled.div`
   }
 `;
 
+const Header = styled.div`
+  padding-bottom: 4px;
+  border-bottom: 2px solid #2565d0;
+  font-size: 1.5rem;
+`;
 const TeamContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  /* outline: 2px solid; */
 `;
 
 const TeamCase = styled.div`
@@ -58,7 +64,7 @@ const ModalBox = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 330px;
-  height: 500px;
+  /* height: 500px; */
   border: 2px solid rgba(0, 0, 0, 0.2);
   background-color: white;
   display: flex;
@@ -91,21 +97,38 @@ const ModalBox = styled.div`
     width: 90%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
     font-size: 1.3rem;
   }
   .filter {
     display: flex;
+    justify-content: center;
     flex-direction: row;
     margin-top: 5px;
+    width: 100%;
   }
   .candidates {
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 250px;
     margin: 5px 0;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
 
+    &::-webkit-scrollbar-thumb {
+      height: 15%;
+      background-color: #92ded5;
+      border-radius: 2rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #d7dcff;
+      border-radius: 2rem;
+    }
     .candi {
       margin: 5px 0;
     }
@@ -125,4 +148,22 @@ const ModalBox = styled.div`
     padding: 0.2rem 0.4rem;
   }
 `;
-export { CustomConatiner, TeamContainer, TeamCase, ModalBox };
+
+const ListWrap = styled.div`
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 15%;
+    background-color: #92ded5;
+    border-radius: 2rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #d7dcff;
+    border-radius: 2rem;
+  }
+`;
+export { CustomConatiner, TeamContainer, TeamCase, ModalBox, Header, ListWrap };

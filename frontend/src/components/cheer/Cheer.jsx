@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import {
     LogoFirstTeam,
     LogoSecondTeam,
@@ -23,81 +23,138 @@ import {
 
 const Cheer = () => {
 
-    // const [cheerScore, setCheerScore] = useState(
-    const [cheerScore] = useState(
-            {team1: 25, team2: 31, total: 56}
-    );
-
+    // API에서 가져온 전체 정보 저장
+    const [cheerScore, setCheerScore] = useState({
+        homeName: '',
+        awayName: '',
+        homeCount: 0,
+        awayCount: 0,
+    });
     const [totalScore, setTotalScore] = useState(); 
-    const [firstTeam, setFirstTeam] = useState();
-    const [secondTeam, setSecondTeam] = useState();
+    const [homeTeam, setHomeTeam] = useState();
+    const [awayTeam, setAwayTeam] = useState();
+    const [cheerRate, setCheerRate] = useState();
+    const [isHome, setisHome] = useState(true);
+ 
+    useEffect(() => {
+   
+        axios({
+            method: "get", // [요청 타입]
+            url: process.env.REACT_APP_DB_HOST+`/cheering/info`, // [요청 주소]
+            params: {gamePk: 100}, // [요청 데이터]
+            headers: {
+                "Content-Type" : "application/x-www-form-urlencoded;"
+            }, // [요청 헤더]
+            timeout: 5000 // [타임 아웃 시간]
 
-    let rate = (secondTeam/totalScore)* 100;
+            //responseType: "json" // [응답 데이터 : stream , json]
+        })
+        .then(function(response) {
+           const resData = response.data.data;
+           console.log("ggg", resData);
+           setCheerScore({
+                homeName: resData.homeName,
+                awayName: resData.awayName,
+                homeCount: resData.homeCount,
+                awayCount: resData.awayCount,
+           });
+           
+           
+           setHomeTeam(cheerScore.homeCount);
+           setAwayTeam(cheerScore.awayCount);
+           setTotalScore(resData.homeCount + resData.awayCount);
+           console.log("ttt",totalScore)
+           
+           
+     
+        })
+        .catch(function(error) {
+            console.log("ERROR : " + JSON.stringify(error));
+        });
+    
+    }, []);
+
+
+    useEffect(()=> {
+        const rate = ((cheerScore.awayCount/totalScore) * 100);
+        setCheerRate(rate);
+
+        axios({
+            method: "put", // [요청 타입]
+            url: process.env.REACT_APP_DB_HOST+`/cheering`, // [요청 주소]
+            params: {gamePk: 100, isHome: isHome}, // [요청 데이터]
+            headers: {
+                "Content-Type" : "application/x-www-form-urlencoded;"
+            }, // [요청 헤더]
+            timeout: 5000 // [타임 아웃 시간]
+
+            //responseType: "json" // [응답 데이터 : stream , json]
+        })
+        .then(function(response) {
+
+
+            console.log("성공~~~");
+        })
+         .catch(function(error) {
+             console.log("ERROR : " + JSON.stringify(error));
+         });
+
+
+    }, [totalScore])
+
+        
     const scoreHandler = () => {
-        let rate = (secondTeam/totalScore)* 100;
-        console.log("비율", rate);
+        const rate = (awayTeam/totalScore)* 100;
+        setCheerRate(rate);
     }
     
-    const onCheer1TeamHandler = () => {
+    const onCheerHomeTeamHandler = () => {
+        setisHome(true);
         setTotalScore(totalScore + 1);
-        setFirstTeam(firstTeam + 1);
-        scoreHandler();
-        
+        setCheerScore(prev => ({
+            ...prev,
+            homeCount : prev.homeCount+1
+        }))
+        setHomeTeam(homeTeam + 1);
+        scoreHandler();   
     }
 
-    const onCheer2TeamHandler = () => {
+    const onCheerAwayTeamHandler = () => {
+        setisHome(false);
         setTotalScore(totalScore + 1);
-        setSecondTeam(secondTeam + 1);
-        scoreHandler();
-  
-       
+        setAwayTeam(awayTeam + 1);
+        setCheerScore(prev => ({
+            ...prev,
+            awayCount : prev.awayCount+1
+        }))
+        scoreHandler();   
     }
-
-
-    // useEffect(() => {
-        
-    //     setFirstTeam(cheerScore.team1);
-    //     setSecondTeam(cheerScore.team2);
-    //     setTotalScore(cheerScore.total);
-
-    // }, []);
-    // 원래는 위에 껀데 useEffect에 데이터가 없어서 일단 넣음
-    useEffect(() => {
-        
-        setFirstTeam(cheerScore.team1);
-        setSecondTeam(cheerScore.team2);
-        setTotalScore(cheerScore.total);
-
-    }, [cheerScore.team1,cheerScore.team2,cheerScore.total]);
-
-    useEffect(() => {
-
-        // axios.put()
-        // .then(function(result){
-        //     setCheerScore(result.data);
-        //   }).catch(function(err){
-        //     console.log(err);
-        //   });
-    }, [totalScore]);
-
     
     return (
 
-        <CheerContainer >
-            <LogoFirstTeam onClick={onCheer1TeamHandler} src={"/assets/teamlogo1.png"}  />
-            <span>{Math.round(100 -rate)}</span>
-            <LogoSecondTeam onClick={onCheer2TeamHandler} src={"/assets/teamlogo2.png"} />
-            <span>{Math.round(rate)}</span>
+
+        cheerRate !== null ? 
+            (
+            <CheerContainer >
+            <LogoFirstTeam onClick={onCheerHomeTeamHandler} src={"/assets/teamlogo1.png"}  />
+            <span>{cheerScore.homeName} </span>
+            <span>{Math.round(100 - cheerRate)} %</span>
+                <LogoSecondTeam onClick={onCheerAwayTeamHandler} src={"/assets/teamlogo2.png"} />
+            <span>{cheerScore.awayName} </span>
+            <span>{Math.round(cheerRate)} %</span>
             
             <BarContainer>
                 <ProgressBar>
-                    <Progress data = {rate} />
+                    <Progress data = {cheerRate} />
                 </ProgressBar>
             </BarContainer>
-
-
-
         </CheerContainer>
+        )
+        :
+        <div> 값을 불러오는 중입니다.</div>
+        
+        
+       
     )
 } 
 

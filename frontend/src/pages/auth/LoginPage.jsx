@@ -3,6 +3,10 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "./login-slice";
+import * as React from "react";
+import Modal from "@mui/material/Modal";
+import { ModalBox } from "../profile/MyProfilePage.style";
+import { tmppwd } from "./login-slice";
 // import { login, logout } from "./login-slice";
 
 // 로그인 기능 구현
@@ -14,6 +18,10 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [userEmail, setEmail] = useState("");
   const [userPassword, setPassword] = useState("");
+  const [tmpmail, setTmpmail] = useState("");
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   // 로그인 기능
   function loginSubmit(e) {
@@ -44,6 +52,22 @@ const LoginPage = () => {
   //   dispatch(logout());
   // }
 
+  // 임시비밀번호 발급
+  function tmpSendmail(e) {
+    e.preventDefault();
+    const data = {
+      email: tmpmail,
+    };
+    dispatch(tmppwd(data))
+      .unwrap()
+      .then((res) => {
+        console.log("성공");
+      })
+      .catch((err) => {
+        console.log("에러뜸");
+      });
+  }
+
   return (
     <LoginBox>
       <div class="imgbox">
@@ -71,7 +95,31 @@ const LoginPage = () => {
       </form>
       <FlexSpan>
         <div>비밀번호를 잊으셨나요?</div>
-        <a href="/findPwd">비밀번호 찾기</a>
+        <div onClick={handleOpen}>비밀번호 찾기</div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <ModalBox>
+            <div className="title">임시비밀번호 발급하기</div>
+            <div className="content">
+              <form onSubmit={(e) => tmpSendmail(e)}>
+                <span>이메일</span>
+                <input
+                  type="text"
+                  value={tmpmail}
+                  onChange={(e) => setTmpmail(e.target.value)}
+                />
+                <button onClick={(e) => tmpSendmail(e)}>발급하기</button>
+              </form>
+            </div>
+            <button className="change" onClick={handleClose}>
+              닫기
+            </button>
+          </ModalBox>
+        </Modal>
       </FlexSpan>
       <FlexSpan>
         <div>아직 회원이 아니신가요?</div>

@@ -17,34 +17,53 @@ import GameSchedule from "./pages/game/GameSchedule";
 import TeamComparison from "./pages/game/TeamComparison";
 import Navbar from "./components/navbar/Navbar";
 
+// import PrivateRoute from "./lib/PrivateRoute";
+// import PublicRoute from "./lib/PublicRoute";
+// import isAuthenticated from "./api/isAuthenticated";
+
 import GlobalStyle from "./styles/global";
+import AmdinNoticeDetail from "./components/admin_notice/AdminNoticeDetail";
 
 function App() {
+  //   // 로그인시 특정 페이지 막기
+  //   useEffect(() => {
+  //     const path = window.location.pathname;
+  //     console.log(isAuthenticated());
+  //     if (isAuthenticated() === false) {
+  //       if (path === "/playerdetail" || path === "/singup" || path === "/login") {
+  //         alert("로그인이 필요한 서비스입니다");
+  //         go("/login");
+  //       }
+  //     }
+  //   }, [window.location.pathname]);
+
   return (
-    <>
+    <BrowserRouter>
       <GlobalStyle />
       <Navbar />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/findPwd" element={<FindPWDPage />} />
-          <Route path="/myprofile" element={<MyProfilePage />} />
-          <Route path="/teamcustom" element={<TeamCustomPage />} />
-          <Route path="/teamdetail" element={<TeamDetailPage />} />
-          <Route path="/playerdetail" element={<PlayerDetailPage />} />
-          <Route path="/matchsimulation" element={<MatchSimultaionPage />} />
-          <Route path="/customsimultaion" element={<CustomSimulationPage />} />
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/simulation" element={<SimulationPage />} />
-          <Route path="/live" element={<LivePage />} />
-          <Route path="/gamehistory" element={<GameHistory />} />
-          <Route path="/gameschedule" element={<GameSchedule />} />
-          <Route path="/teamcomparison" element={<TeamComparison />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/findPwd" element={<FindPWDPage />} />
+        <Route path="/myprofile" element={<MyProfilePage />} />
+        <Route path="/teamcustom" element={<TeamCustomPage />} />
+        <Route path="/teamdetail" element={<TeamDetailPage />} />
+        <Route path="/playerdetail" element={<PlayerDetailPage />} />
+        <Route path="/matchsimulation" element={<MatchSimultaionPage />} />
+        <Route path="/customsimultaion" element={<CustomSimulationPage />} />
+
+        <Route path="/simulation" element={<SimulationPage />} />
+        <Route path="/live" element={<LivePage />} />
+        <Route path="/gamehistory" element={<GameHistory />} />
+        <Route path="/gameschedule" element={<GameSchedule />} />
+        <Route path="/teamcomparison" element={<TeamComparison />} />
+
+        {/* 관리자 페이지 */}
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/notice/:id" element={<AmdinNoticeDetail />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
