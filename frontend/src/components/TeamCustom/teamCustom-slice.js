@@ -25,6 +25,7 @@ export const getUserTeam = createAsyncThunk(
       });
       return res.data;
     } catch (err) {
+      console.log('겟팀 에러', email)
       return rejectWithValue(err.response);
     }
   }

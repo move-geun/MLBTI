@@ -20,8 +20,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPersonCirclePlus } from "@fortawesome/free-solid-svg-icons";
 const PlayerList = ({
   email,
-  isModifiedPlayer,
-  setIsModifiedPlayer,
+
   myTeam,
 }) => {
   const dispatch = useDispatch();
@@ -114,16 +113,15 @@ const PlayerList = ({
     // 내 팀에 같은 포지션의 선수가 있는지 확인할 변수
     const findSamePosition = myTeam.find(function (n) {
       return n.baseballPlayer.primaryPositionName === data.position;
-    })
+    });
 
-    if ( findSamePosition ) {
+    // 중복되는 선수가 있다면
+    if (findSamePosition) {
       alert(
         "해당 포지션의 선수가 이미 있습니다. 기존 선수를 방출 후 영입 해주십시오"
       );
     } else {
-      dispatch(registTeam(data))
-        .unwrap()
-        .then(setIsModifiedPlayer(!isModifiedPlayer));
+      dispatch(registTeam(data));
     }
   };
 
@@ -149,7 +147,7 @@ const PlayerList = ({
     filterdList = filterdList.filter((person) => person.position === position);
   }
 
-  // 선수 검색 버튼 클릭
+  // 선수 검색 버튼 클릭 | 드롭박스 필터 초기화
   const handleSearch = (e) => {
     const data = {
       name: userInput,
@@ -298,33 +296,36 @@ const PlayerList = ({
                 </PlyaerDetailWrapper>
               </List>
             ))
-          ) : <div className="noCondition"> 조건에 맞는 선수가 없습니다.</div> ) : isSearch ? (
-            searchRes.map((player, idx) => (
-              <List key={idx + 1000}>
-                <PlyaerName>{player.name}</PlyaerName>
-                <PlyaerDetailWrapper>
-                  <PlyaerDetail>{player.season}</PlyaerDetail>
-                  <PlyaerDetail>{player.league}</PlyaerDetail>
-                  <PlyaerDetail>{player.teamName}</PlyaerDetail>
-                  <PlyaerDetail>{player.position}</PlyaerDetail>
-                  {player.position === "P" ? (
-                    <PlyaerDetail>방어율: {player.indicator}</PlyaerDetail>
-                  ) : (
-                    <PlyaerDetail>타율: {player.indicator}</PlyaerDetail>
-                  )}
-                  <FontAwesomeIcon
-                    onClick={() => saveTeam({ player })}
-                    className="save"
-                    type="button"
-                    color="#139e3d"
-                    icon={faPersonCirclePlus}
-                  />
-                </PlyaerDetailWrapper>
-              </List>
-            ))
           ) : (
-            <div className="noCondition">조건을 선택해 주세요</div>
-          )}
+            <div className="noCondition"> 조건에 맞는 선수가 없습니다.</div>
+          )
+        ) : isSearch ? (
+          searchRes.map((player, idx) => (
+            <List key={idx + 1000}>
+              <PlyaerName>{player.name}</PlyaerName>
+              <PlyaerDetailWrapper>
+                <PlyaerDetail>{player.season}</PlyaerDetail>
+                <PlyaerDetail>{player.league}</PlyaerDetail>
+                <PlyaerDetail>{player.teamName}</PlyaerDetail>
+                <PlyaerDetail>{player.position}</PlyaerDetail>
+                {player.position === "P" ? (
+                  <PlyaerDetail>방어율: {player.indicator}</PlyaerDetail>
+                ) : (
+                  <PlyaerDetail>타율: {player.indicator}</PlyaerDetail>
+                )}
+                <FontAwesomeIcon
+                  onClick={() => saveTeam({ player })}
+                  className="save"
+                  type="button"
+                  color="#139e3d"
+                  icon={faPersonCirclePlus}
+                />
+              </PlyaerDetailWrapper>
+            </List>
+          ))
+        ) : (
+          <div className="noCondition">조건을 선택해 주세요</div>
+        )}
       </ListWrapper>
     </>
   );
