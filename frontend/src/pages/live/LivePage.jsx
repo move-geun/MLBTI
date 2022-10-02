@@ -35,7 +35,7 @@ const LivePage = () => {
 //   setCurrentTab(index);
 // }
 
-  
+  const test = 0;
 useEffect(() => {
   dispatch(playData())
     .unwrap()
@@ -45,7 +45,7 @@ useEffect(() => {
       inningsInfo(res.inngings);
 
     });
-}, []);
+}, [test]);
 
 
  function inningsInfo(data) {

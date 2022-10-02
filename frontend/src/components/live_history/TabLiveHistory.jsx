@@ -76,11 +76,11 @@ export default function TabLiveHistory(prop = defaultValue) {
     console.log("말 클릭함");
     setPlayStatus(false);
   };
-
+  const test = 0;
 
     useEffect(()=>{
         setValue(0);
-    }, []);
+    }, [test]);
 
     
     useEffect(()=>{
@@ -93,9 +93,9 @@ export default function TabLiveHistory(prop = defaultValue) {
         if(prop.livedata[0]){
           console.log("이닝길이", prop.livedata.length);
           setInningsLength(prop.livedata.length/2);
-            prop.livedata.map(inning => {
-                setInnings(previnnings => [...previnnings, inning]);
-            })           
+            prop.livedata.map(inning => 
+                (setInnings(previnnings => [...previnnings, inning]))
+            )           
         }
     }, [prop]);
 
@@ -108,7 +108,7 @@ export default function TabLiveHistory(prop = defaultValue) {
     }, [playStatus])
 
     useEffect(()=> {
-      // BatterInfoHandler(batterInfo);
+      BatterInfoHandler(batterInfo);
   },[batterInfo]);
 
     useEffect(()=> {
@@ -121,10 +121,9 @@ export default function TabLiveHistory(prop = defaultValue) {
         console.log("Ccccccc", value);
         let batterList = []; 
         innings.map(batter => {
-            if(batter.inning == value +1){
-                batterList.push(batter);
-
-            }      
+            if(batter.inning === value +1){
+                return batterList.push(batter);
+            }  
         }) 
        
         if(batterList.length !== 0){
@@ -169,7 +168,7 @@ const BatterInfoHandler = () => {
 
     }
 }
-let checkBallList = [];
+// let checkBallList = [];
  
   return (
     <Box sx={{ width: '100%' }}>

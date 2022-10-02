@@ -107,7 +107,7 @@ const MainPage = () => {
         console.log("어제어제 스케줄 불러오기 실패");
       });
   }
-
+  const test=0
   useEffect(() => {
     floatingNotice();
     floatingToday();
@@ -118,7 +118,7 @@ const MainPage = () => {
     // for (step = 0; step < res.data.length; step++) {
     //   setNotice([...notices, res.data[step]]);
     // }
-  }, [floatingNotice(),floatingToday(),,floatingYesterday(),todayFormal(),rank()]);
+  }, [test]);
 
   const settings = {
     dots: false,

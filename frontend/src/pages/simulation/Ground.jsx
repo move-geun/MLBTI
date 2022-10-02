@@ -12,9 +12,12 @@ const Ground = (prop) => {
 
     const [inningList, setInningList] = useState([]);
     // const [batterList, setBatterList] = useState([]);
-    const [firstBase, setFirstBase] = useState(false);
-    const [secondBase, setSecondBase]= useState(false);
-    const [thirdBase, setThirdBase] = useState(false);
+    // const [firstBase, setFirstBase] = useState(false);
+    const [firstBase] = useState(false);
+    // const [secondBase, setSecondBase]= useState(false);
+    const [secondBase]= useState(false);
+    // const [thirdBase, setThirdBase] = useState(false);
+    const [thirdBase] = useState(false);
 
     useEffect(()=>{
         if(prop.data !== null){
@@ -41,6 +44,7 @@ const Ground = (prop) => {
                     
                     
                 // })
+                return null;
             })
         }
     }, [inningList]);

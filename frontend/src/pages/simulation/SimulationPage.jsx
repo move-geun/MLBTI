@@ -11,23 +11,23 @@ const SimulationPage = () => {
   const dispatch = useDispatch();
   const [simulData, setSimulData] = useState({});
 
-
+  const test=0;
   useEffect(() => {
     dispatch(simulationData())
       .unwrap()
       .then((res) => {
         setSimulData(res);
         console.log("ressss ", res);
-  
+        return null;
       });
-  }, []);
+  }, [test]);
 
 
   useEffect(()=> {
     if(simulData.gamePk){
       makeInningsInfo();
     }
-  }, [simulData]);
+  }, [simulData,makeInningsInfo]);
 
   let innginglist = [];
   let batterlist = [];
@@ -38,6 +38,7 @@ const SimulationPage = () => {
       inning.datas.map(batter => {
           //  console.log("bbbaaattterrr   ", batter);
         batterlist.push(batter);
+        return null;
       })
       innginglist.push(inning);
     })

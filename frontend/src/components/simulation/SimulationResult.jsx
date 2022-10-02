@@ -31,27 +31,27 @@ const SimulationResult = (prop = defaultValue) => {
   const [inningInfo, setInningInfo] = useState([]);
   const [inningStatus, setInningStatus] = useState(true);
  
-  const [batterInfo, setBatterInfo] = useState();
-
+  // const [batterInfo, setBatterInfo] = useState();
+  
   useEffect(()=> {
     if(prop.data.gamePk){
         setInningList(prop.data.inngings);
     }
   }, [prop]);
-
+  const tmp =0;
   useEffect(()=>{  
     if(inningList.length > 0){
       InfoHandler();
     }
-  }, [inningList])
+  }, [inningList,InfoHandler])
 
   useEffect(()=> {
     InfoHandler();
-  }, [currentTab]);
+  }, [currentTab,InfoHandler]);
 
   useEffect(()=> {
     InfoHandler();
-  }, [inningStatus])
+  }, [inningStatus,InfoHandler])
 
 
   useEffect(()=> {
@@ -61,7 +61,7 @@ const SimulationResult = (prop = defaultValue) => {
     else {
       console.log("현재 이닝에는 값이 없습니다.")
     }
-  }, [inningInfo])
+  }, [inningInfo,ResultContent])
 
 
   // 한 이닝 값 전체를 핸들링
@@ -71,7 +71,7 @@ const SimulationResult = (prop = defaultValue) => {
       setInningInfo([]);
       let info = [];
       inningList.map(inning => {        
-        if(inning.inning == currentTab+1){
+        if(inning.inning === currentTab+1){
           info.push(inning);
             // setInningInfo(prev => [...prev, inning]);
         }
@@ -96,14 +96,14 @@ const SimulationResult = (prop = defaultValue) => {
   // 회 -> 초,말까지 선택한 후의 inning의 datas 가져오기
   const ResultContent = () => {
     setBatterList([]);
-    inningInfo.datas.map( batter =>{
+    inningInfo.datas.map((batter) =>{
       
       let batInfo = {
         batterName: batter.batterName,
         batterEvent : batter.event
       }
       setBatterList(prev => [...prev, batInfo]);
-     
+     return null;
     })
   
     
