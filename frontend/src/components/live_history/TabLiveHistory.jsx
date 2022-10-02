@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import {
   StatusBtn, BatContainer, BatterContainer, 
   Batter, BatterResult, BatterResultList, 
-  // CircleStrike, CircleBall, CircleSwing,
+  CircleStrike, CircleBall, CircleSwing,
 } from "./LiveHistory.style";
 
 function TabPanel(props) {
@@ -60,8 +60,7 @@ export default function TabLiveHistory(prop = defaultValue) {
 //   const[batterList, setBatterList] = useState([]);
   const[batterInfo, setBatterInfo] = useState([]);
   const[playStatus, setPlayStatus] = useState(true);
-  // const[inningsLength, setInningsLength] = useState();
-  const[ setInningsLength] = useState();
+  const[inningsLength, setInningsLength] = useState();
   
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -76,11 +75,11 @@ export default function TabLiveHistory(prop = defaultValue) {
     console.log("말 클릭함");
     setPlayStatus(false);
   };
-  const test = 0;
+
 
     useEffect(()=>{
         setValue(0);
-    }, [test]);
+    }, []);
 
     
     useEffect(()=>{
@@ -93,9 +92,9 @@ export default function TabLiveHistory(prop = defaultValue) {
         if(prop.livedata[0]){
           console.log("이닝길이", prop.livedata.length);
           setInningsLength(prop.livedata.length/2);
-            prop.livedata.map(inning => 
-                (setInnings(previnnings => [...previnnings, inning]))
-            )           
+            prop.livedata.map(inning => {
+                setInnings(previnnings => [...previnnings, inning]);
+            })           
         }
     }, [prop]);
 
@@ -108,7 +107,7 @@ export default function TabLiveHistory(prop = defaultValue) {
     }, [playStatus])
 
     useEffect(()=> {
-      BatterInfoHandler(batterInfo);
+      // BatterInfoHandler(batterInfo);
   },[batterInfo]);
 
     useEffect(()=> {
@@ -121,9 +120,10 @@ export default function TabLiveHistory(prop = defaultValue) {
         console.log("Ccccccc", value);
         let batterList = []; 
         innings.map(batter => {
-            if(batter.inning === value +1){
-                return batterList.push(batter);
-            }  
+            if(batter.inning == value +1){
+                batterList.push(batter);
+
+            }      
         }) 
        
         if(batterList.length !== 0){
@@ -151,9 +151,9 @@ const ContentTabValue = (batterList) => {
 }
 
 
-// const [firstBase, setFirstBase] = useState(false);
-// const [secondBase, setSecondeBase] = useState(false);
-// const [thirdBase, setThirdBase] = useState(false);
+const [firstBase, setFirstBase] = useState(false);
+const [secondBase, setSecondeBase] = useState(false);
+const [thirdBase, setThirdBase] = useState(false);
 
 
 const BatterInfoHandler = () => {
@@ -168,7 +168,7 @@ const BatterInfoHandler = () => {
 
     }
 }
-// let checkBallList = [];
+let checkBallList = [];
  
   return (
     <Box sx={{ width: '100%' }}>

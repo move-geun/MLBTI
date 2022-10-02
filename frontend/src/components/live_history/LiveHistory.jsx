@@ -12,7 +12,7 @@ const LiveHistory = (prop = defaultValue) => {
     useEffect(()=> {
       if(prop.livedata.gamePk){
         const keys = Object.keys(prop.livedata.inngings);
-        // const value = [];
+        const value = [];
 
         for(let i = 0; i < keys.length; i++){
           const key = keys[i];

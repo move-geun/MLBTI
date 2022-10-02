@@ -1,20 +1,20 @@
-import React, { useState} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Overlay,
   ModalWrap,
   Button,
   Contents,
-  // CloseButton,
+  CloseButton,
 } from "./ModifiedModal.style";
 import { SearchDiv } from "../../pages/team/TeamCustomPage.style";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux/es/exports";
 import { modifiedTeamName } from "./teamCustom-slice";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function ModifiedModal({ userInfo, onClose, isChangeName, setIsChangeName }) {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [newName, setNewName] = useState("");
 
   // 모달 닫기

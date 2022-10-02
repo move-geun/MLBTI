@@ -40,8 +40,7 @@ export const registTeam = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       alert("선수가 추가 되었습니다.");
-      // const res = await http.auth_axios.post("/user_team", data);
-      await http.auth_axios.post("/user_team", data);
+      const res = await http.auth_axios.post("/user_team", data);
     } catch (err) {
       return rejectWithValue(err.resposne);
     }
@@ -86,8 +85,7 @@ export const modifiedTeamName = createAsyncThunk(
   "MODIFIED_TEAM_NAME",
   async (data, { rejectWithValue }) => {
     try {
-      // const res = await http.auth_axios.put("/user/teamName",null, {params: {email: data.email, newTeamName: data.newTeamName}});
-      await http.auth_axios.put("/user/teamName",null, {params: {email: data.email, newTeamName: data.newTeamName}});
+      const res = await http.auth_axios.put("/user/teamName",null, {params: {email: data.email, newTeamName: data.newTeamName}});
       console.log('성공인가')
     } catch (err) {
       return rejectWithValue(err.response)

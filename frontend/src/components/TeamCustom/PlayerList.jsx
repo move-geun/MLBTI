@@ -80,19 +80,18 @@ const PlayerList = ({
 
         // 선수마다 가지고 있는, 조건이 될 정보 뽑아오기
         res.data.map((item, idx) => {
-          console.log(idx)
-          if (!yearData.includes(item.season) && item.season !== null) 
-            return yearData.push(parseInt(item.season));
-          
-          if (!leagueData.includes(item.league) && item.league !== null) 
-            return leagueData.push(item.league);
-          
-          if (!teamData.includes(item.teamName) && item.teamName !== null) 
-            return teamData.push(item.teamName);
-          
-          if (!positionData.includes(item.position) && item.position !== null)
-            return positionData.push(item.position);
-          
+          if (!yearData.includes(item.season) && item.season !== null) {
+            yearData.push(parseInt(item.season));
+          }
+          if (!leagueData.includes(item.league) && item.league !== null) {
+            leagueData.push(item.league);
+          }
+          if (!teamData.includes(item.teamName) && item.teamName !== null) {
+            teamData.push(item.teamName);
+          }
+          if (!positionData.includes(item.position) && item.position !== null) {
+            positionData.push(item.position);
+          }
         });
 
         // 조건 리스트 filter 목록에 담기
@@ -101,7 +100,7 @@ const PlayerList = ({
         setTeamFilter(teamData);
         setPositionFilter(positionData);
       });
-  }, [dispatch]);
+  }, []);
 
   // 내 팀에 선수 추가
   const saveTeam = ({ player }) => {

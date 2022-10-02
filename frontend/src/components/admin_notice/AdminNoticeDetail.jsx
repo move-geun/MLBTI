@@ -1,5 +1,5 @@
 import { useLocation, useNavigate} from "react-router-dom";
-import React, {useState } from 'react';
+import React, {useState ,useEffect} from 'react';
 import {
     ModifyBtn,
     DeleteBtn,
@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 
 const AmdinNoticeDetail = ({prop}) => {
     
-    const [ data ] = useState({});
+    const [ data, setData ] = useState({});
     const location = useLocation();
     const notice = location.state;
     console.log("디데일페이지   ", notice);

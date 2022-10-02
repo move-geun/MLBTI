@@ -5,7 +5,7 @@ import {
   Header,
   CenterWrapper,
   MyteamWrapper,
-  // Nickname,
+  Nickname,
   CustomTeamName,
   EditBtn,
 } from "./TeamCustomPage.style";
@@ -51,7 +51,6 @@ const TeamCustomPage = () => {
         setUserInfo(res.data);
       });
   }, [isChangeName]);
-
 
   // 구단 명 수정 모달 띄우기
   const onCreate = () => {

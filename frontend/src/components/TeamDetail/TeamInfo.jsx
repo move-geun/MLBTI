@@ -1,4 +1,4 @@
-// import { useScrollTrigger } from "@mui/material";
+import { useScrollTrigger } from "@mui/material";
 import React, { useState } from "react";
 import { useEffect } from "react";
 // import styled from "styled-components";
@@ -8,13 +8,13 @@ import { Wrapper, Logo, InfoWrapper, Info, LogoDiv } from "./TeamInfo.style";
 const TeamInfo = (props) => {
 
   console.log("TeamInfo   ", props.data);
-  var test = 0;
+
   const[teamInfo, setTeamInfo] = useState({});
 
   useEffect(()=> {
     setTeamInfo(props.data);
     console.log("첫번째");
-  }, [test]);
+  }, []);
 
   useEffect(()=> {
     console.log("두번째");

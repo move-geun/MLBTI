@@ -1,7 +1,7 @@
 // import { useEffect, useImperativeHandle } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-// import axios from "../../api/http";
+import axios from "../../api/http";
 
 
 import {
@@ -50,8 +50,7 @@ const dispatch = useDispatch();
 
 
     const onSendComments = ((e) => {
-        // const deleteContent = typingComments.trim() === "";
-        //const tmp = typingComments.trim() === "";
+        const deleteContent = typingComments.trim() === "";
         e.preventDefault();
         const obj2 = {};
         obj2.csendTosId = userEmail;
@@ -62,7 +61,7 @@ const dispatch = useDispatch();
       
     })
 
-    const test = 0;
+    
     useEffect(()=> {
         webSocket.onopen = function(){
             console.log("서버와 웹소켓 연결 성공");
@@ -71,7 +70,7 @@ const dispatch = useDispatch();
             console.log("Resssssss ", res);
             setUserEmail(res.data.userId);
         })
-    }, [test]);
+    }, []);
 
 
 

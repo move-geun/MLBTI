@@ -12,7 +12,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Modal from '../Modal/Modal';
-import {  NoticeTableContainer, CreateBtn} from "./NoticeTable.style";
+import { Notice, NoticeBox, NoticeTableContainer, CreateBtn} from "./NoticeTable.style";
 
 
 const AmdinNotice = () => {

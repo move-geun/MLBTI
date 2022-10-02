@@ -35,7 +35,7 @@ const Cheer = () => {
     const [awayTeam, setAwayTeam] = useState();
     const [cheerRate, setCheerRate] = useState();
     const [isHome, setisHome] = useState(true);
-    var test = 0;
+ 
     useEffect(() => {
    
         axios({
@@ -59,16 +59,20 @@ const Cheer = () => {
                 awayCount: resData.awayCount,
            });
            
+           
            setHomeTeam(cheerScore.homeCount);
            setAwayTeam(cheerScore.awayCount);
            setTotalScore(resData.homeCount + resData.awayCount);
            console.log("ttt",totalScore)
+           
+           
+     
         })
         .catch(function(error) {
             console.log("ERROR : " + JSON.stringify(error));
         });
     
-    }, [test]);
+    }, []);
 
 
     useEffect(()=> {

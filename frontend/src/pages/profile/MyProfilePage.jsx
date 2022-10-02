@@ -80,10 +80,9 @@ const MyProfilePage = () => {
 
   useEffect(() => {
     getInfo();
-  }, [getInfo]);
+  }, []);
 
   // 유저 정보 받아오기
-  const test = 0;
   useEffect(() => {
     dispatch(myprofile())
       .unwrap()
@@ -97,7 +96,7 @@ const MyProfilePage = () => {
         }
       })
       .catch((err) => alert("오류"));
-  }, [test]);
+  }, []);
 
   return (
     <PageContainer>
