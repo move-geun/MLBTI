@@ -26,11 +26,13 @@ const TeamCoposition = ({ userInfo, myTeam }) => {
     dispatch(deletePlayer(data.uid));
   };
 
+  const imgUrl = "/assets/smallGround.png"
+  
   return (
     <CompositionWrapper>
       <Header>
         <MyNickname>{userInfo["teamName"]}</MyNickname>
-        <p>의 전력</p>
+        <p>의 전력</p> <img className="mark" alt="mark" src={imgUrl}></img>
       </Header>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
