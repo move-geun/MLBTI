@@ -39,8 +39,8 @@ const Player = styled.div`
       left: 16rem;
     }
     @media screen and (max-width: 480px) {
-      width: 250px;
-      height: 250px;
+      top: 6.5rem;
+      left: 11.5rem;
     }
   }
   
@@ -53,8 +53,8 @@ const Player = styled.div`
       left: 13rem;
     }
     @media screen and (max-width: 480px) {
-      width: 250px;
-      height: 250px;
+      top: 3.5rem;
+      left: 10rem;
     }
   }
   &.TB {
@@ -66,8 +66,8 @@ const Player = styled.div`
       left: 3.6rem;
     }
     @media screen and (max-width: 480px) {
-      width: 250px;
-      height: 250px;
+      top: 6.5rem;
+      left: 2.5rem;
     }
   }
 
@@ -80,8 +80,8 @@ const Player = styled.div`
       left: 6rem;
     }
     @media screen and (max-width: 480px) {
-      width: 250px;
-      height: 250px;
+      top: 3.5rem;
+      left: 4.3rem;
     }
   }
   &.LF {
@@ -93,8 +93,8 @@ const Player = styled.div`
       left: 2rem;
     }
     @media screen and (max-width: 480px) {
-      width: 250px;
-      height: 250px;
+      top: 3rem;
+      left: 1.5rem;
     }
   }
   &.CF {
@@ -106,8 +106,8 @@ const Player = styled.div`
       left: 9.5rem;
     }
     @media screen and (max-width: 480px) {
-      width: 250px;
-      height: 250px;
+      top: 0.5rem;
+      left: 6.9rem;
     }
   }
   &.RF {
@@ -119,8 +119,8 @@ const Player = styled.div`
       left: 17rem;
     }
     @media screen and (max-width: 480px) {
-      width: 250px;
-      height: 250px;
+      top: 3rem;
+      left: 12.5rem;
     }
   }
   &.P {
@@ -132,8 +132,8 @@ const Player = styled.div`
       left: 9.7rem;
     }
     @media screen and (max-width: 480px) {
-      width: 250px;
-      height: 250px;
+      top: 6.6rem;
+      left: 6.9rem;
     }
   }
 
@@ -146,8 +146,8 @@ const Player = styled.div`
       left: 9.7rem;
     }
     @media screen and (max-width: 480px) {
-      width: 250px;
-      height: 250px;
+      top: 11.5rem;
+      left: 6.9rem;
     }
   }
   

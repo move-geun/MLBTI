@@ -57,6 +57,9 @@ const Ground = ({ myTeam }) => {
           ) : null
         )} */}
 
+        <Player className="FB"> 
+          <Img className="img" src={"/assets/shortStop3.png"}></Img>
+        </Player>
         <Player className="TB"> 
           <Img className="img" src={"/assets/shortStop3.png"}></Img>
         </Player>
