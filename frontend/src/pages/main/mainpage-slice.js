@@ -53,6 +53,26 @@ export const getYesterday = createAsyncThunk(
   }
 );
 
+export const getrank = createAsyncThunk(
+  "GETRANK",
+  async (data, { rejectWithValue }) => {
+    try {
+      const params = {
+        date: data.day,
+        leagueCode: 200,
+      };
+      const res = await http.axios.get("/rank", {
+        params,
+      });
+      console.log(res.data.data);
+      return res.data.data;
+    } catch (err) {
+      alert("랭크 불러오기 실패");
+      return rejectWithValue(err.response);
+    }
+  }
+);
+
 const initialState = {
   notices: [],
   todays: [],

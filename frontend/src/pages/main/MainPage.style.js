@@ -161,6 +161,16 @@ const Rank = styled.div`
   flex-direction: column;
   font-size: 1rem;
 
+  .title {
+    margin-bottom: 5px;
+  }
+  .divide {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
   @media screen and (max-width: 830px) {
     font-size: 1rem;
     border-right: none;

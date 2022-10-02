@@ -10,7 +10,7 @@ import {
 } from "./MainPage.style";
 
 import { Link } from "react-router-dom";
-import { getNotice, getToday } from "./mainpage-slice";
+import { getNotice, getToday, getrank } from "./mainpage-slice";
 
 // 시뮬레이션 스켈레톤용
 import * as React from "react";
@@ -95,12 +95,25 @@ const MainPage = () => {
         console.log("어제어제 스케줄 불러오기 실패");
       });
   }
+  // 서부 랭크 받아오기
+  function rank() {
+    const data = {
+      day: todayFormal(),
+    };
+    dispatch(getrank(data))
+      .unwrap()
+      .then((res) => {})
+      .catch((err) => {
+        console.log("어제어제 스케줄 불러오기 실패");
+      });
+  }
 
   useEffect(() => {
     floatingNotice();
     floatingToday();
     floatingYesterday();
     todayFormal();
+    rank();
     // let step = 0;
     // for (step = 0; step < res.data.length; step++) {
     //   setNotice([...notices, res.data[step]]);
@@ -204,6 +217,10 @@ const MainPage = () => {
           </Today>
           <Rank>
             <div className="title">[팀 순위]</div>
+            <div className="divide">
+              <div>내셔널 리그</div>
+              <div>아메리칸 리그</div>
+            </div>
           </Rank>
         </CheckBox>
       </Main>
