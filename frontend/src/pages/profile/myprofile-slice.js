@@ -39,6 +39,7 @@ export const changeTeamName = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const res = await http.auth_axios.put("/user/teamName", null, {
+
         params: {
           email: data.email,
           newTeamName: data.newTeamName,

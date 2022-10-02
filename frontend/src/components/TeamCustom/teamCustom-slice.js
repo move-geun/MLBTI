@@ -1,5 +1,7 @@
 import http from "../../api/http";
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
 
 // GET - MLB 선수 목록
 export const getPlayer = createAsyncThunk(
@@ -9,6 +11,7 @@ export const getPlayer = createAsyncThunk(
       const res = await http.axios.get("/allPlayers/list");
 
       return res.data;
+
     } catch (err) {
       return rejectWithValue(err.resposne);
     }
@@ -64,8 +67,10 @@ export const searchPlayer = createAsyncThunk(
   "SEARCH_PLAYER",
   async (data, {rejectWithValue}) => {
     try {
+
       const res = await http.auth_axios.get('allPlayers', {params : {searchName: data.name}})
       return res.data
+
     } catch (err) {
       return rejectWithValue(err.response)
     }
