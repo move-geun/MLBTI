@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Background, Img, ImgDiv, Player } from "./Ground.style";
+import { Background, Img, ImgDiv, Player, Nickname } from "./Ground.style";
 
-const Ground = ({ myTeam }) => {
+const Ground = ({ myTeam, userInfo }) => {
   if (myTeam.length !== 0) {
     let cnt = 0;
     myTeam.map((item) =>
@@ -11,13 +11,14 @@ const Ground = ({ myTeam }) => {
         : null
     );
   }
+  
 
   return myTeam ? (
     <Background>
       <ImgDiv>
         <Img className="ground" src={"/assets/Ground.png"}></Img>
 
-        {/* {myTeam.map((player) =>
+        {myTeam.map((player) =>
           player.baseballPlayer.primaryPositionName === "First Base" ? (
             <Player className="FB">
               <Img className="img" src={"/assets/shortStop3.png"}></Img>
@@ -55,9 +56,9 @@ const Ground = ({ myTeam }) => {
               <Img className="img" src={"/assets/catcher.png"}></Img>
             </Player>
           ) : null
-        )} */}
+        )}
 
-        <Player className="FB"> 
+        {/* <Player className="FB"> 
           <Img className="img" src={"/assets/shortStop3.png"}></Img>
         </Player>
         <Player className="TB"> 
@@ -83,8 +84,9 @@ const Ground = ({ myTeam }) => {
         </Player>
         <Player className="P">
           <Img className="img" src={"/assets/pitcher3.png"}></Img>
-        </Player>
+        </Player> */}
       </ImgDiv>
+      <Nickname>{userInfo.nickname} 님의 구단</Nickname>
     </Background>
   ) : null;
 };

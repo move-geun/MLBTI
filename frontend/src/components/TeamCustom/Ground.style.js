@@ -16,6 +16,7 @@ const ImgDiv = styled.div`
 
 const Img = styled.img`
   &.ground {
+    
     width: 450px;
     height: 450px;
 
@@ -29,6 +30,13 @@ const Img = styled.img`
     }
   }
 `;
+
+
+const Nickname = styled.div`
+  font-size: 2rem;
+  padding-left: 1rem;
+`
+
 const Player = styled.div`
   &.FB {
     position: absolute;
@@ -166,4 +174,4 @@ const Player = styled.div`
   }
 `;
 
-export { Background, Img, ImgDiv, Player };
+export { Background, Img, ImgDiv, Player, Nickname };

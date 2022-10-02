@@ -8,12 +8,27 @@ const Background = styled.div`
   flex-direction: column;
   width: 100vw;
   height: 100vh;
+  
+  .header {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin: 1rem 0 0 5rem;
+    
+  }
+
+  img {
+    width: 35px;
+    height: 35px;
+    padding-left: 1rem;
+  }
 `
 
 const Header = styled.div`
-  font-size: 20px;
-  margin-top: 1rem;
-  width: 100%;
+    text-align: left;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #2565d0;
+    font-size: 1.5rem;
 `
 
 const CenterWrapper = styled.div`

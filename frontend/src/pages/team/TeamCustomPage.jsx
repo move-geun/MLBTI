@@ -57,13 +57,18 @@ const TeamCustomPage = () => {
     setIsOpen(true);
   };
 
+  
+
   return (
     <Background>
-      <Header>My team 구성하기</Header>
+      <div className="header">
+        <Header>My team 구성하기</Header>
+        
+      </div>
       <CenterWrapper>
         {/* 왼쪽 박스 */}
         <MyteamWrapper>
-          <Nickname>{userInfo["nickname"]} 님의 구단</Nickname>
+          {/* <Nickname>{userInfo["nickname"]} 님의 구단</Nickname> */}
           <CustomTeamName>
             {userInfo["teamName"]}
             <EditBtn onClick={onCreate} />
@@ -82,7 +87,7 @@ const TeamCustomPage = () => {
           <PlayerList email={userInfo["userId"]} myTeam={myTeam} />
         </MyteamWrapper>
         {/* 오른쪽 박스 */}
-        <Ground myTeam={myTeam} />
+        <Ground myTeam={myTeam} userInfo={userInfo} />
       </CenterWrapper>
 
       {/* 팀 전력 */}
