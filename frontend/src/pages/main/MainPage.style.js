@@ -84,6 +84,11 @@ const SimulationCase = styled.div`
   div {
     width: 48%;
   }
+
+  img {
+    height: 330px;
+    width: 100%;
+  }
 `;
 
 const CheckBox = styled.div`
@@ -111,17 +116,18 @@ const Predict = styled.div`
   border-left: 2px solid rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
+  font-size: 1rem;
 
   .content {
     margin-bottom: 5px;
   }
 
   @media screen and (max-width: 830px) {
-    font-size: 1rem;
+    font-size: 0.8rem;
     border-left: none;
   }
   @media screen and (max-width: 480px) {
-    font-size: 0.625rem;
+    font-size: 0.5rem;
   }
 `;
 
@@ -132,18 +138,18 @@ const Today = styled.div`
   border-right: 2px solid rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-
+  font-size: 1rem;
   .content {
     margin-bottom: 5px;
   }
 
   @media screen and (max-width: 830px) {
-    font-size: 1rem;
+    font-size: 0.8rem;
     border-left: none;
     border-right: none;
   }
   @media screen and (max-width: 480px) {
-    font-size: 0.625rem;
+    font-size: 0.5rem;
   }
 `;
 
@@ -153,6 +159,7 @@ const Rank = styled.div`
   border-right: 2px solid rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
+  font-size: 1rem;
 
   @media screen and (max-width: 830px) {
     font-size: 1rem;

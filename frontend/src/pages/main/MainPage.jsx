@@ -29,6 +29,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const MainPage = () => {
   const notices = useSelector((state) => state.main.notices);
+  const todays = useSelector((state) => state.main.todays);
+  const yesterdays = useSelector((state) => state.main.yesterdays);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -36,6 +38,27 @@ const MainPage = () => {
     setOpen(false);
   };
   // const [notices, setNotices] = useState();
+
+  // 오늘 날짜 구하기
+  const todayFormal = () => {
+    let now = new Date();
+    let year = now.getFullYear();
+    let month =
+      now.getMonth() + 1 > 9 ? now.getMonth() + 1 : "0" + (now.getMonth() + 1);
+    let day = now.getDate() > 9 ? now.getDate() : "0" + now.getDate();
+    return String(year) + String(month) + day;
+  };
+
+  // 어제 날짜 구하기
+  const yesterdayFormal = () => {
+    let now = new Date();
+    let year = now.getFullYear();
+    let month =
+      now.getMonth() + 1 > 9 ? now.getMonth() + 1 : "0" + (now.getMonth() + 1);
+    let day =
+      now.getDate() - 1 > 9 ? now.getDate() - 1 : "0" + (now.getDate() - 1);
+    return String(year) + String(month) + String(day);
+  };
 
   const dispatch = useDispatch();
   function floatingNotice() {
@@ -46,9 +69,11 @@ const MainPage = () => {
         console.log("공지 불러오기 실패");
       });
   }
+
+  // 오늘 경기 스케줄
   function floatingToday() {
     const data = {
-      day: 20220930,
+      day: todayFormal(),
     };
     dispatch(getToday(data))
       .unwrap()
@@ -58,9 +83,24 @@ const MainPage = () => {
       });
   }
 
+  // 어제 경기 스케줄
+  function floatingYesterday() {
+    const data = {
+      day: yesterdayFormal(),
+    };
+    dispatch(getToday(data))
+      .unwrap()
+      .then((res) => {})
+      .catch((err) => {
+        console.log("어제어제 스케줄 불러오기 실패");
+      });
+  }
+
   useEffect(() => {
     floatingNotice();
     floatingToday();
+    floatingYesterday();
+    todayFormal();
     // let step = 0;
     // for (step = 0; step < res.data.length; step++) {
     //   setNotice([...notices, res.data[step]]);
@@ -137,7 +177,7 @@ const MainPage = () => {
         </Notice>
         <SimulationCase>
           <div className="Main">
-            <Skeleton variant="rectangular" height={330} />
+            <img className="main_simul" src="../assets/Ground.png" alt="" />
           </div>
           <div className="Sub">
             <Skeleton className="skel" variant="rectangular" height={100} />
@@ -148,25 +188,19 @@ const MainPage = () => {
         <CheckBox>
           <Predict>
             <div className="title">[ 어제 경기 결과 ]</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
+            {yesterdays.map((yesterday, idx) => (
+              <div key={idx} className="content">
+                {yesterday.awayName} vs {yesterday.homeName}
+              </div>
+            ))}
           </Predict>
           <Today>
             <div className="title">[ 오늘 경기 일정 ]</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
+            {todays.map((today, idx) => (
+              <div key={idx} className="content">
+                {today.awayName} vs {today.homeName}
+              </div>
+            ))}
           </Today>
           <Rank>
             <div className="title">[팀 순위]</div>
@@ -190,7 +224,7 @@ const MainPage = () => {
         </Notice>
         <SimulationCase>
           <div className="Main">
-            <Skeleton variant="rectangular" height={330} />
+            <img className="main_simul" src="../assets/Ground.png" alt="" />
           </div>
           <div className="Sub">
             <Skeleton className="skel" variant="rectangular" height={100} />
@@ -201,25 +235,19 @@ const MainPage = () => {
         <DownChart {...downsettings}>
           <Predict>
             <div className="title">[ 어제 경기 결과 ]</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
+            {yesterdays.map((yesterday, idx) => (
+              <div key={idx} className="content">
+                {yesterday.awayName} vs {yesterday.homeName}
+              </div>
+            ))}
           </Predict>
           <Today>
             <div className="title">[ 오늘 경기 일정 ]</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
+            {todays.map((today, idx) => (
+              <div key={idx} className="content">
+                {today.awayName} vs {today.homeName}
+              </div>
+            ))}
           </Today>
           <Rank>
             <div className="title">[팀 순위]</div>
@@ -242,32 +270,24 @@ const MainPage = () => {
           )}
         </Notice>
         <SimulationCase>
-          <div className="Main">
-            <Skeleton variant="rectangular" width={372} height={330} />
-          </div>
+          <img className="main_simul" src="../assets/Ground.png" alt="" />
         </SimulationCase>
         <DownChart {...downsettings}>
           <Predict>
             <div className="title">[ 어제 경기 결과 ]</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
+            {yesterdays.map((yesterday, idx) => (
+              <div key={idx} className="content">
+                {yesterday.awayName} vs {yesterday.homeName}
+              </div>
+            ))}
           </Predict>
           <Today>
             <div className="title">[ 오늘 경기 일정 ]</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
-            <div className="content">애리조나 5 : 0 샌디에고</div>
+            {todays.map((today, idx) => (
+              <div key={idx} className="content">
+                {today.awayName} vs {today.homeName}
+              </div>
+            ))}
           </Today>
           <Rank>
             <div className="title">[팀 순위]</div>
