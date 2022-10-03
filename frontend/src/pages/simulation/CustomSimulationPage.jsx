@@ -112,6 +112,14 @@ const CustomSimulationPage = () => {
       });
   }, [getNational]);
 
+  // 팀 설정 안했을 시 페이지 이동 막기 
+  const isSelectedTeams = (event) => {
+    if ( selectHome.length === 0 || selectAway.length === 0 ) {
+      event.preventDefault();
+      alert("두 팀 모두 선택해 주세요")
+    } 
+  }
+
   return (
     <CustomConatiner>
       <Header>매치업 설정하기</Header>
@@ -144,7 +152,7 @@ const CustomSimulationPage = () => {
               <br />
               <br />
               <div className="team">
-                팀
+                팀 검색
                 <div>
                   <input
                     type="text"
@@ -237,7 +245,7 @@ const CustomSimulationPage = () => {
               <br />
               <br />
               <div className="team">
-                팀
+                팀 검색
                 <div>
                   <input
                     value={userInput}
@@ -304,9 +312,10 @@ const CustomSimulationPage = () => {
         to={"/simulation"}
         state={{ home: selectHome, away: selectAway }}
         style={{ textDecoration: "none", color: "black" }}
+        onClick={isSelectedTeams}
       >
         <div className="start" onMouseOver={() => setIsImgHover(true)} onMouseOut={() => setIsImgHover(false)} >
-          <img src={isImgHover ? startImg1 : startImg2 } alt="시작아이콘..이었던것" />
+          <img src={isImgHover ? startImg1 : startImg2 } alt="시뮬레이션 시작" />
           <span>시뮬레이션 시작</span>
         </div>
       </Link>
