@@ -45,6 +45,11 @@ const CustomSimulationPage = () => {
   const [nationalSearchList, setNationalSearchList] = useState([]);
   const [americanSearchList, setAmericanSearchList] = useState([]);
 
+  // 마우스 오버 변수 (이미지 변환)
+  const [isImgHover, setIsImgHover] = useState(false);
+  const startImg1 = "/assets/simulationStart.png"
+  const startImg2 = "/assets/simulationStart2.png"
+
   // 입력값 변경 이벤트
   const handleInput = (e) => {
     setUserInput(e.target.value);
@@ -133,8 +138,7 @@ const CustomSimulationPage = () => {
             open={open}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
+            aria-describedby="modal-modal-description">
             <ModalBox>
               <div className="title">홈팀 선택하기</div>
               <br />
@@ -301,8 +305,8 @@ const CustomSimulationPage = () => {
         state={{ home: selectHome, away: selectAway }}
         style={{ textDecoration: "none", color: "black" }}
       >
-        <div className="start">
-          <img src="/assets/simulationStart.png" alt="시작아이콘..이었던것" />
+        <div className="start" onMouseOver={() => setIsImgHover(true)} onMouseOut={() => setIsImgHover(false)} >
+          <img src={isImgHover ? startImg1 : startImg2 } alt="시작아이콘..이었던것" />
           <span>시뮬레이션 시작</span>
         </div>
       </Link>
