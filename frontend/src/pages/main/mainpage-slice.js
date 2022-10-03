@@ -53,7 +53,8 @@ export const getYesterday = createAsyncThunk(
   }
 );
 
-export const getrank = createAsyncThunk(
+// 아메리카 서부리그
+export const getAWrank = createAsyncThunk(
   "GETRANK",
   async (data, { rejectWithValue }) => {
     try {
@@ -64,7 +65,44 @@ export const getrank = createAsyncThunk(
       const res = await http.axios.get("/rank", {
         params,
       });
-      console.log(res.data.data);
+      return res.data.data;
+    } catch (err) {
+      alert("랭크 불러오기 실패");
+      return rejectWithValue(err.response);
+    }
+  }
+);
+// 아메리카 동부리그
+export const getAErank = createAsyncThunk(
+  "GETRANK",
+  async (data, { rejectWithValue }) => {
+    try {
+      const params = {
+        date: data.day,
+        leagueCode: 201,
+      };
+      const res = await http.axios.get("/rank", {
+        params,
+      });
+      return res.data.data;
+    } catch (err) {
+      alert("랭크 불러오기 실패");
+      return rejectWithValue(err.response);
+    }
+  }
+);
+// 아메리카 중부리그
+export const getAMrank = createAsyncThunk(
+  "GETRANK",
+  async (data, { rejectWithValue }) => {
+    try {
+      const params = {
+        date: data.day,
+        leagueCode: 202,
+      };
+      const res = await http.axios.get("/rank", {
+        params,
+      });
       return res.data.data;
     } catch (err) {
       alert("랭크 불러오기 실패");
@@ -73,10 +111,74 @@ export const getrank = createAsyncThunk(
   }
 );
 
+// 네셔널 서부리그
+export const getNWrank = createAsyncThunk(
+  "GETRANK",
+  async (data, { rejectWithValue }) => {
+    try {
+      const params = {
+        date: data.day,
+        leagueCode: 203,
+      };
+      const res = await http.axios.get("/rank", {
+        params,
+      });
+      return res.data.data;
+    } catch (err) {
+      alert("랭크 불러오기 실패");
+      return rejectWithValue(err.response);
+    }
+  }
+);
+
+// 네셔널 동부리그
+export const getNErank = createAsyncThunk(
+  "GETRANK",
+  async (data, { rejectWithValue }) => {
+    try {
+      const params = {
+        date: data.day,
+        leagueCode: 204,
+      };
+      const res = await http.axios.get("/rank", {
+        params,
+      });
+      return res.data.data;
+    } catch (err) {
+      alert("랭크 불러오기 실패");
+      return rejectWithValue(err.response);
+    }
+  }
+);
+// 네셔널 서부리그
+export const getNMrank = createAsyncThunk(
+  "GETRANK",
+  async (data, { rejectWithValue }) => {
+    try {
+      const params = {
+        date: data.day,
+        leagueCode: 205,
+      };
+      const res = await http.axios.get("/rank", {
+        params,
+      });
+      return res.data.data;
+    } catch (err) {
+      alert("랭크 불러오기 실패");
+      return rejectWithValue(err.response);
+    }
+  }
+);
 const initialState = {
   notices: [],
   todays: [],
   yesterdays: [],
+  AWrank: [],
+  AErank: [],
+  AMrank: [],
+  NWrank: [],
+  NErank: [],
+  NMrank: [],
 };
 
 const mainpageSlice = createSlice({
@@ -92,6 +194,24 @@ const mainpageSlice = createSlice({
     setYesterday: (state) => {
       state.yesterdays = [];
     },
+    setAWrank: (state) => {
+      state.AWrank = [];
+    },
+    setAErank: (state) => {
+      state.AWrank = [];
+    },
+    setAMrank: (state) => {
+      state.AWrank = [];
+    },
+    setNWrank: (state) => {
+      state.AWrank = [];
+    },
+    setNErank: (state) => {
+      state.AWrank = [];
+    },
+    setNMrank: (state) => {
+      state.AWrank = [];
+    },
   },
   extraReducers: {
     [getNotice.fulfilled]: (state, action) => {
@@ -102,6 +222,24 @@ const mainpageSlice = createSlice({
     },
     [getYesterday.fulfilled]: (state, action) => {
       state.yesterdays = action.payload;
+    },
+    [getAWrank.fulfilled]: (state, action) => {
+      state.AWrank = action.payload;
+    },
+    [getAErank.fulfilled]: (state, action) => {
+      state.AErank = action.payload;
+    },
+    [getAMrank.fulfilled]: (state, action) => {
+      state.AMrank = action.payload;
+    },
+    [getNWrank.fulfilled]: (state, action) => {
+      state.NWrank = action.payload;
+    },
+    [getNErank.fulfilled]: (state, action) => {
+      state.NErank = action.payload;
+    },
+    [getNMrank.fulfilled]: (state, action) => {
+      state.NMrank = action.payload;
     },
   },
 });

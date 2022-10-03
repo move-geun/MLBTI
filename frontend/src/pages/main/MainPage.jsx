@@ -10,7 +10,17 @@ import {
 } from "./MainPage.style";
 
 import { Link } from "react-router-dom";
-import { getNotice, getToday, getrank } from "./mainpage-slice";
+import {
+  getNotice,
+  getToday,
+  getYesterday,
+  getAWrank,
+  getAErank,
+  getAMrank,
+  getNWrank,
+  getNErank,
+  getNMrank,
+} from "./mainpage-slice";
 
 // 시뮬레이션 스켈레톤용
 import * as React from "react";
@@ -31,6 +41,12 @@ const MainPage = () => {
   const notices = useSelector((state) => state.main.notices);
   const todays = useSelector((state) => state.main.todays);
   const yesterdays = useSelector((state) => state.main.yesterdays);
+  const AWrank = useSelector((state) => state.main.AWrank);
+  const AErank = useSelector((state) => state.main.AErank);
+  const AMrank = useSelector((state) => state.main.AMrank);
+  const NWrank = useSelector((state) => state.main.NWrank);
+  const NErank = useSelector((state) => state.main.NErank);
+  const NMrank = useSelector((state) => state.main.NMrank);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -61,6 +77,7 @@ const MainPage = () => {
   };
 
   const dispatch = useDispatch();
+
   function floatingNotice() {
     dispatch(getNotice())
       .unwrap()
@@ -88,23 +105,53 @@ const MainPage = () => {
     const data = {
       day: yesterdayFormal(),
     };
-    dispatch(getToday(data))
+    dispatch(getYesterday(data))
       .unwrap()
       .then((res) => {})
       .catch((err) => {
         console.log("어제어제 스케줄 불러오기 실패");
       });
   }
-  // 서부 랭크 받아오기
+  // 랭크 받아오기
   function rank() {
     const data = {
       day: todayFormal(),
     };
-    dispatch(getrank(data))
+    dispatch(getAErank(data))
       .unwrap()
       .then((res) => {})
       .catch((err) => {
-        console.log("어제어제 스케줄 불러오기 실패");
+        console.log("랭크 불러오기 실패");
+      });
+    dispatch(getAWrank(data))
+      .unwrap()
+      .then((res) => {})
+      .catch((err) => {
+        console.log("랭크 불러오기 실패");
+      });
+    dispatch(getAMrank(data))
+      .unwrap()
+      .then((res) => {})
+      .catch((err) => {
+        console.log("랭크 불러오기 실패");
+      });
+    dispatch(getNErank(data))
+      .unwrap()
+      .then((res) => {})
+      .catch((err) => {
+        console.log("랭크 불러오기 실패");
+      });
+    dispatch(getNWrank(data))
+      .unwrap()
+      .then((res) => {})
+      .catch((err) => {
+        console.log("랭크 불러오기 실패");
+      });
+    dispatch(getNMrank(data))
+      .unwrap()
+      .then((res) => {})
+      .catch((err) => {
+        console.log("랭크 불러오기 실패");
       });
   }
 
@@ -118,7 +165,7 @@ const MainPage = () => {
     // for (step = 0; step < res.data.length; step++) {
     //   setNotice([...notices, res.data[step]]);
     // }
-  }, [floatingNotice(),floatingToday(),,floatingYesterday(),todayFormal(),rank()]);
+  }, []);
 
   const settings = {
     dots: false,
