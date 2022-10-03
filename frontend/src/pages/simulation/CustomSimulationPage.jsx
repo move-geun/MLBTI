@@ -24,39 +24,58 @@ const CustomSimulationPage = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [opensec, setOpenSec] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setOpen(true);
+    setUserInput("");
+  };
   const handleClose = () => setOpen(false);
-  const handleOpensec = () => setOpenSec(true);
+  const handleOpensec = () => {
+    setOpenSec(true);
+    setUserInput("");
+  };
   const handleClosesec = () => setOpenSec(false);
-  // const chat = () => console.log("눌러짐");
+
+  // MLB 팀 목록
+  const [mlbTeam, setMLBTeam] = useState([]);
 
   // 리그 선택 필터링
   const [leagueName, setLeagueName] = React.useState("nationalMLB");
   const [nationalList, setNationalList] = useState([]);
   const [americanList, setAmericanList] = useState([]);
 
+  // 선택한 팀 정보
   const [selectHome, setSelectHome] = useState([]);
-  const [selectaway, setSelectAway] = useState([]);
+  const [selectAway, setSelectAway] = useState([]);
 
+  // 검색기능
+  const [userInput, setUserInput] = useState("");
+  const [searchRes, setSearchRes] = useState([]);
+
+  const handleInput = (e) => {
+    setUserInput(e.target.value);
+  };
+
+
+  
   const handleChange = (event) => {
     setLeagueName(event.target.value);
   };
-
-  console.log(leagueName)
+  
   useEffect(() => {
+
     dispatch(getNational())
-      .unwrap()
-      .then((res) => {
-        setNationalList(res);
-      });
+    .unwrap()
+    .then((res) => {
+      setNationalList(res);
+    });
     dispatch(getAmerican())
-      .unwrap()
-      .then((res) => {
-        setAmericanList(res);
-      });
+    .unwrap()
+    .then((res) => {
+      setAmericanList(res);
+    });
   }, [getNational]);
 
-  
+  console.log(selectHome)
   return (
     <CustomConatiner>
       <Header>매치업 설정하기</Header>
@@ -65,19 +84,18 @@ const CustomSimulationPage = () => {
           {selectHome.length !== 0 ? (
             <div>
               <img onClick={handleOpen} src={selectHome.logo} alt="선택한 팀" />
-              <div>{selectHome.clubName}</div>
-              <div>{selectHome.divisionName}</div>
-              <div>56%</div>
+              <div>팀명: {selectHome.clubName}</div>
+              <div>리그: {selectHome.divisionName}</div>
+              <div>연고지: {selectHome.locationName}</div>
             </div>
           ) : (
             <div>
               <img
                 onClick={handleOpen}
-                src="/assets/teamlogo1.png"
+                src="/assets/defaultTeam.png"
                 alt="기본 이미지"
               />
               <div>팀 설정하기</div>
-              <div>56%</div>
             </div>
           )}
           <Modal
@@ -115,20 +133,23 @@ const CustomSimulationPage = () => {
                 </div>
                 <div className="candidates">
                   {leagueName === "nationalMLB"
-                    ? nationalList.map((item) => (
+                    ? nationalList.map((item, idx) => (
                         <ListWrap
-                          onClick={() => {
+                          value={idx}
+                          onClick={(e) => {
                             setSelectHome(item);
                           }}
                         >
                           <img alt="logo" src={item.logo}></img>
-                          <div className="candi">{item.name}</div>
+                          <div value={idx} className="candi">
+                            {item.name}
+                          </div>
                         </ListWrap>
                       ))
-                    : americanList.map((item) => (
+                    : americanList.map((item, idx) => (
                         <ListWrap
                           onClick={() => {
-                            setSelectAway(item);
+                            setSelectHome(item);
                           }}
                         >
                           <img alt="logo" src={item.logo}></img>
@@ -145,22 +166,25 @@ const CustomSimulationPage = () => {
         </TeamCase>
         <span> VS </span>
         <TeamCase>
-          {selectaway.length !== 0 ? (
+          {selectAway.length !== 0 ? (
             <div>
-              <img onClick={handleOpensec} src={selectaway.logo} alt="선택한 팀" />
-              <div>{selectaway.clubName}</div>
-              <div>{selectaway.divisionName}</div>
-              <div>56%</div>
+              <img
+                onClick={handleOpensec}
+                src={selectAway.logo}
+                alt="선택한 팀"
+              />
+              <div>팀명: {selectAway.clubName}</div>
+              <div>리그: {selectAway.divisionName}</div>
+              <div>연고지: {selectAway.locationName}</div>
             </div>
           ) : (
             <div>
               <img
                 onClick={handleOpensec}
-                src="/assets/teamlogo1.png"
+                src="/assets/defaultTeam.png"
                 alt="기본 이미지"
               />
               <div>팀 설정하기</div>
-              <div>56%</div>
             </div>
           )}
           <Modal
@@ -176,7 +200,11 @@ const CustomSimulationPage = () => {
               <div className="team">
                 팀
                 <div>
-                  <input type="text" />
+                  <input
+                    value={userInput}
+                    type="text"
+                    onChange={(e) => handleInput(e)}
+                  />
                   <button>검색하기</button>
                 </div>
                 <div className="filter">
@@ -220,14 +248,19 @@ const CustomSimulationPage = () => {
                       ))}
                 </div>
               </div>
-              <button className="change" onClick={handleClose}>
+              <button
+                className="change"
+                onClick={() => {
+                  handleClosesec();
+                }}
+              >
                 매치업
               </button>
             </ModalBox>
           </Modal>
         </TeamCase>
       </TeamContainer>
-      <Link to="/simulation" style={{ textDecoration: "none", color: "black" }}>
+      <Link to={"/simulation"} state={{ home: selectHome, away: selectAway }} style={{ textDecoration: "none", color: "black" }}>
         <div className="start">
           <img src="/assets/simulationStart.png" alt="시작아이콘..이었던것" />
           <span>시뮬레이션 시작</span>
