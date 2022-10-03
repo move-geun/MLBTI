@@ -322,12 +322,10 @@ const PlayerList = ({
                 />
               </PlyaerDetailWrapper>
             </List>
-
           ))
         ) : (
           <div className="noCondition">조건을 선택해 주세요</div>
         )}
-
       </ListWrapper>
     </>
   );
