@@ -22,8 +22,43 @@ import { getNational, getAmerican } from "./customsimulation-slice";
 
 const CustomSimulationPage = () => {
   const dispatch = useDispatch();
+
+  // 모달 개폐 변수
   const [open, setOpen] = React.useState(false);
   const [opensec, setOpenSec] = React.useState(false);
+
+  // 리그 선택 필터링
+  const [leagueName, setLeagueName] = React.useState("nationalMLB");
+
+  // 리그 별 팀목록
+  const [nationalList, setNationalList] = useState([]);
+  const [americanList, setAmericanList] = useState([]);
+
+  // 선택한 팀 정보
+  const [selectHome, setSelectHome] = useState([]);
+  const [selectAway, setSelectAway] = useState([]);
+
+  // 검색 인풋 변수
+  const [userInput, setUserInput] = useState("");
+
+  // 검색 결과를 담을 리스트
+  const [nationalSearchList, setNationalSearchList] = useState([]);
+  const [americanSearchList, setAmericanSearchList] = useState([]);
+
+  // 입력값 변경 이벤트
+  const handleInput = (e) => {
+    setUserInput(e.target.value);
+  };
+
+  // 리그 변경 이벤트
+  const handleChange = (event) => {
+    setLeagueName(event.target.value);
+    setUserInput("");
+    setNationalSearchList(nationalList);
+    setAmericanSearchList(americanList);
+  };
+
+  // 모달 개폐
   const handleOpen = () => {
     setOpen(true);
     setUserInput("");
@@ -35,47 +70,43 @@ const CustomSimulationPage = () => {
   };
   const handleClosesec = () => setOpenSec(false);
 
-  // MLB 팀 목록
-  const [mlbTeam, setMLBTeam] = useState([]);
-
-  // 리그 선택 필터링
-  const [leagueName, setLeagueName] = React.useState("nationalMLB");
-  const [nationalList, setNationalList] = useState([]);
-  const [americanList, setAmericanList] = useState([]);
-
-  // 선택한 팀 정보
-  const [selectHome, setSelectHome] = useState([]);
-  const [selectAway, setSelectAway] = useState([]);
-
-  // 검색기능
-  const [userInput, setUserInput] = useState("");
-  const [searchRes, setSearchRes] = useState([]);
-
-  const handleInput = (e) => {
-    setUserInput(e.target.value);
+  // 엔터 시 검색 기능
+  const onClick = () => {
+    searchClick();
+  };
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onClick();
+    }
   };
 
-
-  
-  const handleChange = (event) => {
-    setLeagueName(event.target.value);
+  // 팀명 검색 기능
+  const searchClick = () => {
+    const value1 = nationalList.filter((team) =>
+      team.name.toLowerCase().includes(userInput.toLowerCase())
+    );
+    const value2 = nationalList.filter((team) =>
+      team.name.toLowerCase().includes(userInput.toLowerCase())
+    );
+    setNationalSearchList(value1);
+    setAmericanSearchList(value2);
   };
-  
+
   useEffect(() => {
-
     dispatch(getNational())
-    .unwrap()
-    .then((res) => {
-      setNationalList(res);
-    });
+      .unwrap()
+      .then((res) => {
+        setNationalList(res);
+        setNationalSearchList(res);
+      });
     dispatch(getAmerican())
-    .unwrap()
-    .then((res) => {
-      setAmericanList(res);
-    });
+      .unwrap()
+      .then((res) => {
+        setAmericanList(res);
+        setAmericanSearchList(res);
+      });
   }, [getNational]);
 
-  console.log(selectHome)
   return (
     <CustomConatiner>
       <Header>매치업 설정하기</Header>
@@ -111,8 +142,13 @@ const CustomSimulationPage = () => {
               <div className="team">
                 팀
                 <div>
-                  <input type="text" />
-                  <button>검색하기</button>
+                  <input
+                    type="text"
+                    value={userInput}
+                    onChange={(e) => handleInput(e)}
+                    onKeyPress={onKeyPress}
+                  />
+                  <button onClick={onClick}>검색하기</button>
                 </div>
                 <div className="filter">
                   <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
@@ -124,7 +160,6 @@ const CustomSimulationPage = () => {
                       id="demo-simple-select-standard"
                       value={leagueName}
                       onChange={handleChange}
-                      label="Age"
                     >
                       <MenuItem value={"nationalMLB"}>National League</MenuItem>
                       <MenuItem value={"americanMLB"}>American League</MenuItem>
@@ -133,7 +168,7 @@ const CustomSimulationPage = () => {
                 </div>
                 <div className="candidates">
                   {leagueName === "nationalMLB"
-                    ? nationalList.map((item, idx) => (
+                    ? nationalSearchList.map((item, idx) => (
                         <ListWrap
                           value={idx}
                           onClick={(e) => {
@@ -146,7 +181,7 @@ const CustomSimulationPage = () => {
                           </div>
                         </ListWrap>
                       ))
-                    : americanList.map((item, idx) => (
+                    : americanSearchList.map((item, idx) => (
                         <ListWrap
                           onClick={() => {
                             setSelectHome(item);
@@ -204,8 +239,9 @@ const CustomSimulationPage = () => {
                     value={userInput}
                     type="text"
                     onChange={(e) => handleInput(e)}
+                    onKeyPress={onKeyPress}
                   />
-                  <button>검색하기</button>
+                  <button onClick={onClick}>검색하기</button>
                 </div>
                 <div className="filter">
                   <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
@@ -226,7 +262,7 @@ const CustomSimulationPage = () => {
                 </div>
                 <div className="candidates">
                   {leagueName === "nationalMLB"
-                    ? nationalList.map((item) => (
+                    ? nationalSearchList.map((item) => (
                         <ListWrap
                           onClick={() => {
                             setSelectAway(item);
@@ -236,7 +272,7 @@ const CustomSimulationPage = () => {
                           <div className="candi">{item.name}</div>
                         </ListWrap>
                       ))
-                    : americanList.map((item) => (
+                    : americanSearchList.map((item) => (
                         <ListWrap
                           onClick={() => {
                             setSelectAway(item);
@@ -260,7 +296,11 @@ const CustomSimulationPage = () => {
           </Modal>
         </TeamCase>
       </TeamContainer>
-      <Link to={"/simulation"} state={{ home: selectHome, away: selectAway }} style={{ textDecoration: "none", color: "black" }}>
+      <Link
+        to={"/simulation"}
+        state={{ home: selectHome, away: selectAway }}
+        style={{ textDecoration: "none", color: "black" }}
+      >
         <div className="start">
           <img src="/assets/simulationStart.png" alt="시작아이콘..이었던것" />
           <span>시뮬레이션 시작</span>
