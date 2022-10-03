@@ -19,6 +19,6 @@ import com.ssafy.db.entity.Batters;
   */
 public interface BatterService {
 	List<Batters> getAllBatters();
-	Batters getBatterBySeasonAndUid(int season, int uid);
+	Optional<Batters> getBatterBySeasonAndUid(int season, int uid);
 	List<Batters> getBatterByName(String searchName);
 }

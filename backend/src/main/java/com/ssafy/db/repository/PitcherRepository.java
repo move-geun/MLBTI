@@ -1,6 +1,7 @@
 package com.ssafy.db.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -18,5 +19,5 @@ import com.ssafy.db.entity.Pitchers;
   */
 @Repository
 public interface PitcherRepository extends JpaRepository<Pitchers, Integer>{
-	Pitchers findBySeasonAndPlayerUid(int season, int uid);
+	Optional<Pitchers> findBySeasonAndPlayerUid(int season, int uid);
 }
