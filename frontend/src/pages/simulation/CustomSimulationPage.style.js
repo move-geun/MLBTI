@@ -64,7 +64,6 @@ const ModalBox = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 330px;
-  /* height: 500px; */
   border: 2px solid rgba(0, 0, 0, 0.2);
   background-color: white;
   display: flex;
@@ -150,7 +149,14 @@ const ModalBox = styled.div`
 `;
 
 const ListWrap = styled.div`
-
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  img {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+  }
   &::-webkit-scrollbar {
     width: 0.5rem;
   }

@@ -31,17 +31,27 @@ const CustomSimulationPage = () => {
   // const chat = () => console.log("눌러짐");
 
   // 리그 선택 필터링
-  const [legueName, setLegueName] = React.useState("nationalMLB");
-
+  const [leagueName, setLeagueName] = React.useState("nationalMLB");
   const [nationalList, setNationalList] = useState([]);
   // const [americanList, setAmericanList] = useState([]);
   const [setAmericanList] = useState([]);
 
+  const [selectHome, setSelectHome] = useState([]);
+  const [selectaway, setSelectAway] = useState([]);
+
   const handleChange = (event) => {
-    setLegueName(event.target.value);
+    setLeagueName(event.target.value);
   };
+  
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
+    if (count > 10) return;
+    setCount(count + 1);
+  }, [count]);
+  
+  useEffect(() => {
+    
     dispatch(getNational())
       .unwrap()
       .then((res) => {
@@ -52,21 +62,34 @@ const CustomSimulationPage = () => {
       .then((res) => {
         setAmericanList(res);
       });
-  }, []);
+  }, [getNational]);
 
-  console.log(nationalList)
   return (
     <CustomConatiner>
       <Header>매치업 설정하기</Header>
       <TeamContainer>
         <TeamCase>
-          <img
-            onClick={handleOpen}
-            src="/assets/teamlogo1.png"
-            alt="1팀이었던것.."
-          />
-          <div>팀 설정하기</div>
-          <div>56%</div>
+          {selectHome.length !== 0 ? (
+            <div>
+              <img
+                onClick={handleOpen}
+                src={selectHome.logo}
+                alt="1팀이었던것.."
+              />
+              <div>{selectHome.clubName}</div>
+              <div>56%</div>
+            </div>
+          ) : (
+            <div>
+              <img
+                onClick={handleOpen}
+                src="/assets/teamlogo1.png"
+                alt="1팀이었던것.."
+              />
+              <div>팀 설정하기</div>
+              <div>56%</div>
+            </div>
+          )}
           <Modal
             open={open}
             onClose={handleClose}
@@ -110,7 +133,7 @@ const CustomSimulationPage = () => {
                     <Select
                       labelId="demo-simple-select-standard-label"
                       id="demo-simple-select-standard"
-                      value={legueName}
+                      value={leagueName}
                       onChange={handleChange}
                       label="Age"
                     >
@@ -120,11 +143,27 @@ const CustomSimulationPage = () => {
                   </FormControl>
                 </div>
                 <div className="candidates">
-                  {nationalList.map((item) => (
-                    <ListWrap>
-                      <div className="candi">{item.name}</div>
-                    </ListWrap>
-                  ))}
+                  {leagueName === "nationalMLB"
+                    ? nationalList.map((item) => (
+                        <ListWrap
+                          onClick={() => {
+                            setSelectHome(item);
+                          }}
+                        >
+                          <img alt="logo" src={item.logo}></img>
+                          <div className="candi">{item.name}</div>
+                        </ListWrap>
+                      ))
+                    : americanList.map((item) => (
+                        <ListWrap
+                          onClick={() => {
+                            setSelectAway(item);
+                          }}
+                        >
+                          <img alt="logo" src={item.logo}></img>
+                          <div className="candi">{item.name}</div>
+                        </ListWrap>
+                      ))}
                 </div>
               </div>
               <button className="change" onClick={handleClose}>
