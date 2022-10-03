@@ -43,6 +43,7 @@ const CenterWrapper = styled.div`
 `
 const MyteamWrapper = styled.div`
   width: 50%;
+  padding-top: 2rem;
   /* height: 100%; */
   @media screen and (max-width: 830px) {
     width: 90%;

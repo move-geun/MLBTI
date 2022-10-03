@@ -1,7 +1,9 @@
 import http from "../../api/http";
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
+import qs from "qs";
+http.axios.defaults.paramsSerializer = (params) => {
+  return qs.stringify(params);
+};
 
 // GET - MLB 선수 목록
 export const getPlayer = createAsyncThunk(
@@ -9,9 +11,7 @@ export const getPlayer = createAsyncThunk(
   async (uid, { rejectWithValue }) => {
     try {
       const res = await http.axios.get("/allPlayers/list");
-
-      return res.data;
-
+      return res
     } catch (err) {
       return rejectWithValue(err.resposne);
     }
@@ -67,7 +67,6 @@ export const searchPlayer = createAsyncThunk(
   "SEARCH_PLAYER",
   async (data, {rejectWithValue}) => {
     try {
-
       const res = await http.auth_axios.get('allPlayers', {params : {searchName: data.name}})
       return res.data
 
@@ -77,8 +76,20 @@ export const searchPlayer = createAsyncThunk(
   }
 )
 
-
 // DELETE - 유저팀 전체 삭제
+export const deleteUserTeam = createAsyncThunk(
+  "DELETE_USER_TEAM",
+  async (data, {rejectWithValue}) => {
+    try {
+      const params = {email: data}
+      const res = await http.auth_axios.delete("user_team/list", {params})
+      return res
+    } catch (err) {
+      return rejectWithValue(err.response)
+    }
+  }
+)
+
 
 // PUT - 팀 이름 변경
 export const modifiedTeamName = createAsyncThunk(

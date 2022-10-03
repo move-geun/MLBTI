@@ -10,7 +10,6 @@ import { SearchDiv } from "../../pages/team/TeamCustomPage.style";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux/es/exports";
 import { modifiedTeamName } from "./teamCustom-slice";
-// import { useNavigate } from "react-router-dom";
 
 function ModifiedModal({ userInfo, onClose, isChangeName, setIsChangeName }) {
   const dispatch = useDispatch();

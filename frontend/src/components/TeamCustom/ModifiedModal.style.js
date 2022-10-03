@@ -46,6 +46,7 @@ const Contents = styled.div`
     font-size: 30px;
     font-weight: 600;
     margin: 0;
+    color: #be2018;
   }
   
   .buttonDiv {
