@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,7 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
+@Table(name="new_new_pitchers")
 public class Pitchers {
 	
 //	@OneToOne
@@ -75,5 +77,6 @@ public class Pitchers {
 	Float average;
 	Float standardDeviation;
 	String education;
-
+	Integer leftOutNum;
+	Integer rightOutNum;
 }

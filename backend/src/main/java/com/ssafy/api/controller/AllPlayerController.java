@@ -5,6 +5,7 @@ package com.ssafy.api.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.ssafy.api.request.NoticeRegisterPostReq;
 import com.ssafy.api.response.BaseRes;
@@ -97,5 +99,31 @@ public class AllPlayerController {
 		
 		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",playersList));
 	}
+	
+	@GetMapping("/searchUid")
+	@ApiOperation(value = "uid로 검색한 선수 정보 얻기", notes = "uid로 검색한 선수 정보를 가져온다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+    	@ApiResponse(code = 404, message = "해당 선수 못 찾음"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<BaseRes> getBySearchUidAndSeason(@RequestParam(value="player_uid", required = false) int player_uid,@RequestParam(value="season", required = false) int season ) {
+		Optional<Batters> b =  batterService.getBatterBySeasonAndUid(season,player_uid);
+		Optional<Pitchers> p = pitcherService.getPitcherBySeasonAndUid(season,player_uid);
+		List<PlayersDto> playersList = new ArrayList();
+		if (b.isPresent()) {
+			playersList.add(PlayersDto.of(b.get()));			
+		}
+		if (p.isPresent()) {
+			playersList.add(PlayersDto.of(p.get()));				
+		}
+
+		if (playersList.isEmpty()) {
+			return ResponseEntity.status(404).body(BaseRes.of(404, "해당 선수가 없습니다."));
+		}
+		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",playersList));
+	}
+	
+	
 	
 }

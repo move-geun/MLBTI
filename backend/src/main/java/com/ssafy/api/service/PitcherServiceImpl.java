@@ -39,7 +39,7 @@ public class PitcherServiceImpl implements PitcherService{
 	}
 	
 	@Override
-	public Pitchers getPitcherBySeasonAndUid(int season, int uid) {
+	public Optional<Pitchers> getPitcherBySeasonAndUid(int season, int uid) {
 		return pitcherRepository.findBySeasonAndPlayerUid(season, uid);
 	}
 	@Override

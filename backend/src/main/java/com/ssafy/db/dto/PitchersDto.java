@@ -41,7 +41,9 @@ public class PitchersDto {
 		// 여기서 방어율 계산 총 자책점 * 9 / 총 던진 이닝수
 
 		float era = Math.round(((float)(pitchers.getLeftEr() + pitchers.getRightEr())*9*1000)/(pitchers.getLeftInningNum() + pitchers.getRightInningNum()))/(float)1000;
-		b.setEra(era);
+		float era1 = Math.round(((float)(pitchers.getLeftEr() + pitchers.getRightEr())*9*1000*3)/(pitchers.getLeftOutNum() + pitchers.getRightOutNum()))/(float)1000;
+		
+		b.setEra(era1);
 		return b;
 	}
 }

@@ -5,6 +5,7 @@ package com.ssafy.api.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -67,11 +68,16 @@ public class BatterController {
 		@ApiOperation(value = "batter 정보 얻기", notes = "<strong>batters에서 한 명의 batter 정보를 가져온다.") 
 	    @ApiResponses({
 	        @ApiResponse(code = 200, message = "성공"),
+	    	@ApiResponse(code = 404, message = "해당 선수 못 찾음"),
 	        @ApiResponse(code = 500, message = "서버 오류")
 	    })
 		public ResponseEntity<BaseRes> getOne(@ApiParam(value = "season", required = true) @RequestParam("season") int season, @ApiParam(value = "playerUid", required = true) @RequestParam("playerUid") int playerUid ){
-			Batters b = batterService.getBatterBySeasonAndUid(season, playerUid);
-			
-		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",BattersDto.of(b)));
+			Optional<Batters> b = batterService.getBatterBySeasonAndUid(season, playerUid);
+			if (b.isPresent()) {
+				return ResponseEntity.status(200).body(BaseRes.of(200, "Success",BattersDto.of(b.get())));
+			}
+			else {
+				return ResponseEntity.status(404).body(BaseRes.of(404, "해당 선수가 없습니다."));
+			}
 	}
 }
