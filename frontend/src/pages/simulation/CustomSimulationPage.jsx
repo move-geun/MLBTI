@@ -31,16 +31,18 @@ const CustomSimulationPage = () => {
   // const chat = () => console.log("눌러짐");
 
   // 리그 선택 필터링
-  const [legueName, setLegueName] = React.useState("nationalMLB");
-
+  const [leagueName, setLeagueName] = React.useState("nationalMLB");
   const [nationalList, setNationalList] = useState([]);
-  // const [americanList, setAmericanList] = useState([]);
-  const [setAmericanList] = useState([]);
+  const [americanList, setAmericanList] = useState([]);
+
+  const [selectHome, setSelectHome] = useState([]);
+  const [selectaway, setSelectAway] = useState([]);
 
   const handleChange = (event) => {
-    setLegueName(event.target.value);
+    setLeagueName(event.target.value);
   };
 
+  console.log(leagueName)
   useEffect(() => {
     dispatch(getNational())
       .unwrap()
@@ -52,21 +54,32 @@ const CustomSimulationPage = () => {
       .then((res) => {
         setAmericanList(res);
       });
-  }, []);
+  }, [getNational]);
 
-  console.log(nationalList)
+  
   return (
     <CustomConatiner>
       <Header>매치업 설정하기</Header>
       <TeamContainer>
         <TeamCase>
-          <img
-            onClick={handleOpen}
-            src="/assets/teamlogo1.png"
-            alt="1팀이었던것.."
-          />
-          <div>팀 설정하기</div>
-          <div>56%</div>
+          {selectHome.length !== 0 ? (
+            <div>
+              <img onClick={handleOpen} src={selectHome.logo} alt="선택한 팀" />
+              <div>{selectHome.clubName}</div>
+              <div>{selectHome.divisionName}</div>
+              <div>56%</div>
+            </div>
+          ) : (
+            <div>
+              <img
+                onClick={handleOpen}
+                src="/assets/teamlogo1.png"
+                alt="기본 이미지"
+              />
+              <div>팀 설정하기</div>
+              <div>56%</div>
+            </div>
+          )}
           <Modal
             open={open}
             onClose={handleClose}
@@ -74,27 +87,8 @@ const CustomSimulationPage = () => {
             aria-describedby="modal-modal-description"
           >
             <ModalBox>
-              <div className="title">1팀 선택하기</div>
+              <div className="title">홈팀 선택하기</div>
               <br />
-              {/* <div className="content">
-                날씨
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>맑음</span>
-                </div>
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>흐림</span>
-                </div>
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>태풍</span>
-                </div>
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>흘김</span>
-                </div>
-              </div> */}
               <br />
               <div className="team">
                 팀
@@ -110,7 +104,7 @@ const CustomSimulationPage = () => {
                     <Select
                       labelId="demo-simple-select-standard-label"
                       id="demo-simple-select-standard"
-                      value={legueName}
+                      value={leagueName}
                       onChange={handleChange}
                       label="Age"
                     >
@@ -120,11 +114,27 @@ const CustomSimulationPage = () => {
                   </FormControl>
                 </div>
                 <div className="candidates">
-                  {nationalList.map((item) => (
-                    <ListWrap>
-                      <div className="candi">{item.name}</div>
-                    </ListWrap>
-                  ))}
+                  {leagueName === "nationalMLB"
+                    ? nationalList.map((item) => (
+                        <ListWrap
+                          onClick={() => {
+                            setSelectHome(item);
+                          }}
+                        >
+                          <img alt="logo" src={item.logo}></img>
+                          <div className="candi">{item.name}</div>
+                        </ListWrap>
+                      ))
+                    : americanList.map((item) => (
+                        <ListWrap
+                          onClick={() => {
+                            setSelectAway(item);
+                          }}
+                        >
+                          <img alt="logo" src={item.logo}></img>
+                          <div className="candi">{item.name}</div>
+                        </ListWrap>
+                      ))}
                 </div>
               </div>
               <button className="change" onClick={handleClose}>
@@ -135,13 +145,24 @@ const CustomSimulationPage = () => {
         </TeamCase>
         <span> VS </span>
         <TeamCase>
-          <img
-            onClick={handleOpensec}
-            src="/assets/teamlogo2.png"
-            alt="2팀이었던것.."
-          />
-          <div>팀 설정하기</div>
-          <div>44%</div>
+          {selectaway.length !== 0 ? (
+            <div>
+              <img onClick={handleOpensec} src={selectaway.logo} alt="선택한 팀" />
+              <div>{selectaway.clubName}</div>
+              <div>{selectaway.divisionName}</div>
+              <div>56%</div>
+            </div>
+          ) : (
+            <div>
+              <img
+                onClick={handleOpensec}
+                src="/assets/teamlogo1.png"
+                alt="기본 이미지"
+              />
+              <div>팀 설정하기</div>
+              <div>56%</div>
+            </div>
+          )}
           <Modal
             open={opensec}
             onClose={handleClosesec}
@@ -149,27 +170,8 @@ const CustomSimulationPage = () => {
             aria-describedby="modal-modal-description"
           >
             <ModalBox>
-              <div className="title">2팀 선택하기</div>
+              <div className="title">어웨이팀 선택하기</div>
               <br />
-              <div className="content">
-                날씨
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>맑음</span>
-                </div>
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>흐림</span>
-                </div>
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>태풍</span>
-                </div>
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>흘김</span>
-                </div>
-              </div>
               <br />
               <div className="team">
                 팀
@@ -178,14 +180,44 @@ const CustomSimulationPage = () => {
                   <button>검색하기</button>
                 </div>
                 <div className="filter">
-                  <input type="drop" placeholder="연도" />
-                  <input type="drop" placeholder="리그" />
-                  <input type="drop" placeholder="팀명" />
+                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                    <InputLabel id="demo-simple-select-standard-label">
+                      리그 선택
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-standard-label"
+                      id="demo-simple-select-standard"
+                      value={leagueName}
+                      onChange={handleChange}
+                      label="Age"
+                    >
+                      <MenuItem value={"nationalMLB"}>National League</MenuItem>
+                      <MenuItem value={"americanMLB"}>American League</MenuItem>
+                    </Select>
+                  </FormControl>
                 </div>
                 <div className="candidates">
-                  <div className="candi">초코맛팀</div>
-                  <div className="candi">딸기맛팀</div>
-                  <div className="candi">바나나맛팀</div>
+                  {leagueName === "nationalMLB"
+                    ? nationalList.map((item) => (
+                        <ListWrap
+                          onClick={() => {
+                            setSelectAway(item);
+                          }}
+                        >
+                          <img alt="logo" src={item.logo}></img>
+                          <div className="candi">{item.name}</div>
+                        </ListWrap>
+                      ))
+                    : americanList.map((item) => (
+                        <ListWrap
+                          onClick={() => {
+                            setSelectAway(item);
+                          }}
+                        >
+                          <img alt="logo" src={item.logo}></img>
+                          <div className="candi">{item.name}</div>
+                        </ListWrap>
+                      ))}
                 </div>
               </div>
               <button className="change" onClick={handleClose}>
