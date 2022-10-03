@@ -55,7 +55,7 @@ export const getYesterday = createAsyncThunk(
 
 // 아메리카 서부리그
 export const getAWrank = createAsyncThunk(
-  "GETRANK",
+  "GETAWRANK",
   async (data, { rejectWithValue }) => {
     try {
       const params = {
@@ -74,7 +74,7 @@ export const getAWrank = createAsyncThunk(
 );
 // 아메리카 동부리그
 export const getAErank = createAsyncThunk(
-  "GETRANK",
+  "GETAERANK",
   async (data, { rejectWithValue }) => {
     try {
       const params = {
@@ -93,7 +93,7 @@ export const getAErank = createAsyncThunk(
 );
 // 아메리카 중부리그
 export const getAMrank = createAsyncThunk(
-  "GETRANK",
+  "GETAMRANK",
   async (data, { rejectWithValue }) => {
     try {
       const params = {
@@ -113,7 +113,7 @@ export const getAMrank = createAsyncThunk(
 
 // 네셔널 서부리그
 export const getNWrank = createAsyncThunk(
-  "GETRANK",
+  "GETNWRANK",
   async (data, { rejectWithValue }) => {
     try {
       const params = {
@@ -133,7 +133,7 @@ export const getNWrank = createAsyncThunk(
 
 // 네셔널 동부리그
 export const getNErank = createAsyncThunk(
-  "GETRANK",
+  "GETNERANK",
   async (data, { rejectWithValue }) => {
     try {
       const params = {
@@ -152,7 +152,7 @@ export const getNErank = createAsyncThunk(
 );
 // 네셔널 서부리그
 export const getNMrank = createAsyncThunk(
-  "GETRANK",
+  "GETNMRANK",
   async (data, { rejectWithValue }) => {
     try {
       const params = {

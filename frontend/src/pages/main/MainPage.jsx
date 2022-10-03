@@ -7,6 +7,7 @@ import {
   Today,
   Rank,
   DownChart,
+  League,
 } from "./MainPage.style";
 
 import { Link } from "react-router-dom";
@@ -120,39 +121,27 @@ const MainPage = () => {
     dispatch(getAErank(data))
       .unwrap()
       .then((res) => {})
-      .catch((err) => {
-        console.log("랭크 불러오기 실패");
-      });
+      .catch((err) => {});
     dispatch(getAWrank(data))
       .unwrap()
       .then((res) => {})
-      .catch((err) => {
-        console.log("랭크 불러오기 실패");
-      });
+      .catch((err) => {});
     dispatch(getAMrank(data))
       .unwrap()
       .then((res) => {})
-      .catch((err) => {
-        console.log("랭크 불러오기 실패");
-      });
+      .catch((err) => {});
     dispatch(getNErank(data))
       .unwrap()
       .then((res) => {})
-      .catch((err) => {
-        console.log("랭크 불러오기 실패");
-      });
+      .catch((err) => {});
     dispatch(getNWrank(data))
       .unwrap()
       .then((res) => {})
-      .catch((err) => {
-        console.log("랭크 불러오기 실패");
-      });
+      .catch((err) => {});
     dispatch(getNMrank(data))
       .unwrap()
       .then((res) => {})
-      .catch((err) => {
-        console.log("랭크 불러오기 실패");
-      });
+      .catch((err) => {});
   }
 
   useEffect(() => {
@@ -178,6 +167,16 @@ const MainPage = () => {
   };
 
   const downsettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3500,
+  };
+
+  const ranksettings = {
     dots: false,
     infinite: true,
     speed: 500,
@@ -268,6 +267,44 @@ const MainPage = () => {
               <div>내셔널 리그</div>
               <div>아메리칸 리그</div>
             </div>
+            {/* <League {...ranksettings}>
+              <div>
+                <div className="leaguetitle">[동부리그]</div>
+                {NErank.map((rank, idx) => (
+                  <div key={idx} className="rank_cont">
+                    <div className="number">{rank.diveRank}</div>
+                    <div className="rank">
+                      <img src={rank.logo} alt="" />
+                      <div>{rank.teamName}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div>
+                <div className="leaguetitle">[서부리그]</div>
+                {NWrank.map((rank, idx) => (
+                  <div key={idx} className="rank_cont">
+                    <div className="number">{rank.diveRank}</div>
+                    <div className="rank">
+                      <img src={rank.logo} alt="" />
+                      <div>{rank.teamName}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div>
+                <div className="leaguetitle">[중앙리그]</div>
+                {NMrank.map((rank, idx) => (
+                  <div key={idx} className="rank_cont">
+                    <div className="number">{rank.diveRank}</div>
+                    <div className="rank">
+                      <img src={rank.logo} alt="" />
+                      <div>{rank.teamName}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </League> */}
           </Rank>
         </CheckBox>
       </Main>

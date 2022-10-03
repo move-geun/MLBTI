@@ -93,10 +93,13 @@ const SimulationCase = styled.div`
 
 const CheckBox = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: row;
+  height: 60%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 100%;
+  /* flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
   margin-top: 3rem;
 
   .title {
@@ -116,6 +119,7 @@ const Predict = styled.div`
   border-left: 2px solid rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   font-size: 1rem;
 
   .content {
@@ -138,6 +142,7 @@ const Today = styled.div`
   border-right: 2px solid rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   font-size: 1rem;
   .content {
     margin-bottom: 5px;
@@ -158,11 +163,16 @@ const Rank = styled.div`
   text-align: center;
   border-right: 2px solid rgba(0, 0, 0, 0.2);
   display: flex;
+  justify-content: flex-start;
   flex-direction: column;
   font-size: 1rem;
 
   .title {
     margin-bottom: 5px;
+    width: 100%;
+  }
+  .number {
+    margin-left: 50px;
   }
   .divide {
     display: flex;
@@ -180,6 +190,40 @@ const Rank = styled.div`
   }
 `;
 
+const League = styled(Slider)`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .leaguetitle {
+    font-style: italic;
+  }
+  .rank_cont {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+  }
+  .rank {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    &.hover {
+      cursor: pointer;
+    }
+  }
+`;
+
 export {
   Notice,
   Main,
@@ -189,4 +233,5 @@ export {
   Today,
   Rank,
   DownChart,
+  League,
 };
