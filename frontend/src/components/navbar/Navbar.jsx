@@ -7,22 +7,27 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import styled from "styled-components";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from "@mui/icons-material/Login";
 import { useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom'
-import { deleteToken} from "../../api/JWT";
+import { useNavigate } from "react-router-dom";
+import { deleteToken } from "../../api/JWT";
+import isAuthenticated from "../../api/isAuthenticated";
 
-let pages = [
+let loginPages = [
+  { MLB: "https://www.mlb.com/" },
+  { 시뮬레이션: "/customsimultaion" },
+  { "팀 커스텀": "/" },
+  { 마이페이지: "/myprofile" },
+];
+let notLoginPages = [
   { MLB: "https://www.mlb.com/" },
   { 시뮬레이션: "/customsimultaion" },
 ];
-
-const settings = ["프로필", "나만의 팀 만들기", "로그아웃"];
 
 const LogoImgDesk = styled.img`
   width: 40px;
@@ -38,24 +43,30 @@ const LogoImgMoblie = styled.img`
 `;
 
 const Navbar = () => {
- 
-  function logout () {
+  function logout() {
     deleteToken();
-    navigate("/")
-  } 
-   
-  
+    navigate("/");
+  }
+
+  function login() {
+    navigate("/login");
+  }
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const logoutHandle = () => {
-    logout()
+    logout();
+  };
+
+  const loginHandle = () => {
+    login();
   };
 
   const handleCloseNavMenu = () => {
@@ -68,12 +79,10 @@ const Navbar = () => {
 
   return (
     <AppBar style={{ background: "white" }} position="static">
-      <Container maxWidth='0'>
+      <Container maxWidth="0">
         <Toolbar disableGutters>
           {/* 로고 이미지  */}
           <LogoImgDesk src={"/assets/cap.png"}></LogoImgDesk>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-
           <Typography
             variant="h1"
             noWrap
@@ -132,13 +141,21 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    {Object.keys(page)}
-                  </Typography>
-                </MenuItem>
-              ))}
+              {isAuthenticated()
+                ? loginPages.map((page) => (
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">
+                        {Object.keys(page)}
+                      </Typography>
+                    </MenuItem>
+                  ))
+                : notLoginPages.map((page) => (
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">
+                        {Object.keys(page)}
+                      </Typography>
+                    </MenuItem>
+                  ))}
             </Menu>
           </Box>
 
@@ -175,32 +192,60 @@ const Navbar = () => {
               },
             }}
           >
-            {pages.map((page) => (
-              <Button
-                component="a"
-                href={Object.values(page)}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: "black",
-                  display: "block",
-                  fontFamily: "MICEGothic Bold",
-                }}
-              >
-                {Object.keys(page)}
-              </Button>
-            ))}
+            {isAuthenticated()
+              ? loginPages.map((page) => (
+                  <Button
+                    component="a"
+                    href={Object.values(page)}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      color: "black",
+                      display: "block",
+                      fontFamily: "MICEGothic Bold",
+                    }}
+                  >
+                    {Object.keys(page)}
+                  </Button>
+                ))
+              : notLoginPages.map((page) => (
+                  <Button
+                    component="a"
+                    href={Object.values(page)}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      color: "black",
+                      display: "block",
+                      fontFamily: "MICEGothic Bold",
+                    }}
+                  >
+                    {Object.keys(page)}
+                  </Button>
+                ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Logout">
-              <IconButton onClick={logoutHandle} sx={{ p: 0 }}>
-                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/3.jpg" /> */}
-                <LogoutIcon sx={{ fontSize: 40, color: 'pink[500]' }}></LogoutIcon>
-              </IconButton>
-            </Tooltip>
-           
-          </Box>
+          {isAuthenticated() ? (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Logout">
+                <IconButton onClick={logoutHandle} sx={{ p: 0 }}>
+                  <LogoutIcon
+                    sx={{ fontSize: 40, color: "pink[500]" }}
+                  ></LogoutIcon>
+                </IconButton>
+              </Tooltip>
+            </Box>
+          ) : (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Login">
+                <IconButton onClick={login} sx={{ p: 0 }}>
+                  <LoginIcon
+                    sx={{ fontSize: 40, color: "pink[500]" }}
+                  ></LoginIcon>
+                </IconButton>
+              </Tooltip>
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>
