@@ -41,8 +41,10 @@ public class ScheduleDto {
 	String winningPitcher;
 	String losingPitcher;
 	String savePitcher;
+	String awayLogo;
+	String homeLogo;
 	
-	public static ScheduleDto of(Schedules s) {
+	public static ScheduleDto of(Schedules s,String homeLogo, String awayLogo) {
 		ScheduleDto scheduleDto = new ScheduleDto();
 		scheduleDto.gameDate=s.getGameDate();
 		scheduleDto.gameType=s.getGameType();
@@ -60,6 +62,8 @@ public class ScheduleDto {
 		scheduleDto.winningPitcher=s.getWinningPitcher();
 		scheduleDto.losingPitcher=s.getLosingPitcher();
 		scheduleDto.savePitcher=s.getSavePitcher();
+		scheduleDto.homeLogo=homeLogo;
+		scheduleDto.awayLogo=awayLogo;
 		return scheduleDto;
 	}
 }
