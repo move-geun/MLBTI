@@ -1,11 +1,9 @@
-
 import {
   Notice,
   Main,
   SimulationCase,
   CheckBox,
   Predict,
-  Today,
   Rank,
   DownChart,
   Leagues,
@@ -67,8 +65,9 @@ const MainPage = () => {
     let year = now.getFullYear();
     let month =
       now.getMonth() + 1 > 9 ? now.getMonth() + 1 : "0" + (now.getMonth() + 1);
-    let day = now.getDate() > 9 ? now.getDate() : "0" + now.getDate();
-    return String(year) + String(month) + day;
+    let day =
+      now.getDate() - 1 > 9 ? now.getDate() - 1 : "0" + (now.getDate() - 1);
+    return String(year) + String(month) + String(day);
   };
 
   // 어제 날짜 구하기
@@ -78,7 +77,7 @@ const MainPage = () => {
     let month =
       now.getMonth() + 1 > 9 ? now.getMonth() + 1 : "0" + (now.getMonth() + 1);
     let day =
-      now.getDate() - 1 > 9 ? now.getDate() - 1 : "0" + (now.getDate() - 1);
+      now.getDate() - 2 > 9 ? now.getDate() - 2 : "0" + (now.getDate() - 2);
     return String(year) + String(month) + String(day);
   };
 
@@ -252,24 +251,42 @@ const MainPage = () => {
         <CheckBox>
           <Predict>
             <div className="title">[ 어제 경기 결과 ]</div>
-            <div className="result">
+            <div>
               {yesterdays.map((yesterday, idx) => (
-                <div key={idx} className="content">
-                  {yesterday.awayName} vs {yesterday.homeName}
+                <div key={idx} className="contentdiv">
+                  <div className="content">
+                    <div className="home">{yesterday.homeName}</div>
+                    <div className="vs">vs</div>
+                    <div className="away">{yesterday.awayName}</div>
+                  </div>
+                  <div className="score">
+                    <div className="homescore">{yesterday.homeScore}</div>
+                    <div className="status">{yesterday.status}</div>
+                    <div className="awayscore">{yesterday.awayScore}</div>
+                  </div>
                 </div>
               ))}
             </div>
           </Predict>
-          <Today>
+          <Predict>
             <div className="title">[ 오늘 경기 일정 ]</div>
             <div>
               {todays.map((today, idx) => (
-                <div key={idx} className="content">
-                  {today.awayName} vs {today.homeName}
+                <div key={idx} className="contentdiv">
+                  <div className="content">
+                    <div className="home">{today.homeName}</div>
+                    <div className="vs">vs</div>
+                    <div className="away">{today.awayName}</div>
+                  </div>
+                  <div className="score">
+                    <div className="homescore">{today.homeScore}</div>
+                    <div className="status">{today.status}</div>
+                    <div className="awayscore">{today.awayScore}</div>
+                  </div>
                 </div>
               ))}
             </div>
-          </Today>
+          </Predict>
           <Rank>
             <div className="title">[팀 순위]</div>
             <div className="divide">
@@ -390,20 +407,42 @@ const MainPage = () => {
         <DownChart {...downsettings}>
           <Predict>
             <div className="title">[ 어제 경기 결과 ]</div>
-            {yesterdays.map((yesterday, idx) => (
-              <div key={idx} className="content">
-                {yesterday.awayName} vs {yesterday.homeName}
-              </div>
-            ))}
+            <div>
+              {yesterdays.map((yesterday, idx) => (
+                <div key={idx} className="contentdiv">
+                  <div className="content">
+                    <div className="home">{yesterday.homeName}</div>
+                    <div className="vs">vs</div>
+                    <div className="away">{yesterday.awayName}</div>
+                  </div>
+                  <div className="score">
+                    <div className="homescore">{yesterday.homeScore}</div>
+                    <div className="status">{yesterday.status}</div>
+                    <div className="awayscore">{yesterday.awayScore}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </Predict>
-          <Today>
+          <Predict>
             <div className="title">[ 오늘 경기 일정 ]</div>
-            {todays.map((today, idx) => (
-              <div key={idx} className="content">
-                {today.awayName} vs {today.homeName}
-              </div>
-            ))}
-          </Today>
+            <div>
+              {todays.map((today, idx) => (
+                <div key={idx} className="contentdiv">
+                  <div className="content">
+                    <div className="home">{today.homeName}</div>
+                    <div className="vs">vs</div>
+                    <div className="away">{today.awayName}</div>
+                  </div>
+                  <div className="score">
+                    <div className="homescore">{today.homeScore}</div>
+                    <div className="status">{today.status}</div>
+                    <div className="awayscore">{today.awayScore}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Predict>
           <Rank>
             <div className="title">[팀 순위]</div>
             <div className="divide">
@@ -517,20 +556,42 @@ const MainPage = () => {
         <DownChart {...downsettings}>
           <Predict>
             <div className="title">[ 어제 경기 결과 ]</div>
-            {yesterdays.map((yesterday, idx) => (
-              <div key={idx} className="content">
-                {yesterday.awayName} vs {yesterday.homeName}
-              </div>
-            ))}
+            <div>
+              {yesterdays.map((yesterday, idx) => (
+                <div key={idx} className="contentdiv">
+                  <div className="content">
+                    <div className="home">{yesterday.homeName}</div>
+                    <div className="vs">vs</div>
+                    <div className="away">{yesterday.awayName}</div>
+                  </div>
+                  <div className="score">
+                    <div className="homescore">{yesterday.homeScore}</div>
+                    <div className="status">{yesterday.status}</div>
+                    <div className="awayscore">{yesterday.awayScore}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </Predict>
-          <Today>
+          <Predict>
             <div className="title">[ 오늘 경기 일정 ]</div>
-            {todays.map((today, idx) => (
-              <div key={idx} className="content">
-                {today.awayName} vs {today.homeName}
-              </div>
-            ))}
-          </Today>
+            <div>
+              {todays.map((today, idx) => (
+                <div key={idx} className="contentdiv">
+                  <div className="content">
+                    <div className="home">{today.homeName}</div>
+                    <div className="vs">vs</div>
+                    <div className="away">{today.awayName}</div>
+                  </div>
+                  <div className="score">
+                    <div className="homescore">{today.homeScore}</div>
+                    <div className="status">{today.status}</div>
+                    <div className="awayscore">{today.awayScore}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Predict>
           <Rank>
             <div className="title">[팀 순위]</div>
             <div className="divide">
@@ -627,4 +688,3 @@ const MainPage = () => {
   }
 };
 export default MainPage;
-
