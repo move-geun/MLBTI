@@ -18,13 +18,9 @@ import { SearchDiv, Img } from "../../pages/team/TeamCustomPage.style";
 import { TextField } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPersonCirclePlus } from "@fortawesome/free-solid-svg-icons";
-const PlayerList = ({
-  email,
 
-  myTeam,
-}) => {
+const PlayerList = ({email, myTeam}) => {
   const dispatch = useDispatch();
-
   // MLB 선수 리스트
   const [playerList, setPlayerList] = useState([]);
 
@@ -164,6 +160,7 @@ const PlayerList = ({
       });
   };
 
+  // console.log('d')
   return (
     <>
       {/* Dropdown */}
@@ -322,12 +319,10 @@ const PlayerList = ({
                 />
               </PlyaerDetailWrapper>
             </List>
-
           ))
         ) : (
           <div className="noCondition">조건을 선택해 주세요</div>
         )}
-
       </ListWrapper>
     </>
   );

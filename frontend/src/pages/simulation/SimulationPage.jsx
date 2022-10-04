@@ -4,6 +4,11 @@ import SimulationResult from "../../components/simulation/SimulationResult";
 import {  simulationData } from "./simulation-slice";
 import { useDispatch } from "react-redux";
 import Ground from "./Ground";
+import { useLocation } from "react-router-dom";
+
+import {
+  TopLayout, BottomLayout, GroundContainer,SimulResultContainer,
+} from "./SimulationPage.style";
 
 
 const SimulationPage = () => {
@@ -51,10 +56,14 @@ const SimulationPage = () => {
   return (
     <>
       <div className="title">시뮬레이션</div>
-      
-          <Ground data= {innginglist}/>
-       
-          <SimulationResult data = {simulData}/>
+          <TopLayout>
+
+          
+          </TopLayout>
+          <BottomLayout>
+              <GroundContainer><Ground data= {innginglist}/></GroundContainer>
+              <SimulResultContainer><SimulationResult data = {simulData}/></SimulResultContainer>
+          </BottomLayout>        
     </>
         
   );

@@ -3,7 +3,10 @@ import { useEffect, useState } from 'react';
 
 import {
  TabMenu,
- StatusBtn
+ TabName,
+ StatusBtn,
+ BatterContatiner,
+ BatterResult
 } from './SimulationResult.style';
 
 const defaultValue = {};
@@ -130,21 +133,23 @@ const SimulationResult = (prop = defaultValue) => {
         <TabMenu>
         {
            menuArr.map((v, idx) => {
-            return <li onClick={()=> onClickHandler(idx)}>{v.name}</li>
+            return <TabName onClick={()=> onClickHandler(idx)}>{v.name}</TabName>
           })
         } 
         </TabMenu>
         <div>
         <StatusBtn onClick={onClickTopPlay}>{currentTab+1}회 초</StatusBtn>
         <StatusBtn onClick={onClickBottomPlay}>{currentTab+1}회 말</StatusBtn>
+        <BatterContatiner>
         {
           batterList.batterName !== null ?
           (batterList.map(b =>{
-            return(<div>투수 {b.batterName}  {b.batterEvent}</div>)
+            return(<BatterResult>투수 {b.batterName}  {b.batterEvent}</BatterResult>)
           }))
           :
           (<div>데이터를 가져오는 중입니다.</div>)
         }
+        </BatterContatiner>
 {/*         
          <h1>{menuArr[currentTab].content}</h1> */}
         </div>

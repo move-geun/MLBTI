@@ -5,7 +5,6 @@ import {
   Header,
   CenterWrapper,
   MyteamWrapper,
-  // Nickname,
   CustomTeamName,
   EditBtn,
 } from "./TeamCustomPage.style";
@@ -18,7 +17,6 @@ import { getUserTeam } from "../../components/TeamCustom/teamCustom-slice";
 
 const TeamCustomPage = () => {
   const dispatch = useDispatch();
-
   // 유저 정보
   const [userInfo, setUserInfo] = useState([]);
 
@@ -30,20 +28,21 @@ const TeamCustomPage = () => {
 
   // 구단 명 수정 시 유저 정보 다시 불러오기
   const [isChangeName, setIsChangeName] = useState(true);
-
+  
   // userInfo가 들어왔을 때, 내 팀 목록을 불러옴
-  if (userInfo.length !== 0) {
-    async function getTeam() {
-      const res = await dispatch(getUserTeam(userInfo["userId"]));
-
-      // 성공적으로 dispatatch 했을 때 payload에 팀이 담겨 옴
-      if (res.meta.requestStatus === "fulfilled") {
-        setMyTeam(res.payload);
-      }
+  async function getTeam() {
+    const res = await dispatch(getUserTeam(userInfo["userId"]));
+    
+    // 성공적으로 dispatatch 했을 때 payload에 팀이 담겨 옴
+    if (res.meta.requestStatus === "fulfilled") {
+      setMyTeam(res.payload);
     }
-    getTeam();
   }
 
+  useEffect(() => {
+    if (userInfo.length !== 0) getTeam()
+  }, [userInfo])
+    
   useEffect(() => {
     dispatch(myprofile())
       .unwrap()
@@ -57,18 +56,14 @@ const TeamCustomPage = () => {
     setIsOpen(true);
   };
 
-  
-
   return (
     <Background>
       <div className="header">
         <Header>My team 구성하기</Header>
-        
       </div>
       <CenterWrapper>
-        {/* 왼쪽 박스 */}
+        
         <MyteamWrapper>
-          {/* <Nickname>{userInfo["nickname"]} 님의 구단</Nickname> */}
           <CustomTeamName>
             {userInfo["teamName"]}
             <EditBtn onClick={onCreate} />
@@ -86,11 +81,9 @@ const TeamCustomPage = () => {
           </CustomTeamName>
           <PlayerList email={userInfo["userId"]} myTeam={myTeam} />
         </MyteamWrapper>
-        {/* 오른쪽 박스 */}
+        
         <Ground myTeam={myTeam} userInfo={userInfo} />
       </CenterWrapper>
-
-      {/* 팀 전력 */}
       <TeamCoposition userInfo={userInfo} myTeam={myTeam}></TeamCoposition>
     </Background>
   );

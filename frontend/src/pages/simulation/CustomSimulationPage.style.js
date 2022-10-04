@@ -7,7 +7,7 @@ const CustomConatiner = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 1rem auto;
+  margin: 5rem auto;
   font-size: 1.5rem;
 
   @media screen and (max-width: 830px) {
@@ -23,12 +23,18 @@ const CustomConatiner = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 5rem;
 
     img {
       height: 100px;
       width: 100px;
       margin-bottom: 1rem;
       cursor: pointer;
+      @media screen and (max-width: 830px) {
+        width: 80px;
+        height: 80px;
+      }
+
     }
   }
 `;
@@ -57,6 +63,19 @@ const TeamCase = styled.div`
   div {
     margin-top: 1rem;
   }
+
+  img {
+    width: 200px;
+    height: 200px;
+    @media screen and (max-width: 830px) {
+      width: 180px;
+    height: 180px;
+  }
+  @media screen and (max-width: 480px) {
+    width: 130px;
+    height: 130px;
+  }
+  }
 `;
 const ModalBox = styled.div`
   position: absolute;
@@ -64,7 +83,6 @@ const ModalBox = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 330px;
-  /* height: 500px; */
   border: 2px solid rgba(0, 0, 0, 0.2);
   background-color: white;
   display: flex;
@@ -150,7 +168,19 @@ const ModalBox = styled.div`
 `;
 
 const ListWrap = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 
+  .active {
+    background-color: green;
+  }
+
+  img {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+  }
   &::-webkit-scrollbar {
     width: 0.5rem;
   }
