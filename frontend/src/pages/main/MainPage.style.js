@@ -93,10 +93,10 @@ const SimulationCase = styled.div`
 
 const CheckBox = styled.div`
   width: 100%;
-  height: 60%;
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 100%;
+  grid-template-rows: 450px;
   /* flex-direction: row;
   justify-content: space-between;
   align-items: center; */
@@ -119,8 +119,11 @@ const Predict = styled.div`
   border-left: 2px solid rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+
   font-size: 1rem;
+  .title {
+    margin-bottom: 20px;
+  }
 
   .content {
     margin-bottom: 5px;
@@ -144,6 +147,10 @@ const Today = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   font-size: 1rem;
+
+  .title {
+    margin-bottom: 20px;
+  }
   .content {
     margin-bottom: 5px;
   }
@@ -168,19 +175,21 @@ const Rank = styled.div`
   font-size: 1rem;
 
   .title {
-    margin-bottom: 5px;
+    margin-bottom: 20px;
     width: 100%;
   }
-  .number {
-    margin-left: 50px;
-  }
+
   .divide {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
   }
-
+  .leaguebtn {
+    &.hover {
+      cursor: pointer;
+    }
+  }
   @media screen and (max-width: 830px) {
     font-size: 1rem;
     border-right: none;
@@ -190,20 +199,51 @@ const Rank = styled.div`
   }
 `;
 
-const League = styled(Slider)`
+const Leagues = styled(Slider)`
+  width: 280px;
+  height: 90%;
+  margin: 20px auto;
+  .slick-list {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+    padding: 4px 0;
+  }
+
+  .slick-slide div {
+    cursor: pointer;
+    background-color: white;
+    font-size: 1rem;
+  }
+
+  .slick-dots {
+    display: none;
+  }
+
+  .slick-track {
+    width: 100%;
+  }
+`;
+
+const League = styled.div`
+  box-sizing: inherit;
   width: 100%;
   display: flex;
   flex-direction: column;
   .leaguetitle {
-    font-style: italic;
+    margin: 15px 0;
   }
   .rank_cont {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    margin: 10px auto;
+    margin: 20px auto;
+  }
+  .number {
+    margin-left: 40px;
   }
   .rank {
     width: 100%;
@@ -217,6 +257,7 @@ const League = styled(Slider)`
       height: 30px;
       border-radius: 50%;
       margin-right: 10px;
+      margin-left: 20px;
     }
     &.hover {
       cursor: pointer;
@@ -224,6 +265,12 @@ const League = styled(Slider)`
   }
 `;
 
+// const League = styled.div`
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   margin: 0 auto;
+// `;
 export {
   Notice,
   Main,
@@ -233,5 +280,6 @@ export {
   Today,
   Rank,
   DownChart,
+  Leagues,
   League,
 };

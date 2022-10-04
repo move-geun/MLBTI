@@ -7,6 +7,7 @@ import {
   Today,
   Rank,
   DownChart,
+  Leagues,
   League,
 } from "./MainPage.style";
 
@@ -49,6 +50,9 @@ const MainPage = () => {
   const NErank = useSelector((state) => state.main.NErank);
   const NMrank = useSelector((state) => state.main.NMrank);
   const [open, setOpen] = useState(false);
+  const [national, setNational] = useState(true);
+  const handleAm = () => setNational(false);
+  const handleNa = () => setNational(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     console.log("누르긴했다잉, 근데 안 닫힐거지롱");
@@ -247,64 +251,113 @@ const MainPage = () => {
         <CheckBox>
           <Predict>
             <div className="title">[ 어제 경기 결과 ]</div>
-            {yesterdays.map((yesterday, idx) => (
-              <div key={idx} className="content">
-                {yesterday.awayName} vs {yesterday.homeName}
-              </div>
-            ))}
+            <div className="result">
+              {yesterdays.map((yesterday, idx) => (
+                <div key={idx} className="content">
+                  {yesterday.awayName} vs {yesterday.homeName}
+                </div>
+              ))}
+            </div>
           </Predict>
           <Today>
             <div className="title">[ 오늘 경기 일정 ]</div>
-            {todays.map((today, idx) => (
-              <div key={idx} className="content">
-                {today.awayName} vs {today.homeName}
-              </div>
-            ))}
+            <div>
+              {todays.map((today, idx) => (
+                <div key={idx} className="content">
+                  {today.awayName} vs {today.homeName}
+                </div>
+              ))}
+            </div>
           </Today>
           <Rank>
             <div className="title">[팀 순위]</div>
             <div className="divide">
-              <div>내셔널 리그</div>
-              <div>아메리칸 리그</div>
+              <div claasName="leaguebtn" onClick={handleNa}>
+                내셔널 리그
+              </div>
+              <div claasName="leaguebtn" onClick={handleAm}>
+                아메리칸 리그
+              </div>
             </div>
-            {/* <League {...ranksettings}>
-              <div>
-                <div className="leaguetitle">[동부리그]</div>
-                {NErank.map((rank, idx) => (
-                  <div key={idx} className="rank_cont">
-                    <div className="number">{rank.diveRank}</div>
-                    <div className="rank">
-                      <img src={rank.logo} alt="" />
-                      <div>{rank.teamName}</div>
+            {national === true ? (
+              <Leagues {...ranksettings}>
+                <League>
+                  <div className="leaguetitle">[동부리그]</div>
+                  {NErank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-              <div>
-                <div className="leaguetitle">[서부리그]</div>
-                {NWrank.map((rank, idx) => (
-                  <div key={idx} className="rank_cont">
-                    <div className="number">{rank.diveRank}</div>
-                    <div className="rank">
-                      <img src={rank.logo} alt="" />
-                      <div>{rank.teamName}</div>
+                  ))}
+                </League>
+                <League>
+                  <div className="leaguetitle">[서부리그]</div>
+                  {NWrank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-              <div>
-                <div className="leaguetitle">[중앙리그]</div>
-                {NMrank.map((rank, idx) => (
-                  <div key={idx} className="rank_cont">
-                    <div className="number">{rank.diveRank}</div>
-                    <div className="rank">
-                      <img src={rank.logo} alt="" />
-                      <div>{rank.teamName}</div>
+                  ))}
+                </League>
+                <League>
+                  <div className="leaguetitle">[중앙리그]</div>
+                  {NMrank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </League> */}
+                  ))}
+                </League>
+              </Leagues>
+            ) : (
+              <Leagues {...ranksettings}>
+                <League>
+                  <div className="leaguetitle">[동부리그]</div>
+                  {AErank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
+                    </div>
+                  ))}
+                </League>
+                <League>
+                  <div className="leaguetitle">[서부리그]</div>
+                  {AWrank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
+                    </div>
+                  ))}
+                </League>
+                <League>
+                  <div className="leaguetitle">[중앙리그]</div>
+                  {AMrank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
+                    </div>
+                  ))}
+                </League>
+              </Leagues>
+            )}
           </Rank>
         </CheckBox>
       </Main>
@@ -352,6 +405,93 @@ const MainPage = () => {
           </Today>
           <Rank>
             <div className="title">[팀 순위]</div>
+            <div className="divide">
+              <div claasName="leaguebtn" onClick={handleNa}>
+                내셔널 리그
+              </div>
+              <div claasName="leaguebtn" onClick={handleAm}>
+                아메리칸 리그
+              </div>
+            </div>
+            {national === true ? (
+              <Leagues {...ranksettings}>
+                <League>
+                  <div className="leaguetitle">[동부리그]</div>
+                  {NErank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
+                    </div>
+                  ))}
+                </League>
+                <League>
+                  <div className="leaguetitle">[서부리그]</div>
+                  {NWrank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
+                    </div>
+                  ))}
+                </League>
+                <League>
+                  <div className="leaguetitle">[중앙리그]</div>
+                  {NMrank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
+                    </div>
+                  ))}
+                </League>
+              </Leagues>
+            ) : (
+              <Leagues {...ranksettings}>
+                <League>
+                  <div className="leaguetitle">[동부리그]</div>
+                  {AErank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
+                    </div>
+                  ))}
+                </League>
+                <League>
+                  <div className="leaguetitle">[서부리그]</div>
+                  {AWrank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
+                    </div>
+                  ))}
+                </League>
+                <League>
+                  <div className="leaguetitle">[중앙리그]</div>
+                  {AMrank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
+                    </div>
+                  ))}
+                </League>
+              </Leagues>
+            )}
           </Rank>
         </DownChart>
       </Main>
@@ -392,6 +532,93 @@ const MainPage = () => {
           </Today>
           <Rank>
             <div className="title">[팀 순위]</div>
+            <div className="divide">
+              <div claasName="leaguebtn" onClick={handleNa}>
+                내셔널 리그
+              </div>
+              <div claasName="leaguebtn" onClick={handleAm}>
+                아메리칸 리그
+              </div>
+            </div>
+            {national === true ? (
+              <Leagues {...ranksettings}>
+                <League>
+                  <div className="leaguetitle">[동부리그]</div>
+                  {NErank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
+                    </div>
+                  ))}
+                </League>
+                <League>
+                  <div className="leaguetitle">[서부리그]</div>
+                  {NWrank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
+                    </div>
+                  ))}
+                </League>
+                <League>
+                  <div className="leaguetitle">[중앙리그]</div>
+                  {NMrank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
+                    </div>
+                  ))}
+                </League>
+              </Leagues>
+            ) : (
+              <Leagues {...ranksettings}>
+                <League>
+                  <div className="leaguetitle">[동부리그]</div>
+                  {AErank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
+                    </div>
+                  ))}
+                </League>
+                <League>
+                  <div className="leaguetitle">[서부리그]</div>
+                  {AWrank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
+                    </div>
+                  ))}
+                </League>
+                <League>
+                  <div className="leaguetitle">[중앙리그]</div>
+                  {AMrank.map((rank, idx) => (
+                    <div key={idx} className="rank_cont">
+                      <div className="number">{rank.diveRank}</div>
+                      <div className="rank">
+                        <img src={rank.logo} alt="" />
+                        <div>{rank.teamName}</div>
+                      </div>
+                    </div>
+                  ))}
+                </League>
+              </Leagues>
+            )}
           </Rank>
         </DownChart>
       </Main>
