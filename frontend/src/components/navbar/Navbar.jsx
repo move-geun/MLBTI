@@ -13,7 +13,6 @@ import MenuItem from "@mui/material/MenuItem";
 import styled from "styled-components";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteToken } from "../../api/JWT";
 import isAuthenticated from "../../api/isAuthenticated";
@@ -53,10 +52,8 @@ const Navbar = () => {
   }
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -71,10 +68,6 @@ const Navbar = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -238,7 +231,7 @@ const Navbar = () => {
           ) : (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Login">
-                <IconButton onClick={login} sx={{ p: 0 }}>
+                <IconButton onClick={loginHandle} sx={{ p: 0 }}>
                   <LoginIcon
                     sx={{ fontSize: 40, color: "pink[500]" }}
                   ></LoginIcon>
@@ -250,5 +243,5 @@ const Navbar = () => {
       </Container>
     </AppBar>
   );
-}; 
+};
 export default Navbar;
