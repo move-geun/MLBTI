@@ -38,6 +38,7 @@ import { useDispatch, useSelector } from "react-redux";
 // 너비 지정해놔서 크기 줄 때 바꿔줘야함
 // title 안내려오게끔 고정
 
+// 후후
 const MainPage = () => {
   const notices = useSelector((state) => state.main.notices);
   const todays = useSelector((state) => state.main.todays);
