@@ -250,5 +250,5 @@ const Navbar = () => {
       </Container>
     </AppBar>
   );
-};
+}; 
 export default Navbar;
