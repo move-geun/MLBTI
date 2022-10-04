@@ -600,12 +600,12 @@ public class SimulationServiceImpl implements SimulationService {
 			conn.setRequestProperty("Content-Type", "application/json"); // header Content-Type 정보
 			conn.setRequestProperty("auth", "myAuth"); // header의 auth 정보
 			conn.setDoOutput(true); // 서버로부터 받는 값이 있다면 true
-
+			
 			// 서버로부터 데이터 읽어오기
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			StringBuilder sb = new StringBuilder();
 			String line = null;
-
+			System.out.println(1);
 			while ((line = br.readLine()) != null) { // 읽을 수 있을 때 까지 반복
 				sb.append(line);
 			}
@@ -613,6 +613,7 @@ public class SimulationServiceImpl implements SimulationService {
 			JSONArray playsByInning = obj.getJSONArray("playsByInning");
 			ArrayList<Integer> awayIdx = new ArrayList<>();
 			ArrayList<Integer> homeIdx = new ArrayList<>();
+			System.out.println(2);
 			for(int i=0; i<playsByInning.length(); i++) {
 				JSONObject playByInning = playsByInning.getJSONObject(i);
 				JSONArray top = playByInning.getJSONArray("top");
@@ -624,6 +625,7 @@ public class SimulationServiceImpl implements SimulationService {
 					homeIdx.add(bottom.getInt(j));
 				}
 			}
+			System.out.println(3);
 			JSONArray allPlays = obj.getJSONArray("allPlays");
 			for(int i=0; i<9; i++) {
 				int playIdx = awayIdx.get(i);
@@ -639,7 +641,10 @@ public class SimulationServiceImpl implements SimulationService {
 				int id = batter.getInt("id");
 				awayBatters.add(id);
 				awayBattersSeason.add(2022);
-			}for(int i=0; i<9; i++) {
+			}
+			
+			System.out.println(4);
+			for(int i=0; i<9; i++) {
 				int playIdx = homeIdx.get(i);
 				JSONObject play = allPlays.getJSONObject(playIdx);
 				JSONObject matchup = play.getJSONObject("matchup");
@@ -654,6 +659,7 @@ public class SimulationServiceImpl implements SimulationService {
 				homeBatters.add(id);
 				homeBattersSeason.add(2022);
 			}
+			System.out.println(5);
 			System.out.println(homeBatters);
 			System.out.println(awayBatters);
 			System.out.println(homePitchers);
@@ -666,7 +672,6 @@ public class SimulationServiceImpl implements SimulationService {
 //			System.out.println(a.getName());
 //			System.out.println(a.getName());
 		} catch (Exception e) {
-			System.out.println(e);
 			return null;
 		}
 		pitcherRepositorySupport.findPitcherBySeasonAndUid(1972, 110100);
