@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Main = styled.div`
   width: 95%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   margin: 1rem auto 0 auto;
@@ -119,14 +118,80 @@ const Predict = styled.div`
   border-left: 2px solid rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
+  /* background-color: rgba(123, 12, 15, 0.2); */
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
 
+  &::-webkit-scrollbar-thumb {
+    height: 5%;
+    background-color: rgba(123, 12, 15, 0.2);
+    border-radius: 2rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    height: 5%;
+    background-color: #d7dcff;
+    border-radius: 2rem;
+  }
   font-size: 1rem;
   .title {
     margin-bottom: 20px;
   }
 
+  .contentdiv {
+    display: flex;
+    flex-direction: column;
+  }
+
   .content {
     margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .home {
+      width: 150px;
+      text-align: left;
+      font-size: 0.8rem;
+    }
+
+    .vs {
+      width: 30px;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+
+    .away {
+      width: 150px;
+      text-align: right;
+      font-size: 0.8rem;
+    }
+  }
+  .score {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .homescore {
+      width: 100px;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+
+    .status {
+      width: 150px;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+
+    .awayscore {
+      width: 100px;
+      text-align: center;
+      font-size: 0.8rem;
+    }
   }
 
   @media screen and (max-width: 830px) {
@@ -138,32 +203,53 @@ const Predict = styled.div`
   }
 `;
 
-const Today = styled.div`
-  width: 100%;
-  text-align: center;
-  border-left: 2px solid rgba(0, 0, 0, 0.2);
-  border-right: 2px solid rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  font-size: 1rem;
+// const Today = styled.div`
+//   width: 100%;
+//   text-align: center;
+//   border-left: 2px solid rgba(0, 0, 0, 0.2);
+//   border-right: 2px solid rgba(0, 0, 0, 0.2);
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-start;
+//   font-size: 1rem;
+//   overflow-y: auto;
 
-  .title {
-    margin-bottom: 20px;
-  }
-  .content {
-    margin-bottom: 5px;
-  }
+//   .title {
+//     margin-bottom: 20px;
+//   }
+//   .content {
+//     margin-bottom: 5px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//   }
+//   .home {
+//     width: 150px;
+//     text-align: left;
+//     font-size: 0.8rem;
+//   }
 
-  @media screen and (max-width: 830px) {
-    font-size: 0.8rem;
-    border-left: none;
-    border-right: none;
-  }
-  @media screen and (max-width: 480px) {
-    font-size: 0.5rem;
-  }
-`;
+//   .vs {
+//     width: 30px;
+//     text-align: center;
+//     font-size: 0.8rem;
+//   }
+
+//   .away {
+//     width: 150px;
+//     text-align: right;
+//     font-size: 0.8rem;
+//   }
+
+//   @media screen and (max-width: 830px) {
+//     font-size: 0.8rem;
+//     border-left: none;
+//     border-right: none;
+//   }
+//   @media screen and (max-width: 480px) {
+//     font-size: 0.5rem;
+//   }
+// `;
 
 const Rank = styled.div`
   width: 100%;
@@ -277,7 +363,6 @@ export {
   SimulationCase,
   CheckBox,
   Predict,
-  Today,
   Rank,
   DownChart,
   Leagues,
