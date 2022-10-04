@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Score = styled.div`
-  width: 100%;
+  width: 40rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,6 +10,7 @@ const Score = styled.div`
   color: white;
   border-radius: 10px;
   margin-top: 1rem;
+  margin-left: 5rem;
   padding: 1rem 0;
 `;
 

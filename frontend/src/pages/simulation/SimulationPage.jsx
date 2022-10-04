@@ -4,6 +4,7 @@ import SimulationResult from "../../components/simulation/SimulationResult";
 import {  simulationData } from "./simulation-slice";
 import { useDispatch } from "react-redux";
 import Ground from "./Ground";
+import TeamScore from "../../components/game/TeamScore";
 import { useLocation } from "react-router-dom";
 
 import {
@@ -57,7 +58,7 @@ const SimulationPage = () => {
     <>
       <div className="title">시뮬레이션</div>
           <TopLayout>
-
+            <TeamScore data = {simulData}/>
           
           </TopLayout>
           <BottomLayout>

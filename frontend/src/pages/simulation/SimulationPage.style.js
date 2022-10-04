@@ -72,7 +72,6 @@ top: 14rem;
   animation-direction: normal; */
 
   @keyframes motion {
- 
     0%{
       top: 10rem;
     }
@@ -80,6 +79,7 @@ top: 14rem;
       top : 50rem;
     }
   }
+
 
 `
 
