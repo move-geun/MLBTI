@@ -1,17 +1,22 @@
-// import { letterSpacing } from "@mui/system";
+import { letterSpacing } from "@mui/system";
 import { useEffect, useState } from "react";
 
 import {
+    GroundWrap,
     Img,
+    BallWrap,
     BaseBall,
+    BatterEvent,
     Base,
+    FirstB,
+    SecondB,
+    ThirdB,
   } from "./SimulationPage.style";
-
 
 const Ground = (prop) => { 
 
     const [inningList, setInningList] = useState([]);
-    // const [batterList, setBatterList] = useState([]);
+    const [batterList, setBatterList] = useState([]);
     const [firstBase, setFirstBase] = useState(false);
     const [secondBase, setSecondBase]= useState(false);
     const [thirdBase, setThirdBase] = useState(false);
@@ -24,77 +29,75 @@ const Ground = (prop) => {
 
     useEffect(()=> {
         if(inningList.length >0 ){
-            let list = [];
-                inningList.map(inning => {        
-                console.log("innningggin", inning);   
-                // setInterval(()=> makeBatterList(inning), 3000); 
-                // setTimeout( ()=> makeBatterList(inning), 3000);
+            
+             async function processArray(inningList) {
+            for (let inning of inningList) {
+            // console.log("현재 이닝!", inning.inning)
+                for(let data of inning.datas){
+                    await makeBatterList(data)
+                }                    
+                }
+                console.log('Done!');
+              }
                 
-                
-                list.push(inning);
-                makeBatterList(list);
-                
-                
-                // inning.datas.map(batter => {
-                //     // console.log("batttterrr  ", batter);
-
-                    
-                    
-                // })
-            })
+              processArray(inningList);
+       
         }
     }, [inningList]);
-
-    // const fooor = () => {
-        
-    //     inningList.map()
+    
 
 
-    // }
+     async function makeBatterList(batter) {
+        baseSetting(batter)
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        // await delay(2000)
 
-    const makeBatterList = (list) => {
-        console.log("3초마다 메이커 들어오니   ", list);
-            // inning.dats.map(batter => {
-            //     baseSetting(batter);
-            // })
-       
     }
-
-
-
-    // const baseSetting = (batter) => {
-    //     console.log("10초마다 실행되고 있니");
-    //     setFirstBase(batter.firstBase);
-    //     setSecondBase(batter.secondBase);
-    //     setThirdBase(batter.thirdBase);
-
-    // }
-
-    const showSimul = () => {
-
-
-
-       return(
-        <>
-            {firstBase && <Base className="base1" src={"/assets/base.png"}/>}
-            {secondBase && <Base className="base2" src={"/assets/base.png"}/>}
-            {thirdBase && <Base className="base3" src={"/assets/base.png"}/>}
-        </>
-       )
-
+  
+    
+    function delay(time) {
+        return new Promise(resolve => setTimeout(resolve, time));
 
     }
 
+    const [batterEvent, setBatterEvent] = useState('');
+    const [hitterName, sethitterName ] = useState('');
 
+    const baseSetting = (batter) => {
+        console.log("2초 뒤에 간ㄷ", batter);
+        setFirstBase(batter.firstBase);
+        setSecondBase(batter.secondBase);
+        setThirdBase(batter.thirdBase);
+        setBatterEvent(batter.event);
+        sethitterName(batter.batterName);
 
+    }
 
+    useEffect(()=> {
+        console.log("event 알려줘", batterEvent);
+    }, [batterEvent, hitterName]);
 
     return (
-        <>
-            <Img className="ground" src={"/assets/Ground.png"} />
+        <GroundWrap>
+
+        <Img className="ground" src={"/assets/Ground.png"}/>
+        <BallWrap>
             <BaseBall src={"/assets/baseball.png"}/>
-            {showSimul}
-        </>
+        </BallWrap>
+        <BatterEvent>{hitterName}   {batterEvent}</BatterEvent>
+        <FirstB className="base1" src={"/assets/base.png"}/>
+        <SecondB className="base2" src={"/assets/base.png"}/>
+        <ThirdB className="base3" src={"/assets/base.png"}/>
+{/*         
+            {firstBase && <FirstB className="base1" src={"/assets/base.png"}/>}
+            {secondBase &&  <SecondB className="base2" src={"/assets/base.png"}/>}
+            {thirdBase &&  <ThirdB className="base3" src={"/assets/base.png"}/>}
+         */}
+
+
+
+           
+        </GroundWrap>
             
     );
 };

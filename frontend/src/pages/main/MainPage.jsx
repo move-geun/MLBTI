@@ -1,3 +1,4 @@
+
 import {
   Notice,
   Main,
@@ -247,19 +248,23 @@ const MainPage = () => {
         <CheckBox>
           <Predict>
             <div className="title">[ 어제 경기 결과 ]</div>
-            {yesterdays.map((yesterday, idx) => (
-              <div key={idx} className="content">
-                {yesterday.awayName} vs {yesterday.homeName}
-              </div>
-            ))}
+            <div className="result">
+              {yesterdays.map((yesterday, idx) => (
+                <div key={idx} className="content">
+                  {yesterday.awayName} vs {yesterday.homeName}
+                </div>
+              ))}
+            </div>
           </Predict>
           <Today>
             <div className="title">[ 오늘 경기 일정 ]</div>
-            {todays.map((today, idx) => (
-              <div key={idx} className="content">
-                {today.awayName} vs {today.homeName}
-              </div>
-            ))}
+            <div>
+              {todays.map((today, idx) => (
+                <div key={idx} className="content">
+                  {today.awayName} vs {today.homeName}
+                </div>
+              ))}
+            </div>
           </Today>
           <Rank>
             <div className="title">[팀 순위]</div>
@@ -399,3 +404,4 @@ const MainPage = () => {
   }
 };
 export default MainPage;
+
