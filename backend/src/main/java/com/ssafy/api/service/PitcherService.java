@@ -20,6 +20,6 @@ import com.ssafy.db.entity.Pitchers;
   */
 public interface PitcherService {
 	List<Pitchers> getAllPitchers();
-	Optional<Pitchers> getPitcherBySeasonAndUid(int season, int uid);
+	Pitchers getPitcherBySeasonAndUid(int season, int uid);
 	List<Pitchers> getPitcherByName(String searchName);
 }

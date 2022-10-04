@@ -90,6 +90,8 @@ public class QPitchers extends EntityPathBase<Pitchers> {
 
     public final NumberPath<Integer> season = createNumber("season", Integer.class);
 
+    public final NumberPath<Integer> playerUid = createNumber("playerUid", Integer.class);
+
     public final NumberPath<Float> standardDeviation = createNumber("standardDeviation", Float.class);
 
     public final QTeams team;

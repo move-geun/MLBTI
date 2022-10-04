@@ -3,13 +3,19 @@
  */
 package com.ssafy.api.controller;
 
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.api.request.NoticeRegisterPostReq;
+import com.ssafy.api.service.SimulationService;
 import com.ssafy.db.entity.LiveGames;
 import com.ssafy.db.entity.SimulGameDatas;
 import com.ssafy.db.entity.SimulGameInning;
@@ -37,7 +43,26 @@ import com.google.gson.JsonParser;
 @RestController
 @RequestMapping("/api/simul")
 public class SimulController {
+	@Autowired
+	private SimulationService simulationService;
+	
 
+	@PostMapping("/normal")
+	@ApiOperation(value = "경기 시물레이션", notes = "<strong>오늘 경기를</strong> 시뮬레이션한다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 401, message = "인증 실패"),
+        @ApiResponse(code = 404, message = "사용자 없음"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<String> todaySimul(@ApiParam(value = "homeTeamUid", required = true) @RequestParam("homeTeamUid") int homeTeamUid,
+			@ApiParam(value = "awayTeamUid", required = true) @RequestParam("awayTeamUid") int awayTeamUid) {
+		
+		String json = simulationService.getNormalSim(homeTeamUid, awayTeamUid);
+		return ResponseEntity.status(200).body(json);
+		
+	}
+	
 	@PostMapping()
 	@ApiOperation(value = "batter 정보 얻기", notes = "<strong>schedule에서 </strong> batter 정보를 가져온다.") 
     @ApiResponses({

@@ -3,6 +3,8 @@
  */
 package com.ssafy.db.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,7 +27,7 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
-public class Batters{
+public class Batters implements Serializable{
 	
 //	@OneToOne
 //	@JoinColumn(name="player_uid")
@@ -41,7 +43,28 @@ public class Batters{
 	Teams team;
 	
 	String league;
-	
+	int uid;
+	int leftRbiNum;
+	int leftBBNum;
+	int leftAONum;
+	int leftSONum;
+	int leftGONum;
+	int leftSHNum;
+	int leftSFNum;
+	int leftIBBNum;
+	int leftStrikeNum;
+	int leftBallNum;
+
+	int rightRbiNum;
+	int rightBBNum;
+	int rightAONum;
+	int rightSONum;
+	int rightGONum;
+	int rightSHNum;
+	int rightSFNum;
+	int rightIBBNum;
+	int rightStrikeNum;
+	int rightBallNum;
 	
 	String teamName;
 	String name;

@@ -47,7 +47,7 @@ public class BatterServiceImpl implements BatterService{
 	}
 	
 	@Override
-	public Optional<Batters> getBatterBySeasonAndUid(int season, int uid) {
+	public Batters getBatterBySeasonAndUid(int season, int uid) {
 		return battersRepository.findBySeasonAndPlayerUid(season, uid);
 	}
 
