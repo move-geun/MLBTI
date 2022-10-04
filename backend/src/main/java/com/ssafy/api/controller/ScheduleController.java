@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.api.response.BaseRes;
 import com.ssafy.api.service.ScheduleService;
+import com.ssafy.api.service.TeamService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.dto.ScheduleDto;
 import com.ssafy.db.entity.Schedules;
@@ -44,6 +45,9 @@ public class ScheduleController {
 
 	@Autowired
 	ScheduleService scheduleService;
+	
+	@Autowired
+	TeamService teamService;
 	
 	@GetMapping("/{gameId}")
 	@ApiOperation(value = "gameId로 스케줄 가져오기", notes = "<strong>gameId를 통해 스케줄을 가져온다.") 
@@ -83,9 +87,13 @@ public class ScheduleController {
 		if(s.size()==0) {
 			return ResponseEntity.status(404).body(BaseRes.of(404, "failed"));
 		}
-		List l = new ArrayList<Schedules>();
+		List l = new ArrayList<ScheduleDto>();
 		for(int i=0;i<s.size();++i) {
-			l.add(ScheduleDto.of(s.get(i)));
+			 
+			String awayLogo = teamService.getTeamById(Integer.parseInt(s.get(i).getAwayId())).getLogo();
+			String homeLogo = teamService.getTeamById(Integer.parseInt(s.get(i).getHomeId())).getLogo();
+			
+			l.add(ScheduleDto.of(s.get(i),homeLogo,awayLogo));
 		}
 
 		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",l));
