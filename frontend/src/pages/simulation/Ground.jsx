@@ -85,14 +85,14 @@ const Ground = (prop) => {
             <BaseBall src={"/assets/baseball.png"}/>
         </BallWrap>
         <BatterEvent>{hitterName}   {batterEvent}</BatterEvent>
-        <FirstB className="base1" src={"/assets/base.png"}/>
+        {/* <FirstB className="base1" src={"/assets/base.png"}/>
         <SecondB className="base2" src={"/assets/base.png"}/>
-        <ThirdB className="base3" src={"/assets/base.png"}/>
-{/*         
+        <ThirdB className="base3" src={"/assets/base.png"}/> */}
+        
             {firstBase && <FirstB className="base1" src={"/assets/base.png"}/>}
             {secondBase &&  <SecondB className="base2" src={"/assets/base.png"}/>}
             {thirdBase &&  <ThirdB className="base3" src={"/assets/base.png"}/>}
-         */}
+        
 
 
 

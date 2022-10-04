@@ -9,6 +9,17 @@ import {
  BatterResult
 } from './SimulationResult.style';
 
+
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+
+
+
+import { current } from '@reduxjs/toolkit';
+
 const defaultValue = {};
 const SimulationResult = (prop = defaultValue) => {
   
@@ -127,16 +138,72 @@ const SimulationResult = (prop = defaultValue) => {
   };
 
 
+  const [value, setValue] = React.useState(1);
+
+  const handleChange = (event, newValue) => {
+    setCurrentTab(newValue);
+  };
+
+
+  const tabs = [
+    {label: '1회'},
+    {label: '2회'},
+    {label: '3회'},
+    {label: '4회'},
+    {label: '5회'},
+    {label: '6회'},
+    {label: '7회'},
+    {label: '8회'},
+    {label: '9회'},
+    {label: '10회'},
+    {label: '11회'},
+    {label: '12회'},
+
+  ]
+
+
   return (
     <>
       <div>
-        <TabMenu>
+        {/* <TabMenu>
         {
            menuArr.map((v, idx) => {
             return <TabName onClick={()=> onClickHandler(idx)}>{v.name}</TabName>
           })
         } 
-        </TabMenu>
+        </TabMenu>  */}
+          <Tabs                                                               
+              indicatorColor="primary"                                          
+              onChange={handleChange}                                       
+              scrollButtons="auto"                                              
+              sx={{ px: 1, fontWeight:'bold' }}                                                    
+              textColor="primary"                                               
+              value={currentTab}                                                
+              variant="scrollable">                                                                   
+            {tabs.map((tab) => (                          
+          <Tab                                        
+            key={tab.value}                           
+            label={
+              // 여기가 수정 됨
+              <Typography                             
+                sx={{                                 
+                  border: '2px solid',                
+                  borderColor: 'inherit',             
+                  borderRadius: 3,                    
+                  px: 3,                              
+                  fontSize: '1rem',                
+                  fontWeight: 'bold',                 
+                }}                                    
+              >                                       
+                {tab.label}                           
+              </Typography>                           
+            }                                         
+            value={tab.value}                         
+          />                                          
+        ))}                  
+                                                     
+        </Tabs>
+
         <div>
         <StatusBtn onClick={onClickTopPlay}>{currentTab+1}회 초</StatusBtn>
         <StatusBtn onClick={onClickBottomPlay}>{currentTab+1}회 말</StatusBtn>
@@ -144,7 +211,7 @@ const SimulationResult = (prop = defaultValue) => {
         {
           batterList.batterName !== null ?
           (batterList.map(b =>{
-            return(<BatterResult>투수 {b.batterName}  {b.batterEvent}</BatterResult>)
+            return(<BatterResult>타자 {b.batterName}  {b.batterEvent}</BatterResult>)
           }))
           :
           (<div>데이터를 가져오는 중입니다.</div>)
