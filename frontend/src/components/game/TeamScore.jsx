@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
  
 const TeamScore = (prop) => {
 
-  const [inningList, setInningList] = useState([]);
-
- 
   const [gameInfo, setGameInfo] = useState({});
   const [scoreBoard, setScoreBoard] = useState([]);
   const [scoreInfo, setScoreInfo] = useState([]);
+
+  let cnt = 0;
+  let list = [];
 
   useEffect(()=> {
     if(prop.data.gamePk){
@@ -18,13 +18,10 @@ const TeamScore = (prop) => {
   }, [prop]);
 
 
-  let list = [];
-
   useEffect(()=> {
     if(gameInfo.gamePk){
       let homeScore = gameInfo.scoreBoard[0];
       let awayScore = gameInfo.scoreBoard[1];
-
 
         for(let i = 0; i < gameInfo.scoreBoard[0].length - 2 ; i ++){
           let data = {
@@ -41,7 +38,6 @@ const TeamScore = (prop) => {
 
   // 이닝별 스코어 데이터 파싱
   const eachInningScore = (data) => {
-    console.log("파싱한 데이터 확인해볼까`~~" , data);
     setScoreBoard(data);
   }
 
@@ -57,8 +53,6 @@ const TeamScore = (prop) => {
       whozWin(scoreInfo);
     }
   }, [scoreInfo]);
-
-
 
 
   // 경기 종료한 후 최종 점수 저장
@@ -79,8 +73,6 @@ const TeamScore = (prop) => {
       setWinMark(1);
     }
   }
-
-
 
   return (
     <Score>
@@ -111,12 +103,12 @@ const TeamScore = (prop) => {
           <div>{gameInfo.homeName}</div>
           <div>{gameInfo.awayName}</div>
         </div>
-      {
-        scoreBoard.map(inning => {     
-              
+  
+        { scoreBoard.map(inning => {     
+            cnt += 1;
           return(
             <div className="each">
-              <div className="info">_</div>
+              <div className="info">{cnt}</div>
               <div>{inning.home}</div>
               <div>{inning.away}</div>
             </div>
@@ -124,72 +116,6 @@ const TeamScore = (prop) => {
           )
         })
       }
-    
-        {/* <div className="each">
-          <div className="info">1</div>
-          <div>1</div>
-          <div>2</div>
-        </div>
-        <div className="each">
-          <div className="info">2</div>
-          <div>1</div>
-          <div>2</div>
-        </div>
-        <div className="each">
-          <div className="info">3</div>
-          <div>1</div>
-          <div>2</div>
-        </div>
-        <div className="each">
-          <div className="info">4</div>
-          <div>1</div>
-          <div>2</div>
-        </div>
-        <div className="each">
-          <div className="info">5</div>
-          <div>1</div>
-          <div>2</div>
-        </div>
-        <div className="each">
-          <div className="info">6</div>
-          <div>1</div>
-          <div>2</div>
-        </div>
-        <div className="each">
-          <div className="info">7</div>
-          <div>1</div>
-          <div>2</div>
-        </div>
-        <div className="each">
-          <div className="info">8</div>
-          <div>1</div>
-          <div>2</div>
-        </div>
-        <div className="each">
-          <div className="info">9</div>
-          <div>1</div>
-          <div>2</div>
-        </div>
-        <div className="each">
-          <div className="info">R</div>
-          <div>5</div>
-          <div>3</div>
-        </div>
-        <div className="each">
-          <div className="info">H</div>
-          <div>11</div>
-          <div>6</div>
-        </div>
-        <div className="each">
-          <div className="info">E</div>
-          <div>0</div>
-          <div>0</div>
-        </div>
-        <div className="each">
-          <div className="info">B</div>
-          <div>7</div>
-          <div>3</div>
-        </div> */}
       </ScoreInfo>
     </Score>
   );
