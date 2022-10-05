@@ -243,13 +243,19 @@ const MainPage = () => {
             <img className="main_simul" src="../assets/Ground.png" alt="" />
             <div className="main_des">
               <div className="team_des">
-                <img src="" alt="홈팀로고" />
-                <div>홈팀이름</div>
+                <img src={todays[todays.length - 1].homeLogo} alt="홈팀로고" />
+                <div>{todays[todays.length - 1].homeName}</div>
               </div>
-              <h5>지금 시뮬레이션 경기 중</h5>
+              <div class="simul_case">
+                <h5>지금 시뮬레이션 경기 중</h5>
+                <div class="dot-elastic"></div>
+              </div>
               <div className="team_des">
-                <img src="" alt="어웨이로고" />
-                <div>어웨이팀 이름</div>
+                <img
+                  src={todays[todays.length - 1].awayLogo}
+                  alt="어웨이로고"
+                />
+                <div>{todays[todays.length - 1].awayName}</div>
               </div>
             </div>
           </div>

@@ -17,16 +17,125 @@ const Main = styled.div`
     flex-direction: row;
     align-items: center;
     margin: 0 auto;
+    margin-top: 5px;
+    font-size: 1rem;
+    h5 {
+      font-size: 1.5rem;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
     img {
       width: 50px;
       height: 50px;
-      border-radius: 50%;
     }
     .team_des {
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      div {
+        margin-top: 5px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+    .simul_case {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .dot-elastic {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: blue;
+      color: #9880ff;
+      animation: dotElastic 1s infinite linear;
+    }
+
+    .dot-elastic::before,
+    .dot-elastic::after {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      top: 0;
+    }
+
+    .dot-elastic::before {
+      left: -30px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: yellow;
+      color: #9880ff;
+      animation: dotElasticBefore 1s infinite linear;
+    }
+
+    .dot-elastic::after {
+      left: 30px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: tomato;
+      color: #9880ff;
+      animation: dotElasticAfter 1s infinite linear;
+    }
+
+    @keyframes dotElasticBefore {
+      0% {
+        transform: scale(1, 1);
+      }
+      25% {
+        transform: scale(1, 1.5);
+      }
+      50% {
+        transform: scale(1, 0.67);
+      }
+      75% {
+        transform: scale(1, 1);
+      }
+      100% {
+        transform: scale(1, 1);
+      }
+    }
+
+    @keyframes dotElastic {
+      0% {
+        transform: scale(1, 1);
+      }
+      25% {
+        transform: scale(1, 1);
+      }
+      50% {
+        transform: scale(1, 1.5);
+      }
+      75% {
+        transform: scale(1, 1);
+      }
+      100% {
+        transform: scale(1, 1);
+      }
+    }
+
+    @keyframes dotElasticAfter {
+      0% {
+        transform: scale(1, 1);
+      }
+      25% {
+        transform: scale(1, 1);
+      }
+      50% {
+        transform: scale(1, 0.67);
+      }
+      75% {
+        transform: scale(1, 1.5);
+      }
+      100% {
+        transform: scale(1, 1);
+      }
     }
   }
   /* 스켈레톤용 */
