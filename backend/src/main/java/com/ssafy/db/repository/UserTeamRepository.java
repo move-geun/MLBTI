@@ -7,7 +7,9 @@ import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.ssafy.db.entity.BaseballPlayers;
 import com.ssafy.db.entity.UserTeams;
+import com.ssafy.db.entity.Users;
 
 /**
 
@@ -22,4 +24,6 @@ public interface UserTeamRepository extends JpaRepository<UserTeams, Integer> {
 	List<UserTeams> findAllByUserUid(Integer user_uid);
 	@Transactional
 	void deleteAllByUserUid(Integer user_uid);
+	UserTeams findByUserAndBaseballPlayer(Users user, BaseballPlayers baseballPlayer);
+	boolean existsByUserAndBaseballPlayer(Users user, BaseballPlayers baseballPlayer);
 }

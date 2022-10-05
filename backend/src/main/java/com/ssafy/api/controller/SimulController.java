@@ -48,7 +48,7 @@ public class SimulController {
 	
 
 	@PostMapping("/normal")
-	@ApiOperation(value = "경기 시물레이션", notes = "<strong>오늘 경기를</strong> 시뮬레이션한다.") 
+	@ApiOperation(value = "경기 시물레이션", notes = "두 팀 UID를 받아서<strong>오늘 경기를</strong> 시뮬레이션한다.") 
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
         @ApiResponse(code = 401, message = "인증 실패"),
@@ -59,6 +59,22 @@ public class SimulController {
 			@ApiParam(value = "awayTeamUid", required = true) @RequestParam("awayTeamUid") int awayTeamUid) {
 		
 		String json = simulationService.getNormalSim(homeTeamUid, awayTeamUid);
+		return ResponseEntity.status(200).body(json);
+		
+	}
+	
+	@PostMapping("/custom")
+	@ApiOperation(value = "경기 시물레이션", notes = "사용자의 email과 실제 팀을 입력받아<strong>경기를</strong> 시뮬레이션한다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 401, message = "인증 실패"),
+        @ApiResponse(code = 404, message = "사용자 없음"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<String> custom(@ApiParam(value = "email", required = true) @RequestParam("email") String email,
+			@ApiParam(value = "teamUid", required = true) @RequestParam("teamUid") int teamUid) {
+		
+		String json = simulationService.getCustomSim(email, teamUid);
 		return ResponseEntity.status(200).body(json);
 		
 	}
