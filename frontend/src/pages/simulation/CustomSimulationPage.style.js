@@ -1,15 +1,18 @@
 import styled from "styled-components";
 
 const CustomConatiner = styled.div`
+  /* background-image : url("/assets/customSimulBackground2.jpg"); */
+  background-repeat: no-repeat;
   display: flex;
   height: 100%;
   width: 800px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 5rem auto;
+  margin: 0 auto;
   font-size: 1.5rem;
-
+  margin-top: 2rem;
+  /* color: white; */
   @media screen and (max-width: 830px) {
     font-size: 1.3rem;
     width: 600px;
@@ -28,13 +31,10 @@ const CustomConatiner = styled.div`
     img {
       height: 100px;
       width: 100px;
-      margin-bottom: 1rem;
-      cursor: pointer;
       @media screen and (max-width: 830px) {
         width: 80px;
         height: 80px;
       }
-
     }
   }
 `;
@@ -59,6 +59,7 @@ const TeamCase = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   cursor: pointer;
   div {
     margin-top: 1rem;
@@ -67,14 +68,25 @@ const TeamCase = styled.div`
   img {
     width: 200px;
     height: 200px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    transition: all 0.3s ease-in-out;
+
+    :hover {
+      transform: scale(1.2);
+      -webkit-transform: scale(1.2);
+    }
+
     @media screen and (max-width: 830px) {
       width: 180px;
-    height: 180px;
-  }
-  @media screen and (max-width: 480px) {
-    width: 130px;
-    height: 130px;
-  }
+      height: 180px;
+    }
+    @media screen and (max-width: 480px) {
+      width: 130px;
+      height: 130px;
+    }
   }
 `;
 const ModalBox = styled.div`
