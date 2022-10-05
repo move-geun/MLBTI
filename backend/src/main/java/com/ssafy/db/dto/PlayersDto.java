@@ -37,6 +37,7 @@ public class PlayersDto {
 		b.setLeague(batters.getLeague());
 		b.setSeason(batters.getSeason());
 		b.setTeamName(batters.getTeamName());
+		b.setPosition(batters.getPosition());
 		// 여기서 타율 계산
 		float batAvg = (batters.getLeftHitNum()+batters.getRightHitNum()+batters.getLeftTwobHitNum()+batters.getRightTwobHitNum()+batters.getLeftThreebHitNum()+batters.getRightThreebHitNum()+batters.getLeftHrNum()+batters.getRightHrNum())/(float)(batters.getLeftAtBatNum()+batters.getRightAtBatNum());
 		b.setIndicator(batAvg);
@@ -50,6 +51,7 @@ public class PlayersDto {
 		b.setLeague(pitchers.getLeague());
 		b.setSeason(pitchers.getSeason());
 		b.setTeamName(pitchers.getTeamName());
+		b.setPosition(pitchers.getPosition());
 		// 여기서 타율 계산
 //		float era = Math.round(((float)(pitchers.getLeftEr() + pitchers.getRightEr())*9*1000)/(pitchers.getLeftInningNum() + pitchers.getRightInningNum()))/(float)1000;
 		float era1 = Math.round(((float)(pitchers.getLeftEr() + pitchers.getRightEr())*9*1000*3)/(pitchers.getLeftOutNum() + pitchers.getRightOutNum()))/(float)1000;

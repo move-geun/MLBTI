@@ -20,16 +20,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
+import com.ssafy.db.entity.BaseballPlayers;
 import com.ssafy.db.entity.Batters;
 import com.ssafy.db.entity.Pitchers;
 import com.ssafy.db.entity.SimulGameDatas;
 import com.ssafy.db.entity.SimulGameInning;
 import com.ssafy.db.entity.SimulGames;
+import com.ssafy.db.entity.UserTeams;
+import com.ssafy.db.entity.Users;
 import com.ssafy.db.repository.BaseballPlayerRepository;
 import com.ssafy.db.repository.BatterRepository;
 import com.ssafy.db.repository.PitcherRepository;
 import com.ssafy.db.repository.PitcherRepositorySupport;
 import com.ssafy.db.repository.TeamRepository;
+import com.ssafy.db.repository.UserRepository;
+import com.ssafy.db.repository.UserTeamRepository;
 
 /**
  * 
@@ -52,6 +57,10 @@ public class SimulationServiceImpl implements SimulationService {
 	private BaseballPlayerRepository baseballPlayerRepository;
 	@Autowired
 	private TeamRepository teamRepository;
+	@Autowired
+	private UserTeamRepository userTeamRepository;
+	@Autowired
+	private UserRepository userRepository;
 
 	static HashMap<String, String> map = new HashMap<>();
 	static {
@@ -771,27 +780,29 @@ public class SimulationServiceImpl implements SimulationService {
 	@Override
 	public String getCustomSim(String email, int teamUid) {
 		ArrayList<Integer> homeBatters = new ArrayList<>();
-		ArrayList<Integer> awayBatters = new ArrayList<>();
 		ArrayList<Integer> homePitchers = new ArrayList<>();
-		ArrayList<Integer> awayPitchers = new ArrayList<>();
 		ArrayList<Integer> homeBattersSeason = new ArrayList<>();
-		ArrayList<Integer> awayBattersSeason = new ArrayList<>();
 		ArrayList<Integer> homePitchersSeason = new ArrayList<>();
+		ArrayList<Integer> awayBatters = new ArrayList<>();
+		ArrayList<Integer> awayPitchers = new ArrayList<>();
+		ArrayList<Integer> awayBattersSeason = new ArrayList<>();
 		ArrayList<Integer> awayPitchersSeason = new ArrayList<>();
 		int gamePK = 0;
 		Calendar calendar = new GregorianCalendar();
 		SimpleDateFormat SDF = new SimpleDateFormat("MM/dd/yyyy");
 
 		String chkDate = SDF.format(calendar.getTime());
+		String chkDate2 = SDF.format(calendar.getTime());
+		chkDate2 = SDF.format(calendar.getTime());
 		calendar.add(Calendar.DATE, -2);
 		chkDate = SDF.format(calendar.getTime());
-		System.out.println(chkDate);
 		String homeName = "";
 		String awayName = "";
 		try {
 			URL url = new URL(
-					"https://statsapi.mlb.com/api/v1/schedule?sportId=1&startDate=" + chkDate + "&endDate=" + chkDate); // fastAPI에서
+					"https://statsapi.mlb.com/api/v1/schedule?sportId=1&startDate=" + chkDate + "&endDate=" + chkDate2); // fastAPI에서
 																														// 호출
+			System.out.println("https://statsapi.mlb.com/api/v1/schedule?sportId=1&startDate=" + chkDate + "&endDate=" + chkDate2);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
 			conn.setRequestMethod("GET"); // http 메서드
@@ -820,8 +831,14 @@ public class SimulationServiceImpl implements SimulationService {
 					gamePK = game.getInt("gamePk");
 					awayName = team.getString("name");
 				}
+				JSONObject home = teams.getJSONObject("home");
+				team = home.getJSONObject("team");
+				id = team.getInt("id");
+				if (id == teamUid) {
+					gamePK = game.getInt("gamePk");
+					awayName = team.getString("name");
+				}
 			}
-			System.out.println(date);
 		} catch (Exception e) {
 			System.out.println("경기 없음");
 			return null;
@@ -851,9 +868,9 @@ public class SimulationServiceImpl implements SimulationService {
 				isAway = true;
 			}
 		} catch (Exception e) {
+			System.out.println(e);
 			return null;
 		}
-
 		try {
 			URL url = new URL("https://statsapi.mlb.com/api/v1/game/" + gamePK + "/playByPlay"); // fastAPI에서 호출
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -921,9 +938,36 @@ public class SimulationServiceImpl implements SimulationService {
 				awayPitchersSeason.add(2022);
 			}
 		} catch (Exception e) {
+			System.out.println(e);
 			return null;
 		}
 
+//		ArrayList<Integer> homeBatters = new ArrayList<>();
+//		ArrayList<Integer> homePitchers = new ArrayList<>();
+//		ArrayList<Integer> homeBattersSeason = new ArrayList<>();
+//		ArrayList<Integer> homePitchersSeason = new ArrayList<>();
+		
+		int userUid = userRepository.findByEmail(email).get().getUid();
+		ArrayList<UserTeams> userteams = (ArrayList<UserTeams>) userTeamRepository.findAllByUserUid(userUid);
+		int[] batterIdx = new int[9];
+		int[] batterSeason = new int[9];
+		int pitcherIdx = 0;
+		int pitcherSeason = 0;
+		for(int i=0; i<userteams.size(); i++) {
+			if(userteams.get(i).getOrder()>=1&&userteams.get(i).getOrder()<=9) {
+				batterIdx[userteams.get(i).getOrder()-1] = userteams.get(i).getBaseballPlayer().getUid();
+				batterSeason[userteams.get(i).getOrder()-1] = userteams.get(i).getSeason();
+			} else {
+				pitcherIdx = userteams.get(i).getBaseballPlayer().getUid();
+				pitcherSeason = userteams.get(i).getSeason();
+			}
+		}
+		for(int i=0; i<9; i++) {
+			homeBatters.add(batterIdx[i]);
+			homeBattersSeason.add(batterSeason[i]);
+		}
+		homePitchers.add(pitcherIdx);
+		homePitchersSeason.add(pitcherSeason);
 		ArrayList<Batters> homeBattersArray = new ArrayList<>();
 		ArrayList<Batters> awayBattersArray = new ArrayList<>();
 		ArrayList<Pitchers> homePitchersArray = new ArrayList<>();
