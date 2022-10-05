@@ -23,7 +23,12 @@ const [userEmail, setUserEmail] = useState();
 const dispatch = useDispatch();
 
     // 웹소켓
-    const webSocket = new WebSocket("ws://localhost:8081/teamName"); 
+    const webSocket = new WebSocket("wss://j7e202.p.ssafy.io:8081/teamName"); 
+
+    // const webSocket = new WebSocket("ws://localhost:8081/teamName"); 
+
+
+
 
     const onEnter = (e) => {
         if(e.key === 'Enter'){

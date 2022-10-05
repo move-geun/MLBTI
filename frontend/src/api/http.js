@@ -2,7 +2,7 @@ import baseAxios from "axios";
 import { getToken } from "./JWT";
 
 const auth_axios = baseAxios.create({
-  baseURL: "http://j7e202.p.ssafy.io:8081/api",
+  baseURL: "https://j7e202.p.ssafy.io:8081/api",
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${getToken()}`,
@@ -10,7 +10,7 @@ const auth_axios = baseAxios.create({
 });
 
 const axios = baseAxios.create({
-  baseURL: "http://j7e202.p.ssafy.io:8081/api",
+  baseURL: "https://j7e202.p.ssafy.io:8081/api",
   headers: {
     "Content-Type": "application/json",
   },

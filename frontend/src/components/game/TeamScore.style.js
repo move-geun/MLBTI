@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Score = styled.div`
-  width: 40rem;
+  width: 60rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

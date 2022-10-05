@@ -1,47 +1,47 @@
-import styled from "styled-components";
+import styled, {createGlobalStyle} from "styled-components";
 
+const GlobalStyle= createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+
+  @font-face {
+  font-family: 'Staatliches';
+  src: url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap')
+    format("staat");
+}
+`
 
 const TopLayout = styled.div`
   width: 100%;
-  height: 500px;
-
-
-
+  height: 200px;
+  text-align: center;
 `
-
 
 const BottomLayout = styled.div`
   width: 100%;
   height: 500px;
   display: flex;
   flex-direction: row;
-
-
 `
 const GroundContainer = styled.div`
-
   flex-grow:1;
   width: 50%;
   height: 100%;
   box-sizing: border-box;
-
 `
 
 const SimulResultContainer = styled.div`
-
   flex-grow:1;
   width: 50%;
   height: 100%;
   box-sizing: border-box;
-
 `
 
 const GroundWrap = styled.div`
   position: relative;
+  margin-left: 2rem;
 `
 
 const Img = styled.img`
-
   position: absolute;
   margin: 1rem 1rem 0 1rem;
 
@@ -126,14 +126,37 @@ const Base = styled.img`
 } */
 `
 
+const BatterWrap = styled.div`
+  text-align: center;
+`
+
 const BatterEvent = styled.div`
-  font-size: xxx-large;
-  font-weight: bold;
-  top: 2rem;
-  left: 8rem;
+  margin-left: 8.5rem;
   position: relative;
   z-index: 100;
+  width: 14rem;
+  padding: 0.6rem;
+  background-color: white;
+  text-align: center;
+  border: #16345A solid;
+  box-shadow: 2px 2px #16345A, 5px 5px #4D8CBF;
+`
 
+const BatterName = styled.div`
+
+font-size: 2em;
+font-weight: 700;
+
+  /* top: 2rem;
+  left: 5rem;
+  position: relative;
+  z-index: 100;
+  text-align: center;
+
+  font-family: 'Staatliches', cursive;
+ 
+  color: #F1C164;
+  text-shadow: 5px 5px #16345A, 8px 8px #284D8E, 11px 11px #4D8CBF, 14px 14px #5FA9D9; */
 `
 
 const FirstB = styled.img`
@@ -150,11 +173,7 @@ animation: blink-effect 1s step-end infinite;
   @keyframes blink-effect {
   50% {
     opacity: 0;
-  }
-
-  }
-
-
+  }}
 `
 
 const SecondB = styled.img`
@@ -167,14 +186,10 @@ left: 14em;
 
 animation: blink-effect 1s step-end infinite;
   /* animation: hue-rotate 3s linear infinite; */
-
   @keyframes blink-effect {
   50% {
     opacity: 0;
-  }
-
-  }
-
+  }}
 `
 
 const ThirdB = styled.img`
@@ -187,16 +202,13 @@ left: 5.5em;
 
 animation: blink-effect 1s step-end infinite;
   /* animation: hue-rotate 3s linear infinite; */
-
   @keyframes blink-effect {
   50% {
     opacity: 0;
-  }
-
-  }
-
+  }}
 `
 
 export { TopLayout, BottomLayout, GroundContainer,SimulResultContainer, 
   GroundWrap, Img,BallWrap, BaseBall, Base, 
-  BatterEvent, FirstB, SecondB, ThirdB };
+  BatterWrap, BatterEvent, BatterName,
+   FirstB, SecondB, ThirdB };

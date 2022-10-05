@@ -13,6 +13,7 @@ const TeamScore = (prop) => {
 
   useEffect(()=> {
     if(prop.data.gamePk){
+      // console.log("여기는 전광판", prop.data);
         setGameInfo(prop.data);
     }
   }, [prop]);
@@ -43,7 +44,7 @@ const TeamScore = (prop) => {
 
   useEffect(()=> {
     if(scoreBoard.length > 0 ){
-      console.log("scoreBoard 값 들어옴!!!", scoreBoard)
+
     }
     
   }, [scoreBoard]);
@@ -58,7 +59,7 @@ const TeamScore = (prop) => {
   // 경기 종료한 후 최종 점수 저장
   const finalBigScore = (data) => {
     data.map(s => {
-      setScoreInfo(prev => [...prev, s[13]]);
+      setScoreInfo(prev => [...prev, s[12]]);
     })    
   }
 
@@ -109,8 +110,8 @@ const TeamScore = (prop) => {
           return(
             <div className="each">
               <div className="info">{cnt}</div>
-              <div>{inning.home}</div>
-              <div>{inning.away}</div>
+              <div>{inning.home !== null ? inning.home : '_'}</div>
+              <div>{inning.away !== null ? inning.away: '_'} </div>
             </div>
           
           )
