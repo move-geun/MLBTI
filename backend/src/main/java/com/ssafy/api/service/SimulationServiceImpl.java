@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
@@ -53,6 +53,16 @@ public class SimulationServiceImpl implements SimulationService {
 	@Autowired
 	private TeamRepository teamRepository;
 
+	static HashMap<String, String> map = new HashMap<>();
+	static {
+		map.put("1B", "1루타");
+		map.put("2B", "2루타");
+		map.put("3B", "3루타");
+		map.put("HR", "홈런");
+		map.put("SO", "삼진 아웃");
+		map.put("GO", "땅볼 아웃");
+		map.put("AO", "뜬공 아웃");
+	}
 	static class Team {
 		String teamName;
 		ArrayList<Batters> batters;
@@ -378,7 +388,7 @@ public class SimulationServiceImpl implements SimulationService {
 					}
 					temp.setInning(inning);
 					temp.setStatus("초");
-					e.setEvent(result);
+					e.setEvent(map.get(result));
 					e.setRbi(runBattedIn);
 					temp.getDatas().add(e);
 //					homeTeam.pitch[homeTeam.pitcherIndex] += (awayTeam.nowBatter().PdivPA
@@ -521,7 +531,7 @@ public class SimulationServiceImpl implements SimulationService {
 					}
 					temp.setInning(inning);
 					temp.setStatus("말");
-					e.setEvent(result);
+					e.setEvent(map.get(result));
 					e.setRbi(runBattedIn);
 					temp.getDatas().add(e);
 //					awayTeam.pitch[awayTeam.pitcherIndex] += (homeTeam.nowBatter().PdivPA
