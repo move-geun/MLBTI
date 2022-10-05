@@ -22,7 +22,10 @@ const SimulationPage = () => {
 
   const [teamData, setTeamData] = useState({});
   const [simulData, setSimulData] = useState({});
+  // const [logoUrl, setLogoUrl] = useState([]);
   const teamId = {team1: data.home.id, team2: data.away.id};
+  const logoUrl = [data.home.logo, data.away.logo];
+
 
 
   useEffect(() => {
@@ -34,8 +37,6 @@ const SimulationPage = () => {
   
       });
   }, []);
-
-
 
 
   useEffect(()=> {
@@ -61,7 +62,7 @@ const SimulationPage = () => {
     <>
       <div className="title"></div>
           <TopLayout>
-            <TeamScore data = {simulData}/>
+            <TeamScore data = {simulData} logo = {logoUrl}/>
           
           </TopLayout>
           <BottomLayout>

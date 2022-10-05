@@ -7,14 +7,17 @@ const TeamScore = (prop) => {
   const [gameInfo, setGameInfo] = useState({});
   const [scoreBoard, setScoreBoard] = useState([]);
   const [scoreInfo, setScoreInfo] = useState([]);
+  const [ logoUrl, setLogoUrl] = useState([]);
 
   let cnt = 0;
   let list = [];
 
   useEffect(()=> {
     if(prop.data.gamePk){
-      // console.log("여기는 전광판", prop.data);
-        setGameInfo(prop.data);
+      console.log("여기는 전광판", prop);
+      setGameInfo(prop.data);
+      setLogoUrl(prop.logo);
+
     }
   }, [prop]);
 
@@ -36,6 +39,12 @@ const TeamScore = (prop) => {
         finalBigScore(gameInfo.scoreBoard);
     }  
   }, [gameInfo]);
+
+  useEffect(()=>{
+    if(logoUrl.length > 0){
+      console.log("로고 URL 읽으셈", logoUrl);
+    }
+  }, [logoUrl])
 
   // 이닝별 스코어 데이터 파싱
   const eachInningScore = (data) => {
@@ -83,7 +92,7 @@ const TeamScore = (prop) => {
           <div>{winMark === 0 ? '승' : '패'}</div>
           {/* <div>승-하비에르</div> */}
         </div>
-        <img src="/assets/cap.png" alt="" />
+        <img src={logoUrl[0]} alt="" />
         <div className="score">{scoreInfo[0]}</div>
         <div className="status">
           <div className="now">시뮬레이션</div>
@@ -91,7 +100,7 @@ const TeamScore = (prop) => {
           <div className="stadium">{gameInfo.weatherWind}</div>
         </div>
         <div className="score">{scoreInfo[1]}</div>
-        <img src="/assets/cap.png" alt="" />
+        <img src={logoUrl[1]} alt="" />
         <div className="title">
           <div>{gameInfo.awayName}</div>
           <div>{winMark === 1 ? '승' : '패'}</div>
