@@ -15,14 +15,24 @@ import {
 const SimulationPage = () => {
 
   const dispatch = useDispatch();
+  const location = useLocation();
+  const data = location.state;
+
+  console.log("여기는 시뮬레이션 페이지, 팀매칭에서 어떤 값 가져왔어  ", data);
+
+  const [teamData, setTeamData] = useState({});
   const [simulData, setSimulData] = useState({});
+  // const [logoUrl, setLogoUrl] = useState([]);
+  const teamId = {team1: data.home.id, team2: data.away.id};
+  const logoUrl = [data.home.logo, data.away.logo];
+
 
 
   useEffect(() => {
-    dispatch(simulationData())
+    dispatch(simulationData(teamId))
       .unwrap()
       .then((res) => {
-        setSimulData(res);
+        setSimulData(res.data);
         console.log("ressss ", res);
   
       });
@@ -40,25 +50,19 @@ const SimulationPage = () => {
 
   const makeInningsInfo = () => {
     simulData.inngings.map(inning => {
-      // console.log("iiiinnnning", inning);
       inning.datas.map(batter => {
-          //  console.log("bbbaaattterrr   ", batter);
         batterlist.push(batter);
       })
       innginglist.push(inning);
     })
   }
 
-  // const baseInfo= [];
-
-
-
 
   return (
     <>
-      <div className="title">시뮬레이션</div>
+      <div className="title"></div>
           <TopLayout>
-            <TeamScore data = {simulData}/>
+            <TeamScore data = {simulData} logo = {logoUrl}/>
           
           </TopLayout>
           <BottomLayout>

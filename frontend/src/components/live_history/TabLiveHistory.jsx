@@ -60,8 +60,8 @@ export default function TabLiveHistory(prop = defaultValue) {
 //   const[batterList, setBatterList] = useState([]);
   const[batterInfo, setBatterInfo] = useState([]);
   const[playStatus, setPlayStatus] = useState(true);
-  // const[inningsLength, setInningsLength] = useState();
-  const[ setInningsLength] = useState();
+  const[inningsLength, setInningsLength] = useState();
+  // const[ setInningsLength] = useState();
   
   const handleChange = (event, newValue) => {
     setValue(newValue);

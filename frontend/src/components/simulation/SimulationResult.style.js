@@ -24,7 +24,9 @@ const TabName = styled.span`
   font-size: 1rem;
   border-radius: 30%;
 `
-
+const StatusContainer = styled.div`
+  padding-left: 4rem;
+`
 
 
 const StatusBtn = styled.span`
@@ -50,7 +52,7 @@ const StatusBtn = styled.span`
 
 const BatterContatiner = styled.div`
 
-padding: 2rem;
+padding: 3rem;
 /* display: flex; */
   /* justify-content:center;  */
   align-items : center;
@@ -68,7 +70,7 @@ const BatterResult = styled.div`
   background-color: #f2dd8a;
 
 `
-export {TabMenu, TabName, StatusBtn, BatterContatiner, BatterResult };
+export {TabMenu, TabName, StatusContainer, StatusBtn, BatterContatiner, BatterResult };
 
 
 

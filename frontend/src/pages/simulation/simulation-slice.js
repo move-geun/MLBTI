@@ -6,10 +6,13 @@ import http from "../../api/http";
 
 export const simulationData = createAsyncThunk(
   "SIMULATIONDATA",
-  async (ar, { rejectWithValue }) => {
+  async (teamId, { rejectWithValue }) => {
     try {
-      const res = await http.auth_axios.post("/simul");
-      return res.data;
+      // console.log("여기는 시뮬레이션 슬라이스, 팀아이디 뭐야  ", teamId);
+      const res = await http.auth_axios.post("/simul/normal", null , {
+        params:{homeTeamUid: teamId.team1 , awayTeamUid: teamId.team2 },
+      });
+      return res;
     } catch (err) {
       alert("에러입니다");
       return rejectWithValue(err.response);
