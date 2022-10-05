@@ -41,16 +41,12 @@ public class MailServiceImpl implements MailService {
         message.setSubject("mlbti 회원가입 메일 인증 서비스");
         message.setFrom("admin@mlbti.com");
         String randomString = RandomStringUtils.random(6, false, true);
-        message.setText("if you want to signin Submit  number before 5 minutes \n The number is "+ randomString);
+        message.setText("You must submit your number within 5 minutes to sign up for MLBTI. \n The number is "+ randomString);
         message.setTo(email);
         MailConfirmKeys mailConfirmKey = new MailConfirmKeys();
         mailConfirmKey.setEmail(email);
         mailConfirmKey.setRandomNumber(randomString);
         mailConfirmKey.setCreateDate(LocalDateTime.now());
-        System.out.println("===============================");
-        
-        System.out.println(message);
-        System.out.println("===============================");
         emailRepository.save(mailConfirmKey);
         emailSender.send(message);
     }
