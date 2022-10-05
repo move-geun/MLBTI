@@ -14,21 +14,44 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPersonCircleMinus } from "@fortawesome/free-solid-svg-icons";
-import { deletePlayer } from "./teamCustom-slice";
+import { deletePlayer, modifiedOrder } from "./teamCustom-slice";
 import { useDispatch } from "react-redux/es/exports";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const TaBleList = styled(TableCell)`
   font-family: "MICEGothic Bold";
 `;
 const TeamCoposition = ({ userInfo, myTeam, isModified, setIsModified }) => {
   const dispatch = useDispatch();
+
   const deleteHandle = (data) => {
     dispatch(deletePlayer(data.uid));
-    setIsModified(!isModified)
+    setIsModified(!isModified);
   };
 
-  const imgUrl = "/assets/smallGround.png"
-  
+  const orderList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  const imgUrl = "/assets/smallGround.png";
+
+  const handleChange = (e, player) => {
+    const data = {
+      email: userInfo.userId,
+      order: e.target.value,
+      player_uid: player.baseballPlayer.uid,
+    };
+
+    dispatch(modifiedOrder(data))
+      .unwrap()
+      .then((res) => {
+        if (res.status === 200) {
+          setIsModified(!isModified);
+        }
+      });
+  };
+
   return (
     <CompositionWrapper>
       <Header>
@@ -42,6 +65,7 @@ const TeamCoposition = ({ userInfo, myTeam, isModified, setIsModified }) => {
               <TaBleList>선수명</TaBleList>
               <TaBleList align="right">포지션</TaBleList>
               <TaBleList align="right">우완(R), 좌완(L)</TaBleList>
+              <TaBleList align="right">타순</TaBleList>
               <TaBleList align="right">생년월일</TaBleList>
               <TaBleList align="center">선수삭제</TaBleList>
             </TableRow>
@@ -60,6 +84,29 @@ const TeamCoposition = ({ userInfo, myTeam, isModified, setIsModified }) => {
                   {player["baseballPlayer"]["batSideCode"]}
                 </TaBleList>
 
+                <TaBleList align="right">
+                  <FormControl sx={{ m: 1, minWidth: 70 }} size="small">
+                    <InputLabel>타순</InputLabel>
+                    <Select
+                      labelId="demo-select-small"
+                      id="demo-select-small"
+                      value={player.order}
+                      label="타순"
+                      onChange={(e) => handleChange(e, player)}
+                    >
+                      {orderList.map((idx) => (
+                        <MenuItem key={idx} value={idx}>
+                          {idx}
+                        </MenuItem>
+                      ))}
+                      {/* <MenuItem value={1}>1</MenuItem>
+                      <MenuItem value={2}>2</MenuItem>
+                      <MenuItem value={3}>3</MenuItem>
+                      <MenuItem value={4}>4</MenuItem>
+                      <MenuItem value={7}>7</MenuItem> */}
+                    </Select>
+                  </FormControl>
+                </TaBleList>
                 <TaBleList align="right">
                   {player["baseballPlayer"]["birthDate"]}
                 </TaBleList>

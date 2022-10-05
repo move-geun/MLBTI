@@ -104,6 +104,20 @@ export const modifiedTeamName = createAsyncThunk(
   }
 );
 
+// PUT - 타순 변경
+export const modifiedOrder = createAsyncThunk(
+  "MODIFIED_ORDER",
+  async (data, {rejectWithValue}) => {
+    try {
+      const res = await http.auth_axios.put("user_team/update", null, {params: {email: data.email, order: data.order, player_uid: data.player_uid} })
+      return res
+    } catch (err) {
+      return rejectWithValue(err.resposne)
+    }
+  }
+)
+
+
 const initialState = {
   isLoading: false,
 };

@@ -7,7 +7,7 @@ const PlayerInfo = ({ match }) => {
   const dispatch = useDispatch();
   const { uid } = useParams();
   const [infoData, setInfoData] = useState();
-
+  
   useEffect(() => {
     dispatch(getPlayerDetail(uid))
       .unwrap()
@@ -20,7 +20,6 @@ const PlayerInfo = ({ match }) => {
       });
   }, []);
 
-  // console.log(infoData.height);
   return infoData ? (
     <Wrapper>
       <ProfileImg src={infoData.imgUrl}></ProfileImg>

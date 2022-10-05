@@ -65,7 +65,7 @@ const Ground = ({ myTeam, userInfo }) => {
           ) : null
         )}
 
-        <Player className="FB"> 
+        {/* <Player className="FB"> 
           <Img className="img" src={"/assets/shortStop3.png"}></Img>
         </Player>
         <Player className="TB"> 
@@ -91,7 +91,7 @@ const Ground = ({ myTeam, userInfo }) => {
         </Player>
         <Player className="P">
           <Img className="img" src={"/assets/pitcher3.png"}></Img>
-        </Player>
+        </Player> */}
       </ImgDiv>
       
       <Nickname>{userInfo.nickname} 님의 구단
