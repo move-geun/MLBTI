@@ -33,8 +33,8 @@ public class Pitchers {
 //	@OneToOne
 //	@JoinColumn(name="player_uid")
 //	BaseballPlayers baseballPlayer;
-	
 	@Id
+	int uid;
 	int playerUid;
 	
 	Integer season;

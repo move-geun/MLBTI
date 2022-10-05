@@ -33,7 +33,6 @@ public class Batters implements Serializable{
 //	@JoinColumn(name="player_uid")
 //	BaseballPlayers baseballPlayer;
 	
-	@Id
 	int playerUid;
 	
 	Integer season;
@@ -43,6 +42,7 @@ public class Batters implements Serializable{
 	Teams team;
 	
 	String league;
+	@Id
 	int uid;
 	Integer leftRbiNum;
 	Integer leftBBNum;

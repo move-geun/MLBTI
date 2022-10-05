@@ -29,6 +29,7 @@ import com.ssafy.db.entity.Batters;
 import com.ssafy.db.entity.Notices;
 import com.ssafy.db.entity.Pitchers;
 import com.ssafy.db.entity.Users;
+import com.ssafy.db.repository.BatterRepository;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -52,7 +53,8 @@ import io.swagger.annotations.ApiResponses;
 public class AllPlayerController {
 	@Autowired
 	BatterService batterService;
-	
+	@Autowired
+	BatterRepository batterRepository;
 	@Autowired
 	PitcherService pitcherService;
 
@@ -63,14 +65,14 @@ public class AllPlayerController {
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<BaseRes> getAll() {
-		ArrayList<Batters> b_l = (ArrayList<Batters>) batterService.getAllBatters();
+		System.out.println("list");
+//		ArrayList<Batters> b_l = (ArrayList<Batters>) batterRepository.findAll();
+		
 		ArrayList<Pitchers> p_l = (ArrayList<Pitchers>) pitcherService.getAllPitchers();
 		List<PlayersDto> playersList = new ArrayList();
-		List<PlayersDto> PitchersList = new ArrayList();
-		for(int i=0;i<b_l.size();++i) {
-			playersList .add(PlayersDto.of(b_l.get(i)));
-		}
-		
+//		for(int i=0;i<b_l.size();++i) {
+//			playersList .add(PlayersDto.of(b_l.get(i)));
+//		}
 		for(int i=0;i<p_l.size();++i) {
 			playersList .add(PlayersDto.of(p_l.get(i)));
 		}
