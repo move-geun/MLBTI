@@ -20,10 +20,11 @@ import { useDispatch } from "react-redux/es/exports";
 const TaBleList = styled(TableCell)`
   font-family: "MICEGothic Bold";
 `;
-const TeamCoposition = ({ userInfo, myTeam }) => {
+const TeamCoposition = ({ userInfo, myTeam, isModified, setIsModified }) => {
   const dispatch = useDispatch();
   const deleteHandle = (data) => {
     dispatch(deletePlayer(data.uid));
+    setIsModified(!isModified)
   };
 
   const imgUrl = "/assets/smallGround.png"

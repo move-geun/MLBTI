@@ -19,7 +19,7 @@ import { TextField } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPersonCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
-const PlayerList = ({email, myTeam}) => {
+const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
   const dispatch = useDispatch();
   // MLB 선수 리스트
   const [playerList, setPlayerList] = useState([]);
@@ -66,16 +66,16 @@ const PlayerList = ({email, myTeam}) => {
     dispatch(getPlayer())
       .unwrap()
       .then((res) => {
-        setPlayerList(res.data);
+        setPlayerList(res.data.data);
 
         // Dropdown에 표시 할 조건 리스트 전처리
         const yearData = [];
         const leagueData = [];
         const teamData = [];
         const positionData = [];
-
+        
         // 선수마다 가지고 있는, 조건이 될 정보 뽑아오기
-        res.data.map((item, _) => {
+        res.data.data.map((item) => {
           if (!yearData.includes(item.season) && item.season !== null) {
             yearData.push(parseInt(item.season));
           }
@@ -118,6 +118,7 @@ const PlayerList = ({email, myTeam}) => {
       );
     } else {
       dispatch(registTeam(data));
+      setIsModified(!isModified)
     }
   };
 
@@ -130,6 +131,7 @@ const PlayerList = ({email, myTeam}) => {
 
   // 필터링
   let filterdList = playerList;
+  
   if (year !== "") {
     filterdList = filterdList.filter((person) => person.season === year);
   }

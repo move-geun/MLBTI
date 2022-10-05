@@ -49,7 +49,7 @@ function App() {
         <Route path="/myprofile" element={<MyProfilePage />} />
         <Route path="/teamcustom" element={<TeamCustomPage />} />
         <Route path="/teamdetail" element={<TeamDetailPage />} />
-        <Route path="/playerdetail" element={<PlayerDetailPage />} />
+        <Route path="/playerdetail/:uid" element={<PlayerDetailPage />} />
         <Route path="/matchsimulation" element={<MatchSimultaionPage />} />
         <Route path="/customsimultaion" element={<CustomSimulationPage />} />
 
