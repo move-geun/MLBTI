@@ -25,4 +25,5 @@ public class SimulGames {
 	Integer weatherTemp;
 	String weatherWind;
 	SimulGameInning[] inngings = new SimulGameInning[24];
+	Integer[][] scoreBoard = new Integer[2][14];
 }

@@ -44,27 +44,27 @@ public class Batters implements Serializable{
 	
 	String league;
 	int uid;
-	int leftRbiNum;
-	int leftBBNum;
-	int leftAONum;
-	int leftSONum;
-	int leftGONum;
-	int leftSHNum;
-	int leftSFNum;
-	int leftIBBNum;
-	int leftStrikeNum;
-	int leftBallNum;
+	Integer leftRbiNum;
+	Integer leftBBNum;
+	Integer leftAoNum;
+	Integer leftSoNum;
+	Integer leftGoNum;
+	Integer leftSHNum;
+	Integer leftSFNum;
+	Integer leftIBBNum;
+	Integer leftStrikeNum;
+	Integer leftBallNum;
 
-	int rightRbiNum;
-	int rightBBNum;
-	int rightAONum;
-	int rightSONum;
-	int rightGONum;
-	int rightSHNum;
-	int rightSFNum;
-	int rightIBBNum;
-	int rightStrikeNum;
-	int rightBallNum;
+	Integer rightRbiNum;
+	Integer rightBBNum;
+	Integer rightAoNum;
+	Integer rightSoNum;
+	Integer rightGoNum;
+	Integer rightSHNum;
+	Integer rightSFNum;
+	Integer rightIBBNum;
+	Integer rightStrikeNum;
+	Integer rightBallNum;
 	
 	String teamName;
 	String name;
@@ -91,8 +91,6 @@ public class Batters implements Serializable{
 	Integer rightOps;
 	Integer leftBbNum;
 	Integer rightBbNum;
-	Integer leftAoNum;
-	Integer rightAoNum;
 	Integer leftDpNum;
 	Integer rightDpNum;
 	Integer leftShNum;
