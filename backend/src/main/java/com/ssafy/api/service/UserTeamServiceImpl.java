@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.ssafy.db.entity.BaseballPlayers;
 import com.ssafy.db.entity.UserTeams;
 import com.ssafy.db.entity.Users;
+import com.ssafy.db.repository.BaseballPlayerRepository;
+import com.ssafy.db.repository.UserRepository;
 import com.ssafy.db.repository.UserTeamRepository;
 
 /**
@@ -22,6 +24,10 @@ import com.ssafy.db.repository.UserTeamRepository;
 public class UserTeamServiceImpl implements UserTeamService{
 	@Autowired
 	UserTeamRepository userTeamRepository;
+	@Autowired
+	UserRepository userRepository;
+	@Autowired
+	BaseballPlayerRepository baseballPlayerRepository;
 	
 	@Override
 	public UserTeams createUserTeam(Users user, BaseballPlayers baseballPlayer, String position) {
@@ -29,6 +35,9 @@ public class UserTeamServiceImpl implements UserTeamService{
 		userTeam.setUser(user);
 		userTeam.setBaseballPlayer(baseballPlayer);
 		userTeam.setPosition(position);
+		if(userTeamRepository.existsByUserAndBaseballPlayer(user, baseballPlayer)) {
+			return null;
+		}
 		return userTeamRepository.save(userTeam);
 	}
 
@@ -58,6 +67,17 @@ public class UserTeamServiceImpl implements UserTeamService{
 		
 		userTeam.setBaseballPlayer(baseballPlayer);
 		return userTeamRepository.save(userTeam);
+	}
+
+	@Override
+	public void updateUserTeamByUid(String email, int playerUid, int order) {
+		int userUid = userRepository.findByEmail(email).get().getUid();
+		Users user = userRepository.findByEmail(email).get();
+		BaseballPlayers baseballPlayer = baseballPlayerRepository.findByUid(playerUid);
+		UserTeams userTeam = userTeamRepository.findByUserAndBaseballPlayer(user, baseballPlayer);
+		userTeamRepository.delete(userTeam);
+		userTeam.setOrder(order);
+		userTeamRepository.save(userTeam);
 	}
 
 }

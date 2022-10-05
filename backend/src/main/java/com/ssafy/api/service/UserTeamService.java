@@ -20,4 +20,5 @@ public interface UserTeamService {
 	void deleteUserTeamByUserUid(Integer user_uid);
 	List<UserTeams> getUserTeamByUserUid(Integer user_uid);
 	UserTeams updateUserTeam(Integer uid, BaseballPlayers baseballPlayer);
+	void updateUserTeamByUid(String email, int playerUid, int order);
 }
