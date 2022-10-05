@@ -23,9 +23,11 @@ const Ground = (prop) => {
     const [secondBase, setSecondBase]= useState(false);
     const [thirdBase, setThirdBase] = useState(false);
 
+    console.log("여기는 그라운드 컴포넌트 ");
     useEffect(()=>{
         if(prop.data !== null){
             setInningList(prop.data);
+            console.log("여기는 ground", prop);
         }      
     }, [prop])
 

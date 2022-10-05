@@ -24,6 +24,10 @@ import {
   getNMrank,
 } from "./mainpage-slice";
 
+import {
+  simulationData
+} from "../simulation/simulation-slice";
+
 // 모달
 import Modal from "@mui/material/Modal";
 import { ModalBox } from "../simulation/CustomSimulationPage.style";
@@ -31,6 +35,9 @@ import { ModalBox } from "../simulation/CustomSimulationPage.style";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+// 시뮬레이션 컴포넌트
+import Ground from "../simulation/Ground";
 
 // 너비 지정해놔서 크기 줄 때 바꿔줘야함
 // title 안내려오게끔 고정
@@ -97,11 +104,54 @@ const MainPage = () => {
     };
     dispatch(getToday(data))
       .unwrap()
-      .then((res) => {})
+      .then((res) => {
+        takeGameId(res);
+      })
       .catch((err) => {
         console.log("스케줄 불러오기 실패");
       });
   }
+
+  // 메인시뮬레이션 게임아이디 받아가기
+  const takeGameId = (data) => {
+      let length = data.length-1;
+      let teamId = {team1: data[length].homeId, team2: data[length].awayId}
+      takeSimulResult(teamId)
+      // console.log("TeamId 만들어졌니", teamId);
+  }
+
+
+  //////////////////// 시뮬레이션 /////////////////////////////
+ 
+  const [inningList, setInningList] = useState([]);
+  useEffect(()=> {
+    if(inningList.length > 0){
+      console.log("여기는 메인 페이지 이닝리스트 들어감", inningList);
+    }
+  }, [inningList]);
+
+  // 게임 아이디로 시뮬레이션 결과 받아오기
+  function takeSimulResult(teamId){
+    dispatch(simulationData(teamId))
+      .unwrap()
+      .then((res) => { 
+        console.log("시뮬레이션 가져왔지롱  ", res)
+        setInningList(res.data.inngings);
+      })
+      .catch((err) => {
+        console.log("시뮬레이션 데이터 불러오기 실패")
+      })
+  }
+
+ 
+
+
+  // 메인 시뮬레이션 연결 하기
+  // 1. 게임 아이디 받아오기
+  // 2. 게임 아이디로 시뮬레이션 결과 받아오기
+  // 3. 값 가져와서 ground 컴포넌트에 inningList만 뽑아서 넣어주기
+
+
 
   // 어제 경기 스케줄
   function floatingYesterday() {
@@ -238,7 +288,8 @@ const MainPage = () => {
         </Notice>
         <SimulationCase>
           <div className="main_con">
-            <img className="main_simul" src="../assets/Ground.png" alt="" />
+            {/* <img className="main_simul" src="../assets/Ground.png" alt="" /> */}
+            <Ground data = {inningList}/>
             <div className="main_des">
               <div className="team_des">
                 <img src={todays[todays.length - 1].homeLogo} alt="홈팀로고" />
@@ -537,7 +588,8 @@ const MainPage = () => {
         </Notice>
         <SimulationCase>
           <div className="Main">
-            <img className="main_simul" src="../assets/Ground.png" alt="" />
+            {/* <img className="main_simul" src="../assets/Ground.png" alt="" /> */}
+            <Ground data = {inningList}/>
             <div className="main_des">
               <div className="team_des">
                 <img src={todays[todays.length - 1].homeLogo} alt="홈팀로고" />
@@ -836,7 +888,8 @@ const MainPage = () => {
         </Notice>
         <SimulationCase>
           <div className="Main">
-            <img className="main_simul" src="../assets/Ground.png" alt="" />
+            {/* <img className="main_simul" src="../assets/Ground.png" alt="" /> */}
+            <Ground data = {inningList}/>
             <div className="main_des">
               <div className="team_des">
                 <img src={todays[todays.length - 1].homeLogo} alt="홈팀로고" />
