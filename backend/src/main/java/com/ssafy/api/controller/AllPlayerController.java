@@ -108,14 +108,14 @@ public class AllPlayerController {
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<BaseRes> getBySearchUidAndSeason(@RequestParam(value="player_uid", required = false) int player_uid,@RequestParam(value="season", required = false) int season ) {
-		Optional<Batters> b =  batterService.getBatterBySeasonAndUid(season,player_uid);
-		Optional<Pitchers> p = pitcherService.getPitcherBySeasonAndUid(season,player_uid);
+		Batters b =  batterService.getBatterBySeasonAndUid(season,player_uid);
+		Pitchers p = pitcherService.getPitcherBySeasonAndUid(season,player_uid);
 		List<PlayersDto> playersList = new ArrayList();
-		if (b.isPresent()) {
-			playersList.add(PlayersDto.of(b.get()));			
+		if (b!=null) {
+			playersList.add(PlayersDto.of(b));			
 		}
-		if (p.isPresent()) {
-			playersList.add(PlayersDto.of(p.get()));				
+		if (p!=null) {
+			playersList.add(PlayersDto.of(p));				
 		}
 
 		if (playersList.isEmpty()) {

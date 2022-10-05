@@ -70,6 +70,8 @@ public class Pitchers {
 	Integer rightIbbNum;
 	Integer leftInningNum;
 	Integer rightInningNum;	
+	Integer leftRbi;
+	Integer rightRbi;	
 	String playerWeatherTmi;
 	Float average;
 	Float standardDeviation;

@@ -76,9 +76,9 @@ public class PitcherController {
 	        @ApiResponse(code = 500, message = "서버 오류")
 	    })
 		public ResponseEntity<BaseRes> getOne(@ApiParam(value = "season", required = true) @RequestParam("season") int season, @ApiParam(value = "playerUid", required = true) @RequestParam("playerUid") int playerUid ){
-			Optional<Pitchers> p = pitcherService.getPitcherBySeasonAndUid(season, playerUid);
-			if(p.isPresent()) {
-				return ResponseEntity.status(200).body(BaseRes.of(200, "Success",PitchersDto.of(p.get())));
+			Pitchers p = pitcherService.getPitcherBySeasonAndUid(season, playerUid);
+			if(p!=null) {
+				return ResponseEntity.status(200).body(BaseRes.of(200, "Success",PitchersDto.of(p)));
 			}
 			return ResponseEntity.status(404).body(BaseRes.of(404, "해당 선수가 없습니다."));
 		
