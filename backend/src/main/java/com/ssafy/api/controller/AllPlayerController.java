@@ -66,13 +66,13 @@ public class AllPlayerController {
     })
 	public ResponseEntity<BaseRes> getAll() {
 		System.out.println("list");
-//		ArrayList<Batters> b_l = (ArrayList<Batters>) batterRepository.findAll();
+		ArrayList<Batters> b_l = (ArrayList<Batters>) batterRepository.findAll();
 		
 		ArrayList<Pitchers> p_l = (ArrayList<Pitchers>) pitcherService.getAllPitchers();
 		List<PlayersDto> playersList = new ArrayList();
-//		for(int i=0;i<b_l.size();++i) {
-//			playersList .add(PlayersDto.of(b_l.get(i)));
-//		}
+		for(int i=0;i<b_l.size();++i) {
+			playersList .add(PlayersDto.of(b_l.get(i)));
+		}
 		for(int i=0;i<p_l.size();++i) {
 			playersList .add(PlayersDto.of(p_l.get(i)));
 		}
