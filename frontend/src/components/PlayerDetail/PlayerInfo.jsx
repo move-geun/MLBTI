@@ -1,35 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Wrapper, ProfileDiv, ProfileImg, Name } from "./PlayerInfo.style";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getPlayerDetail } from "./playerdetail-slice";
+const PlayerInfo = ({ match }) => {
+  const dispatch = useDispatch();
+  const { uid } = useParams();
+  const [infoData, setInfoData] = useState();
 
-const PlayerInfo = () => {
-  return (
+  useEffect(() => {
+    dispatch(getPlayerDetail(uid))
+      .unwrap()
+      .then((res) => {
+        // feet, pound => cm, kg
+        const height = res.height.split("'");
+        res.height = parseInt(height[0]) * 30.48 + parseInt(height[1].replace('"', "")) * 2.54
+        res.weight = res.weight * 0.45
+        setInfoData(res);
+      });
+  }, []);
+
+  // console.log(infoData.height);
+  return infoData ? (
     <Wrapper>
-      <ProfileImg src={"assets/chanho.jpg"}></ProfileImg>
+      <ProfileImg src={infoData.imgUrl}></ProfileImg>
       <div className="detail">
         <ProfileDiv>
           <div className="title">포지션</div>
-          <div className="content">우익수</div>
+          <div className="content">{infoData.primaryPositionName}</div>
         </ProfileDiv>
         <ProfileDiv>
           <div className="title">출생</div>
-          <div className="content">1999.03.02</div>
+          <div className="content">{infoData.birthDate}</div>
+        </ProfileDiv>
+        <ProfileDiv>
+          <div className="title">MLB 데뷔</div>
+          <div className="content">{infoData.mlbDebutDate}</div>
         </ProfileDiv>
         <ProfileDiv>
           <div className="title">키</div>
-          <div className="content">188 (cm)</div>
+          <div className="content">{infoData.height} cm</div>
         </ProfileDiv>
         <ProfileDiv>
-          <div className="title">소속팀</div>
-          <div className="content">롯데 프링글스</div>
+          <div className="title">몸무게</div>
+          <div className="content">{infoData.weight} kg</div>
         </ProfileDiv>
         <ProfileDiv>
-          <div className="title">입단일</div>
-          <div className="content">2022.01.01</div>
+          <div className="title">주 팔</div>
+          <div className="content">{infoData.pitchHandCode}</div>
         </ProfileDiv>
       </div>
-      <Name>박찬호</Name>
+      <Name>{infoData.fullName}</Name>
     </Wrapper>
-  );
+  ) : null;
 };
 
 export default PlayerInfo;

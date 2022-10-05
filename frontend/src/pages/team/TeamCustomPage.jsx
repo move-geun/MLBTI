@@ -23,6 +23,9 @@ const TeamCustomPage = () => {
   // 내 구단 선수 목록
   const [myTeam, setMyTeam] = useState([]);
 
+  // 선수 추가 및 삭제 시 확인
+  const [isModified, setIsModified] = useState(false);
+
   // 구단명 변경 모달 띄우기
   const [isOpen, setIsOpen] = useState(false);
 
@@ -38,6 +41,10 @@ const TeamCustomPage = () => {
       setMyTeam(res.payload);
     }
   }
+
+  useEffect(() => {
+    getTeam()
+  }, [isModified])
 
   useEffect(() => {
     if (userInfo.length !== 0) getTeam()
@@ -79,12 +86,12 @@ const TeamCustomPage = () => {
               />
             )}
           </CustomTeamName>
-          <PlayerList email={userInfo["userId"]} myTeam={myTeam} />
+          <PlayerList email={userInfo["userId"]} myTeam={myTeam} isModified={isModified} setIsModified={setIsModified} />
         </MyteamWrapper>
         
         <Ground myTeam={myTeam} userInfo={userInfo} />
       </CenterWrapper>
-      <TeamCoposition userInfo={userInfo} myTeam={myTeam}></TeamCoposition>
+      <TeamCoposition userInfo={userInfo} myTeam={myTeam} isModified={isModified} setIsModified={setIsModified}></TeamCoposition>
     </Background>
   );
 };
