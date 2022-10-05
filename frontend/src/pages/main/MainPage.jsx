@@ -241,6 +241,17 @@ const MainPage = () => {
         <SimulationCase>
           <div className="Main">
             <img className="main_simul" src="../assets/Ground.png" alt="" />
+            <div className="main_des">
+              <div className="team_des">
+                <img src="" alt="홈팀로고" />
+                <div>홈팀이름</div>
+              </div>
+              <h5>지금 시뮬레이션 경기 중</h5>
+              <div className="team_des">
+                <img src="" alt="어웨이로고" />
+                <div>어웨이팀 이름</div>
+              </div>
+            </div>
           </div>
           <div className="Sub">
             <Skeleton className="skel" variant="rectangular" height={100} />
@@ -254,15 +265,47 @@ const MainPage = () => {
             <div>
               {yesterdays.map((yesterday, idx) => (
                 <div key={idx} className="contentdiv">
-                  <div className="content">
-                    <div className="home">{yesterday.homeName}</div>
-                    <div className="vs">vs</div>
-                    <div className="away">{yesterday.awayName}</div>
+                  <div className="home">
+                    <div>{yesterday.homeName}</div>
+                    <div
+                      className={
+                        yesterday.homeScore > yesterday.awayScore
+                          ? "win"
+                          : yesterday.homeScore < yesterday.awayScore
+                          ? "lose"
+                          : "gray"
+                      }
+                    >
+                      {yesterday.homeScore}
+                    </div>
                   </div>
-                  <div className="score">
-                    <div className="homescore">{yesterday.homeScore}</div>
+                  <img
+                    className="homeImg"
+                    src={yesterday.homeLogo}
+                    alt="홈팀 사진"
+                  />
+                  <div className="status">
+                    <div className="vs">vs</div>
                     <div className="status">{yesterday.status}</div>
-                    <div className="awayscore">{yesterday.awayScore}</div>
+                  </div>
+                  <img
+                    className="AwayImg"
+                    src={yesterday.awayLogo}
+                    alt="어웨이팀 사진"
+                  />
+                  <div className="away">
+                    <div>{yesterday.awayName}</div>
+                    <div
+                      className={
+                        yesterday.awayScore > yesterday.homeScore
+                          ? "win"
+                          : yesterday.awayScore < yesterday.homeScore
+                          ? "lose"
+                          : "gray"
+                      }
+                    >
+                      {yesterday.awayScore}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -273,15 +316,47 @@ const MainPage = () => {
             <div>
               {todays.map((today, idx) => (
                 <div key={idx} className="contentdiv">
-                  <div className="content">
-                    <div className="home">{today.homeName}</div>
-                    <div className="vs">vs</div>
-                    <div className="away">{today.awayName}</div>
+                  <div className="home">
+                    <div>{today.homeName}</div>
+                    <div
+                      className={
+                        today.homeScore > today.awayScore
+                          ? "win"
+                          : today.homeScore < today.awayScore
+                          ? "lose"
+                          : "gray"
+                      }
+                    >
+                      {today.homeScore}
+                    </div>
                   </div>
-                  <div className="score">
-                    <div className="homescore">{today.homeScore}</div>
+                  <img
+                    className="homeImg"
+                    src={today.homeLogo}
+                    alt="홈팀 사진"
+                  />
+                  <div className="status">
+                    <div className="vs">vs</div>
                     <div className="status">{today.status}</div>
-                    <div className="awayscore">{today.awayScore}</div>
+                  </div>
+                  <img
+                    className="AwayImg"
+                    src={today.awayLogo}
+                    alt="어웨이팀 사진"
+                  />
+                  <div className="away">
+                    <div>{today.awayName}</div>
+                    <div
+                      className={
+                        today.awayScore > today.homeScore
+                          ? "win"
+                          : today.awayScore < today.homeScore
+                          ? "lose"
+                          : "gray"
+                      }
+                    >
+                      {today.awayScore}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -410,15 +485,47 @@ const MainPage = () => {
             <div>
               {yesterdays.map((yesterday, idx) => (
                 <div key={idx} className="contentdiv">
-                  <div className="content">
-                    <div className="home">{yesterday.homeName}</div>
-                    <div className="vs">vs</div>
-                    <div className="away">{yesterday.awayName}</div>
+                  <div className="home">
+                    <div>{yesterday.homeName}</div>
+                    <div
+                      className={
+                        yesterday.homeScore > yesterday.awayScore
+                          ? "win"
+                          : yesterday.homeScore < yesterday.awayScore
+                          ? "lose"
+                          : "gray"
+                      }
+                    >
+                      {yesterday.homeScore}
+                    </div>
                   </div>
-                  <div className="score">
-                    <div className="homescore">{yesterday.homeScore}</div>
+                  <img
+                    className="homeImg"
+                    src={yesterday.homeLogo}
+                    alt="홈팀 사진"
+                  />
+                  <div className="status">
+                    <div className="vs">vs</div>
                     <div className="status">{yesterday.status}</div>
-                    <div className="awayscore">{yesterday.awayScore}</div>
+                  </div>
+                  <img
+                    className="AwayImg"
+                    src={yesterday.awayLogo}
+                    alt="어웨이팀 사진"
+                  />
+                  <div className="away">
+                    <div>{yesterday.awayName}</div>
+                    <div
+                      className={
+                        yesterday.awayScore > yesterday.homeScore
+                          ? "win"
+                          : yesterday.awayScore < yesterday.homeScore
+                          ? "lose"
+                          : "gray"
+                      }
+                    >
+                      {yesterday.awayScore}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -429,15 +536,47 @@ const MainPage = () => {
             <div>
               {todays.map((today, idx) => (
                 <div key={idx} className="contentdiv">
-                  <div className="content">
-                    <div className="home">{today.homeName}</div>
-                    <div className="vs">vs</div>
-                    <div className="away">{today.awayName}</div>
+                  <div className="home">
+                    <div>{today.homeName}</div>
+                    <div
+                      className={
+                        today.homeScore > today.awayScore
+                          ? "win"
+                          : today.homeScore < today.awayScore
+                          ? "lose"
+                          : "gray"
+                      }
+                    >
+                      {today.homeScore}
+                    </div>
                   </div>
-                  <div className="score">
-                    <div className="homescore">{today.homeScore}</div>
+                  <img
+                    className="homeImg"
+                    src={today.homeLogo}
+                    alt="홈팀 사진"
+                  />
+                  <div className="status">
+                    <div className="vs">vs</div>
                     <div className="status">{today.status}</div>
-                    <div className="awayscore">{today.awayScore}</div>
+                  </div>
+                  <img
+                    className="AwayImg"
+                    src={today.awayLogo}
+                    alt="어웨이팀 사진"
+                  />
+                  <div className="away">
+                    <div>{today.awayName}</div>
+                    <div
+                      className={
+                        today.awayScore > today.homeScore
+                          ? "win"
+                          : today.awayScore < today.homeScore
+                          ? "lose"
+                          : "gray"
+                      }
+                    >
+                      {today.awayScore}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -559,15 +698,47 @@ const MainPage = () => {
             <div>
               {yesterdays.map((yesterday, idx) => (
                 <div key={idx} className="contentdiv">
-                  <div className="content">
-                    <div className="home">{yesterday.homeName}</div>
-                    <div className="vs">vs</div>
-                    <div className="away">{yesterday.awayName}</div>
+                  <div className="home">
+                    <div>{yesterday.homeName}</div>
+                    <div
+                      className={
+                        yesterday.homeScore > yesterday.awayScore
+                          ? "win"
+                          : yesterday.homeScore < yesterday.awayScore
+                          ? "lose"
+                          : "gray"
+                      }
+                    >
+                      {yesterday.homeScore}
+                    </div>
                   </div>
-                  <div className="score">
-                    <div className="homescore">{yesterday.homeScore}</div>
+                  <img
+                    className="homeImg"
+                    src={yesterday.homeLogo}
+                    alt="홈팀 사진"
+                  />
+                  <div className="status">
+                    <div className="vs">vs</div>
                     <div className="status">{yesterday.status}</div>
-                    <div className="awayscore">{yesterday.awayScore}</div>
+                  </div>
+                  <img
+                    className="AwayImg"
+                    src={yesterday.awayLogo}
+                    alt="어웨이팀 사진"
+                  />
+                  <div className="away">
+                    <div>{yesterday.awayName}</div>
+                    <div
+                      className={
+                        yesterday.awayScore > yesterday.homeScore
+                          ? "win"
+                          : yesterday.awayScore < yesterday.homeScore
+                          ? "lose"
+                          : "gray"
+                      }
+                    >
+                      {yesterday.awayScore}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -578,15 +749,47 @@ const MainPage = () => {
             <div>
               {todays.map((today, idx) => (
                 <div key={idx} className="contentdiv">
-                  <div className="content">
-                    <div className="home">{today.homeName}</div>
-                    <div className="vs">vs</div>
-                    <div className="away">{today.awayName}</div>
+                  <div className="home">
+                    <div>{today.homeName}</div>
+                    <div
+                      className={
+                        today.homeScore > today.awayScore
+                          ? "win"
+                          : today.homeScore < today.awayScore
+                          ? "lose"
+                          : "gray"
+                      }
+                    >
+                      {today.homeScore}
+                    </div>
                   </div>
-                  <div className="score">
-                    <div className="homescore">{today.homeScore}</div>
+                  <img
+                    className="homeImg"
+                    src={today.homeLogo}
+                    alt="홈팀 사진"
+                  />
+                  <div className="status">
+                    <div className="vs">vs</div>
                     <div className="status">{today.status}</div>
-                    <div className="awayscore">{today.awayScore}</div>
+                  </div>
+                  <img
+                    className="AwayImg"
+                    src={today.awayLogo}
+                    alt="어웨이팀 사진"
+                  />
+                  <div className="away">
+                    <div>{today.awayName}</div>
+                    <div
+                      className={
+                        today.awayScore > today.homeScore
+                          ? "win"
+                          : today.awayScore < today.homeScore
+                          ? "lose"
+                          : "gray"
+                      }
+                    >
+                      {today.awayScore}
+                    </div>
                   </div>
                 </div>
               ))}

@@ -4,13 +4,31 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Main = styled.div`
-  width: 95%;
+  width: 88%;
   display: flex;
   flex-direction: column;
   margin: 1rem auto 0 auto;
   justify-content: center;
   font-size: 1.5rem;
 
+  .main_des {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 auto;
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    .team_des {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
   /* 스켈레톤용 */
   .skel {
     margin-bottom: 10px;
@@ -62,6 +80,15 @@ const DownChart = styled(Slider)`
     cursor: pointer;
     background-color: white;
     font-size: 1rem;
+    .gray {
+      background-color: rgba(0, 0, 0, 0.17);
+    }
+    .win {
+      background-color: #4d79be;
+    }
+    .lose {
+      background-color: tomato;
+    }
   }
 
   .slick-dots {
@@ -115,7 +142,6 @@ const CheckBox = styled.div`
 const Predict = styled.div`
   width: 100%;
   text-align: center;
-  border-left: 2px solid rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   /* background-color: rgba(123, 12, 15, 0.2); */
@@ -135,14 +161,46 @@ const Predict = styled.div`
     background-color: #d7dcff;
     border-radius: 2rem;
   }
-  font-size: 1rem;
+  font-size: 0.8rem;
   .title {
     margin-bottom: 20px;
+    font-size: 1rem;
   }
 
   .contentdiv {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+  }
+
+  .home {
     display: flex;
     flex-direction: column;
+    width: 105px;
+    div {
+      margin: 3px;
+    }
+  }
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+  .status {
+    width: 130px;
+    display: flex;
+    flex-direction: column;
+  }
+  .away {
+    width: 105px;
+    display: flex;
+    flex-direction: column;
+    div {
+      margin: 3px;
+    }
   }
 
   .content {
@@ -150,56 +208,38 @@ const Predict = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-
-    .home {
-      width: 150px;
-      text-align: left;
-      font-size: 0.8rem;
-    }
-
-    .vs {
-      width: 30px;
-      text-align: center;
-      font-size: 0.8rem;
-    }
-
-    .away {
-      width: 150px;
-      text-align: right;
-      font-size: 0.8rem;
-    }
   }
-  .score {
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .homescore {
-      width: 100px;
-      text-align: center;
-      font-size: 0.8rem;
-    }
-
-    .status {
-      width: 150px;
-      text-align: center;
-      font-size: 0.8rem;
-    }
-
-    .awayscore {
-      width: 100px;
-      text-align: center;
-      font-size: 0.8rem;
-    }
+  .gray {
+    background-color: rgba(0, 0, 0, 0.17);
+  }
+  .win {
+    background-color: #4d79be;
+  }
+  .lose {
+    background-color: tomato;
   }
 
   @media screen and (max-width: 830px) {
     font-size: 0.8rem;
     border-left: none;
+    .home {
+      width: 200px;
+    }
+    .away {
+      width: 200px;
+    }
+    img {
+      margin: 0 10px;
+    }
   }
   @media screen and (max-width: 480px) {
-    font-size: 0.5rem;
+    font-size: 0.3rem;
+    .home {
+      width: 130px;
+    }
+    .away {
+      width: 130px;
+    }
   }
 `;
 
@@ -254,7 +294,6 @@ const Predict = styled.div`
 const Rank = styled.div`
   width: 100%;
   text-align: center;
-  border-right: 2px solid rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
