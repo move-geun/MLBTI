@@ -8,6 +8,7 @@ import {
   DownChart,
   Leagues,
   League,
+  SubItem,
 } from "./MainPage.style";
 
 import { Link } from "react-router-dom";
@@ -22,10 +23,6 @@ import {
   getNErank,
   getNMrank,
 } from "./mainpage-slice";
-
-// 시뮬레이션 스켈레톤용
-import * as React from "react";
-import Skeleton from "@mui/material/Skeleton";
 
 // 모달
 import Modal from "@mui/material/Modal";
@@ -239,7 +236,7 @@ const MainPage = () => {
           )}
         </Notice>
         <SimulationCase>
-          <div className="Main">
+          <div className="main_con">
             <img className="main_simul" src="../assets/Ground.png" alt="" />
             <div className="main_des">
               <div className="team_des">
@@ -259,10 +256,72 @@ const MainPage = () => {
               </div>
             </div>
           </div>
-          <div className="Sub">
-            <Skeleton className="skel" variant="rectangular" height={100} />
-            <Skeleton className="skel" variant="rectangular" height={100} />
-            <Skeleton className="skel" variant="rectangular" height={100} />
+          <div className="sub">
+            <SubItem>
+              <div className="sub_dot">
+                <img className="sub_simul" src="../assets/Ground.png" alt="" />
+                <div class="dot-elastic"></div>
+              </div>
+              <div className="sub_des">
+                <div className="sub_title">
+                  <div>오늘 예정 경기</div>
+                </div>
+                <div className="sub_container">
+                  <div className="sub_home">
+                    <img src={todays[todays.length - 4].homeLogo} alt="" />
+                    <div>{todays[todays.length - 4].homeName}</div>
+                  </div>
+                  <h5>VS</h5>
+                  <div className="sub_home">
+                    <img src={todays[todays.length - 4].awayLogo} alt="" />
+                    <div>{todays[todays.length - 4].awayName}</div>
+                  </div>
+                </div>
+                <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+              </div>
+            </SubItem>
+            <SubItem>
+              <div className="sub_dot">
+                <img className="sub_simul" src="../assets/Ground.png" alt="" />
+                <div class="dot-elastic"></div>
+              </div>
+              <div className="sub_des">
+                <div className="sub_title">오늘 예정 경기</div>
+                <div className="sub_container">
+                  <div className="sub_home">
+                    <img src={todays[todays.length - 3].homeLogo} alt="" />
+                    <div>{todays[todays.length - 3].homeName}</div>
+                  </div>
+                  <h5>VS</h5>
+                  <div className="sub_home">
+                    <img src={todays[todays.length - 3].awayLogo} alt="" />
+                    <div>{todays[todays.length - 3].awayName}</div>
+                  </div>
+                </div>
+                <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+              </div>
+            </SubItem>
+            <SubItem>
+              <div className="sub_dot">
+                <img className="sub_simul" src="../assets/Ground.png" alt="" />
+                <div class="dot-elastic"></div>
+              </div>
+              <div className="sub_des">
+                <div className="sub_title">오늘 예정 경기</div>
+                <div className="sub_container">
+                  <div className="sub_home">
+                    <img src={todays[todays.length - 2].homeLogo} alt="" />
+                    <div>{todays[todays.length - 2].homeName}</div>
+                  </div>
+                  <h5>VS</h5>
+                  <div className="sub_home">
+                    <img src={todays[todays.length - 2].awayLogo} alt="" />
+                    <div>{todays[todays.length - 2].awayName}</div>
+                  </div>
+                </div>
+                <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+              </div>
+            </SubItem>
           </div>
         </SimulationCase>
         <CheckBox>
@@ -478,11 +537,90 @@ const MainPage = () => {
         <SimulationCase>
           <div className="Main">
             <img className="main_simul" src="../assets/Ground.png" alt="" />
+            <div className="main_des">
+              <div className="team_des">
+                <img src={todays[todays.length - 1].homeLogo} alt="홈팀로고" />
+                <div>{todays[todays.length - 1].homeName}</div>
+              </div>
+              <div class="simul_case">
+                <h5>지금 시뮬레이션 경기 중</h5>
+                <div class="dot-elastic"></div>
+              </div>
+              <div className="team_des">
+                <img
+                  src={todays[todays.length - 1].awayLogo}
+                  alt="어웨이로고"
+                />
+                <div>{todays[todays.length - 1].awayName}</div>
+              </div>
+            </div>
           </div>
-          <div className="Sub">
-            <Skeleton className="skel" variant="rectangular" height={100} />
-            <Skeleton className="skel" variant="rectangular" height={100} />
-            <Skeleton className="skel" variant="rectangular" height={100} />
+          <div className="sub">
+            <SubItem>
+              <div className="sub_dot">
+                <img className="sub_simul" src="../assets/Ground.png" alt="" />
+                <div class="dot-elastic"></div>
+              </div>
+              <div className="sub_des">
+                <div className="sub_title">
+                  <div>오늘 예정 경기</div>
+                </div>
+                <div className="sub_container">
+                  <div className="sub_home">
+                    <img src={todays[todays.length - 4].homeLogo} alt="" />
+                    <div>{todays[todays.length - 4].homeName}</div>
+                  </div>
+                  <h5>VS</h5>
+                  <div className="sub_home">
+                    <img src={todays[todays.length - 4].awayLogo} alt="" />
+                    <div>{todays[todays.length - 4].awayName}</div>
+                  </div>
+                </div>
+                <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+              </div>
+            </SubItem>
+            <SubItem>
+              <div className="sub_dot">
+                <img className="sub_simul" src="../assets/Ground.png" alt="" />
+                <div class="dot-elastic"></div>
+              </div>
+              <div className="sub_des">
+                <div className="sub_title">오늘 예정 경기</div>
+                <div className="sub_container">
+                  <div className="sub_home">
+                    <img src={todays[todays.length - 3].homeLogo} alt="" />
+                    <div>{todays[todays.length - 3].homeName}</div>
+                  </div>
+                  <h5>VS</h5>
+                  <div className="sub_home">
+                    <img src={todays[todays.length - 3].awayLogo} alt="" />
+                    <div>{todays[todays.length - 3].awayName}</div>
+                  </div>
+                </div>
+                <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+              </div>
+            </SubItem>
+            <SubItem>
+              <div className="sub_dot">
+                <img className="sub_simul" src="../assets/Ground.png" alt="" />
+                <div class="dot-elastic"></div>
+              </div>
+              <div className="sub_des">
+                <div className="sub_title">오늘 예정 경기</div>
+                <div className="sub_container">
+                  <div className="sub_home">
+                    <img src={todays[todays.length - 2].homeLogo} alt="" />
+                    <div>{todays[todays.length - 2].homeName}</div>
+                  </div>
+                  <h5>VS</h5>
+                  <div className="sub_home">
+                    <img src={todays[todays.length - 2].awayLogo} alt="" />
+                    <div>{todays[todays.length - 2].awayName}</div>
+                  </div>
+                </div>
+                <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+              </div>
+            </SubItem>
           </div>
         </SimulationCase>
         <DownChart {...downsettings}>
@@ -696,7 +834,26 @@ const MainPage = () => {
           )}
         </Notice>
         <SimulationCase>
-          <img className="main_simul" src="../assets/Ground.png" alt="" />
+          <div className="Main">
+            <img className="main_simul" src="../assets/Ground.png" alt="" />
+            <div className="main_des">
+              <div className="team_des">
+                <img src={todays[todays.length - 1].homeLogo} alt="홈팀로고" />
+                <div>{todays[todays.length - 1].homeName}</div>
+              </div>
+              <div class="simul_case">
+                <h5>지금 시뮬레이션 경기 중</h5>
+                <div class="dot-elastic"></div>
+              </div>
+              <div className="team_des">
+                <img
+                  src={todays[todays.length - 1].awayLogo}
+                  alt="어웨이로고"
+                />
+                <div>{todays[todays.length - 1].awayName}</div>
+              </div>
+            </div>
+          </div>
         </SimulationCase>
         <DownChart {...downsettings}>
           <Predict>

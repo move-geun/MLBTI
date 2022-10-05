@@ -19,14 +19,28 @@ const Main = styled.div`
     margin: 0 auto;
     margin-top: 5px;
     font-size: 1rem;
+    @media screen and (max-width: 830px) {
+      font-size: 0.6rem;
+    }
     h5 {
       font-size: 1.5rem;
       margin-top: 0;
       margin-bottom: 10px;
+      @media screen and (max-width: 830px) {
+        font-size: 1rem;
+      }
     }
     img {
       width: 50px;
       height: 50px;
+      @media screen and (max-width: 830px) {
+        width: 30px;
+        height: 30px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 30px;
+        height: 30px;
+      }
     }
     .team_des {
       width: 100%;
@@ -54,6 +68,14 @@ const Main = styled.div`
       background-color: blue;
       color: #9880ff;
       animation: dotElastic 1s infinite linear;
+      @media screen and (max-width: 830px) {
+        width: 15px;
+        height: 15px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 10px;
+        height: 10px;
+      }
     }
 
     .dot-elastic::before,
@@ -72,6 +94,15 @@ const Main = styled.div`
       background-color: yellow;
       color: #9880ff;
       animation: dotElasticBefore 1s infinite linear;
+      @media screen and (max-width: 830px) {
+        width: 15px;
+        height: 15px;
+      }
+      @media screen and (max-width: 480px) {
+        left: -15px;
+        width: 10px;
+        height: 10px;
+      }
     }
 
     .dot-elastic::after {
@@ -82,6 +113,15 @@ const Main = styled.div`
       background-color: tomato;
       color: #9880ff;
       animation: dotElasticAfter 1s infinite linear;
+      @media screen and (max-width: 830px) {
+        width: 15px;
+        height: 15px;
+      }
+      @media screen and (max-width: 480px) {
+        left: 15px;
+        width: 10px;
+        height: 10px;
+      }
     }
 
     @keyframes dotElasticBefore {
@@ -137,12 +177,6 @@ const Main = styled.div`
         transform: scale(1, 1);
       }
     }
-  }
-  /* 스켈레톤용 */
-  .skel {
-    margin-bottom: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    width: 100%;
   }
 `;
 
@@ -211,18 +245,44 @@ const DownChart = styled(Slider)`
 
 const SimulationCase = styled.div`
   margin-top: 1rem;
+  margin-bottom: 1rem;
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-
-  div {
-    width: 48%;
+  justify-content: space-evenly;
+  .main_con {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
   }
-
   img {
     height: 330px;
-    width: 100%;
+    width: 500px;
+  }
+
+  .sub {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 10px;
+  }
+
+  .Main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  @media screen and (max-width: 830px) {
+    img {
+      height: 330px;
+      width: 300px;
+    }
+    font-size: 1rem;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.625rem;
   }
 `;
 
@@ -289,6 +349,7 @@ const Predict = styled.div`
     display: flex;
     flex-direction: column;
     width: 105px;
+
     div {
       margin: 3px;
     }
@@ -499,6 +560,178 @@ const League = styled.div`
   }
 `;
 
+const SubItem = styled.div`
+  margin: 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  width: 600px;
+  height: 160px;
+  /* background-color: rgba(0, 0, 0, 0.05); */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  text-align: right;
+  .sub_dot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+  @media screen and (max-width: 830px) {
+    width: 300px;
+  }
+
+  .sub_simul {
+    width: 200px;
+    height: 120px;
+    @media screen and (max-width: 830px) {
+      width: 80px;
+      height: 120px;
+    }
+  }
+
+  .sub_des {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    .sub_container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 1rem;
+      h5 {
+        font-size: 1rem;
+      }
+      .sub_home {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @media screen and (max-width: 830px) {
+          font-size: 0.6rem;
+        }
+      }
+      img {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+  .go_simul {
+    font-size: 1rem;
+  }
+  .dot-elastic {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: blue;
+    color: #9880ff;
+    animation: dotElastic 1s infinite linear;
+    @media screen and (max-width: 830px) {
+      width: 15px;
+      height: 15px;
+    }
+    @media screen and (max-width: 480px) {
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  .dot-elastic::before,
+  .dot-elastic::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+
+  .dot-elastic::before {
+    left: -30px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: yellow;
+    color: #9880ff;
+    animation: dotElasticBefore 1s infinite linear;
+    @media screen and (max-width: 830px) {
+      left: -20px;
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  .dot-elastic::after {
+    left: 30px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: tomato;
+    color: #9880ff;
+    animation: dotElasticAfter 1s infinite linear;
+    @media screen and (max-width: 830px) {
+      left: 20px;
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  @keyframes dotElasticBefore {
+    0% {
+      transform: scale(1, 1);
+    }
+    25% {
+      transform: scale(1, 1.5);
+    }
+    50% {
+      transform: scale(1, 0.67);
+    }
+    75% {
+      transform: scale(1, 1);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+
+  @keyframes dotElastic {
+    0% {
+      transform: scale(1, 1);
+    }
+    25% {
+      transform: scale(1, 1);
+    }
+    50% {
+      transform: scale(1, 1.5);
+    }
+    75% {
+      transform: scale(1, 1);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+
+  @keyframes dotElasticAfter {
+    0% {
+      transform: scale(1, 1);
+    }
+    25% {
+      transform: scale(1, 1);
+    }
+    50% {
+      transform: scale(1, 0.67);
+    }
+    75% {
+      transform: scale(1, 1.5);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+`;
+
 // const League = styled.div`
 //   width: 100%;
 //   display: flex;
@@ -515,4 +748,5 @@ export {
   DownChart,
   Leagues,
   League,
+  SubItem,
 };
