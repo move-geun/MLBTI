@@ -71,14 +71,14 @@ top: 14rem;
   animation-duration: 0.6s;
   animation-direction: normal; */
 
-  @keyframes motion {
+  /* @keyframes motion {
     0%{
       top: 10rem;
     }
     100%{
       top : 50rem;
     }
-  }
+  } */
 
 
 `
@@ -97,7 +97,7 @@ const BaseBall = styled.img`
     100% {
       transform: rotate(360deg);
     }
-  }
+  }\
 
   
 `
