@@ -28,7 +28,6 @@ export const getToday = createAsyncThunk(
       const res = await http.axios.get("/schedule", {
         params,
       });
-      console.log(res.data.data);
       return res.data.data;
     } catch (err) {
       alert("스케줄 불러오기 실패");
@@ -46,7 +45,6 @@ export const getYesterday = createAsyncThunk(
       const res = await http.axios.get("/schedule", {
         params,
       });
-      console.log("어제", res.data.data);
       return res.data.data;
     } catch (err) {
       alert("어제 스케줄 불러오기 실패");
@@ -247,4 +245,3 @@ const mainpageSlice = createSlice({
 });
 
 export default mainpageSlice.reducer;
-
