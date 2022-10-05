@@ -39,9 +39,6 @@ public class Pitchers {
 	
 	Integer season;
 	
-	@OneToOne
-	@JoinColumn(name="team_uid")
-	Teams team;
 	
 	String league;
 	String teamName;
