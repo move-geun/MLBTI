@@ -23,7 +23,7 @@ const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
   const dispatch = useDispatch();
   // MLB 선수 리스트
   const [playerList, setPlayerList] = useState([]);
-
+  
   // 필터링 변수 (렌더링 조건)
   const [year, setYear] = React.useState("");
   const [league, setLeague] = React.useState("");
@@ -104,6 +104,8 @@ const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
       email: email,
       player_uid: player.playerUid,
       position: player.position,
+      // 찬호형
+      // battingorder: 0
     };
 
     // 내 팀에 같은 포지션의 선수가 있는지 확인할 변수
@@ -162,7 +164,6 @@ const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
       });
   };
 
-  // console.log('d')
   return (
     <>
       {/* Dropdown */}
