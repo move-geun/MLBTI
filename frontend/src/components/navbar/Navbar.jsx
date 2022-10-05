@@ -20,7 +20,7 @@ import isAuthenticated from "../../api/isAuthenticated";
 let loginPages = [
   { MLB: "https://www.mlb.com/" },
   { 시뮬레이션: "/customsimultaion" },
-  { "팀 커스텀": "/" },
+  { "팀 커스텀": "/teamcustom" },
   { 마이페이지: "/myprofile" },
 ];
 let notLoginPages = [
@@ -223,7 +223,7 @@ const Navbar = () => {
               <Tooltip title="Logout">
                 <IconButton onClick={logoutHandle} sx={{ p: 0 }}>
                   <LogoutIcon
-                    sx={{ fontSize: 40, color: "pink[500]" }}
+                    sx={{ fontSize: 40}}
                   ></LogoutIcon>
                 </IconButton>
               </Tooltip>
@@ -233,7 +233,7 @@ const Navbar = () => {
               <Tooltip title="Login">
                 <IconButton onClick={loginHandle} sx={{ p: 0 }}>
                   <LoginIcon
-                    sx={{ fontSize: 40, color: "pink[500]" }}
+                    sx={{ fontSize: 40}}
                   ></LoginIcon>
                 </IconButton>
               </Tooltip>
