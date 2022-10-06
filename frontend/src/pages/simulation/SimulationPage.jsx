@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import SimulationResult from "../../components/simulation/SimulationResult";
 
-import { simulationData } from "./simulation-slice";
+import { simulationData, customsimulationData } from "./simulation-slice";
 import { useDispatch } from "react-redux";
 import Ground from "./Ground";
 import BallCount from "./BallCount";
 import TeamScore from "../../components/game/TeamScore";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { SimulContainer, Center} from "./SimulationPage.style";
 
@@ -17,26 +17,29 @@ const SimulationPage = () => {
 
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const data = location.state;
 
-  console.log("여기는 시뮬레이션 페이지, 팀매칭에서 어떤 값 가져왔어  ", data);
-  const teamId = {team1: data.home.id, team2: data.away.id};
+    const [matchData, setMatchData] = useState({});
+    const [simulData, setSimulData] = useState({});
+    // 커스텀 데이터 넘어왔는지 확인
+    const [customStatus, setCustomStatus] = useState();
+    const logoUrl = [data.home.logo, data.away.logo];
 
+  useEffect(()=> {
+    // 커스텀팀이 넘어왔을 때, status true로 변환
+    if(!data.home.id){
+      // setCustomStatus(true);  
+      takeCustomSimulData(matchInfo);     
+    } else {
+      takeSimulData(teamId)
+    }
+    setMatchData(data);
 
-  // const [teamData, setTeamData] = useState({});
-  const [simulData, setSimulData] = useState({});
-
-  // const [logoUrl, setLogoUrl] = useState([]);
-
-  // const [teamId, setTeamId] = useState({});
-
-  const logoUrl = [data.home.logo, data.away.logo];
-
-  useEffect(() => {
-
-    
-    takeSimulData(teamId)
   }, []);
+  
+  const teamId = {team1: data.home.id, team2: data.away.id};
+  const matchInfo = {email: data.home, uid: data.away.id }
 
 
   const takeSimulData= (teamId)=> {
@@ -44,15 +47,25 @@ const SimulationPage = () => {
     .unwrap()
     .then((res) => {
       console.log("ressss ", res);
+      if(res.data === ""){
+        alert("데이터가 없습니다.");
+        navigate("/customsimultaion");
+      }
       setSimulData(res.data);
       
-
     });
   }
 
-  // useEffect(()=>{
-   
-  // }, [teamId])
+const takeCustomSimulData = (matchInfo) => {
+  console.log("커스텀 api 받으러 감", matchInfo);
+  dispatch(customsimulationData(matchInfo))
+  .unwrap()
+  .then((res) => {
+    console.log("커스텀 api 받으러 감", res);
+    setCustomStatus(false);
+  })
+}
+
 
 
   useEffect(()=> {
