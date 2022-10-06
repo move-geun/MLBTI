@@ -754,9 +754,7 @@ const SubItem = styled.div`
 //   margin: 0 auto;
 // `;
 
-
 const MainGameCard = styled.div`
-  
   margin: 0.3em;
   margin-left: 2%;
   width: 40rem;
@@ -764,9 +762,8 @@ const MainGameCard = styled.div`
   border-style: none;
   box-shadow: 5px 5px 10px 0.1px gray;
   padding: 1em;
-  background-color: #f2dd8a;
-
-`
+  background-color: #bfd4eea0;
+`;
 export {
   Notice,
   Main,
