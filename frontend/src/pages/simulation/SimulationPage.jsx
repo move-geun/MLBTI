@@ -48,7 +48,7 @@ const SimulationPage = () => {
     .then((res) => {
       console.log("ressss ", res);
       if(res.data === ""){
-        alert("데이터가 없습니다.");
+        alert("선수 정보가 부족합니다.");
         navigate("/customsimultaion");
       }
       setSimulData(res.data);

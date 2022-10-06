@@ -13,9 +13,9 @@ export const simulationData = createAsyncThunk(
       });
       return res;
     } catch (err) {
-      alert("에러입니다");
-
-      return rejectWithValue(err.response);
+      alert("선수 정보가 부족합니다.");
+      const navigate = useNavigate();
+      navigate("/customsimultaion");
     }
   }
 );
@@ -31,9 +31,10 @@ export const customsimulationData = createAsyncThunk(
       });
       return res;
     } catch (err) {
-      alert("에러입니다");
-
-      return rejectWithValue(err.response);
+      
+      alert("선수 정보가 부족합니다.");
+      const navigate = useNavigate();
+       navigate("/customsimultaion");
     }
   }
 );
