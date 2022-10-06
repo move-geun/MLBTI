@@ -112,7 +112,6 @@ const CustomSimulationPage = () => {
   //  내 팀 선택 시 
   const clickMyTeam = () => {
     setIsClickMyTeam(true);
-
   }
 
   useEffect(() => {
@@ -138,17 +137,24 @@ const CustomSimulationPage = () => {
 
   useEffect(() => {
     if (myInfo.length !== 0) {
+      console.log("myInfo값 가져와", myInfo);
       const data = {
         email: myInfo,
       };
       dispatch(getMyteam(data))
         .unwrap()
         .then((res) => {
+          console.log("서버에서 가져온 내 팀 정보", res);
           setMyTeam(res[0]);
         });
     }
   }, [myInfo]);
 
+  useEffect(()=>{
+
+      console.log("myTeaeeeam들어왔으면 값 출ㄹ겨 ", myTeam);
+
+  }, [myTeam]);
   
 
   // 팀 설정 안했을 시 페이지 이동 막기
@@ -363,7 +369,7 @@ const CustomSimulationPage = () => {
       </TeamContainer>
       <Link
         to={"/simulation"}
-        state={ isClickMyTeam ? ({ home: myTeam.email, away: selectAway}) : {home: selectHome, away: selectAway} }
+        state={ isClickMyTeam ? ({ home: myTeam.user.email, away: selectAway}) : {home: selectHome, away: selectAway} }
         style={{ textDecoration: "none", color: "black" }}
         onClick={isSelectedTeams}
       >
