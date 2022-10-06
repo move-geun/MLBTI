@@ -9,6 +9,7 @@ import {
   Leagues,
   League,
   SubItem,
+  MainGameCard,
 } from "./MainPage.style";
 import { PacmanLoader } from "react-spinners";
 import { Link } from "react-router-dom";
@@ -333,7 +334,8 @@ const MainPage = () => {
             ) : null}
           </div>
           <div className="sub">
-            <SubItem>
+          <MainGameCard>
+          <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/sub1.gif" alt="" />
                 {/* <div class="dot-elastic"></div> */}
@@ -342,6 +344,7 @@ const MainPage = () => {
                 <div className="sub_title">
                   <div>오늘 예정 경기</div>
                 </div>
+                
 
                 <Link
                   className="sub_container"
@@ -372,7 +375,9 @@ const MainPage = () => {
                 <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
               </div>
             </SubItem>
-            <SubItem>
+          </MainGameCard>
+          <MainGameCard>
+          <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/sub2.gif" alt="" />
                 {/* <div class="dot-elastic"></div> */}
@@ -409,7 +414,9 @@ const MainPage = () => {
                 <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
               </div>
             </SubItem>
-            <SubItem>
+          </MainGameCard>
+          <MainGameCard>
+          <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/sub3.gif" alt="" />
                 {/* <div class="dot-elastic"></div> */}
@@ -445,6 +452,10 @@ const MainPage = () => {
                 <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
               </div>
             </SubItem>
+          </MainGameCard>
+            
+            
+            
           </div>
         </SimulationCase>
         <CheckBox>
@@ -705,6 +716,7 @@ const MainPage = () => {
             ) : null}
           </div>
           <div className="sub">
+            <MainGameCard>
             <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/Ground.png" alt="" />
@@ -728,6 +740,8 @@ const MainPage = () => {
                 <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
               </div>
             </SubItem>
+            </MainGameCard>
+            <MainGameCard>
             <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/Ground.png" alt="" />
@@ -749,6 +763,8 @@ const MainPage = () => {
                 <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
               </div>
             </SubItem>
+            </MainGameCard>
+            <MainGameCard>
             <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/Ground.png" alt="" />
@@ -770,6 +786,8 @@ const MainPage = () => {
                 <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
               </div>
             </SubItem>
+            </MainGameCard> 
+            
           </div>
         </SimulationCase>
         <DownChart {...downsettings}>
