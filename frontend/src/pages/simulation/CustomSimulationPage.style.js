@@ -164,11 +164,12 @@ const ModalBox = styled.div`
     }
     .myteam {
       margin: 5px 0;
+      cursor: pointer;
       
       .myteamlogo {
         width: 20px;
         height: 20px;
-        
+        margin-right: 0.5rem;
       }
     }
     .candi {
