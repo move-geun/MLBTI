@@ -157,8 +157,7 @@ const CustomSimulationPage = () => {
       alert("두 팀 모두 선택해 주세요");
     }
   };
-  // console.log(isClickMyTeam, selectHome, selectAway)
-  console.log(myTeam)
+
   return myTeam ? (
     <CustomConatiner>
       <Header>매치업 설정하기</Header>
@@ -166,7 +165,7 @@ const CustomSimulationPage = () => {
         <TeamCase>
           {isClickMyTeam ? (
             <div>
-              <img onClick={handleOpen} className="myteamlogo" src={'/assets/customTeamLogo.png'}></img>
+              <img alt="mylogo" onClick={handleOpen} className="myteamlogo" src={'/assets/customTeamLogo.png'}></img>
               <div>팀명: {myTeam.myTeamName}</div>
               <div>구단주: {myTeam.nickname}</div>
             </div>
