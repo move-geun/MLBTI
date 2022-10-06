@@ -11,6 +11,19 @@ const Main = styled.div`
   justify-content: center;
   font-size: 1.5rem;
 
+  .loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 50%;
+    height: 70vh;
+    .spinner {
+      margin: 0 1rem 2rem 0
+    }
+    
+  }
   .main_des {
     width: 100%;
     display: flex;
