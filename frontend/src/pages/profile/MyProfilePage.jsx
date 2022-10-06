@@ -32,12 +32,16 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { CompositionWrapper } from "../../components/TeamCustom/TeamCoposiotion.style";
-
+import {RiBallPenFill} from "react-icons/ri"
 // 선수 목록 받아와서 뿌리기 남음
 
 const TaBleList = styled(TableCell)`
   font-family: "MICEGothic Bold";
 `;
+
+const EditPen = styled(RiBallPenFill)`
+  margin-left: 0.5rem;
+`
 
 const MyProfilePage = () => {
   const [nickName, setNickname] = useState("");
@@ -145,17 +149,15 @@ const MyProfilePage = () => {
       </NameBox>
       <ChangePwd>
         <Link to="/findPwd">
-          <img src="/assets/edit.png" alt="편집이미지였던것.." />
-          개인정보 변경하기
+          내 정보 변경
         </Link>
       </ChangePwd>
       <div className="divide">
-        {nickName} 님의 구단
-        <img
-          src="/assets/edit.png"
-          alt="편집이미지였던것.."
+        구단명
+        <EditPen
           onClick={handleOpen}
         />
+        <div>{teamName}</div>
         <Modal
           open={open}
           onClose={handleClose}
@@ -181,7 +183,7 @@ const MyProfilePage = () => {
           </ModalBox>
         </Modal>
       </div>
-      <div>{teamName}</div>
+      
       <GraphBox>
         <div>
           현재 {teamName}의 전력

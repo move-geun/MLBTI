@@ -162,6 +162,7 @@ const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
         setPosition("");
       });
   };
+  console.log(filterdList)
   
   return (
     <>
