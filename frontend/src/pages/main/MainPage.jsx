@@ -314,7 +314,7 @@ const MainPage = () => {
             <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/Ground.png" alt="" />
-                <div class="dot-elastic"></div>
+                {/* <div class="dot-elastic"></div> */}
               </div>
               <div className="sub_des">
                 <div className="sub_title">
@@ -337,7 +337,7 @@ const MainPage = () => {
             <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/Ground.png" alt="" />
-                <div class="dot-elastic"></div>
+                {/* <div class="dot-elastic"></div> */}
               </div>
               <div className="sub_des">
                 <div className="sub_title">오늘 예정 경기</div>
@@ -358,7 +358,7 @@ const MainPage = () => {
             <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/Ground.png" alt="" />
-                <div class="dot-elastic"></div>
+                {/* <div class="dot-elastic"></div> */}
               </div>
               <div className="sub_des">
                 <div className="sub_title">오늘 예정 경기</div>
@@ -619,7 +619,7 @@ const MainPage = () => {
             <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/Ground.png" alt="" />
-                <div class="dot-elastic"></div>
+                {/* <div class="dot-elastic"></div> */}
               </div>
               <div className="sub_des">
                 <div className="sub_title">
@@ -642,7 +642,7 @@ const MainPage = () => {
             <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/Ground.png" alt="" />
-                <div class="dot-elastic"></div>
+                {/* <div class="dot-elastic"></div> */}
               </div>
               <div className="sub_des">
                 <div className="sub_title">오늘 예정 경기</div>
@@ -663,7 +663,7 @@ const MainPage = () => {
             <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/Ground.png" alt="" />
-                <div class="dot-elastic"></div>
+                {/* <div class="dot-elastic"></div> */}
               </div>
               <div className="sub_des">
                 <div className="sub_title">오늘 예정 경기</div>

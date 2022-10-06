@@ -22,7 +22,6 @@ const Ground = (prop) => {
   useEffect(() => {
     if (prop.data !== null) {
       setInningList(prop.data);
-      console.log("여기는 ground", prop);
     }
   }, [prop]);
 
