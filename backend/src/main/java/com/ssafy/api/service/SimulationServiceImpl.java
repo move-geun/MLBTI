@@ -300,7 +300,7 @@ public class SimulationServiceImpl implements SimulationService {
 					e.setStrikeCount(random.nextInt(3));
 					e.setBallCount(random.nextInt(4));
 					e.setInning(inning);
-					e.setOutCount(0);
+					e.setOutCount(out);
 					e.setPitcherName(homeTeam.nowPitcher().getName());
 
 					String result = getResult(awayTeam.nowBatter(), homeTeam.nowPitcher(), awayTeam.nowBatSide(),
@@ -447,7 +447,7 @@ public class SimulationServiceImpl implements SimulationService {
 					e.setStrikeCount(random.nextInt(3));
 					e.setBallCount(random.nextInt(4));
 					e.setInning(inning);
-					e.setOutCount(0);
+					e.setOutCount(out);
 					e.setPitcherName(homeTeam.nowPitcher().getName());
 
 					String result = getResult(awayTeam.nowBatter(), homeTeam.nowPitcher(), awayTeam.nowBatSide(),
