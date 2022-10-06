@@ -17,7 +17,6 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getNational, getAmerican } from "./customsimulation-slice";
 
-
 // 모달 연결
 // 승률 높은 곳에 색 변경
 // 수정필요
@@ -49,8 +48,8 @@ const CustomSimulationPage = () => {
 
   // 마우스 오버 변수 (이미지 변환)
   const [isImgHover, setIsImgHover] = useState(false);
-  const startImg1 = "/assets/hit2.png"
-  const startImg2 = "/assets/hit1.png"
+  const startImg1 = "/assets/hit2.png";
+  const startImg2 = "/assets/hit1.png";
 
   // 입력값 변경 이벤트
   const handleInput = (e) => {
@@ -114,13 +113,13 @@ const CustomSimulationPage = () => {
       });
   }, [getNational]);
 
-  // 팀 설정 안했을 시 페이지 이동 막기 
+  // 팀 설정 안했을 시 페이지 이동 막기
   const isSelectedTeams = (event) => {
-    if ( selectHome.length === 0 || selectAway.length === 0 ) {
+    if (selectHome.length === 0 || selectAway.length === 0) {
       event.preventDefault();
-      alert("두 팀 모두 선택해 주세요")
-    } 
-  }
+      alert("두 팀 모두 선택해 주세요");
+    }
+  };
 
   return (
     <CustomConatiner>
@@ -148,7 +147,8 @@ const CustomSimulationPage = () => {
             open={open}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description">
+            aria-describedby="modal-modal-description"
+          >
             <ModalBox>
               <div className="title">홈팀 선택하기</div>
               <br />
@@ -312,12 +312,16 @@ const CustomSimulationPage = () => {
       </TeamContainer>
       <Link
         to={"/simulation"}
-        state={{ home: selectHome, away: selectAway }}
+        state={{ home: selectHome.id, away: selectAway.id }}
         style={{ textDecoration: "none", color: "black" }}
         onClick={isSelectedTeams}
       >
-        <div className="start" onMouseOver={() => setIsImgHover(true)} onMouseOut={() => setIsImgHover(false)} >
-          <img src={isImgHover ? startImg1 : startImg2 } alt="시뮬레이션 시작" />
+        <div
+          className="start"
+          onMouseOver={() => setIsImgHover(true)}
+          onMouseOut={() => setIsImgHover(false)}
+        >
+          <img src={isImgHover ? startImg1 : startImg2} alt="시뮬레이션 시작" />
           <div>시뮬레이션 시작</div>
         </div>
       </Link>

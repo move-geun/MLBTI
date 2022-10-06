@@ -28,48 +28,18 @@ const MyNickname = styled.div`
   }
   
 `
-
-const ListWrapper = styled.div`
-`
-const ListTable = styled.table`
-  width: 100%;
-  tr {
-    border-right: 2px solid;
-  }
-
-`
-const ListBody = styled.tbody`
- 
-`
-
-const ListHeader = styled.thead`
-    tr{
-outline: 2px solid;
-  }
-  `
-
-const HeaderDetail = styled.th`
-  font-size: 20px;
-`
-
-const PlyaerList = styled.div`
+const Select = styled.select`
 
 `
 
-const PlayerDetail = styled.td`
-
+const Option = styled.option`
 `
+
 
 export {
   CompositionWrapper,
   Header,
-  ListWrapper,
   MyNickname,
-  ListHeader,
-  ListTable,
-  ListBody,
-  HeaderDetail,
-  PlyaerList,
-  PlayerDetail,
-
+  Select,
+  Option
 }

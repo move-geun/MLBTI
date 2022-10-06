@@ -13,7 +13,11 @@ import {
 
 
 const SimulationPage = () => {
+  const location = useLocation();
+  const home = location.state.home
+  const away = location.state.away
 
+  console.log(home, away)
   const dispatch = useDispatch();
   const location = useLocation();
   const data = location.state;
