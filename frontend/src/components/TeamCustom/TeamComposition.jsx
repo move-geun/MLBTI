@@ -51,7 +51,7 @@ const TeamCoposition = ({ userInfo, myTeam, isModified, setIsModified }) => {
         }
       });
   };
-
+  
   return (
     <CompositionWrapper>
       <Header>
@@ -62,10 +62,12 @@ const TeamCoposition = ({ userInfo, myTeam, isModified, setIsModified }) => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
+              <TaBleList>시즌</TaBleList>
               <TaBleList>선수명</TaBleList>
               <TaBleList align="right">포지션</TaBleList>
+              <TaBleList align="right">포지션 코드</TaBleList>
               <TaBleList align="right">우완(R), 좌완(L)</TaBleList>
-              <TaBleList align="right">타순</TaBleList>
+              <TaBleList align="center">타순</TaBleList>
               <TaBleList align="right">생년월일</TaBleList>
               <TaBleList align="center">선수삭제</TaBleList>
             </TableRow>
@@ -76,9 +78,13 @@ const TeamCoposition = ({ userInfo, myTeam, isModified, setIsModified }) => {
                 key={idx}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
+                <TaBleList>{player['season']}</TaBleList>
                 <TaBleList>{player["baseballPlayer"]["fullName"]}</TaBleList>
                 <TaBleList align="right" component="th" scope="player">
                   {player["baseballPlayer"]["primaryPositionName"]}
+                </TaBleList>
+                <TaBleList align="right" component="th" scope="player">
+                  {player["baseballPlayer"]["primaryPositionAbbreviation"]}
                 </TaBleList>
                 <TaBleList align="right">
                   {player["baseballPlayer"]["batSideCode"]}
@@ -94,16 +100,19 @@ const TeamCoposition = ({ userInfo, myTeam, isModified, setIsModified }) => {
                       label="타순"
                       onChange={(e) => handleChange(e, player)}
                     >
-                      {orderList.map((idx) => (
+                      {player["baseballPlayer"]["primaryPositionAbbreviation"] === "P" ? (
+                         <MenuItem key={0} value={0}>
+                         0
+                       </MenuItem>
+                      ) :
+                    
+                      orderList.map((idx) => (
                         <MenuItem key={idx} value={idx}>
                           {idx}
                         </MenuItem>
-                      ))}
-                      {/* <MenuItem value={1}>1</MenuItem>
-                      <MenuItem value={2}>2</MenuItem>
-                      <MenuItem value={3}>3</MenuItem>
-                      <MenuItem value={4}>4</MenuItem>
-                      <MenuItem value={7}>7</MenuItem> */}
+                      ))
+                    } 
+
                     </Select>
                   </FormControl>
                 </TaBleList>
