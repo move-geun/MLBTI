@@ -65,7 +65,7 @@ const MainPage = () => {
   };
   // const [notices, setNotices] = useState();
 
-  // 시뮬레이션으로 넘길 때 데이터 
+  // 시뮬레이션으로 넘길 때 데이터
   // home = [{id: xx, logo: url}]
   const [home, setHome] = useState([]);
   const [away, setAway] = useState([]);
@@ -202,6 +202,7 @@ const MainPage = () => {
     floatingYesterday();
     todayFormal();
     rank();
+
     // let step = 0;
     // for (step = 0; step < res.data.length; step++) {
     //   setNotice([...notices, res.data[step]]);
@@ -250,16 +251,17 @@ const MainPage = () => {
     return () => window.removeEventListener("resize", handleResize);
   });
 
-  const clickYesterday = (yesterday) => {
-    let newhome = {'id': '', 'logo':''}
-    let newaway = {'id': '', 'logo':''}
-    newhome['id'] = yesterday.homeId
-    newhome['logo'] = yesterday.homeLogo
-    newaway['id'] = yesterday.awayId
-    newaway['logo'] = yesterday.awayLogo
-    
-  
-  }
+  const clickHistory = (yesterday) => {
+    // let newhome = { id: "", logo: "" };
+    // let newaway = { id: "", logo: "" };
+    // newhome["id"] = yesterday.homeId;
+    // newhome["logo"] = yesterday.homeLogo;
+    // newaway["id"] = yesterday.awayId;
+    // newaway["logo"] = yesterday.awayLogo;
+    // setHome(newhome)
+    // setAway(newaway)
+    console.log("메인페이지 값", home, away);
+  };
 
   if (windowSize > 980) {
     return (
@@ -301,15 +303,15 @@ const MainPage = () => {
           <div className="main_con">
             <div className="simul_page">
               <Ground data={inningList} />
-              <BallCount data={inningList}/>
+              <BallCount data={inningList} />
             </div>
             <div className="main_des">
               <div className="team_des">
-                <img
+                {/* <img
                   className="logo"
                   src={todays[todays.length - 1].homeLogo}
                   alt="홈팀로고"
-                />
+                /> */}
                 <div>{todays[todays.length - 1].homeName}</div>
               </div>
               <div class="simul_case">
@@ -330,13 +332,28 @@ const MainPage = () => {
             <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/Ground.png" alt="" />
-                <div class="dot-elastic"></div>
+                {/* <div class="dot-elastic"></div> */}
               </div>
               <div className="sub_des">
                 <div className="sub_title">
                   <div>오늘 예정 경기</div>
                 </div>
-                <div className="sub_container">
+
+                {/* <Link
+                  className="sub_container"
+                  to={"/simulation"}
+                  style={{ textDecoration: "none", color: "black" }}
+                  state={{
+                    home: {
+                      id: todays[todays.length - 4].homeId,
+                      logo: todays[todays.length - 4].homeLogo,
+                    },
+                    away: {
+                      id: todays[todays.length - 4].awayId,
+                      logo: todays[todays.length - 4].awayLogo,
+                    },
+                  }}
+                >
                   <div className="sub_home">
                     <img src={todays[todays.length - 4].homeLogo} alt="" />
                     <div>{todays[todays.length - 4].homeName}</div>
@@ -346,18 +363,34 @@ const MainPage = () => {
                     <img src={todays[todays.length - 4].awayLogo} alt="" />
                     <div>{todays[todays.length - 4].awayName}</div>
                   </div>
-                </div>
+                </Link> */}
+
                 <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
               </div>
             </SubItem>
             <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/Ground.png" alt="" />
-                <div class="dot-elastic"></div>
+                {/* <div class="dot-elastic"></div> */}
               </div>
               <div className="sub_des">
                 <div className="sub_title">오늘 예정 경기</div>
-                <div className="sub_container">
+
+                {/* <Link
+                  className="sub_container"
+                  to={"/simulation"}
+                  style={{ textDecoration: "none", color: "black" }}
+                  state={{
+                    home: {
+                      id: todays[todays.length - 3].homeId,
+                      logo: todays[todays.length - 3].homeLogo,
+                    },
+                    away: {
+                      id: todays[todays.length - 3].awayId,
+                      logo: todays[todays.length - 3].awayLogo,
+                    },
+                  }}
+                >
                   <div className="sub_home">
                     <img src={todays[todays.length - 3].homeLogo} alt="" />
                     <div>{todays[todays.length - 3].homeName}</div>
@@ -367,18 +400,36 @@ const MainPage = () => {
                     <img src={todays[todays.length - 3].awayLogo} alt="" />
                     <div>{todays[todays.length - 3].awayName}</div>
                   </div>
-                </div>
+                </Link> */}
+
                 <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
               </div>
             </SubItem>
             <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/Ground.png" alt="" />
-                <div class="dot-elastic"></div>
+                {/* <div class="dot-elastic"></div> */}
               </div>
               <div className="sub_des">
                 <div className="sub_title">오늘 예정 경기</div>
-                <div className="sub_container">
+
+
+                {/* <Link
+
+                  className="sub_container"
+                  to={"/simulation"}
+                  style={{ textDecoration: "none", color: "black" }}
+                  state={{
+                    home: {
+                      id: todays[todays.length - 2].homeId,
+                      logo: todays[todays.length - 2].homeLogo,
+                    },
+                    away: {
+                      id: todays[todays.length - 2].awayId,
+                      logo: todays[todays.length - 2].awayLogo,
+                    },
+                  }}
+                >
                   <div className="sub_home">
                     <img src={todays[todays.length - 2].homeLogo} alt="" />
                     <div>{todays[todays.length - 2].homeName}</div>
@@ -388,7 +439,8 @@ const MainPage = () => {
                     <img src={todays[todays.length - 2].awayLogo} alt="" />
                     <div>{todays[todays.length - 2].awayName}</div>
                   </div>
-                </div>
+                </Link> */}
+
                 <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
               </div>
             </SubItem>
@@ -397,15 +449,16 @@ const MainPage = () => {
         <CheckBox>
           <Predict>
             <div className="title">[ 어제 경기 결과 ]</div>
-            <div>
+            {/* <div>
               {yesterdays.map((yesterday, idx) => (
-                <Link 
+                <Link
                   to={"/simulation"}
                   style={{ textDecoration: "none", color: "black" }}
-                  state={{home: home, away: away}}
-                  onClick={()=>clickYesterday(yesterday)}
+                  state={{
+                    home: { id: yesterday.homeId, logo: yesterday.homeLogo },
+                    away: { id: yesterday.awayId, logo: yesterday.awayLogo },
+                  }}
                 >
-                  
                   <div key={idx} className="contentdiv">
                     <div className="home">
                       <div>{yesterday.homeName}</div>
@@ -452,58 +505,67 @@ const MainPage = () => {
                   </div>
                 </Link>
               ))}
-            </div>
+            </div> */}
           </Predict>
           <Predict>
             <div className="title">[ 오늘 경기 일정 ]</div>
-            <div>
+            {/* <div>
               {todays.map((today, idx) => (
-                <div key={idx} className="contentdiv">
-                  <div className="home">
-                    <div>{today.homeName}</div>
-                    <div
-                      className={
-                        today.homeScore > today.awayScore
-                          ? "win"
-                          : today.homeScore < today.awayScore
-                          ? "lose"
-                          : "gray"
-                      }
-                    >
-                      {today.homeScore}
+                <Link
+                  to={"/simulation"}
+                  style={{ textDecoration: "none", color: "black" }}
+                  state={{
+                    home: { id: today.homeId, logo: today.homeLogo },
+                    away: { id: today.awayId, logo: today.awayLogo },
+                  }}
+                >
+                  <div key={idx} className="contentdiv">
+                    <div className="home">
+                      <div>{today.homeName}</div>
+                      <div
+                        className={
+                          today.homeScore > today.awayScore
+                            ? "win"
+                            : today.homeScore < today.awayScore
+                            ? "lose"
+                            : "gray"
+                        }
+                      >
+                        {today.homeScore}
+                      </div>
+                    </div>
+                    <img
+                      className="homeImg"
+                      src={today.homeLogo}
+                      alt="홈팀 사진"
+                    />
+                    <div className="status">
+                      <div className="vs">vs</div>
+                      <div className="status">{today.status}</div>
+                    </div>
+                    <img
+                      className="AwayImg"
+                      src={today.awayLogo}
+                      alt="어웨이팀 사진"
+                    />
+                    <div className="away">
+                      <div>{today.awayName}</div>
+                      <div
+                        className={
+                          today.awayScore > today.homeScore
+                            ? "win"
+                            : today.awayScore < today.homeScore
+                            ? "lose"
+                            : "gray"
+                        }
+                      >
+                        {today.awayScore}
+                      </div>
                     </div>
                   </div>
-                  <img
-                    className="homeImg"
-                    src={today.homeLogo}
-                    alt="홈팀 사진"
-                  />
-                  <div className="status">
-                    <div className="vs">vs</div>
-                    <div className="status">{today.status}</div>
-                  </div>
-                  <img
-                    className="AwayImg"
-                    src={today.awayLogo}
-                    alt="어웨이팀 사진"
-                  />
-                  <div className="away">
-                    <div>{today.awayName}</div>
-                    <div
-                      className={
-                        today.awayScore > today.homeScore
-                          ? "win"
-                          : today.awayScore < today.homeScore
-                          ? "lose"
-                          : "gray"
-                      }
-                    >
-                      {today.awayScore}
-                    </div>
-                  </div>
-                </div>
+                </Link>
               ))}
-            </div>
+            </div> */}
           </Predict>
           <Rank>
             <div className="title">[팀 순위]</div>
@@ -618,11 +680,11 @@ const MainPage = () => {
             <Ground data={inningList} />
             <div className="main_des">
               <div className="team_des">
-                <img
+                {/* <img
                   className="logo"
                   src={todays[todays.length - 1].homeLogo}
                   alt="홈팀로고"
-                />
+                /> */}
                 <div>{todays[todays.length - 1].homeName}</div>
               </div>
               <div class="simul_case">
@@ -643,7 +705,7 @@ const MainPage = () => {
             <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/Ground.png" alt="" />
-                <div class="dot-elastic"></div>
+                {/* <div class="dot-elastic"></div> */}
               </div>
               <div className="sub_des">
                 <div className="sub_title">
@@ -651,7 +713,7 @@ const MainPage = () => {
                 </div>
                 <div className="sub_container">
                   <div className="sub_home">
-                    <img src={todays[todays.length - 4].homeLogo} alt="" />
+                    {/* <img src={todays[todays.length - 4].homeLogo} alt="" /> */}
                     <div>{todays[todays.length - 4].homeName}</div>
                   </div>
                   <h5>VS</h5>
@@ -666,13 +728,13 @@ const MainPage = () => {
             <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/Ground.png" alt="" />
-                <div class="dot-elastic"></div>
+                {/* <div class="dot-elastic"></div> */}
               </div>
               <div className="sub_des">
                 <div className="sub_title">오늘 예정 경기</div>
                 <div className="sub_container">
                   <div className="sub_home">
-                    <img src={todays[todays.length - 3].homeLogo} alt="" />
+                    {/* <img src={todays[todays.length - 3].homeLogo} alt="" /> */}
                     <div>{todays[todays.length - 3].homeName}</div>
                   </div>
                   <h5>VS</h5>
@@ -687,13 +749,13 @@ const MainPage = () => {
             <SubItem>
               <div className="sub_dot">
                 <img className="sub_simul" src="../assets/Ground.png" alt="" />
-                <div class="dot-elastic"></div>
+                {/* <div class="dot-elastic"></div> */}
               </div>
               <div className="sub_des">
                 <div className="sub_title">오늘 예정 경기</div>
                 <div className="sub_container">
                   <div className="sub_home">
-                    <img src={todays[todays.length - 2].homeLogo} alt="" />
+                    {/* <img src={todays[todays.length - 2].homeLogo} alt="" /> */}
                     <div>{todays[todays.length - 2].homeName}</div>
                   </div>
                   <h5>VS</h5>
@@ -710,105 +772,124 @@ const MainPage = () => {
         <DownChart {...downsettings}>
           <Predict>
             <div className="title">[ 어제 경기 결과 ]</div>
-            <div>
+            {/* <div>
               {yesterdays.map((yesterday, idx) => (
-                <div key={idx} className="contentdiv">
-                  <div className="home">
-                    <div>{yesterday.homeName}</div>
-                    <div
-                      className={
-                        yesterday.homeScore > yesterday.awayScore
-                          ? "win"
-                          : yesterday.homeScore < yesterday.awayScore
-                          ? "lose"
-                          : "gray"
-                      }
-                    >
-                      {yesterday.homeScore}
+                <Link
+                  to={"/simulation"}
+                  style={{ textDecoration: "none", color: "black" }}
+                  state={{
+                    home: { id: yesterday.homeId, logo: yesterday.homeLogo },
+                    away: { id: yesterday.awayId, logo: yesterday.awayLogo },
+                  }}
+                  onClick={() => clickHistory(yesterday)}
+                >
+                  <div key={idx} className="contentdiv">
+                    <div className="home">
+                      <div>{yesterday.homeName}</div>
+                      <div
+                        className={
+                          yesterday.homeScore > yesterday.awayScore
+                            ? "win"
+                            : yesterday.homeScore < yesterday.awayScore
+                            ? "lose"
+                            : "gray"
+                        }
+                      >
+                        {yesterday.homeScore}
+                      </div>
+                    </div>
+                    <img
+                      className="homeImg"
+                      src={yesterday.homeLogo}
+                      alt="홈팀 사진"
+                    />
+                    <div className="status">
+                      <div className="vs">vs</div>
+                      <div className="status">{yesterday.status}</div>
+                    </div>
+                    <img
+                      className="AwayImg"
+                      src={yesterday.awayLogo}
+                      alt="어웨이팀 사진"
+                    />
+                    <div className="away">
+                      <div>{yesterday.awayName}</div>
+                      <div
+                        className={
+                          yesterday.awayScore > yesterday.homeScore
+                            ? "win"
+                            : yesterday.awayScore < yesterday.homeScore
+                            ? "lose"
+                            : "gray"
+                        }
+                      >
+                        {yesterday.awayScore}
+                      </div>
                     </div>
                   </div>
-                  <img
-                    className="homeImg"
-                    src={yesterday.homeLogo}
-                    alt="홈팀 사진"
-                  />
-                  <div className="status">
-                    <div className="vs">vs</div>
-                    <div className="status">{yesterday.status}</div>
-                  </div>
-                  <img
-                    className="AwayImg"
-                    src={yesterday.awayLogo}
-                    alt="어웨이팀 사진"
-                  />
-                  <div className="away">
-                    <div>{yesterday.awayName}</div>
-                    <div
-                      className={
-                        yesterday.awayScore > yesterday.homeScore
-                          ? "win"
-                          : yesterday.awayScore < yesterday.homeScore
-                          ? "lose"
-                          : "gray"
-                      }
-                    >
-                      {yesterday.awayScore}
-                    </div>
-                  </div>
-                </div>
+                </Link>
               ))}
-            </div>
+            </div> */}
           </Predict>
           <Predict>
             <div className="title">[ 오늘 경기 일정 ]</div>
-            <div>
+            {/* <div>
               {todays.map((today, idx) => (
-                <div key={idx} className="contentdiv">
-                  <div className="home">
-                    <div>{today.homeName}</div>
-                    <div
-                      className={
-                        today.homeScore > today.awayScore
-                          ? "win"
-                          : today.homeScore < today.awayScore
-                          ? "lose"
-                          : "gray"
-                      }
-                    >
-                      {today.homeScore}
+                <Link
+                  to={"/simulation"}
+                  style={{ textDecoration: "none", color: "black" }}
+                  state={{
+                    home: { id: today.homeId, logo: today.homeLogo },
+                    away: { id: today.awayId, logo: today.awayLogo },
+                  }}
+                >
+                  <div key={idx} className="contentdiv">
+                    <div className="home">
+                      <div>{today.homeName}</div>
+                      <div
+                        className={
+                          today.homeScore > today.awayScore
+                            ? "win"
+                            : today.homeScore < today.awayScore
+                            ? "lose"
+                            : "gray"
+                        }
+                      >
+                        {today.homeScore}
+                      </div>
+                    </div>
+                    <img
+                      className="homeImg"
+                      src={today.homeLogo}
+                      alt="홈팀 사진"
+                    />
+                    <div className="status">
+                      <div className="vs">vs</div>
+                      <div className="status">{today.status}</div>
+                    </div>
+                    <img
+                      className="AwayImg"
+                      src={today.awayLogo}
+                      alt="어웨이팀 사진"
+                    />
+                    <div className="away">
+                      <div>{today.awayName}</div>
+                      <div
+                        className={
+                          today.awayScore > today.homeScore
+                            ? "win"
+                            : today.awayScore < today.homeScore
+                            ? "lose"
+                            : "gray"
+                        }
+                      >
+                        {today.awayScore}
+                      </div>
                     </div>
                   </div>
-                  <img
-                    className="homeImg"
-                    src={today.homeLogo}
-                    alt="홈팀 사진"
-                  />
-                  <div className="status">
-                    <div className="vs">vs</div>
-                    <div className="status">{today.status}</div>
-                  </div>
-                  <img
-                    className="AwayImg"
-                    src={today.awayLogo}
-                    alt="어웨이팀 사진"
-                  />
-                  <div className="away">
-                    <div>{today.awayName}</div>
-                    <div
-                      className={
-                        today.awayScore > today.homeScore
-                          ? "win"
-                          : today.awayScore < today.homeScore
-                          ? "lose"
-                          : "gray"
-                      }
-                    >
-                      {today.awayScore}
-                    </div>
-                  </div>
-                </div>
+                </Link>
               ))}
-            </div>
+            </div> */}
           </Predict>
           <Rank>
             <div className="title">[팀 순위]</div>
@@ -923,11 +1004,11 @@ const MainPage = () => {
             <Ground data={inningList} />
             <div className="main_des">
               <div className="team_des">
-                <img
+                {/* <img
                   className="logo"
                   src={todays[todays.length - 1].homeLogo}
                   alt="홈팀로고"
-                />
+                /> */}
                 <div>{todays[todays.length - 1].homeName}</div>
               </div>
               <div class="simul_case">
@@ -948,105 +1029,124 @@ const MainPage = () => {
         <DownChart {...downsettings}>
           <Predict>
             <div className="title">[ 어제 경기 결과 ]</div>
-            <div>
+            {/* <div>
               {yesterdays.map((yesterday, idx) => (
-                <div key={idx} className="contentdiv">
-                  <div className="home">
-                    <div>{yesterday.homeName}</div>
-                    <div
-                      className={
-                        yesterday.homeScore > yesterday.awayScore
-                          ? "win"
-                          : yesterday.homeScore < yesterday.awayScore
-                          ? "lose"
-                          : "gray"
-                      }
-                    >
-                      {yesterday.homeScore}
+                <Link
+                  to={"/simulation"}
+                  style={{ textDecoration: "none", color: "black" }}
+                  state={{
+                    home: { id: yesterday.homeId, logo: yesterday.homeLogo },
+                    away: { id: yesterday.awayId, logo: yesterday.awayLogo },
+                  }}
+                  onClick={() => clickHistory(yesterday)}
+                >
+                  <div key={idx} className="contentdiv">
+                    <div className="home">
+                      <div>{yesterday.homeName}</div>
+                      <div
+                        className={
+                          yesterday.homeScore > yesterday.awayScore
+                            ? "win"
+                            : yesterday.homeScore < yesterday.awayScore
+                            ? "lose"
+                            : "gray"
+                        }
+                      >
+                        {yesterday.homeScore}
+                      </div>
+                    </div>
+                    <img
+                      className="homeImg"
+                      src={yesterday.homeLogo}
+                      alt="홈팀 사진"
+                    />
+                    <div className="status">
+                      <div className="vs">vs</div>
+                      <div className="status">{yesterday.status}</div>
+                    </div>
+                    <img
+                      className="AwayImg"
+                      src={yesterday.awayLogo}
+                      alt="어웨이팀 사진"
+                    />
+                    <div className="away">
+                      <div>{yesterday.awayName}</div>
+                      <div
+                        className={
+                          yesterday.awayScore > yesterday.homeScore
+                            ? "win"
+                            : yesterday.awayScore < yesterday.homeScore
+                            ? "lose"
+                            : "gray"
+                        }
+                      >
+                        {yesterday.awayScore}
+                      </div>
                     </div>
                   </div>
-                  <img
-                    className="homeImg"
-                    src={yesterday.homeLogo}
-                    alt="홈팀 사진"
-                  />
-                  <div className="status">
-                    <div className="vs">vs</div>
-                    <div className="status">{yesterday.status}</div>
-                  </div>
-                  <img
-                    className="AwayImg"
-                    src={yesterday.awayLogo}
-                    alt="어웨이팀 사진"
-                  />
-                  <div className="away">
-                    <div>{yesterday.awayName}</div>
-                    <div
-                      className={
-                        yesterday.awayScore > yesterday.homeScore
-                          ? "win"
-                          : yesterday.awayScore < yesterday.homeScore
-                          ? "lose"
-                          : "gray"
-                      }
-                    >
-                      {yesterday.awayScore}
-                    </div>
-                  </div>
-                </div>
+                </Link>
               ))}
-            </div>
+            </div> */}
           </Predict>
           <Predict>
             <div className="title">[ 오늘 경기 일정 ]</div>
-            <div>
+            {/* <div>
               {todays.map((today, idx) => (
-                <div key={idx} className="contentdiv">
-                  <div className="home">
-                    <div>{today.homeName}</div>
-                    <div
-                      className={
-                        today.homeScore > today.awayScore
-                          ? "win"
-                          : today.homeScore < today.awayScore
-                          ? "lose"
-                          : "gray"
-                      }
-                    >
-                      {today.homeScore}
+                <Link
+                  to={"/simulation"}
+                  style={{ textDecoration: "none", color: "black" }}
+                  state={{
+                    home: { id: today.homeId, logo: today.homeLogo },
+                    away: { id: today.awayId, logo: today.awayLogo },
+                  }}
+                >
+                  <div key={idx} className="contentdiv">
+                    <div className="home">
+                      <div>{today.homeName}</div>
+                      <div
+                        className={
+                          today.homeScore > today.awayScore
+                            ? "win"
+                            : today.homeScore < today.awayScore
+                            ? "lose"
+                            : "gray"
+                        }
+                      >
+                        {today.homeScore}
+                      </div>
+                    </div>
+                    <img
+                      className="homeImg"
+                      src={today.homeLogo}
+                      alt="홈팀 사진"
+                    />
+                    <div className="status">
+                      <div className="vs">vs</div>
+                      <div className="status">{today.status}</div>
+                    </div>
+                    <img
+                      className="AwayImg"
+                      src={today.awayLogo}
+                      alt="어웨이팀 사진"
+                    />
+                    <div className="away">
+                      <div>{today.awayName}</div>
+                      <div
+                        className={
+                          today.awayScore > today.homeScore
+                            ? "win"
+                            : today.awayScore < today.homeScore
+                            ? "lose"
+                            : "gray"
+                        }
+                      >
+                        {today.awayScore}
+                      </div>
                     </div>
                   </div>
-                  <img
-                    className="homeImg"
-                    src={today.homeLogo}
-                    alt="홈팀 사진"
-                  />
-                  <div className="status">
-                    <div className="vs">vs</div>
-                    <div className="status">{today.status}</div>
-                  </div>
-                  <img
-                    className="AwayImg"
-                    src={today.awayLogo}
-                    alt="어웨이팀 사진"
-                  />
-                  <div className="away">
-                    <div>{today.awayName}</div>
-                    <div
-                      className={
-                        today.awayScore > today.homeScore
-                          ? "win"
-                          : today.awayScore < today.homeScore
-                          ? "lose"
-                          : "gray"
-                      }
-                    >
-                      {today.awayScore}
-                    </div>
-                  </div>
-                </div>
+                </Link>
               ))}
-            </div>
+            </div> */}
           </Predict>
           <Rank>
             <div className="title">[팀 순위]</div>

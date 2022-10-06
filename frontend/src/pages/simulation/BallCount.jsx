@@ -1,38 +1,28 @@
 import { useEffect, useState } from "react";
 
-import {
-  Groundmap,
-  BaseBall,
-  FirstB,
-  SecondB,
-  ThirdB,
-  BatterEvent,
-  BatterName,
-  BallCountContainer,
-} from "./SimulationPage.style";
+import { BallCountContainer } from "./SimulationPage.style";
 
 const BallCount = (prop) => {
   const [inningList, setInningList] = useState([]);
-  // const [batterList, setBatterList] = useState([]);
-  const [firstBase, setFirstBase] = useState(false);
-  const [secondBase, setSecondBase] = useState(false);
-  const [thirdBase, setThirdBase] = useState(false);
+  const [ballCnt, setBallCnt] = useState("");
+  const [strikeCnt, setStrikeCnt] = useState("");
+  const [outCnt, setOutCnt] = useState("");
+  const [inningindex, setInningIndex] = useState("");
   const [batterEvent, setBatterEvent] = useState("");
-  const [hitterName, sethitterName] = useState("");
 
-  console.log("볼카운트 컴포넌트 ", prop);
   useEffect(() => {
     if (prop.data !== null) {
       setInningList(prop.data);
-      console.log("여기는 ground", prop);
     }
   }, [prop]);
+
+  useEffect(() => {}, [ballCnt, strikeCnt, outCnt, inningindex]);
 
   useEffect(() => {
     if (inningList.length > 0) {
       async function processArray(inningList) {
         for (let inning of inningList) {
-          // console.log("현재 이닝!", inning.inning)
+          //   console.log("현재 이닝!", inning.inning)
           for (let data of inning.datas) {
             await makeBatterList(data);
           }
@@ -45,58 +35,102 @@ const BallCount = (prop) => {
   }, [inningList]);
 
   async function makeBatterList(batter) {
-    baseSetting(batter);
+    BSOcountSetting(batter);
     await new Promise((resolve) => setTimeout(resolve, 1200));
     // await delay(2000)
   }
 
-  function delay(time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
-
-  const baseSetting = (batter) => {
-    // console.log("2초 뒤에 간ㄷ", batter);
-    setFirstBase(batter.firstBase);
-    setSecondBase(batter.secondBase);
-    setThirdBase(batter.thirdBase);
+  const BSOcountSetting = (batter) => {
     setBatterEvent(batter.event);
-    sethitterName(batter.batterName);
+    setBallCnt(batter.ballCount);
+    setStrikeCnt(batter.strikeCount);
+    setOutCnt(batter.outCount);
+    setInningIndex(batter.inning);
   };
 
-  useEffect(() => {
-    // console.log("event 알려줘", batterEvent);
-  }, [batterEvent, hitterName]);
+  const RenderBallCnt = () => {
+    const result = [];
+    if (ballCnt) {
+      if (ballCnt > 0) {
+        for (let i = 0; i < ballCnt; i++) {
+          result.push(<div className="circle ball"></div>);
+        }
+        if (ballCnt < 3) {
+          for (let i = 0; i < 3 - ballCnt; i++) {
+            result.push(<div className="circle"></div>);
+          }
+        }
+      }
+    } else {
+      for (let i = 0; i < 3; i++) {
+        result.push(<div className="circle"></div>);
+      }
+    }
+    return result;
+  };
+
+  const RenderStrikeCnt = () => {
+    const result = [];
+    if (strikeCnt) {
+      if (strikeCnt > 0) {
+        for (let i = 0; i < strikeCnt; i++) {
+          result.push(<div className="circle strike"></div>);
+        }
+        if (strikeCnt < 2) {
+          for (let i = 0; i < 2 - strikeCnt; i++) {
+            result.push(<div className="circle"></div>);
+          }
+        }
+      }
+    } else {
+      for (let i = 0; i < 2; i++) {
+        result.push(<div className="circle"></div>);
+      }
+    }
+    return result;
+  };
+
+  const RenderOutCnt = () => {
+    const result = [];
+    if (outCnt) {
+      if (outCnt > 0) {
+        for (let i = 0; i < outCnt; i++) {
+          result.push(<div className="circle out"></div>);
+        }
+        if (outCnt < 2) {
+          for (let i = 0; i < 2 - outCnt; i++) {
+            result.push(<div className="circle"></div>);
+          }
+        }
+      }
+    } else {
+      for (let i = 0; i < 2; i++) {
+        result.push(<div className="circle"></div>);
+      }
+    }
+    return result;
+  };
 
   return (
     <div>
       <BallCountContainer>
-          <div className="count">
-            <div className="title">B</div>
-            <div className="circle_case">
-              <div className="circle ball"></div>
-              <div className="circle ball"></div>
-              <div className="circle"></div>
-            </div>
-          </div>
-          <div className="count">
-            <div className="title">S</div>
-            <div className="circle_case">
-              <div className="circle strike"></div>
-              <div className="circle"></div>
-            </div>
-          </div>
-          <div className="count">
-            <div className="title">O</div>
-            <div className="circle_case">
-              <div className="circle out"></div>
-              <div className="circle"></div>
-            </div>
-          </div>
-        </BallCountContainer>
+        <div>{inningindex}회차</div>
+        <div>{batterEvent}</div>
+        <div className="count">
+          <div className="title">B</div>
+          <div className="circle_case">{RenderBallCnt()}</div>
+        </div>
+        <div className="count">
+          <div className="title">S</div>
+          <div className="circle_case">{RenderStrikeCnt()}</div>
+        </div>
+        <div className="count">
+          <div className="title">O</div>
+          <div className="circle_case">{RenderOutCnt()}</div>
+        </div>
+      </BallCountContainer>
     </div>
   );
 };
 
 export default BallCount;
-
-
