@@ -17,6 +17,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getNational, getAmerican } from "./customsimulation-slice";
 import { getMyteam, myprofile } from "../profile/myprofile-slice";
+import { ConnectingAirportsOutlined } from "@mui/icons-material";
 
 // 모달 연결
 // 승률 높은 곳에 색 변경
@@ -140,7 +141,7 @@ const CustomSimulationPage = () => {
       dispatch(getMyteam(data))
         .unwrap()
         .then((res) => {
-          setMyTeam(res.data[0].user);
+          setMyTeam(res[0]);
         });
     }
   }, [myInfo]);
@@ -231,6 +232,7 @@ const CustomSimulationPage = () => {
                     <img
                       className="myteamlogo"
                       src={"/assets/customTeamLogo.png"}
+                      alt="이미지"
                     ></img>
                     {myTeam.myTeamName} (내 구단)
                   </div>

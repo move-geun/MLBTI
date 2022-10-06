@@ -8,11 +8,11 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
+// import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import styled from "styled-components";
-import LogoutIcon from "@mui/icons-material/Logout";
-import LoginIcon from "@mui/icons-material/Login";
+// import LogoutIcon from "@mui/icons-material/Logout";
+// import LoginIcon from "@mui/icons-material/Login";
 import { useNavigate } from "react-router-dom";
 import { deleteToken } from "../../api/JWT";
 import isAuthenticated from "../../api/isAuthenticated";
@@ -185,7 +185,7 @@ const Navbar = () => {
               },
             }}
           >
-            {isAuthenticated()
+            {/* {isAuthenticated()
               ? loginPages.map((page) => (
                   <Button
                     component="a"
@@ -215,29 +215,13 @@ const Navbar = () => {
                   >
                     {Object.keys(page)}
                   </Button>
-                ))}
+                ))} */}
           </Box>
 
           {isAuthenticated() ? (
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Logout">
-                <IconButton onClick={logoutHandle} sx={{ p: 0 }}>
-                  <LogoutIcon
-                    sx={{ fontSize: 40}}
-                  ></LogoutIcon>
-                </IconButton>
-              </Tooltip>
-            </Box>
+            <Box sx={{ flexGrow: 0 }}></Box>
           ) : (
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Login">
-                <IconButton onClick={loginHandle} sx={{ p: 0 }}>
-                  <LoginIcon
-                    sx={{ fontSize: 40}}
-                  ></LoginIcon>
-                </IconButton>
-              </Tooltip>
-            </Box>
+            <Box sx={{ flexGrow: 0 }}></Box>
           )}
         </Toolbar>
       </Container>
