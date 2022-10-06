@@ -309,6 +309,7 @@ public class SimulationServiceImpl implements SimulationService {
 					if (result == "SO" || result == "GO" || result == "AO") {
 						if (result == "SO") {
 							gamelog.append("삼진 아웃" + "\n");
+							e.setStrikeCount(3);
 						} else if (result == "GO") {
 							if (awayTeam.base[1] && out <= 1) {
 								awayTeam.base[1] = false;
@@ -455,6 +456,7 @@ public class SimulationServiceImpl implements SimulationService {
 					if (result == "SO" || result == "GO" || result == "AO") {
 						if (result == "SO") {
 							gamelog.append("삼진 아웃" + "\n");
+							e.setStrikeCount(2);
 						} else if (result == "GO") {
 							if (homeTeam.base[1] && out <= 1) {
 								homeTeam.base[1] = false;
