@@ -6,15 +6,15 @@ const Background = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 100vw;
+  width: 88%;
   height: 100vh;
-  
+  margin: 0 auto;
+
   .header {
     display: flex;
     justify-content: flex-start;
     width: 100%;
     margin: 1rem 0 0 5rem;
-    
   }
 
   img {
@@ -22,14 +22,14 @@ const Background = styled.div`
     height: 35px;
     padding-left: 1rem;
   }
-`
+`;
 
 const Header = styled.div`
-    text-align: left;
-    padding-bottom: 4px;
-    border-bottom: 2px solid #2565d0;
-    font-size: 1.5rem;
-`
+  text-align: left;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #2565d0;
+  font-size: 1.5rem;
+`;
 
 const CenterWrapper = styled.div`
   display: flex;
@@ -38,9 +38,9 @@ const CenterWrapper = styled.div`
   @media screen and (max-width: 830px) {
     flex-direction: column;
     align-items: center;
-    width:100%;
+    width: 100%;
   }
-`
+`;
 const MyteamWrapper = styled.div`
   width: 50%;
   padding-top: 2rem;
@@ -48,13 +48,12 @@ const MyteamWrapper = styled.div`
   @media screen and (max-width: 830px) {
     width: 90%;
     height: 500px;
-  }  
-`
+  }
+`;
 
 const Nickname = styled.div`
   margin: 1rem;
-  
-`
+`;
 
 const CustomTeamName = styled.div`
   display: flex;
@@ -64,7 +63,7 @@ const CustomTeamName = styled.div`
   @media screen and (max-width: 830px) {
     font-size: 20px;
   }
-` 
+`;
 
 const EditBtn = styled(FiEdit)`
   color: #433c3c;
@@ -74,27 +73,25 @@ const EditBtn = styled(FiEdit)`
 
 const SearchDiv = styled.div`
   display: flex;
-  align-items: center;  
-  
+  align-items: center;
+
   &.playerSearch {
     margin-right: 0.5rem;
-    
   }
-`
+`;
 
 const SearchInput = styled(TextField)`
   margin: 1rem;
 `;
 
 const Img = styled.img`
-
-  &.magnifying{
+  &.magnifying {
     width: 1.6rem;
     height: 1.6rem;
     cursor: pointer;
   }
 
-  &.ground{
+  &.ground {
     width: 400px;
     height: 400px;
     /* padding-top: 5.5rem; */
@@ -116,8 +113,7 @@ const SimulationWrapper = styled.div`
   align-items: center;
   width: 50%;
   height: 100%;
-`
-
+`;
 
 export {
   Background,
@@ -131,4 +127,4 @@ export {
   Img,
   EditBtn,
   SearchInput,
-}
+};

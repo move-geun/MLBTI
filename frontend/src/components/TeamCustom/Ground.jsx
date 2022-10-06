@@ -33,7 +33,7 @@ const Ground = ({ myTeam, userInfo }) => {
   return myTeam ? (
     <Background>
       <ImgDiv>
-        <Img className="ground" src={"/assets/Ground.png"}></Img>
+        <Img className="ground" src={"/assets/Ground2.png"}></Img>
 
         {myTeam.map((player) =>
           player.baseballPlayer.primaryPositionName === "First Base" ? (
