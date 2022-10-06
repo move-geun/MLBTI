@@ -16,6 +16,7 @@ import FormControl from "@mui/material/FormControl";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getNational, getAmerican } from "./customsimulation-slice";
+import { myteam, myprofile } from "../profile/myprofile-slice";
 
 // 모달 연결
 // 승률 높은 곳에 색 변경
@@ -38,6 +39,10 @@ const CustomSimulationPage = () => {
   // 선택한 팀 정보
   const [selectHome, setSelectHome] = useState([]);
   const [selectAway, setSelectAway] = useState([]);
+
+  // 내 정보
+  const [myInfo, setMyInfo] = useState("");
+  const [myTeam, setMyTeam] = useState();
 
   // 검색 인풋 변수
   const [userInput, setUserInput] = useState("");
@@ -99,6 +104,12 @@ const CustomSimulationPage = () => {
   };
 
   useEffect(() => {
+    dispatch(myprofile())
+      .unwrap()
+      .then((res) => {
+        setMyInfo(res.data.userId);
+      });
+
     dispatch(getNational())
       .unwrap()
       .then((res) => {
@@ -113,6 +124,21 @@ const CustomSimulationPage = () => {
       });
   }, [getNational]);
 
+  useEffect(() => {
+    if (myInfo.length !== 0) {
+      const data = {
+        email: myInfo,
+      };
+      dispatch(myteam(data))
+        .unwrap()
+        .then((res) => {
+          setMyTeam(res.data[0].user);
+        });
+    }
+  }, [myInfo]);
+
+  console.log(myTeam);
+
   // 팀 설정 안했을 시 페이지 이동 막기
   const isSelectedTeams = (event) => {
     if (selectHome.length === 0 || selectAway.length === 0) {
@@ -121,7 +147,7 @@ const CustomSimulationPage = () => {
     }
   };
 
-  return (
+  return myTeam ? (
     <CustomConatiner>
       <Header>매치업 설정하기</Header>
       <TeamContainer>
@@ -181,6 +207,9 @@ const CustomSimulationPage = () => {
                   </FormControl>
                 </div>
                 <div className="candidates">
+                  <div className="myteam">
+                    <img className="myteamlogo" src={'/assets/customTeamLogo.png'}></img>{myTeam.myTeamName}
+                    </div>
                   {leagueName === "nationalMLB"
                     ? nationalSearchList.map((item, idx) => (
                         <ListWrap
@@ -326,7 +355,7 @@ const CustomSimulationPage = () => {
         </div>
       </Link>
     </CustomConatiner>
-  );
+  ) : null;
 };
 
 export default CustomSimulationPage;

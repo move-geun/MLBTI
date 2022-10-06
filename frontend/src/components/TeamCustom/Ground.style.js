@@ -20,7 +20,7 @@ const ImgDiv = styled.div`
 
 const Img = styled.img`
   &.ground {
-    
+    padding: 0;
     width: 450px;
     height: 450px;
 
@@ -45,6 +45,9 @@ const Nickname = styled.div`
 `
 
 const Player = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   &.FB {
     position: absolute;
     top: 12rem;
@@ -168,6 +171,7 @@ const Player = styled.div`
   
   
   .img {
+    padding: 0;
     width: 50px;
     height: 50px;
     @media screen and (max-width: 830px) {
