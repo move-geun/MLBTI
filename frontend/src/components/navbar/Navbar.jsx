@@ -8,7 +8,7 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-// import Tooltip from "@mui/material/Tooltip";
+import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import styled from "styled-components";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -225,9 +225,25 @@ const Navbar = () => {
           </Box>
           <>
             {isAuthenticated() ? (
-              <Box sx={{ flexGrow: 0 }}></Box>
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Logout">
+                  <IconButton onClick={logoutHandle} sx={{ p: 0 }}>
+                    <LogoutIcon
+                      sx={{ fontSize: 40, color: "pink[500]" }}
+                    ></LogoutIcon>
+                  </IconButton>
+                </Tooltip>
+              </Box>
             ) : (
-              <Box sx={{ flexGrow: 0 }}></Box>
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Login">
+                  <IconButton onClick={login} sx={{ p: 0 }}>
+                    <LoginIcon
+                      sx={{ fontSize: 40, color: "pink[500]" }}
+                    ></LoginIcon>
+                  </IconButton>
+                </Tooltip>
+              </Box>
             )}
           </>
         </Toolbar>

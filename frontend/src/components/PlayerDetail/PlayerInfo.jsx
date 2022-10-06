@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Wrapper, ProfileDiv, ProfileImg, Name } from "./PlayerInfo.style";
+import {
+  Wrapper,
+  ProfileDiv,
+  ProfileImg,
+  Name,
+  PicName,
+} from "./PlayerInfo.style";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getPlayerDetail } from "./playerdetail-slice";
@@ -7,22 +13,28 @@ const PlayerInfo = ({ match }) => {
   const dispatch = useDispatch();
   const { uid } = useParams();
   const [infoData, setInfoData] = useState();
-  
+
   useEffect(() => {
     dispatch(getPlayerDetail(uid))
       .unwrap()
       .then((res) => {
         // feet, pound => cm, kg
         const height = res.height.split("'");
-        res.height = parseInt(height[0]) * 30.48 + parseInt(height[1].replace('"', "")) * 2.54
-        res.weight = res.weight * 0.45
+        res.height =
+          parseInt(height[0]) * 30.48 +
+          parseInt(height[1].replace('"', "")) * 2.54;
+        res.weight = res.weight * 0.45;
         setInfoData(res);
       });
   }, []);
 
   return infoData ? (
     <Wrapper>
-      <ProfileImg src={infoData.imgUrl}></ProfileImg>
+      <PicName>
+        <ProfileImg src={infoData.imgUrl}></ProfileImg>
+        <img className="outline" src={"/assets/outline.png"}></img>
+        <Name>{infoData.fullName}</Name>
+      </PicName>
       <div className="detail">
         <ProfileDiv>
           <div className="title">포지션</div>
@@ -31,10 +43,6 @@ const PlayerInfo = ({ match }) => {
         <ProfileDiv>
           <div className="title">출생</div>
           <div className="content">{infoData.birthDate}</div>
-        </ProfileDiv>
-        <ProfileDiv>
-          <div className="title">MLB 데뷔</div>
-          <div className="content">{infoData.mlbDebutDate}</div>
         </ProfileDiv>
         <ProfileDiv>
           <div className="title">키</div>
@@ -49,7 +57,6 @@ const PlayerInfo = ({ match }) => {
           <div className="content">{infoData.pitchHandCode}</div>
         </ProfileDiv>
       </div>
-      <Name>{infoData.fullName}</Name>
     </Wrapper>
   ) : null;
 };

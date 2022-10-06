@@ -7,11 +7,6 @@ import * as React from "react";
 import Modal from "@mui/material/Modal";
 import { ModalBox } from "../profile/MyProfilePage.style";
 import { tmppwd } from "./login-slice";
-// import { login, logout } from "./login-slice";
-
-// 로그인 기능 구현
-// apiloginSubmit 연결
-// 토큰 저장
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -42,15 +37,9 @@ const LoginPage = () => {
           alert("해당 정보로 가입된 유저 정보가 없습니다");
         } else if (err.status === 500) {
           alert("서버 오류입니다. 1분 뒤 재시도해주세요");
-        } else {
-          alert("아몰랑");
         }
       });
   }
-  // function logoutFunc(e) {
-  //   e.preventDefault();
-  //   dispatch(logout());
-  // }
 
   // 임시비밀번호 발급
   function tmpSendmail(e) {
@@ -61,11 +50,9 @@ const LoginPage = () => {
     dispatch(tmppwd(data))
       .unwrap()
       .then((res) => {
-        console.log("성공");
+        alert("메일을 확인해주세요");
       })
-      .catch((err) => {
-        console.log("에러뜸");
-      });
+      .catch((err) => {});
   }
 
   return (
@@ -95,7 +82,7 @@ const LoginPage = () => {
       </form>
       <FlexSpan>
         <div>비밀번호를 잊으셨나요?</div>
-        <div onClick={handleOpen}>비밀번호 찾기</div>
+        <div onClick={handleOpen}> 비밀번호 찾기</div>
         <Modal
           open={open}
           onClose={handleClose}
@@ -123,10 +110,9 @@ const LoginPage = () => {
       </FlexSpan>
       <FlexSpan>
         <div>아직 회원이 아니신가요?</div>
-        <a href="/signup">회원가입하기</a>
+        <a href="/signup"> 회원가입하기</a>
       </FlexSpan>
       <button onClick={(e) => loginSubmit(e)}>로그인</button>
-      {/* <button onClick={(e) => logoutFunc(e)}>로그아웃</button> */}
     </LoginBox>
   );
 };
