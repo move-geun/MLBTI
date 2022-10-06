@@ -31,11 +31,11 @@ const TeamCustomPage = () => {
 
   // 구단 명 수정 시 유저 정보 다시 불러오기
   const [isChangeName, setIsChangeName] = useState(true);
-  
+
   // userInfo가 들어왔을 때, 내 팀 목록을 불러옴
   async function getTeam() {
     const res = await dispatch(getUserTeam(userInfo["userId"]));
-    
+
     // 성공적으로 dispatatch 했을 때 payload에 팀이 담겨 옴
     if (res.meta.requestStatus === "fulfilled") {
       setMyTeam(res.payload);
@@ -43,13 +43,13 @@ const TeamCustomPage = () => {
   }
 
   useEffect(() => {
-    getTeam()
-  }, [isModified])
+    getTeam();
+  }, [isModified]);
 
   useEffect(() => {
-    if (userInfo.length !== 0) getTeam()
-  }, [userInfo])
-    
+    if (userInfo.length !== 0) getTeam();
+  }, [userInfo]);
+
   useEffect(() => {
     dispatch(myprofile())
       .unwrap()
@@ -69,7 +69,6 @@ const TeamCustomPage = () => {
         <Header>My team 구성하기</Header>
       </div>
       <CenterWrapper>
-        
         <MyteamWrapper>
           <CustomTeamName>
             {userInfo["teamName"]}
@@ -86,12 +85,24 @@ const TeamCustomPage = () => {
               />
             )}
           </CustomTeamName>
-          <PlayerList email={userInfo["userId"]} myTeam={myTeam} isModified={isModified} setIsModified={setIsModified} />
+          <div className="candi">
+            <PlayerList
+              email={userInfo["userId"]}
+              myTeam={myTeam}
+              isModified={isModified}
+              setIsModified={setIsModified}
+            />
+          </div>
         </MyteamWrapper>
-        
+
         <Ground myTeam={myTeam} userInfo={userInfo} />
       </CenterWrapper>
-      <TeamCoposition userInfo={userInfo} myTeam={myTeam} isModified={isModified} setIsModified={setIsModified}></TeamCoposition>
+      <TeamCoposition
+        userInfo={userInfo}
+        myTeam={myTeam}
+        isModified={isModified}
+        setIsModified={setIsModified}
+      ></TeamCoposition>
     </Background>
   );
 };
