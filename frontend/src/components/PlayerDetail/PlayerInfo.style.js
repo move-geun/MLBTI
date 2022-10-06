@@ -1,24 +1,18 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  display: grid;
+  display: flex;
   width: 50%;
-  place-items: center;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 50px minmax(auto);
-  grid-column-gap: 2rem;
   margin-top: 2rem;
-  @media screen and (max-width: 830px) {
-  }
-
-  @media screen and (max-width: 480px) {
-    grid-gap: 1rem;
-  }
+  flex-direction: column;
+  align-items: center;
+ 
 
   .detail {
+    margin-top: 4rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    
   }
 `;
 
@@ -38,24 +32,40 @@ const ProfileDiv = styled.div`
   .title {
     width: 150px;
     @media screen and (max-width: 830px) {
-    width: 70px;
-  }
+      width: 70px;
+    }
 
-  @media screen and (max-width: 480px) {
-    font-size: 15px;
-  }
+    @media screen and (max-width: 480px) {
+      font-size: 15px;
+    }
   }
 `;
 
+const PicName = styled.div`
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .outline {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 5rem;
+    width: 330px;
+    z-index: -1;
+  }
+`;
 
 const ProfileImg = styled.img`
-  width: 300px;
+position: relative;
+  width: 230px;
+  border-radius: 2rem;
   @media screen and (max-width: 830px) {
     width: 150px;
   }
   @media screen and (max-width: 480px) {
     width: 90px;
-    
   }
 `;
 
@@ -69,11 +79,4 @@ const Name = styled.div`
   }
 `;
 
-
-export {
-  Wrapper,
-  ProfileDiv,
-  ProfileImg,
-  Name,
-
-}
+export { Wrapper, ProfileDiv, ProfileImg, Name, PicName };

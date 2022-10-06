@@ -134,6 +134,32 @@ const ModalBox = styled.div`
   justify-content: flex-start;
   border-radius: 5px;
 
+  &.mainmodal {
+    height: 250px;
+    .maintitle {
+      margin-top: 10px;
+      width: 90%;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+    &.maincontent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 90%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.3rem;
+    }
+
+    .change {
+      margin-top: 2rem;
+      font-size: 1.5rem;
+    }
+  }
   .title {
     margin-top: 10px;
     width: 90%;

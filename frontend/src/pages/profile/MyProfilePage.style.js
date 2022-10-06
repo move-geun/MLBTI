@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 const PageContainer = styled.div`
-  width: 90%;
+  width: 88%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  margin: 2rem 0 1rem 2rem;
+  margin: 2rem auto;
   font-size: 1.5rem;
 
   .divide {
@@ -101,7 +101,10 @@ const GraphBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
+  .myprofileLogo {
+    width: 30px;
+    height: 30px;
+  }
   img {
     @media screen and (max-width: 830px) {
       width: 80%;
