@@ -65,7 +65,7 @@ const Main = styled.div`
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background-color: blue;
+      background-color: lightgray;
       color: #9880ff;
       animation: dotElastic 1s infinite linear;
       @media screen and (max-width: 830px) {
@@ -91,7 +91,7 @@ const Main = styled.div`
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background-color: yellow;
+      background-color: lightgray;
       color: #9880ff;
       animation: dotElasticBefore 1s infinite linear;
       @media screen and (max-width: 830px) {
@@ -110,7 +110,7 @@ const Main = styled.div`
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background-color: tomato;
+      background-color: lightgray;
       color: #9880ff;
       animation: dotElasticAfter 1s infinite linear;
       @media screen and (max-width: 830px) {
@@ -588,6 +588,7 @@ const SubItem = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-right: 30px;
   }
   @media screen and (max-width: 830px) {
     width: 300px;
@@ -605,12 +606,14 @@ const SubItem = styled.div`
   .sub_des {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     .sub_container {
+      width: 330px;
+      height: 80%;
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: space-between;
+      justify-content: space-around;
       font-size: 1rem;
       h5 {
         font-size: 1rem;
@@ -627,7 +630,6 @@ const SubItem = styled.div`
         width: 40px;
         height: 40px;
         margin-bottom: 5px;
-        
       }
     }
   }
@@ -751,6 +753,17 @@ const SubItem = styled.div`
 //   flex-direction: column;
 //   margin: 0 auto;
 // `;
+
+const MainGameCard = styled.div`
+  margin: 0.3em;
+  margin-left: 2%;
+  width: 40rem;
+  border-radius: 0.7em;
+  border-style: none;
+  box-shadow: 5px 5px 10px 0.1px gray;
+  padding: 1em;
+  background-color: #bfd4eea0;
+`;
 export {
   Notice,
   Main,
@@ -762,4 +775,5 @@ export {
   Leagues,
   League,
   SubItem,
+  MainGameCard,
 };
