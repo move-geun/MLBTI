@@ -1,36 +1,35 @@
 import { useEffect, useState } from "react";
 import SimulationResult from "../../components/simulation/SimulationResult";
 
-import {  simulationData } from "./simulation-slice";
+import { simulationData } from "./simulation-slice";
 import { useDispatch } from "react-redux";
 import Ground from "./Ground";
 import TeamScore from "../../components/game/TeamScore";
 import { useLocation } from "react-router-dom";
 
 import {
-  TopLayout, BottomLayout, GroundContainer,SimulResultContainer,
+  TopLayout,
+  BottomLayout,
+  GroundContainer,
+  SimulResultContainer,
 } from "./SimulationPage.style";
-
 
 const SimulationPage = () => {
   const location = useLocation();
-  const home = location.state.home
-  const away = location.state.away
+  const home = location.state.home;
+  const away = location.state.away;
 
-  console.log(home, away)
+  console.log(home, away);
   const dispatch = useDispatch();
-  const location = useLocation();
   const data = location.state;
 
   console.log("여기는 시뮬레이션 페이지, 팀매칭에서 어떤 값 가져왔어  ", data);
 
-  const [teamData, setTeamData] = useState({});
+  // const [teamData, setTeamData] = useState({});
   const [simulData, setSimulData] = useState({});
   // const [logoUrl, setLogoUrl] = useState([]);
-  const teamId = {team1: data.home.id, team2: data.away.id};
+  const teamId = { team1: data.home.id, team2: data.away.id };
   const logoUrl = [data.home.logo, data.away.logo];
-
-
 
   useEffect(() => {
     dispatch(simulationData(teamId))
@@ -38,13 +37,11 @@ const SimulationPage = () => {
       .then((res) => {
         setSimulData(res.data);
         console.log("ressss ", res);
-  
       });
   }, []);
 
-
-  useEffect(()=> {
-    if(simulData.gamePk){
+  useEffect(() => {
+    if (simulData.gamePk) {
       makeInningsInfo();
     }
   }, [simulData]);
@@ -53,28 +50,29 @@ const SimulationPage = () => {
   let batterlist = [];
 
   const makeInningsInfo = () => {
-    simulData.inngings.map(inning => {
-      inning.datas.map(batter => {
+    simulData.inngings.map((inning) => {
+      inning.datas.map((batter) => {
         batterlist.push(batter);
-      })
+      });
       innginglist.push(inning);
-    })
-  }
-
+    });
+  };
 
   return (
     <>
-      <div className="title"></div>
-          <TopLayout>
-            <TeamScore data = {simulData} logo = {logoUrl}/>
-          
-          </TopLayout>
-          <BottomLayout>
-              <GroundContainer><Ground data= {innginglist}/></GroundContainer>
-              <SimulResultContainer><SimulationResult data = {simulData}/></SimulResultContainer>
-          </BottomLayout>        
+      <div className="title">ddd</div>
+      <TopLayout>
+        <TeamScore data={simulData} logo={logoUrl} />
+      </TopLayout>
+      <BottomLayout>
+        <GroundContainer>
+          <Ground data={innginglist} />
+        </GroundContainer>
+        <SimulResultContainer>
+          <SimulationResult data={simulData} />
+        </SimulResultContainer>
+      </BottomLayout>
     </>
-        
   );
 };
 
