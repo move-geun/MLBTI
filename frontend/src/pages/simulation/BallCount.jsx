@@ -8,9 +8,10 @@ import {
   ThirdB,
   BatterEvent,
   BatterName,
+  BallCountContainer,
 } from "./SimulationPage.style";
 
-const Ground = (prop) => {
+const BallCount = (prop) => {
   const [inningList, setInningList] = useState([]);
   // const [batterList, setBatterList] = useState([]);
   const [firstBase, setFirstBase] = useState(false);
@@ -19,6 +20,7 @@ const Ground = (prop) => {
   const [batterEvent, setBatterEvent] = useState("");
   const [hitterName, sethitterName] = useState("");
 
+  console.log("볼카운트 컴포넌트 ", prop);
   useEffect(() => {
     if (prop.data !== null) {
       setInningList(prop.data);
@@ -67,22 +69,34 @@ const Ground = (prop) => {
 
   return (
     <div>
-      <Groundmap>
-        <BaseBall src={"/assets/baseball.png"} />
-        {firstBase && <FirstB className="base1" src={"/assets/base.png"} />}
-        {secondBase && <SecondB className="base2" src={"/assets/base.png"} />}
-        {thirdBase && <ThirdB className="base3" src={"/assets/base.png"} />}
-        {/* <FirstB className="base1" src={"/assets/base.png"} />
-        <SecondB className="base2" src={"/assets/base.png"} />
-        <ThirdB className="base3" src={"/assets/base.png"} /> */}
-        <BatterEvent>
-          {hitterName}, <BatterName> {batterEvent}</BatterName>
-        </BatterEvent>
-      </Groundmap>
+      <BallCountContainer>
+          <div className="count">
+            <div className="title">B</div>
+            <div className="circle_case">
+              <div className="circle ball"></div>
+              <div className="circle ball"></div>
+              <div className="circle"></div>
+            </div>
+          </div>
+          <div className="count">
+            <div className="title">S</div>
+            <div className="circle_case">
+              <div className="circle strike"></div>
+              <div className="circle"></div>
+            </div>
+          </div>
+          <div className="count">
+            <div className="title">O</div>
+            <div className="circle_case">
+              <div className="circle out"></div>
+              <div className="circle"></div>
+            </div>
+          </div>
+        </BallCountContainer>
     </div>
   );
 };
 
-export default Ground;
+export default BallCount;
 
 

@@ -4,10 +4,11 @@ import SimulationResult from "../../components/simulation/SimulationResult";
 import { simulationData } from "./simulation-slice";
 import { useDispatch } from "react-redux";
 import Ground from "./Ground";
+import BallCount from "./BallCount";
 import TeamScore from "../../components/game/TeamScore";
 import { useLocation } from "react-router-dom";
 
-import { SimulContainer, Center, BallCount } from "./SimulationPage.style";
+import { SimulContainer, Center} from "./SimulationPage.style";
 
 const SimulationPage = () => {
   const location = useLocation();
@@ -77,30 +78,7 @@ const SimulationPage = () => {
       <TeamScore data={simulData} logo={logoUrl} />
       <Center>
         <Ground data={innginglist} />
-        <BallCount>
-          <div className="count">
-            <div className="title">B</div>
-            <div className="circle_case">
-              <div className="circle ball"></div>
-              <div className="circle ball"></div>
-              <div className="circle"></div>
-            </div>
-          </div>
-          <div className="count">
-            <div className="title">S</div>
-            <div className="circle_case">
-              <div className="circle strike"></div>
-              <div className="circle"></div>
-            </div>
-          </div>
-          <div className="count">
-            <div className="title">O</div>
-            <div className="circle_case">
-              <div className="circle out"></div>
-              <div className="circle"></div>
-            </div>
-          </div>
-        </BallCount>
+        <BallCount data = {innginglist} />
       </Center>
       <SimulationResult data={simulData} />
     </SimulContainer>
