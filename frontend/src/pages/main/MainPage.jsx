@@ -359,7 +359,22 @@ const MainPage = () => {
                 <div className="sub_title">
                   <div>오늘 예정 경기</div>
                 </div>
-                <div className="sub_container">
+
+                <Link
+                  className="sub_container"
+                  to={"/simulation"}
+                  style={{ textDecoration: "none", color: "black" }}
+                  state={{
+                    home: {
+                      id: todays[todays.length - 4].homeId,
+                      logo: todays[todays.length - 4].homeLogo,
+                    },
+                    away: {
+                      id: todays[todays.length - 4].awayId,
+                      logo: todays[todays.length - 4].awayLogo,
+                    },
+                  }}
+                >
                   <div className="sub_home">
                     <img src={todays[todays.length - 4].homeLogo} alt="" />
                     <div>{todays[todays.length - 4].homeName}</div>
@@ -369,7 +384,8 @@ const MainPage = () => {
                     <img src={todays[todays.length - 4].awayLogo} alt="" />
                     <div>{todays[todays.length - 4].awayName}</div>
                   </div>
-                </div>
+                </Link>
+
                 <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
               </div>
             </SubItem>
@@ -380,7 +396,22 @@ const MainPage = () => {
               </div>
               <div className="sub_des">
                 <div className="sub_title">오늘 예정 경기</div>
-                <div className="sub_container">
+
+                <Link
+                  className="sub_container"
+                  to={"/simulation"}
+                  style={{ textDecoration: "none", color: "black" }}
+                  state={{
+                    home: {
+                      id: todays[todays.length - 3].homeId,
+                      logo: todays[todays.length - 3].homeLogo,
+                    },
+                    away: {
+                      id: todays[todays.length - 3].awayId,
+                      logo: todays[todays.length - 3].awayLogo,
+                    },
+                  }}
+                >
                   <div className="sub_home">
                     <img src={todays[todays.length - 3].homeLogo} alt="" />
                     <div>{todays[todays.length - 3].homeName}</div>
@@ -390,7 +421,8 @@ const MainPage = () => {
                     <img src={todays[todays.length - 3].awayLogo} alt="" />
                     <div>{todays[todays.length - 3].awayName}</div>
                   </div>
-                </div>
+                </Link>
+
                 <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
               </div>
             </SubItem>
@@ -401,7 +433,22 @@ const MainPage = () => {
               </div>
               <div className="sub_des">
                 <div className="sub_title">오늘 예정 경기</div>
-                <div className="sub_container">
+
+                <Link
+                  className="sub_container"
+                  to={"/simulation"}
+                  style={{ textDecoration: "none", color: "black" }}
+                  state={{
+                    home: {
+                      id: todays[todays.length - 2].homeId,
+                      logo: todays[todays.length - 2].homeLogo,
+                    },
+                    away: {
+                      id: todays[todays.length - 2].awayId,
+                      logo: todays[todays.length - 2].awayLogo,
+                    },
+                  }}
+                >
                   <div className="sub_home">
                     <img src={todays[todays.length - 2].homeLogo} alt="" />
                     <div>{todays[todays.length - 2].homeName}</div>
@@ -411,7 +458,8 @@ const MainPage = () => {
                     <img src={todays[todays.length - 2].awayLogo} alt="" />
                     <div>{todays[todays.length - 2].awayName}</div>
                   </div>
-                </div>
+                </Link>
+
                 <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
               </div>
             </SubItem>
