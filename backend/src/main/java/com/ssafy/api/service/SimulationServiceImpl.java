@@ -699,7 +699,7 @@ public class SimulationServiceImpl implements SimulationService {
 			System.out.println("경기 없음");
 			return null;
 		}
-		
+
 		try {
 			URL url = new URL("https://statsapi.mlb.com/api/v1/game/" + homeGamePK + "/playByPlay"); // fastAPI에서 호출
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -1053,8 +1053,10 @@ public class SimulationServiceImpl implements SimulationService {
 				batterIdx[userteams.get(i).getOrder() - 1] = userteams.get(i).getBaseballPlayer().getUid();
 				batterSeason[userteams.get(i).getOrder() - 1] = userteams.get(i).getSeason();
 			} else {
-				pitcherIdx = userteams.get(i).getBaseballPlayer().getUid();
-				pitcherSeason = userteams.get(i).getSeason();
+				if (userteams.get(i).getPosition().equals("P")) {
+					pitcherIdx = userteams.get(i).getBaseballPlayer().getUid();
+					pitcherSeason = userteams.get(i).getSeason();
+				}
 			}
 		}
 		for (int i = 0; i < 9; i++) {
