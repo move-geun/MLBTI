@@ -587,8 +587,7 @@ const SubItem = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-right: 30px;
+    justify-content: space-around;
   }
   @media screen and (max-width: 830px) {
     width: 300px;
@@ -606,14 +605,12 @@ const SubItem = styled.div`
   .sub_des {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     .sub_container {
-      width: 330px;
-      height: 80%;
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: space-around;
+      justify-content: space-between;
       font-size: 1rem;
       h5 {
         font-size: 1rem;
@@ -630,18 +627,19 @@ const SubItem = styled.div`
         width: 40px;
         height: 40px;
         margin-bottom: 5px;
+        
       }
     }
   }
   .go_simul {
     font-size: 1rem;
   }
-  /* .dot-elastic {
+  .dot-elastic {
     position: relative;
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: lightgray;
+    background-color: blue;
     color: #9880ff;
     animation: dotElastic 1s infinite linear;
     @media screen and (max-width: 830px) {
@@ -667,7 +665,7 @@ const SubItem = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: lightgray;
+    background-color: yellow;
     color: #9880ff;
     animation: dotElasticBefore 1s infinite linear;
     @media screen and (max-width: 830px) {
@@ -682,7 +680,7 @@ const SubItem = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: lightgray;
+    background-color: tomato;
     color: #9880ff;
     animation: dotElasticAfter 1s infinite linear;
     @media screen and (max-width: 830px) {
@@ -744,7 +742,7 @@ const SubItem = styled.div`
     100% {
       transform: scale(1, 1);
     }
-  } */
+  }
 `;
 
 // const League = styled.div`

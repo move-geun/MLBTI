@@ -28,7 +28,6 @@ const PlayerDetailPage = () => {
         </div>
       </SearchDiv>
       <PlayerInfo />
-      <PlayerRecord />
     </Background>
   );
 };

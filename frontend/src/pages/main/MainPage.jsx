@@ -60,16 +60,11 @@ const MainPage = () => {
   const handleAm = () => setNational(false);
   const handleNa = () => setNational(true);
   const handleOpen = () => setOpen(true);
+  
   const handleClose = () => {
-    console.log("누르긴했다잉, 근데 안 닫힐거지롱");
     setOpen(false);
   };
   // const [notices, setNotices] = useState();
-
-  // 시뮬레이션으로 넘길 때 데이터
-  // home = [{id: xx, logo: url}]
-  const [home, setHome] = useState([]);
-  const [away, setAway] = useState([]);
 
   // 오늘 날짜 구하기
   const todayFormal = () => {
@@ -261,12 +256,22 @@ const MainPage = () => {
     // newaway["logo"] = yesterday.awayLogo;
     // setHome(newhome)
     // setAway(newaway)
-    console.log("메인페이지 값", home, away);
+    
+  };
+
+  const onESC = () => {
+    setOpen(false);
+
+  };
+  const onKeyPress = (e) => {
+    if (e.key === "ESC") {
+      onESC();
+    }
   };
 
   if (windowSize > 980) {
     return (
-      <Main>
+      <Main className="dd">
         {spinner ? <PacmanLoader></PacmanLoader> : <div></div>}
         <Notice {...settings}>
           {notices ? (
@@ -275,18 +280,24 @@ const MainPage = () => {
               <div onClick={handleOpen} key={idx}>
                 [공지] {notice.title}
                 <Modal
+                  BackdropProps={{
+                    style: { backgroundColor: "rgba(0, 0, 0, 0.1)" },
+                  }}
+                  onClick={onESC}
                   open={open}
-                  onClose={handleClose}
+                  onClose={()=>handleClose()}
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
+                  onKeyPress={onKeyPress}
                 >
-                  <ModalBox>
-                    <div className="title">{notice.title}</div>
-                    <div className="content">
+                  <ModalBox className="mainmodal">
+                    
+                    <div className="maintitle">{notice.title}</div>
+                    <div className="maincontent">
                       <hr />
                       <div>No : {notice.uid}</div>
                       <hr />
-                      <div>작성자 : {notice.writer}</div>
+                      <div>작성자 : {notice.user.nickname}</div>
                       <hr />
                       <div>내용 : {notice.content}</div>
                     </div>
