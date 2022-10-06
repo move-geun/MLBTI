@@ -17,6 +17,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getNational, getAmerican } from "./customsimulation-slice";
 import { getMyteam, myprofile } from "../profile/myprofile-slice";
+import { ConnectingAirportsOutlined } from "@mui/icons-material";
 
 // 모달 연결
 // 승률 높은 곳에 색 변경
