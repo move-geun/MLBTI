@@ -65,7 +65,7 @@ const Main = styled.div`
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background-color: blue;
+      background-color: lightgray;
       color: #9880ff;
       animation: dotElastic 1s infinite linear;
       @media screen and (max-width: 830px) {
@@ -91,7 +91,7 @@ const Main = styled.div`
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background-color: yellow;
+      background-color: lightgray;
       color: #9880ff;
       animation: dotElasticBefore 1s infinite linear;
       @media screen and (max-width: 830px) {
@@ -110,7 +110,7 @@ const Main = styled.div`
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background-color: tomato;
+      background-color: lightgray;
       color: #9880ff;
       animation: dotElasticAfter 1s infinite linear;
       @media screen and (max-width: 830px) {
@@ -751,6 +751,17 @@ const SubItem = styled.div`
 //   flex-direction: column;
 //   margin: 0 auto;
 // `;
+
+const MainGameCard = styled.div`
+  margin: 0.3em;
+  margin-left: 2%;
+  width: 40rem;
+  border-radius: 0.7em;
+  border-style: none;
+  box-shadow: 5px 5px 10px 0.1px gray;
+  padding: 1em;
+  background-color: #bfd4eea0;
+`;
 export {
   Notice,
   Main,
@@ -762,4 +773,5 @@ export {
   Leagues,
   League,
   SubItem,
+  MainGameCard,
 };
