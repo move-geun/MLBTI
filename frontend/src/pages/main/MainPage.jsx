@@ -61,7 +61,7 @@ const MainPage = () => {
   const handleAm = () => setNational(false);
   const handleNa = () => setNational(true);
   const handleOpen = () => setOpen(true);
-  
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -198,7 +198,7 @@ const MainPage = () => {
     floatingYesterday();
     todayFormal();
     rank();
-    setTimeout(() => setSpinner(false), 2000);
+    setTimeout(() => setSpinner(false), 2500);
     console.log("홈로고", todays[todays.length - 1]);
     setMainSimul(todays[todays.length - 1]);
     console.log("메인", mainSimul);
@@ -250,10 +250,8 @@ const MainPage = () => {
     return () => window.removeEventListener("resize", handleResize);
   });
 
-
   const onESC = () => {
     setOpen(false);
-
   };
   const onKeyPress = (e) => {
     if (e.key === "ESC") {
@@ -261,423 +259,465 @@ const MainPage = () => {
     }
   };
 
-
   if (windowSize > 980) {
     return (
       <Main className="dd">
-        {spinner ? <PacmanLoader></PacmanLoader> : <div></div>}
-        <Notice {...settings}>
-          {notices ? (
-            notices.map((notice, idx) => (
-              // <Link to={`/notice/${notice.uid}`} key={idx}>
-              <div onClick={handleOpen} key={idx}>
-                [공지] {notice.title}
-                <Modal
-                  BackdropProps={{
-                    style: { backgroundColor: "rgba(0, 0, 0, 0.1)" },
-                  }}
-                  onClick={onESC}
-                  open={open}
-                  onClose={()=>handleClose()}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                  onKeyPress={onKeyPress}
-                >
-                  <ModalBox className="mainmodal">
-                    
-                    <div className="maintitle">{notice.title}</div>
-                    <div className="maincontent">
-                      <hr />
-                      <div>No : {notice.uid}</div>
-                      <hr />
-                      <div>작성자 : {notice.user.nickname}</div>
-                      <hr />
-                      <div>내용 : {notice.content}</div>
-                    </div>
-                    <button className="change" onClick={handleClose}>
-                      닫기
-                    </button>
-                  </ModalBox>
-                </Modal>
-              </div>
-            ))
-          ) : (
-            <div>공지사항이 없습니다</div>
-          )}
-        </Notice>
-        <SimulationCase>
-          <div className="main_con">
-            <div className="simul_page">
-              <Ground data={inningList} />
-              <BallCount data={inningList} />
-            </div>
-            {todays ? (
-              <div className="main_des">
-                <div className="team_des">
-                  <img
-                    className="logo"
-                    src={todays[todays.length - 1].homeLogo}
-                    alt="홈팀로고"
-                  />
-                  <div>{todays[todays.length - 1].homeName}</div>
-                </div>
-                <div class="simul_case">
-                  <h5>지금 시뮬레이션 경기 중</h5>
-                  <div class="dot-elastic"></div>
-                </div>
-                <div className="team_des">
-                  <img
-                    className="logo"
-                    src={todays[todays.length - 1].awayLogo}
-                    alt="어웨이로고"
-                  />
-                  <div>{todays[todays.length - 1].awayName}</div>
-                </div>
-              </div>
-            ) : null}
+        {spinner ? (
+          <div className="loading">
+            <PacmanLoader color="#b20b0ba8" className="spinner"></PacmanLoader>
+            <div>로딩 중</div>
           </div>
-          <div className="sub">
-            <MainGameCard>
-              <SubItem>
-                <div className="sub_dot">
-                  <img className="sub_simul" src="../assets/sub1.gif" alt="" />
-                  {/* <div class="dot-elastic"></div> */}
-                </div>
-                <div className="sub_des">
-                  <div className="sub_title">
-                    <div>오늘 예정 경기</div>
+        ) : (
+          <div>
+            <Notice {...settings}>
+              {notices ? (
+                notices.map((notice, idx) => (
+                  // <Link to={`/notice/${notice.uid}`} key={idx}>
+                  <div onClick={handleOpen} key={idx}>
+                    [공지] {notice.title}
+                    <Modal
+                      BackdropProps={{
+                        style: { backgroundColor: "rgba(0, 0, 0, 0.1)" },
+                      }}
+                      onClick={onESC}
+                      open={open}
+                      onClose={() => handleClose()}
+                      aria-labelledby="modal-modal-title"
+                      aria-describedby="modal-modal-description"
+                      onKeyPress={onKeyPress}
+                    >
+                      <ModalBox className="mainmodal">
+                        <div className="maintitle">{notice.title}</div>
+                        <div className="maincontent">
+                          <hr />
+                          <div>No : {notice.uid}</div>
+                          <hr />
+                          <div>작성자 : {notice.user.nickname}</div>
+                          <hr />
+                          <div>내용 : {notice.content}</div>
+                        </div>
+                        <button className="change" onClick={handleClose}>
+                          닫기
+                        </button>
+                      </ModalBox>
+                    </Modal>
                   </div>
+                ))
+              ) : (
+                <div>공지사항이 없습니다</div>
+              )}
+            </Notice>
+            <SimulationCase>
+              <div className="main_con">
+                <div className="simul_page">
+                  <Ground data={inningList} />
+                  <BallCount data={inningList} />
+                </div>
+                {todays ? (
+                  <div className="main_des">
+                    <div className="team_des">
+                      <img
+                        className="logo"
+                        src={todays[todays.length - 1].homeLogo}
+                        alt="홈팀로고"
+                      />
+                      <div>{todays[todays.length - 1].homeName}</div>
+                    </div>
+                    <div class="simul_case">
+                      <h5>지금 시뮬레이션 경기 중</h5>
+                      <div class="dot-elastic"></div>
+                    </div>
+                    <div className="team_des">
+                      <img
+                        className="logo"
+                        src={todays[todays.length - 1].awayLogo}
+                        alt="어웨이로고"
+                      />
+                      <div>{todays[todays.length - 1].awayName}</div>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+              <div className="sub">
+                <MainGameCard>
+                  <SubItem>
+                    <div className="sub_dot">
+                      <img
+                        className="sub_simul"
+                        src="../assets/sub1.gif"
+                        alt=""
+                      />
+                      {/* <div class="dot-elastic"></div> */}
+                    </div>
+                    <div className="sub_des">
+                      <div className="sub_title">
+                        <div>오늘 예정 경기</div>
+                      </div>
 
-                  {todays ? (
-                    <Link
-                      className="sub_container"
-                      to={"/simulation"}
-                      style={{ textDecoration: "none", color: "black" }}
-                      state={{
-                        home: {
-                          id: todays[todays.length - 4].homeId,
-                          logo: todays[todays.length - 4].homeLogo,
-                        },
-                        away: {
-                          id: todays[todays.length - 4].awayId,
-                          logo: todays[todays.length - 4].awayLogo,
-                        },
-                      }}
-                    >
-                      <div className="sub_home">
-                        <img src={todays[todays.length - 4].homeLogo} alt="" />
-                        <div>{todays[todays.length - 4].homeName}</div>
-                      </div>
-                      <h5>VS</h5>
-                      <div className="sub_home">
-                        <img src={todays[todays.length - 4].awayLogo} alt="" />
-                        <div>{todays[todays.length - 4].awayName}</div>
-                      </div>
-                    </Link>
-                  ) : null}
+                      {todays ? (
+                        <Link
+                          className="sub_container"
+                          to={"/simulation"}
+                          style={{ textDecoration: "none", color: "black" }}
+                          state={{
+                            home: {
+                              id: todays[todays.length - 4].homeId,
+                              logo: todays[todays.length - 4].homeLogo,
+                            },
+                            away: {
+                              id: todays[todays.length - 4].awayId,
+                              logo: todays[todays.length - 4].awayLogo,
+                            },
+                          }}
+                        >
+                          <div className="sub_home">
+                            <img
+                              src={todays[todays.length - 4].homeLogo}
+                              alt=""
+                            />
+                            <div>{todays[todays.length - 4].homeName}</div>
+                          </div>
+                          <h5>VS</h5>
+                          <div className="sub_home">
+                            <img
+                              src={todays[todays.length - 4].awayLogo}
+                              alt=""
+                            />
+                            <div>{todays[todays.length - 4].awayName}</div>
+                          </div>
+                        </Link>
+                      ) : null}
 
-                  <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
-                </div>
-              </SubItem>
-            </MainGameCard>
-            <MainGameCard>
-              <SubItem>
-                <div className="sub_dot">
-                  <img className="sub_simul" src="../assets/sub2.gif" alt="" />
-                  {/* <div class="dot-elastic"></div> */}
-                </div>
-                <div className="sub_des">
-                  <div className="sub_title">오늘 예정 경기</div>
-                  {todays ? (
-                    <Link
-                      className="sub_container"
-                      to={"/simulation"}
-                      style={{ textDecoration: "none", color: "black" }}
-                      state={{
-                        home: {
-                          id: todays[todays.length - 3].homeId,
-                          logo: todays[todays.length - 3].homeLogo,
-                        },
-                        away: {
-                          id: todays[todays.length - 3].awayId,
-                          logo: todays[todays.length - 3].awayLogo,
-                        },
-                      }}
-                    >
-                      <div className="sub_home">
-                        <img src={todays[todays.length - 3].homeLogo} alt="" />
-                        <div>{todays[todays.length - 3].homeName}</div>
-                      </div>
-                      <h5>VS</h5>
-                      <div className="sub_home">
-                        <img src={todays[todays.length - 3].awayLogo} alt="" />
-                        <div>{todays[todays.length - 3].awayName}</div>
-                      </div>
-                    </Link>
-                  ) : null}
+                      <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+                    </div>
+                  </SubItem>
+                </MainGameCard>
+                <MainGameCard>
+                  <SubItem>
+                    <div className="sub_dot">
+                      <img
+                        className="sub_simul"
+                        src="../assets/sub2.gif"
+                        alt=""
+                      />
+                      {/* <div class="dot-elastic"></div> */}
+                    </div>
+                    <div className="sub_des">
+                      <div className="sub_title">오늘 예정 경기</div>
+                      {todays ? (
+                        <Link
+                          className="sub_container"
+                          to={"/simulation"}
+                          style={{ textDecoration: "none", color: "black" }}
+                          state={{
+                            home: {
+                              id: todays[todays.length - 3].homeId,
+                              logo: todays[todays.length - 3].homeLogo,
+                            },
+                            away: {
+                              id: todays[todays.length - 3].awayId,
+                              logo: todays[todays.length - 3].awayLogo,
+                            },
+                          }}
+                        >
+                          <div className="sub_home">
+                            <img
+                              src={todays[todays.length - 3].homeLogo}
+                              alt=""
+                            />
+                            <div>{todays[todays.length - 3].homeName}</div>
+                          </div>
+                          <h5>VS</h5>
+                          <div className="sub_home">
+                            <img
+                              src={todays[todays.length - 3].awayLogo}
+                              alt=""
+                            />
+                            <div>{todays[todays.length - 3].awayName}</div>
+                          </div>
+                        </Link>
+                      ) : null}
 
-                  <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
-                </div>
-              </SubItem>
-            </MainGameCard>
-            <MainGameCard>
-              <SubItem>
-                <div className="sub_dot">
-                  <img className="sub_simul" src="../assets/sub3.gif" alt="" />
-                  {/* <div class="dot-elastic"></div> */}
-                </div>
-                <div className="sub_des">
-                  <div className="sub_title">오늘 예정 경기</div>
-                  {todays ? (
-                    <Link
-                      className="sub_container"
-                      to={"/simulation"}
-                      style={{ textDecoration: "none", color: "black" }}
-                      state={{
-                        home: {
-                          id: todays[todays.length - 2].homeId,
-                          logo: todays[todays.length - 2].homeLogo,
-                        },
-                        away: {
-                          id: todays[todays.length - 2].awayId,
-                          logo: todays[todays.length - 2].awayLogo,
-                        },
-                      }}
-                    >
-                      <div className="sub_home">
-                        <img src={todays[todays.length - 2].homeLogo} alt="" />
-                        <div>{todays[todays.length - 2].homeName}</div>
-                      </div>
-                      <h5>VS</h5>
-                      <div className="sub_home">
-                        <img src={todays[todays.length - 2].awayLogo} alt="" />
-                        <div>{todays[todays.length - 2].awayName}</div>
-                      </div>
-                    </Link>
-                  ) : null}
+                      <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+                    </div>
+                  </SubItem>
+                </MainGameCard>
+                <MainGameCard>
+                  <SubItem>
+                    <div className="sub_dot">
+                      <img
+                        className="sub_simul"
+                        src="../assets/sub3.gif"
+                        alt=""
+                      />
+                      {/* <div class="dot-elastic"></div> */}
+                    </div>
+                    <div className="sub_des">
+                      <div className="sub_title">오늘 예정 경기</div>
+                      {todays ? (
+                        <Link
+                          className="sub_container"
+                          to={"/simulation"}
+                          style={{ textDecoration: "none", color: "black" }}
+                          state={{
+                            home: {
+                              id: todays[todays.length - 2].homeId,
+                              logo: todays[todays.length - 2].homeLogo,
+                            },
+                            away: {
+                              id: todays[todays.length - 2].awayId,
+                              logo: todays[todays.length - 2].awayLogo,
+                            },
+                          }}
+                        >
+                          <div className="sub_home">
+                            <img
+                              src={todays[todays.length - 2].homeLogo}
+                              alt=""
+                            />
+                            <div>{todays[todays.length - 2].homeName}</div>
+                          </div>
+                          <h5>VS</h5>
+                          <div className="sub_home">
+                            <img
+                              src={todays[todays.length - 2].awayLogo}
+                              alt=""
+                            />
+                            <div>{todays[todays.length - 2].awayName}</div>
+                          </div>
+                        </Link>
+                      ) : null}
 
-                  <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+                      <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+                    </div>
+                  </SubItem>
+                </MainGameCard>
+              </div>
+            </SimulationCase>
+            <CheckBox>
+              <Predict>
+                <div className="title">[ 어제 경기 결과 ]</div>
+                {yesterdays ? (
+                  <div>
+                    {yesterdays.map((yesterday, idx) => (
+                      <Link
+                        to={"/simulation"}
+                        style={{ textDecoration: "none", color: "black" }}
+                        state={{
+                          home: {
+                            id: yesterday.homeId,
+                            logo: yesterday.homeLogo,
+                          },
+                          away: {
+                            id: yesterday.awayId,
+                            logo: yesterday.awayLogo,
+                          },
+                        }}
+                      >
+                        <div key={idx} className="contentdiv">
+                          <div className="home">
+                            <div>{yesterday.homeName}</div>
+                            <div
+                              className={
+                                yesterday.homeScore > yesterday.awayScore
+                                  ? "win"
+                                  : yesterday.homeScore < yesterday.awayScore
+                                  ? "lose"
+                                  : "gray"
+                              }
+                            >
+                              {yesterday.homeScore}
+                            </div>
+                          </div>
+                          <img
+                            className="homeImg"
+                            src={yesterday.homeLogo}
+                            alt="홈팀 사진"
+                          />
+                          <div className="status">
+                            <div className="vs">vs</div>
+                            <div className="status">{yesterday.status}</div>
+                          </div>
+                          <img
+                            className="AwayImg"
+                            src={yesterday.awayLogo}
+                            alt="어웨이팀 사진"
+                          />
+                          <div className="away">
+                            <div>{yesterday.awayName}</div>
+                            <div
+                              className={
+                                yesterday.awayScore > yesterday.homeScore
+                                  ? "win"
+                                  : yesterday.awayScore < yesterday.homeScore
+                                  ? "lose"
+                                  : "gray"
+                              }
+                            >
+                              {yesterday.awayScore}
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
+              </Predict>
+              <Predict>
+                <div className="title">[ 오늘 경기 일정 ]</div>
+                {todays ? (
+                  <div>
+                    {todays.map((today, idx) => (
+                      <Link
+                        to={"/simulation"}
+                        style={{ textDecoration: "none", color: "black" }}
+                        state={{
+                          home: { id: today.homeId, logo: today.homeLogo },
+                          away: { id: today.awayId, logo: today.awayLogo },
+                        }}
+                      >
+                        <div key={idx} className="contentdiv">
+                          <div className="home">
+                            <div>{today.homeName}</div>
+                            <div
+                              className={
+                                today.homeScore > today.awayScore
+                                  ? "win"
+                                  : today.homeScore < today.awayScore
+                                  ? "lose"
+                                  : "gray"
+                              }
+                            >
+                              {today.homeScore}
+                            </div>
+                          </div>
+                          <img
+                            className="homeImg"
+                            src={today.homeLogo}
+                            alt="홈팀 사진"
+                          />
+                          <div className="status">
+                            <div className="vs">vs</div>
+                            <div className="status">{today.status}</div>
+                          </div>
+                          <img
+                            className="AwayImg"
+                            src={today.awayLogo}
+                            alt="어웨이팀 사진"
+                          />
+                          <div className="away">
+                            <div>{today.awayName}</div>
+                            <div
+                              className={
+                                today.awayScore > today.homeScore
+                                  ? "win"
+                                  : today.awayScore < today.homeScore
+                                  ? "lose"
+                                  : "gray"
+                              }
+                            >
+                              {today.awayScore}
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
+              </Predict>
+              <Rank>
+                <div className="title">[팀 순위]</div>
+                <div className="divide">
+                  <div claasName="leaguebtn" onClick={handleNa}>
+                    내셔널 리그
+                  </div>
+                  <div claasName="leaguebtn" onClick={handleAm}>
+                    아메리칸 리그
+                  </div>
                 </div>
-              </SubItem>
-            </MainGameCard>
+                {national === true ? (
+                  <Leagues {...ranksettings}>
+                    <League>
+                      <div className="leaguetitle">[동부리그]</div>
+                      {NErank.map((rank, idx) => (
+                        <div key={idx} className="rank_cont">
+                          <div className="number">{rank.diveRank}</div>
+                          <div className="rank">
+                            <img src={rank.logo} alt="" />
+                            <div>{rank.teamName}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </League>
+                    <League>
+                      <div className="leaguetitle">[서부리그]</div>
+                      {NWrank.map((rank, idx) => (
+                        <div key={idx} className="rank_cont">
+                          <div className="number">{rank.diveRank}</div>
+                          <div className="rank">
+                            <img src={rank.logo} alt="" />
+                            <div>{rank.teamName}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </League>
+                    <League>
+                      <div className="leaguetitle">[중앙리그]</div>
+                      {NMrank.map((rank, idx) => (
+                        <div key={idx} className="rank_cont">
+                          <div className="number">{rank.diveRank}</div>
+                          <div className="rank">
+                            <img src={rank.logo} alt="" />
+                            <div>{rank.teamName}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </League>
+                  </Leagues>
+                ) : (
+                  <Leagues {...ranksettings}>
+                    <League>
+                      <div className="leaguetitle">[동부리그]</div>
+                      {AErank.map((rank, idx) => (
+                        <div key={idx} className="rank_cont">
+                          <div className="number">{rank.diveRank}</div>
+                          <div className="rank">
+                            <img src={rank.logo} alt="" />
+                            <div>{rank.teamName}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </League>
+                    <League>
+                      <div className="leaguetitle">[서부리그]</div>
+                      {AWrank.map((rank, idx) => (
+                        <div key={idx} className="rank_cont">
+                          <div className="number">{rank.diveRank}</div>
+                          <div className="rank">
+                            <img src={rank.logo} alt="" />
+                            <div>{rank.teamName}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </League>
+                    <League>
+                      <div className="leaguetitle">[중앙리그]</div>
+                      {AMrank.map((rank, idx) => (
+                        <div key={idx} className="rank_cont">
+                          <div className="number">{rank.diveRank}</div>
+                          <div className="rank">
+                            <img src={rank.logo} alt="" />
+                            <div>{rank.teamName}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </League>
+                  </Leagues>
+                )}
+              </Rank>
+            </CheckBox>
           </div>
-        </SimulationCase>
-        <CheckBox>
-          <Predict>
-            <div className="title">[ 어제 경기 결과 ]</div>
-            {yesterdays ? (
-              <div>
-                {yesterdays.map((yesterday, idx) => (
-                  <Link
-                    to={"/simulation"}
-                    style={{ textDecoration: "none", color: "black" }}
-                    state={{
-                      home: { id: yesterday.homeId, logo: yesterday.homeLogo },
-                      away: { id: yesterday.awayId, logo: yesterday.awayLogo },
-                    }}
-                  >
-                    <div key={idx} className="contentdiv">
-                      <div className="home">
-                        <div>{yesterday.homeName}</div>
-                        <div
-                          className={
-                            yesterday.homeScore > yesterday.awayScore
-                              ? "win"
-                              : yesterday.homeScore < yesterday.awayScore
-                              ? "lose"
-                              : "gray"
-                          }
-                        >
-                          {yesterday.homeScore}
-                        </div>
-                      </div>
-                      <img
-                        className="homeImg"
-                        src={yesterday.homeLogo}
-                        alt="홈팀 사진"
-                      />
-                      <div className="status">
-                        <div className="vs">vs</div>
-                        <div className="status">{yesterday.status}</div>
-                      </div>
-                      <img
-                        className="AwayImg"
-                        src={yesterday.awayLogo}
-                        alt="어웨이팀 사진"
-                      />
-                      <div className="away">
-                        <div>{yesterday.awayName}</div>
-                        <div
-                          className={
-                            yesterday.awayScore > yesterday.homeScore
-                              ? "win"
-                              : yesterday.awayScore < yesterday.homeScore
-                              ? "lose"
-                              : "gray"
-                          }
-                        >
-                          {yesterday.awayScore}
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            ) : null}
-          </Predict>
-          <Predict>
-            <div className="title">[ 오늘 경기 일정 ]</div>
-            {todays ? (
-              <div>
-                {todays.map((today, idx) => (
-                  <Link
-                    to={"/simulation"}
-                    style={{ textDecoration: "none", color: "black" }}
-                    state={{
-                      home: { id: today.homeId, logo: today.homeLogo },
-                      away: { id: today.awayId, logo: today.awayLogo },
-                    }}
-                  >
-                    <div key={idx} className="contentdiv">
-                      <div className="home">
-                        <div>{today.homeName}</div>
-                        <div
-                          className={
-                            today.homeScore > today.awayScore
-                              ? "win"
-                              : today.homeScore < today.awayScore
-                              ? "lose"
-                              : "gray"
-                          }
-                        >
-                          {today.homeScore}
-                        </div>
-                      </div>
-                      <img
-                        className="homeImg"
-                        src={today.homeLogo}
-                        alt="홈팀 사진"
-                      />
-                      <div className="status">
-                        <div className="vs">vs</div>
-                        <div className="status">{today.status}</div>
-                      </div>
-                      <img
-                        className="AwayImg"
-                        src={today.awayLogo}
-                        alt="어웨이팀 사진"
-                      />
-                      <div className="away">
-                        <div>{today.awayName}</div>
-                        <div
-                          className={
-                            today.awayScore > today.homeScore
-                              ? "win"
-                              : today.awayScore < today.homeScore
-                              ? "lose"
-                              : "gray"
-                          }
-                        >
-                          {today.awayScore}
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            ) : null}
-          </Predict>
-          <Rank>
-            <div className="title">[팀 순위]</div>
-            <div className="divide">
-              <div claasName="leaguebtn" onClick={handleNa}>
-                내셔널 리그
-              </div>
-              <div claasName="leaguebtn" onClick={handleAm}>
-                아메리칸 리그
-              </div>
-            </div>
-            {national === true ? (
-              <Leagues {...ranksettings}>
-                <League>
-                  <div className="leaguetitle">[동부리그]</div>
-                  {NErank.map((rank, idx) => (
-                    <div key={idx} className="rank_cont">
-                      <div className="number">{rank.diveRank}</div>
-                      <div className="rank">
-                        <img src={rank.logo} alt="" />
-                        <div>{rank.teamName}</div>
-                      </div>
-                    </div>
-                  ))}
-                </League>
-                <League>
-                  <div className="leaguetitle">[서부리그]</div>
-                  {NWrank.map((rank, idx) => (
-                    <div key={idx} className="rank_cont">
-                      <div className="number">{rank.diveRank}</div>
-                      <div className="rank">
-                        <img src={rank.logo} alt="" />
-                        <div>{rank.teamName}</div>
-                      </div>
-                    </div>
-                  ))}
-                </League>
-                <League>
-                  <div className="leaguetitle">[중앙리그]</div>
-                  {NMrank.map((rank, idx) => (
-                    <div key={idx} className="rank_cont">
-                      <div className="number">{rank.diveRank}</div>
-                      <div className="rank">
-                        <img src={rank.logo} alt="" />
-                        <div>{rank.teamName}</div>
-                      </div>
-                    </div>
-                  ))}
-                </League>
-              </Leagues>
-            ) : (
-              <Leagues {...ranksettings}>
-                <League>
-                  <div className="leaguetitle">[동부리그]</div>
-                  {AErank.map((rank, idx) => (
-                    <div key={idx} className="rank_cont">
-                      <div className="number">{rank.diveRank}</div>
-                      <div className="rank">
-                        <img src={rank.logo} alt="" />
-                        <div>{rank.teamName}</div>
-                      </div>
-                    </div>
-                  ))}
-                </League>
-                <League>
-                  <div className="leaguetitle">[서부리그]</div>
-                  {AWrank.map((rank, idx) => (
-                    <div key={idx} className="rank_cont">
-                      <div className="number">{rank.diveRank}</div>
-                      <div className="rank">
-                        <img src={rank.logo} alt="" />
-                        <div>{rank.teamName}</div>
-                      </div>
-                    </div>
-                  ))}
-                </League>
-                <League>
-                  <div className="leaguetitle">[중앙리그]</div>
-                  {AMrank.map((rank, idx) => (
-                    <div key={idx} className="rank_cont">
-                      <div className="number">{rank.diveRank}</div>
-                      <div className="rank">
-                        <img src={rank.logo} alt="" />
-                        <div>{rank.teamName}</div>
-                      </div>
-                    </div>
-                  ))}
-                </League>
-              </Leagues>
-            )}
-          </Rank>
-        </CheckBox>
+        )}
       </Main>
     );
   } else if (windowSize > 480) {
