@@ -28,6 +28,7 @@ public class PlayersDto {
 	String league;
 	String teamName;
 	String position;
+	String type;
 	float indicator;
 	
 	public static PlayersDto of(Batters batters) {
@@ -38,6 +39,7 @@ public class PlayersDto {
 		b.setSeason(batters.getSeason());
 		b.setTeamName(batters.getTeamName());
 		b.setPosition(batters.getPosition());
+		b.setType("B");
 		// 여기서 타율 계산
 		float batAvg = (batters.getLeftHitNum()+batters.getRightHitNum())/(float)(batters.getLeftHitNum()+batters.getRightHitNum()+batters.getLeftSoNum()+batters.getLeftAoNum()+batters.getLeftGoNum()+batters.getRightSoNum()+batters.getRightAoNum()+batters.getRightGoNum());
 		batAvg = Math.round(batAvg*1000)/(float)1000;
@@ -53,6 +55,7 @@ public class PlayersDto {
 		b.setSeason(pitchers.getSeason());
 		b.setTeamName(pitchers.getTeamName());
 		b.setPosition(pitchers.getPosition());
+		b.setType("P");
 		// 여기서 타율 계산
 //		float era = Math.round(((float)(pitchers.getLeftEr() + pitchers.getRightEr())*9*1000)/(pitchers.getLeftInningNum() + pitchers.getRightInningNum()))/(float)1000;
 		float era1 = Math.round(((float)(pitchers.getLeftRbi() + pitchers.getRightRbi())*9*1000*3)/(pitchers.getLeftOutNum() + pitchers.getRightOutNum()))/(float)1000;
