@@ -203,8 +203,6 @@ const MainPage = () => {
     floatingYesterday();
     todayFormal();
     rank();
-    setTimeout(() => setSpinner(false), 3000);
-
     // let step = 0;
     // for (step = 0; step < res.data.length; step++) {
     //   setNotice([...notices, res.data[step]]);
@@ -269,7 +267,6 @@ const MainPage = () => {
     return (
       <Main>
         {spinner ? <PacmanLoader></PacmanLoader> : <div></div>}
-
         <Notice {...settings}>
           {notices ? (
             notices.map((notice, idx) => (
@@ -311,11 +308,11 @@ const MainPage = () => {
             </div>
             <div className="main_des">
               <div className="team_des">
-                {/* <img
+                <img
                   className="logo"
                   src={todays[todays.length - 1].homeLogo}
                   alt="홈팀로고"
-                /> */}
+                />
                 <div>{todays[todays.length - 1].homeName}</div>
               </div>
               <div class="simul_case">
@@ -343,7 +340,7 @@ const MainPage = () => {
                   <div>오늘 예정 경기</div>
                 </div>
 
-                {/* <Link
+                <Link
                   className="sub_container"
                   to={"/simulation"}
                   style={{ textDecoration: "none", color: "black" }}
@@ -367,7 +364,7 @@ const MainPage = () => {
                     <img src={todays[todays.length - 4].awayLogo} alt="" />
                     <div>{todays[todays.length - 4].awayName}</div>
                   </div>
-                </Link> */}
+                </Link>
 
                 <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
               </div>
@@ -380,7 +377,7 @@ const MainPage = () => {
               <div className="sub_des">
                 <div className="sub_title">오늘 예정 경기</div>
 
-                {/* <Link
+                <Link
                   className="sub_container"
                   to={"/simulation"}
                   style={{ textDecoration: "none", color: "black" }}
@@ -404,7 +401,7 @@ const MainPage = () => {
                     <img src={todays[todays.length - 3].awayLogo} alt="" />
                     <div>{todays[todays.length - 3].awayName}</div>
                   </div>
-                </Link> */}
+                </Link>
 
                 <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
               </div>
@@ -416,8 +413,7 @@ const MainPage = () => {
               </div>
               <div className="sub_des">
                 <div className="sub_title">오늘 예정 경기</div>
-
-                {/* <Link
+                <Link
                   className="sub_container"
                   to={"/simulation"}
                   style={{ textDecoration: "none", color: "black" }}
@@ -441,7 +437,7 @@ const MainPage = () => {
                     <img src={todays[todays.length - 2].awayLogo} alt="" />
                     <div>{todays[todays.length - 2].awayName}</div>
                   </div>
-                </Link> */}
+                </Link>
 
                 <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
               </div>
@@ -451,7 +447,7 @@ const MainPage = () => {
         <CheckBox>
           <Predict>
             <div className="title">[ 어제 경기 결과 ]</div>
-            {/* <div>
+            <div>
               {yesterdays.map((yesterday, idx) => (
                 <Link
                   to={"/simulation"}
@@ -507,11 +503,11 @@ const MainPage = () => {
                   </div>
                 </Link>
               ))}
-            </div> */}
+            </div>
           </Predict>
           <Predict>
             <div className="title">[ 오늘 경기 일정 ]</div>
-            {/* <div>
+            <div>
               {todays.map((today, idx) => (
                 <Link
                   to={"/simulation"}
@@ -567,7 +563,7 @@ const MainPage = () => {
                   </div>
                 </Link>
               ))}
-            </div> */}
+            </div>
           </Predict>
           <Rank>
             <div className="title">[팀 순위]</div>
@@ -682,11 +678,11 @@ const MainPage = () => {
             <Ground data={inningList} />
             <div className="main_des">
               <div className="team_des">
-                {/* <img
+                <img
                   className="logo"
                   src={todays[todays.length - 1].homeLogo}
                   alt="홈팀로고"
-                /> */}
+                />
                 <div>{todays[todays.length - 1].homeName}</div>
               </div>
               <div class="simul_case">
@@ -715,7 +711,7 @@ const MainPage = () => {
                 </div>
                 <div className="sub_container">
                   <div className="sub_home">
-                    {/* <img src={todays[todays.length - 4].homeLogo} alt="" /> */}
+                    <img src={todays[todays.length - 4].homeLogo} alt="" />
                     <div>{todays[todays.length - 4].homeName}</div>
                   </div>
                   <h5>VS</h5>
@@ -736,7 +732,7 @@ const MainPage = () => {
                 <div className="sub_title">오늘 예정 경기</div>
                 <div className="sub_container">
                   <div className="sub_home">
-                    {/* <img src={todays[todays.length - 3].homeLogo} alt="" /> */}
+                    <img src={todays[todays.length - 3].homeLogo} alt="" />
                     <div>{todays[todays.length - 3].homeName}</div>
                   </div>
                   <h5>VS</h5>
@@ -757,7 +753,7 @@ const MainPage = () => {
                 <div className="sub_title">오늘 예정 경기</div>
                 <div className="sub_container">
                   <div className="sub_home">
-                    {/* <img src={todays[todays.length - 2].homeLogo} alt="" /> */}
+                    <img src={todays[todays.length - 2].homeLogo} alt="" />
                     <div>{todays[todays.length - 2].homeName}</div>
                   </div>
                   <h5>VS</h5>
@@ -774,7 +770,7 @@ const MainPage = () => {
         <DownChart {...downsettings}>
           <Predict>
             <div className="title">[ 어제 경기 결과 ]</div>
-            {/* <div>
+            <div>
               {yesterdays.map((yesterday, idx) => (
                 <Link
                   to={"/simulation"}
@@ -831,11 +827,11 @@ const MainPage = () => {
                   </div>
                 </Link>
               ))}
-            </div> */}
+            </div>
           </Predict>
           <Predict>
             <div className="title">[ 오늘 경기 일정 ]</div>
-            {/* <div>
+            <div>
               {todays.map((today, idx) => (
                 <Link
                   to={"/simulation"}
@@ -891,7 +887,7 @@ const MainPage = () => {
                   </div>
                 </Link>
               ))}
-            </div> */}
+            </div>
           </Predict>
           <Rank>
             <div className="title">[팀 순위]</div>
@@ -1006,11 +1002,11 @@ const MainPage = () => {
             <Ground data={inningList} />
             <div className="main_des">
               <div className="team_des">
-                {/* <img
+                <img
                   className="logo"
                   src={todays[todays.length - 1].homeLogo}
                   alt="홈팀로고"
-                /> */}
+                />
                 <div>{todays[todays.length - 1].homeName}</div>
               </div>
               <div class="simul_case">
@@ -1031,7 +1027,7 @@ const MainPage = () => {
         <DownChart {...downsettings}>
           <Predict>
             <div className="title">[ 어제 경기 결과 ]</div>
-            {/* <div>
+            <div>
               {yesterdays.map((yesterday, idx) => (
                 <Link
                   to={"/simulation"}
@@ -1088,11 +1084,11 @@ const MainPage = () => {
                   </div>
                 </Link>
               ))}
-            </div> */}
+            </div>
           </Predict>
           <Predict>
             <div className="title">[ 오늘 경기 일정 ]</div>
-            {/* <div>
+            <div>
               {todays.map((today, idx) => (
                 <Link
                   to={"/simulation"}
@@ -1148,7 +1144,7 @@ const MainPage = () => {
                   </div>
                 </Link>
               ))}
-            </div> */}
+            </div>
           </Predict>
           <Rank>
             <div className="title">[팀 순위]</div>
