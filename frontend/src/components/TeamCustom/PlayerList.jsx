@@ -18,7 +18,7 @@ import { SearchDiv, Img } from "../../pages/team/TeamCustomPage.style";
 import { TextField } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPersonCirclePlus } from "@fortawesome/free-solid-svg-icons";
-import { ClipLoader } from "react-spinners";
+import { PacmanLoader  } from "react-spinners";
 
 const PlayerList = ({ email, myTeam, isModified, setIsModified }) => {
   const dispatch = useDispatch();
@@ -66,7 +66,7 @@ const PlayerList = ({ email, myTeam, isModified, setIsModified }) => {
   };
 
   useEffect(() => {
-    setTimeout(() => setSpinner(false), 4000);
+    setTimeout(() => setSpinner(false), 3000);
     // MLB 선수 목록 받아오고 저장
     dispatch(getPlayer())
       .unwrap()
@@ -274,7 +274,7 @@ const PlayerList = ({ email, myTeam, isModified, setIsModified }) => {
 
       <ListWrapper>
         {spinner ? (
-          <ClipLoader color="#13a083"></ClipLoader>
+          <PacmanLoader  color="#13a083"></PacmanLoader>
         ) : year || team || league || position ? (
           filterdList.length !== 0 ? (
             filterdList.map((player, idx) => (

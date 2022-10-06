@@ -7,8 +7,8 @@ import Ground from "./Ground";
 import BallCount from "./BallCount";
 import TeamScore from "../../components/game/TeamScore";
 import { useLocation, useNavigate } from "react-router-dom";
-
-import { SimulContainer, Center } from "./SimulationPage.style";
+import { PacmanLoader } from "react-spinners";
+import { SimulContainer, Center, SpinnerDiv } from "./SimulationPage.style";
 
 const SimulationPage = () => {
   const location = useLocation();
@@ -25,7 +25,10 @@ const SimulationPage = () => {
   const [customStatus, setCustomStatus] = useState();
   const logoUrl = [data.home.logo, data.away.logo];
 
+  // 스피너
+  const [spinner, setSpinner] = useState(true);
   useEffect(() => {
+    setTimeout(() => setSpinner(false), 2000);
     // 커스텀팀이 넘어왔을 때, status true로 변환
     if (!data.home.id) {
       // setCustomStatus(true);
@@ -88,12 +91,20 @@ const SimulationPage = () => {
 
   return (
     <SimulContainer>
-      <TeamScore data={simulData} logo={logoUrl} />
-      <Center>
-        <Ground data={innginglist} />
-        <BallCount data={innginglist} />
-      </Center>
-      <SimulationResult data={simulData} />
+      {spinner ? (
+        <SpinnerDiv>
+          <PacmanLoader></PacmanLoader>
+        </SpinnerDiv>
+      ) : (
+        <>
+          <TeamScore data={simulData} logo={logoUrl} />
+          <Center>
+            <Ground data={innginglist} />
+            <BallCount data={innginglist} />
+          </Center>
+          <SimulationResult data={simulData} />
+        </>
+      )}
     </SimulContainer>
   );
 };
