@@ -24,7 +24,7 @@ import {
   getNMrank,
 } from "./mainpage-slice";
 
-import { BallCount } from "../simulation/SimulationPage.style";
+// import {BallCountContainer } from "../simulation/SimulationPage.style";
 
 import { simulationData } from "../simulation/simulation-slice";
 
@@ -38,6 +38,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // 시뮬레이션 컴포넌트
 import Ground from "../simulation/Ground";
+import BallCount from "../simulation/BallCount";
 
 // 너비 지정해놔서 크기 줄 때 바꿔줘야함
 // title 안내려오게끔 고정
@@ -301,30 +302,7 @@ const MainPage = () => {
           <div className="main_con">
             <div className="simul_page">
               <Ground data={inningList} />
-              <BallCount className="temp_ball">
-                <div className="count">
-                  <div className="title">B</div>
-                  <div className="circle_case">
-                    <div className="circle ball"></div>
-                    <div className="circle ball"></div>
-                    <div className="circle"></div>
-                  </div>
-                </div>
-                <div className="count">
-                  <div className="title">S</div>
-                  <div className="circle_case">
-                    <div className="circle strike"></div>
-                    <div className="circle"></div>
-                  </div>
-                </div>
-                <div className="count">
-                  <div className="title">O</div>
-                  <div className="circle_case">
-                    <div className="circle out"></div>
-                    <div className="circle"></div>
-                  </div>
-                </div>
-              </BallCount>
+              <BallCount data={inningList}/>
             </div>
             <div className="main_des">
               <div className="team_des">
