@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Random;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -265,6 +266,7 @@ public class SimulationServiceImpl implements SimulationService {
 		int overtime = 12;
 		StringBuilder gamelog = new StringBuilder();
 		int[] gameResult = new int[7];
+		Random random = new Random();
 		for (int k = 0; k < plays; k++) {
 			int gameInning = 0;
 			int[][] ScoreRecord = new int[2][overtime];
@@ -295,6 +297,8 @@ public class SimulationServiceImpl implements SimulationService {
 					e.setThirdBase(awayTeam.base[3]);
 					e.setIndex(inningIdx);
 					inningIdx++;
+					e.setStrikeCount(random.nextInt(3));
+					e.setBallCount(random.nextInt(4));
 					e.setInning(inning);
 					e.setOutCount(0);
 					e.setPitcherName(homeTeam.nowPitcher().getName());
@@ -440,6 +444,8 @@ public class SimulationServiceImpl implements SimulationService {
 					e.setThirdBase(awayTeam.base[3]);
 					e.setIndex(inningIdx);
 					inningIdx++;
+					e.setStrikeCount(random.nextInt(3));
+					e.setBallCount(random.nextInt(4));
 					e.setInning(inning);
 					e.setOutCount(0);
 					e.setPitcherName(homeTeam.nowPitcher().getName());

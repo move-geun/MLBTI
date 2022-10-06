@@ -21,6 +21,8 @@ public class SimulGameDatas {
 	Integer index;
 	String event;
 	Integer rbi;
+	Integer strikeCount;
+	Integer ballCount;
 	Integer outCount;
 	boolean firstBase;
 	boolean secondBase;
