@@ -32,7 +32,7 @@ const BaseBall = styled.img`
   height: 60px;
   position: absolute;
   left: 155px;
-  top: 158px;
+  top: 155px;
 
   animation: rotate_ball 0.7s linear infinite;
   transform-origin: 50% 50%;
@@ -64,7 +64,7 @@ const Base = styled.img`
 const BatterEvent = styled.div`
   position: absolute;
   z-index: 100;
-  width: 15rem;
+  width: 17rem;
   height: 40px;
   left: 60px;
   line-height: 40px;

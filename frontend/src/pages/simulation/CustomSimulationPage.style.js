@@ -5,7 +5,7 @@ const CustomConatiner = styled.div`
   background-repeat: no-repeat;
   display: flex;
   height: 100%;
-  width: 800px;
+  width: 88%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -26,7 +26,7 @@ const CustomConatiner = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 5rem;
+    margin-top: 3rem;
 
     img {
       height: 100px;
@@ -43,13 +43,27 @@ const Header = styled.div`
   padding-bottom: 4px;
   border-bottom: 2px solid #2565d0;
   font-size: 1.5rem;
+  margin-bottom: 3rem;
 `;
 const TeamContainer = styled.div`
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  .vs {
+    width: 200px;
+    height: 300px;
+    margin: 0 2rem;
+    @media screen and (max-width: 830px) {
+      width: 130px;
+      height: 150px;
+    }
+    @media screen and (max-width: 480px) {
+      width: 60px;
+      height: 100px;
+    }
+  }
   /* outline: 2px solid; */
 `;
 
@@ -59,6 +73,22 @@ const TeamCase = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .teamInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    div {
+      font-size: 20px;
+      @media screen and (max-width: 830px) {
+        font-size: 1rem;
+      }
+      @media screen and (max-width: 480px) {
+        font-size: 0.8rem;
+      }
+    }
+  }
 
   cursor: pointer;
   div {
@@ -80,12 +110,12 @@ const TeamCase = styled.div`
     }
 
     @media screen and (max-width: 830px) {
-      width: 180px;
-      height: 180px;
+      width: 150px;
+      height: 150px;
     }
     @media screen and (max-width: 480px) {
-      width: 130px;
-      height: 130px;
+      width: 100px;
+      height: 100px;
     }
   }
 `;
@@ -136,6 +166,14 @@ const ModalBox = styled.div`
     text-align: center;
     font-size: 1.5rem;
   }
+  .index {
+    margin: 2rem 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
 
   .content {
     width: 90%;
@@ -163,16 +201,14 @@ const ModalBox = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: row;
-    margin-top: 5px;
-    width: 100%;
-    height: 10%;
+    width: 50%;
   }
   .candidates {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 80%;
     height: 300px;
-    margin: 5px 0;
+    margin: 5px auto;
     overflow-y: scroll;
     &::-webkit-scrollbar {
       width: 0.5rem;
@@ -189,6 +225,9 @@ const ModalBox = styled.div`
       border-radius: 2rem;
     }
     .myteam {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
       margin: 5px 0;
       cursor: pointer;
 
@@ -203,6 +242,7 @@ const ModalBox = styled.div`
     }
   }
   .change {
+    margin-top: 1rem;
     font-size: 1rem;
     padding: 0.3rem 0.5rem;
   }

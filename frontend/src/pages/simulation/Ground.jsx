@@ -75,7 +75,7 @@ const Ground = (prop) => {
         <SecondB className="base2" src={"/assets/base.png"} />
         <ThirdB className="base3" src={"/assets/base.png"} /> */}
         <BatterEvent>
-          {hitterName}, <BatterName> {batterEvent}</BatterName>
+          {hitterName} <BatterName> {batterEvent}</BatterName>
         </BatterEvent>
       </Groundmap>
     </div>

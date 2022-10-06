@@ -127,7 +127,7 @@ const MainPage = () => {
   const [inningList, setInningList] = useState([]);
   useEffect(() => {
     if (inningList.length > 0) {
-      console.log("여기는 메인 페이지 이닝리스트 들어감", inningList);
+      // console.log("여기는 메인 페이지 이닝리스트 들어감", inningList);
     }
   }, [inningList]);
 
