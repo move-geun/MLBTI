@@ -99,9 +99,7 @@ const FlexSpan = styled.div`
   justify-content: flex-end;
   color: rgba(0, 0, 0, 0.3);
   a {
-    margin-left: 3%;
-    margin-right: 7%;
-    color: rgba(0, 0, 0);
+    color: rgba(0, 0, 0, 0.3);
   }
   @media screen and (max-width: 830px) {
     font-size: 0.8rem;
