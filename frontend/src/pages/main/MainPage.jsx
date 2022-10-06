@@ -10,7 +10,7 @@ import {
   League,
   SubItem,
 } from "./MainPage.style";
-
+import { PacmanLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import {
   getNotice,
@@ -56,6 +56,7 @@ const MainPage = () => {
   const NMrank = useSelector((state) => state.main.NMrank);
   const [open, setOpen] = useState(false);
   const [national, setNational] = useState(true);
+  const [spinner, setSpinner] = useState(true);
   const handleAm = () => setNational(false);
   const handleNa = () => setNational(true);
   const handleOpen = () => setOpen(true);
@@ -202,6 +203,7 @@ const MainPage = () => {
     floatingYesterday();
     todayFormal();
     rank();
+    setTimeout(() => setSpinner(false), 3000);
 
     // let step = 0;
     // for (step = 0; step < res.data.length; step++) {
@@ -266,6 +268,8 @@ const MainPage = () => {
   if (windowSize > 980) {
     return (
       <Main>
+        {spinner ? <PacmanLoader></PacmanLoader> : <div></div>}
+
         <Notice {...settings}>
           {notices ? (
             notices.map((notice, idx) => (
