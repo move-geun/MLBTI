@@ -39,7 +39,8 @@ public class PlayersDto {
 		b.setTeamName(batters.getTeamName());
 		b.setPosition(batters.getPosition());
 		// 여기서 타율 계산
-		float batAvg = (batters.getLeftHitNum()+batters.getRightHitNum())/(float)(batters.getLeftSoNum()+batters.getLeftAoNum()+batters.getLeftGoNum()+batters.getRightSoNum()+batters.getRightAoNum()+batters.getRightGoNum());
+		float batAvg = (batters.getLeftHitNum()+batters.getRightHitNum())/(float)(batters.getLeftHitNum()+batters.getRightHitNum()+batters.getLeftSoNum()+batters.getLeftAoNum()+batters.getLeftGoNum()+batters.getRightSoNum()+batters.getRightAoNum()+batters.getRightGoNum());
+		batAvg = Math.round(batAvg*1000)/(float)1000;
 		b.setIndicator(batAvg);
 		return b;
 	}
