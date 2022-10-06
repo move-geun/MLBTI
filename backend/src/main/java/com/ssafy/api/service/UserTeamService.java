@@ -15,9 +15,10 @@ import com.ssafy.db.entity.Users;
 * @프로그램 설명 : 유저팀 관련 비즈니스 로직 처리를 위한 서비스 인터페이스 정의.
 */
 public interface UserTeamService {
-	UserTeams createUserTeam(Users user, BaseballPlayers baseballPlayer, String position);
+	UserTeams createUserTeam(Users user, BaseballPlayers baseballPlayer, String position, int Season);
 	void deleteUserTeamByUid(Integer uid);
 	void deleteUserTeamByUserUid(Integer user_uid);
 	List<UserTeams> getUserTeamByUserUid(Integer user_uid);
 	UserTeams updateUserTeam(Integer uid, BaseballPlayers baseballPlayer);
+	void updateUserTeamByUid(String email, int playerUid, int order);
 }

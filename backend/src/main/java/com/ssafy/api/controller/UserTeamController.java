@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,8 +71,10 @@ public class UserTeamController {
 			return ResponseEntity.status(404).body(BaseResponseBody.of(404, "Not Player"));
 		}
 		
-		UserTeams userTeam = userTeamService.createUserTeam(user, baseballPlayer, registerInfo.getPosition());
-		
+		UserTeams userTeam = userTeamService.createUserTeam(user, baseballPlayer, registerInfo.getPosition(), registerInfo.getSeason());
+		if(userTeam==null) {
+			return ResponseEntity.status(404).body(BaseResponseBody.of(404, "Already Exists"));
+		}
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
 	
@@ -99,6 +102,21 @@ public class UserTeamController {
 	public ResponseEntity<? extends BaseResponseBody> deleteByUid(
 			@PathVariable @ApiParam(value="uid", required = true) Integer uid) {
 		userTeamService.deleteUserTeamByUid(uid);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+	}
+	
+	@PutMapping("/update")
+	@ApiOperation(value = "유저팀 해당 선수 타순 수정", notes = "<strong>이메일에 해당하는 user의 팀의 player_uid 선수의 타순을 변경한다") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 401, message = "인증 실패"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<? extends BaseResponseBody> PutByUid(
+			@RequestParam(value="email", required = true) String email,
+			@RequestParam(value="player_uid", required = true) int playerUid,
+			@RequestParam(value="order", required = true) int order) {
+		userTeamService.updateUserTeamByUid(email, playerUid, order);
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
 	}
 	

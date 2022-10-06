@@ -21,6 +21,8 @@ public class UserTeamRegisterPostReq {
 	String email;
 	@ApiModelProperty(name="선수 uid", example="547943")
 	Integer player_uid;
+	@ApiModelProperty(name="선수 시즌", example="2022")
+	Integer season;
 	@ApiModelProperty(name="해당 선수 포지션", example="Pitcher")
 	String position;
 

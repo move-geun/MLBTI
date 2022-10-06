@@ -136,7 +136,7 @@ const BallCountContainer = styled.div`
   min-width: 250px;
   height: 300px;
   border-radius: 20px;
-  background-color: black;
+  background-color: #343434;
   /* background-color: rgba(0, 0, 0, 0.43); */
   margin-left: 80px;
   display: flex;

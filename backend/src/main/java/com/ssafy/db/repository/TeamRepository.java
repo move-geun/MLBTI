@@ -3,6 +3,7 @@ package com.ssafy.db.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.ssafy.db.entity.Batters;
 import com.ssafy.db.entity.Teams;
 
 /**
@@ -16,5 +17,5 @@ import com.ssafy.db.entity.Teams;
 
 @Repository
 public interface TeamRepository extends JpaRepository<Teams, Integer>{
-
+//	Batters findBySeasonAndPlayerUid(int season, int uid);
 }

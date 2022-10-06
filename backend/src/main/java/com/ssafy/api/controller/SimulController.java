@@ -3,13 +3,19 @@
  */
 package com.ssafy.api.controller;
 
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.api.request.NoticeRegisterPostReq;
+import com.ssafy.api.service.SimulationService;
 import com.ssafy.db.entity.LiveGames;
 import com.ssafy.db.entity.SimulGameDatas;
 import com.ssafy.db.entity.SimulGameInning;
@@ -37,7 +43,42 @@ import com.google.gson.JsonParser;
 @RestController
 @RequestMapping("/api/simul")
 public class SimulController {
+	@Autowired
+	private SimulationService simulationService;
+	
 
+	@PostMapping("/normal")
+	@ApiOperation(value = "경기 시물레이션", notes = "두 팀 UID를 받아서<strong>오늘 경기를</strong> 시뮬레이션한다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 401, message = "인증 실패"),
+        @ApiResponse(code = 404, message = "사용자 없음"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<String> todaySimul(@ApiParam(value = "homeTeamUid", required = true) @RequestParam("homeTeamUid") int homeTeamUid,
+			@ApiParam(value = "awayTeamUid", required = true) @RequestParam("awayTeamUid") int awayTeamUid) {
+		
+		String json = simulationService.getNormalSim(homeTeamUid, awayTeamUid);
+		return ResponseEntity.status(200).body(json);
+		
+	}
+	
+	@PostMapping("/custom")
+	@ApiOperation(value = "경기 시물레이션", notes = "사용자의 email과 실제 팀을 입력받아<strong>경기를</strong> 시뮬레이션한다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 401, message = "인증 실패"),
+        @ApiResponse(code = 404, message = "사용자 없음"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<String> custom(@ApiParam(value = "email", required = true) @RequestParam("email") String email,
+			@ApiParam(value = "teamUid", required = true) @RequestParam("teamUid") int teamUid) {
+		
+		String json = simulationService.getCustomSim(email, teamUid);
+		return ResponseEntity.status(200).body(json);
+		
+	}
+	
 	@PostMapping()
 	@ApiOperation(value = "batter 정보 얻기", notes = "<strong>schedule에서 </strong> batter 정보를 가져온다.") 
     @ApiResponses({
@@ -56,6 +97,36 @@ public class SimulController {
 		res.setVenueName("광주 구장");
 		res.setWeatherTemp(23);
 		res.setWeatherWind("24m/h");
+		Integer[][] scoreBoard = new Integer[2][14];
+		scoreBoard[0][0] = 2;
+		scoreBoard[0][1] = 0;
+		scoreBoard[0][2] = 1;
+		scoreBoard[0][3] = 0;
+		scoreBoard[0][4] = 2;
+		scoreBoard[0][5] = 0;
+		scoreBoard[0][6] = 0;
+		scoreBoard[0][7] = 0;
+		scoreBoard[0][8] = 3;
+		scoreBoard[0][9] = 0;
+		scoreBoard[0][10] = 0;
+		scoreBoard[0][11] = 0;
+		scoreBoard[0][12] = 12;
+		scoreBoard[0][13] = 8;
+		scoreBoard[1][0] = 0;
+		scoreBoard[1][1] = 0;
+		scoreBoard[1][2] = 0;
+		scoreBoard[1][3] = 3;
+		scoreBoard[1][4] = 0;
+		scoreBoard[1][5] = 0;
+		scoreBoard[1][6] = 0;
+		scoreBoard[1][7] = 0;
+		scoreBoard[1][8] = 2;
+		scoreBoard[1][9] = 0;
+		scoreBoard[1][10] = 0;
+		scoreBoard[1][11] = 0;
+		scoreBoard[1][12] = 8;
+		scoreBoard[1][13] = 5;
+		res.setScoreBoard(scoreBoard);
 		SimulGameInning[] innings = res.getInngings();
 		for(int i=0; i<24; i++) {
 			innings[i] = new SimulGameInning();

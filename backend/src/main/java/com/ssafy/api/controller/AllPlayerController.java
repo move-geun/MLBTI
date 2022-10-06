@@ -5,6 +5,7 @@ package com.ssafy.api.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.ssafy.api.request.NoticeRegisterPostReq;
 import com.ssafy.api.response.BaseRes;
@@ -27,6 +29,7 @@ import com.ssafy.db.entity.Batters;
 import com.ssafy.db.entity.Notices;
 import com.ssafy.db.entity.Pitchers;
 import com.ssafy.db.entity.Users;
+import com.ssafy.db.repository.BatterRepository;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -50,7 +53,8 @@ import io.swagger.annotations.ApiResponses;
 public class AllPlayerController {
 	@Autowired
 	BatterService batterService;
-	
+	@Autowired
+	BatterRepository batterRepository;
 	@Autowired
 	PitcherService pitcherService;
 
@@ -61,14 +65,14 @@ public class AllPlayerController {
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<BaseRes> getAll() {
-		ArrayList<Batters> b_l = (ArrayList<Batters>) batterService.getAllBatters();
+		System.out.println("list");
+		ArrayList<Batters> b_l = (ArrayList<Batters>) batterRepository.findAll();
+		
 		ArrayList<Pitchers> p_l = (ArrayList<Pitchers>) pitcherService.getAllPitchers();
 		List<PlayersDto> playersList = new ArrayList();
-		List<PlayersDto> PitchersList = new ArrayList();
 		for(int i=0;i<b_l.size();++i) {
 			playersList .add(PlayersDto.of(b_l.get(i)));
 		}
-		
 		for(int i=0;i<p_l.size();++i) {
 			playersList .add(PlayersDto.of(p_l.get(i)));
 		}
@@ -97,5 +101,31 @@ public class AllPlayerController {
 		
 		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",playersList));
 	}
+	
+	@GetMapping("/searchUid")
+	@ApiOperation(value = "uid로 검색한 선수 정보 얻기", notes = "uid로 검색한 선수 정보를 가져온다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+    	@ApiResponse(code = 404, message = "해당 선수 못 찾음"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<BaseRes> getBySearchUidAndSeason(@RequestParam(value="player_uid", required = false) int player_uid,@RequestParam(value="season", required = false) int season ) {
+		Batters b =  batterService.getBatterBySeasonAndUid(season,player_uid);
+		Pitchers p = pitcherService.getPitcherBySeasonAndUid(season,player_uid);
+		List<PlayersDto> playersList = new ArrayList();
+		if (b!=null) {
+			playersList.add(PlayersDto.of(b));			
+		}
+		if (p!=null) {
+			playersList.add(PlayersDto.of(p));				
+		}
+
+		if (playersList.isEmpty()) {
+			return ResponseEntity.status(404).body(BaseRes.of(404, "해당 선수가 없습니다."));
+		}
+		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",playersList));
+	}
+	
+	
 	
 }

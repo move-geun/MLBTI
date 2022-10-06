@@ -33,4 +33,11 @@ public class PitcherRepositorySupport {
 				.where(qPitcher.name.like("%" + searchName + "%")).fetch();
 		return pitchers;
     }
+    
+    public Pitchers findPitcherBySeasonAndUid(int season, int uid) {
+    	Pitchers pitchers = jpaQueryFactory.select(qPitcher).from(qPitcher)
+				.where(qPitcher.playerUid.eq(uid)).where(qPitcher.season.eq(season)).fetchOne();
+    	return pitchers;
+    	
+    }
 }

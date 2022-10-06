@@ -18,4 +18,5 @@ import com.ssafy.db.entity.BaseballPlayers;
 @Repository
 public interface BaseballPlayerRepository extends JpaRepository<BaseballPlayers, Integer>{
 	List<BaseballPlayers> findByFullNameContains(String word);
+	BaseballPlayers findByUid(int uid);
 }

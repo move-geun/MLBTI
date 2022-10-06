@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,20 +27,18 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
+@Table(name="new_new_pitchers")
 public class Pitchers {
 	
 //	@OneToOne
 //	@JoinColumn(name="player_uid")
 //	BaseballPlayers baseballPlayer;
-	
 	@Id
+	int uid;
 	int playerUid;
 	
 	Integer season;
 	
-	@OneToOne
-	@JoinColumn(name="team_uid")
-	Teams team;
 	
 	String league;
 	String teamName;
@@ -71,9 +70,12 @@ public class Pitchers {
 	Integer rightIbbNum;
 	Integer leftInningNum;
 	Integer rightInningNum;	
+	Integer leftRbi;
+	Integer rightRbi;	
 	String playerWeatherTmi;
 	Float average;
 	Float standardDeviation;
 	String education;
-
+	Integer leftOutNum;
+	Integer rightOutNum;
 }
