@@ -18,7 +18,7 @@ import {
   signup,
 } from "./signup-slice";
 import { useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
   const dispatch = useDispatch();
@@ -154,12 +154,9 @@ const SignupPage = () => {
       password: userPwd,
       randomNumber: emailCert,
     };
-    console.log("실행되나?");
     dispatch(signup(data))
       .unwrap()
-      .then(
-        navigate('/login')
-      ) 
+      .then(navigate("/login"))
       .catch((err) => {
         if (err.status === 401) {
           alert("입력하신 정보를 한번 더 확인해주세요");
@@ -245,7 +242,7 @@ const SignupPage = () => {
               ) : null}
 
               {emailCert && !successCert ? (
-                <AlertText >인증이 필요 합니다.</AlertText>
+                <AlertText>인증이 필요 합니다.</AlertText>
               ) : null}
             </div>
           </ContentCase>

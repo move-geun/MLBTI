@@ -174,13 +174,21 @@ const ModalBox = styled.div`
     justify-content: space-between;
     align-items: center;
     font-size: 1rem;
-
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+    }
     input {
       width: 50%;
       border-bottom: 1px solid black;
+      margin: 0 10px;
     }
     button {
-      padding: 0.2rem 0.4rem;
+      font-size: 1rem;
+      padding: 0.2rem 0.2rem;
     }
   }
 

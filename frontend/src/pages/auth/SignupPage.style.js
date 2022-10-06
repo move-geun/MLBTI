@@ -26,10 +26,10 @@ const FormInputsBlock = styled.form`
       font-size: 30px;
     }
     span {
-      font-size: 13px;
+      font-size: 15px;
     }
     input {
-      font-size: 13px;
+      font-size: 15px;
     }
   }
 `;
@@ -59,14 +59,12 @@ const InputDiv = styled.div`
   width: 90%;
   margin: 0 0 2rem 2rem;
   align-items: center;
-
-
 `;
 
 const CertBtn = styled.button`
-  background-color: rgba(0, 0, 0, 0.1);
-  color: black;
-  padding: 3px 3px;
+  background-color: #2565d0;
+  color: white;
+  padding: 0.5rem 0.5rem;
   margin-left: 15px;
   font-size: 20px;
 
@@ -112,7 +110,7 @@ const InputBtnDiv = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 `;
 
@@ -122,10 +120,8 @@ const InBtn = styled.button`
   margin: 1rem 0;
   font-size: 25px;
   :disabled {
-    background-color: #7da4e8 ;
+    background-color: #7da4e8;
     cursor: not-allowed;
-
-    
   }
   &:hover {
     background-color: #2565d0;
@@ -138,7 +134,7 @@ const InBtn = styled.button`
     }
   }
   @media screen and (max-width: 480px) {
-    font-size: 13px;
+    font-size: 15px;
     &:hover {
       font-size: 15px;
     }
@@ -149,9 +145,9 @@ const AlertText = styled.span`
   color: #ff0000;
   font-size: 17px;
   left: 110px;
-  
+
   &.correct {
-    color: #02C302;
+    color: #02c302;
   }
 `;
 

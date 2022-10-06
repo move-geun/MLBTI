@@ -17,7 +17,6 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getNational, getAmerican } from "./customsimulation-slice";
 import { getMyteam, myprofile } from "../profile/myprofile-slice";
-import { ConnectingAirportsOutlined } from "@mui/icons-material";
 
 // 모달 연결
 // 승률 높은 곳에 색 변경
@@ -174,14 +173,14 @@ const CustomSimulationPage = () => {
               <div>구단주: {myTeam.nickname}</div>
             </div>
           ) : selectHome.length !== 0 ? (
-            <div>
+            <div className="teamInfo">
               <img onClick={handleOpen} src={selectHome.logo} alt="선택한 팀" />
               <div>팀명: {selectHome.clubName}</div>
               <div>리그: {selectHome.divisionName}</div>
               <div>연고지: {selectHome.locationName}</div>
             </div>
           ) : (
-            <div>
+            <div className="teamInfo">
               <img
                 onClick={handleOpen}
                 src="/assets/defaultTeam.png"
@@ -198,24 +197,12 @@ const CustomSimulationPage = () => {
           >
             <ModalBox>
               <div className="title">홈팀 선택하기</div>
-              <br />
-              <br />
-              <div className="team">
-                팀 검색
-                <div>
-                  <input
-                    type="text"
-                    value={userInput}
-                    onChange={(e) => handleInput(e)}
-                    onKeyPress={onKeyPress}
-                  />
-                  <button onClick={onClick}>검색하기</button>
-                </div>
+              <div className="index">
                 <div className="filter">
                   <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                    <InputLabel id="demo-simple-select-standard-label">
+                    {/* <InputLabel id="demo-simple-select-standard-label">
                       리그 선택
-                    </InputLabel>
+                    </InputLabel> */}
                     <Select
                       labelId="demo-simple-select-standard-label"
                       id="demo-simple-select-standard"
@@ -227,50 +214,61 @@ const CustomSimulationPage = () => {
                     </Select>
                   </FormControl>
                 </div>
-                <div className="candidates">
-                  <div onClick={clickMyTeam} className="myteam">
-                    <img
-                      className="myteamlogo"
-                      src={"/assets/customTeamLogo.png"}
-                      alt="이미지"
-                    ></img>
-                    {myTeam.myTeamName} (내 구단)
-                  </div>
-                  {leagueName === "nationalMLB"
-                    ? nationalSearchList.map((item, idx) => (
-                        <ListWrap
-                          value={idx}
-                          onClick={(e) => {
-                            setIsClickMyTeam(false);
-                            setSelectHome(item);
-                          }}
-                        >
-                          <img alt="logo" src={item.logo}></img>
-                          <div value={idx} className="candi">
-                            {item.name}
-                          </div>
-                        </ListWrap>
-                      ))
-                    : americanSearchList.map((item, idx) => (
-                        <ListWrap
-                          onClick={() => {
-                            setIsClickMyTeam(false);
-                            setSelectHome(item);
-                          }}
-                        >
-                          <img alt="logo" src={item.logo}></img>
-                          <div className="candi">{item.name}</div>
-                        </ListWrap>
-                      ))}
+                <div>
+                  <input
+                    type="text"
+                    value={userInput}
+                    placeholder="팀명을 입력해주세요"
+                    onChange={(e) => handleInput(e)}
+                    onKeyPress={onKeyPress}
+                  />
+                  <button onClick={onClick}>검색하기</button>
                 </div>
               </div>
+              <div className="candidates">
+                <div onClick={clickMyTeam} className="myteam">
+                  <img
+                    className="myteamlogo"
+                    src={"/assets/customTeamLogo.png"}
+                    alt="이미지"
+                  ></img>
+                  {myTeam.myTeamName} (내 구단)
+                </div>
+                {leagueName === "nationalMLB"
+                  ? nationalSearchList.map((item, idx) => (
+                      <ListWrap
+                        value={idx}
+                        onClick={(e) => {
+                          setIsClickMyTeam(false);
+                          setSelectHome(item);
+                        }}
+                      >
+                        <img alt="logo" src={item.logo}></img>
+                        <div value={idx} className="candi">
+                          {item.name}
+                        </div>
+                      </ListWrap>
+                    ))
+                  : americanSearchList.map((item, idx) => (
+                      <ListWrap
+                        onClick={() => {
+                          setIsClickMyTeam(false);
+                          setSelectHome(item);
+                        }}
+                      >
+                        <img alt="logo" src={item.logo}></img>
+                        <div className="candi">{item.name}</div>
+                      </ListWrap>
+                    ))}
+              </div>
+
               <button className="change" onClick={handleClose}>
                 매치업
               </button>
             </ModalBox>
           </Modal>
         </TeamCase>
-        <span> VS </span>
+        <img className="vs" src="../assets/vs.png" alt="" />
         <TeamCase>
           {selectAway.length !== 0 ? (
             <div className="teamInfo">
@@ -300,36 +298,42 @@ const CustomSimulationPage = () => {
             aria-describedby="modal-modal-description"
           >
             <ModalBox>
-              <div className="title">어웨이팀 선택하기</div>
-              <br />
-              <br />
-              <div className="team">
-                팀 검색
-                <div>
-                  <input
-                    value={userInput}
-                    type="text"
-                    onChange={(e) => handleInput(e)}
-                    onKeyPress={onKeyPress}
-                  />
-                  <button onClick={onClick}>검색하기</button>
-                </div>
-                <div className="filter">
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                    <InputLabel id="demo-simple-select-standard-label">
-                      리그 선택
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-standard-label"
-                      id="demo-simple-select-standard"
-                      value={leagueName}
-                      onChange={handleChange}
-                      label="Age"
+              <div>
+                <div className="title">어웨이팀 선택하기</div>
+                <div className="index">
+                  <div className="filter">
+                    <FormControl
+                      variant="standard"
+                      sx={{ m: 1, minWidth: 120 }}
                     >
-                      <MenuItem value={"nationalMLB"}>National League</MenuItem>
-                      <MenuItem value={"americanMLB"}>American League</MenuItem>
-                    </Select>
-                  </FormControl>
+                      {/* <InputLabel id="demo-simple-select-standard-label">
+                      리그 선택
+                    </InputLabel> */}
+                      <Select
+                        labelId="demo-simple-select-standard-label"
+                        id="demo-simple-select-standard"
+                        value={leagueName}
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={"nationalMLB"}>
+                          National League
+                        </MenuItem>
+                        <MenuItem value={"americanMLB"}>
+                          American League
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      value={userInput}
+                      placeholder="팀명을 입력해주세요"
+                      onChange={(e) => handleInput(e)}
+                      onKeyPress={onKeyPress}
+                    />
+                    <button onClick={onClick}>검색하기</button>
+                  </div>
                 </div>
                 <div className="candidates">
                   {leagueName === "nationalMLB"
