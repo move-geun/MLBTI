@@ -14,30 +14,48 @@ const SimulationPage = () => {
   const home = location.state.home;
   const away = location.state.away;
 
-  console.log(home, away);
+
   const dispatch = useDispatch();
   const data = location.state;
 
   console.log("여기는 시뮬레이션 페이지, 팀매칭에서 어떤 값 가져왔어  ", data);
+  const teamId = {team1: data.home, team2: data.away};
+
 
   // const [teamData, setTeamData] = useState({});
   const [simulData, setSimulData] = useState({});
 
   // const [logoUrl, setLogoUrl] = useState([]);
-  const teamId = { team1: data.home.id, team2: data.away.id };
+
+  // const [teamId, setTeamId] = useState({});
+
   const logoUrl = [data.home.logo, data.away.logo];
 
   useEffect(() => {
-    dispatch(simulationData(teamId))
-      .unwrap()
-      .then((res) => {
-        setSimulData(res.data);
-        console.log("ressss ", res);
-      });
+
+    
+    takeSimulData(teamId)
   }, []);
 
-  useEffect(() => {
-    if (simulData.gamePk) {
+
+  const takeSimulData= (teamId)=> {
+    dispatch(simulationData(teamId))
+    .unwrap()
+    .then((res) => {
+      console.log("ressss ", res);
+      setSimulData(res.data);
+      
+
+    });
+  }
+
+  // useEffect(()=>{
+   
+  // }, [teamId])
+
+
+  useEffect(()=> {
+    if(simulData.gamePk){
       makeInningsInfo();
     }
   }, [simulData]);

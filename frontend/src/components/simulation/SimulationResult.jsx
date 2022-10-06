@@ -43,7 +43,6 @@ const SimulationResult = (prop = defaultValue) => {
   }, [currentTab]);
 
   useEffect(()=> {
-    console.log("inningStatus 바꼈다");
     InfoHandler();
     
   }, [inningStatus])
