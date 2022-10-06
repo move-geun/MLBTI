@@ -64,19 +64,24 @@ const Base = styled.img`
 const BatterEvent = styled.div`
   position: absolute;
   z-index: 100;
-  width: 14rem;
-  height: 20px;
+  width: 15rem;
+  height: 40px;
   left: 60px;
-  padding: 0.6rem;
+  line-height: 40px;
   background-color: white;
   text-align: center;
   border: #16345a solid;
   box-shadow: 2px 2px #16345a, 5px 5px #4d8cbf;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 
 const BatterName = styled.div`
   font-size: 2em;
   font-weight: 700;
+  margin-left: 10px;
 `;
 
 const FirstB = styled.img`

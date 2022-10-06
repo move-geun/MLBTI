@@ -24,6 +24,8 @@ import {
   getNMrank,
 } from "./mainpage-slice";
 
+import { BallCount } from "../simulation/SimulationPage.style";
+
 import { simulationData } from "../simulation/simulation-slice";
 
 // 모달
@@ -280,8 +282,33 @@ const MainPage = () => {
         </Notice>
         <SimulationCase>
           <div className="main_con">
-            {/* <img className="main_simul" src="../assets/Ground.png" alt="" /> */}
-            <Ground data={inningList} />
+            <div className="simul_page">
+              <Ground data={inningList} />
+              <BallCount className="temp_ball">
+                <div className="count">
+                  <div className="title">B</div>
+                  <div className="circle_case">
+                    <div className="circle ball"></div>
+                    <div className="circle ball"></div>
+                    <div className="circle"></div>
+                  </div>
+                </div>
+                <div className="count">
+                  <div className="title">S</div>
+                  <div className="circle_case">
+                    <div className="circle strike"></div>
+                    <div className="circle"></div>
+                  </div>
+                </div>
+                <div className="count">
+                  <div className="title">O</div>
+                  <div className="circle_case">
+                    <div className="circle out"></div>
+                    <div className="circle"></div>
+                  </div>
+                </div>
+              </BallCount>
+            </div>
             <div className="main_des">
               <div className="team_des">
                 <img
