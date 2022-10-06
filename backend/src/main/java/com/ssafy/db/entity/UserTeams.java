@@ -21,7 +21,10 @@ import lombok.Setter;
 public class UserTeams extends BaseEntity{
 	String position;
 	Integer team_index;
-	
+	Integer order;
+	Integer season;
+//	Integer playerUid;
+//	Integer userUid;
 	@ManyToOne
 	@JoinColumn(name="user_uid")
 	Users user;
