@@ -10,9 +10,9 @@ import {
   GraphBox,
   ModalBox,
 } from "./MyProfilePage.style";
-import { myprofile, myteam, changeTeamName } from "./myprofile-slice";
+import { myprofile, getMyteam, changeTeamName } from "./myprofile-slice";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // 선수 목록 받아와서 뿌리기 남음
 
@@ -20,8 +20,9 @@ const MyProfilePage = () => {
   const [nickName, setNickname] = useState("");
   const [usermail, setUsermail] = useState("");
   const [teamName, setTeamName] = useState("");
-  const [userTeam, setUserTeam] = useState([]);
   const [tmpteam, setTmpTeam] = useState("");
+
+  const myteam = useSelector((state) => state.main.myteam);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -46,19 +47,13 @@ const MyProfilePage = () => {
     const userInfo = await dispatch(myprofile());
     const infodata = await userInfo.payload.data;
     const mail = { email: infodata.userId };
-    const res = await dispatch(myteam(mail));
-    if (res.payload.data.length === 0) {
-      setUserTeam("선수등록하러 가기");
-    } else {
-      setUserTeam(res.payload.data);
-    }
+    const res = await dispatch(getMyteam(mail));
     // await setUsermail(infodata.userId);
     // if (userInfo.teamName === null) {
     //   await setTeamName("팀 이름을 설정해주세요");
     // } else {
     //   await setTeamName(userInfo.teamName);
     // }
-    return res;
   }
 
   // 팀 이름 변경
@@ -148,7 +143,7 @@ const MyProfilePage = () => {
       <div>{teamName}</div>
       <GraphBox>
         <div>현재 {nickName}의 선수정보</div>
-        <Link to="/teamcustom">{userTeam}</Link>
+        {/* <Link to="/teamcustom">{userTeam}</Link> */}
         {/* 실경기 박스
         <div className="GraphDraw">
           <div className="nameDraw">
