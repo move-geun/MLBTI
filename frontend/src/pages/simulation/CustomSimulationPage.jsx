@@ -362,7 +362,7 @@ const CustomSimulationPage = () => {
       </TeamContainer>
       <Link
         to={"/simulation"}
-        state={ isClickMyTeam ? ({ home: myTeam.email, away: selectAway.id}) : {home: selectHome.id, away: selectAway.id} }
+        state={ isClickMyTeam ? ({ home: myTeam.email, away: selectAway}) : {home: selectHome, away: selectAway} }
         style={{ textDecoration: "none", color: "black" }}
         onClick={isSelectedTeams}
       >
