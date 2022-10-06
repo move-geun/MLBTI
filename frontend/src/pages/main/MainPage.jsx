@@ -24,9 +24,7 @@ import {
   getNMrank,
 } from "./mainpage-slice";
 
-import {
-  simulationData
-} from "../simulation/simulation-slice";
+import { simulationData } from "../simulation/simulation-slice";
 
 // 모달
 import Modal from "@mui/material/Modal";
@@ -114,44 +112,38 @@ const MainPage = () => {
 
   // 메인시뮬레이션 게임아이디 받아가기
   const takeGameId = (data) => {
-      let length = data.length-1;
-      let teamId = {team1: data[length].homeId, team2: data[length].awayId}
-      takeSimulResult(teamId)
-      // console.log("TeamId 만들어졌니", teamId);
-  }
-
+    let length = data.length - 1;
+    let teamId = { team1: data[length].homeId, team2: data[length].awayId };
+    takeSimulResult(teamId);
+    // console.log("TeamId 만들어졌니", teamId);
+  };
 
   //////////////////// 시뮬레이션 /////////////////////////////
- 
+
   const [inningList, setInningList] = useState([]);
-  useEffect(()=> {
-    if(inningList.length > 0){
+  useEffect(() => {
+    if (inningList.length > 0) {
       console.log("여기는 메인 페이지 이닝리스트 들어감", inningList);
     }
   }, [inningList]);
 
   // 게임 아이디로 시뮬레이션 결과 받아오기
-  function takeSimulResult(teamId){
+  function takeSimulResult(teamId) {
     dispatch(simulationData(teamId))
       .unwrap()
-      .then((res) => { 
-        console.log("시뮬레이션 가져왔지롱  ", res)
+      .then((res) => {
+        console.log("시뮬레이션 가져왔지롱  ", res);
         setInningList(res.data.inngings);
       })
       .catch((err) => {
-        console.log("시뮬레이션 데이터 불러오기 실패")
-      })
+        console.log("시뮬레이션 데이터 불러오기 실패");
+      });
   }
-
- 
-
 
   // 메인 시뮬레이션 연결 하기
   // 1. 게임 아이디 받아오기
   // 2. 게임 아이디로 시뮬레이션 결과 받아오기
   // 3. 값 가져와서 ground 컴포넌트에 inningList만 뽑아서 넣어주기
-
-
 
   // 어제 경기 스케줄
   function floatingYesterday() {
@@ -289,10 +281,14 @@ const MainPage = () => {
         <SimulationCase>
           <div className="main_con">
             {/* <img className="main_simul" src="../assets/Ground.png" alt="" /> */}
-            <Ground data = {inningList}/>
+            <Ground data={inningList} />
             <div className="main_des">
               <div className="team_des">
-                <img src={todays[todays.length - 1].homeLogo} alt="홈팀로고" />
+                <img
+                  className="logo"
+                  src={todays[todays.length - 1].homeLogo}
+                  alt="홈팀로고"
+                />
                 <div>{todays[todays.length - 1].homeName}</div>
               </div>
               <div class="simul_case">
@@ -301,6 +297,7 @@ const MainPage = () => {
               </div>
               <div className="team_des">
                 <img
+                  className="logo"
                   src={todays[todays.length - 1].awayLogo}
                   alt="어웨이로고"
                 />
@@ -589,10 +586,14 @@ const MainPage = () => {
         <SimulationCase>
           <div className="Main">
             {/* <img className="main_simul" src="../assets/Ground.png" alt="" /> */}
-            <Ground data = {inningList}/>
+            <Ground data={inningList} />
             <div className="main_des">
               <div className="team_des">
-                <img src={todays[todays.length - 1].homeLogo} alt="홈팀로고" />
+                <img
+                  className="logo"
+                  src={todays[todays.length - 1].homeLogo}
+                  alt="홈팀로고"
+                />
                 <div>{todays[todays.length - 1].homeName}</div>
               </div>
               <div class="simul_case">
@@ -601,6 +602,7 @@ const MainPage = () => {
               </div>
               <div className="team_des">
                 <img
+                  className="logo"
                   src={todays[todays.length - 1].awayLogo}
                   alt="어웨이로고"
                 />
@@ -889,10 +891,14 @@ const MainPage = () => {
         <SimulationCase>
           <div className="Main">
             {/* <img className="main_simul" src="../assets/Ground.png" alt="" /> */}
-            <Ground data = {inningList}/>
+            <Ground data={inningList} />
             <div className="main_des">
               <div className="team_des">
-                <img src={todays[todays.length - 1].homeLogo} alt="홈팀로고" />
+                <img
+                  className="logo"
+                  src={todays[todays.length - 1].homeLogo}
+                  alt="홈팀로고"
+                />
                 <div>{todays[todays.length - 1].homeName}</div>
               </div>
               <div class="simul_case">
@@ -901,6 +907,7 @@ const MainPage = () => {
               </div>
               <div className="team_des">
                 <img
+                  className="logo"
                   src={todays[todays.length - 1].awayLogo}
                   alt="어웨이로고"
                 />
