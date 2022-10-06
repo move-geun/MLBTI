@@ -68,8 +68,8 @@ const MainPage = () => {
 
   // 시뮬레이션으로 넘길 때 데이터
   // home = [{id: xx, logo: url}]
-  const [home, setHome] = useState([]);
-  const [away, setAway] = useState([]);
+  // const [home, setHome] = useState([]);
+  // const [away, setAway] = useState([]);
 
   // 오늘 날짜 구하기
   const todayFormal = () => {
@@ -252,17 +252,17 @@ const MainPage = () => {
     return () => window.removeEventListener("resize", handleResize);
   });
 
-  const clickHistory = (yesterday) => {
-    // let newhome = { id: "", logo: "" };
-    // let newaway = { id: "", logo: "" };
-    // newhome["id"] = yesterday.homeId;
-    // newhome["logo"] = yesterday.homeLogo;
-    // newaway["id"] = yesterday.awayId;
-    // newaway["logo"] = yesterday.awayLogo;
-    // setHome(newhome)
-    // setAway(newaway)
-    console.log("메인페이지 값", home, away);
-  };
+  // const clickHistory = (yesterday) => {
+  // let newhome = { id: "", logo: "" };
+  // let newaway = { id: "", logo: "" };
+  // newhome["id"] = yesterday.homeId;
+  // newhome["logo"] = yesterday.homeLogo;
+  // newaway["id"] = yesterday.awayId;
+  // newaway["logo"] = yesterday.awayLogo;
+  // setHome(newhome)
+  // setAway(newaway)
+  // console.log("메인페이지 값", home, away);
+  // };
 
   if (windowSize > 980) {
     return (
@@ -784,7 +784,7 @@ const MainPage = () => {
                     home: { id: yesterday.homeId, logo: yesterday.homeLogo },
                     away: { id: yesterday.awayId, logo: yesterday.awayLogo },
                   }}
-                  onClick={() => clickHistory(yesterday)}
+                  // onClick={() => clickHistory(yesterday)}
                 >
                   <div key={idx} className="contentdiv">
                     <div className="home">
@@ -1043,7 +1043,7 @@ const MainPage = () => {
                     home: { id: yesterday.homeId, logo: yesterday.homeLogo },
                     away: { id: yesterday.awayId, logo: yesterday.awayLogo },
                   }}
-                  onClick={() => clickHistory(yesterday)}
+                  // onClick={() => clickHistory(yesterday)}
                 >
                   <div key={idx} className="contentdiv">
                     <div className="home">
