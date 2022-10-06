@@ -255,7 +255,7 @@ const SimulationCase = styled.div`
     flex-direction: column;
     justify-content: space-around;
   }
-  img {
+  .logo {
     height: 330px;
     width: 500px;
   }
@@ -275,7 +275,7 @@ const SimulationCase = styled.div`
   }
 
   @media screen and (max-width: 830px) {
-    img {
+    .logo {
       height: 330px;
       width: 300px;
     }
