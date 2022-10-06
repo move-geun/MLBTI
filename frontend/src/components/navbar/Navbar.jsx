@@ -11,8 +11,8 @@ import Button from "@mui/material/Button";
 // import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import styled from "styled-components";
-// import LogoutIcon from "@mui/icons-material/Logout";
-// import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from "@mui/icons-material/Login";
 import { useNavigate } from "react-router-dom";
 import { deleteToken } from "../../api/JWT";
 import isAuthenticated from "../../api/isAuthenticated";
@@ -185,44 +185,51 @@ const Navbar = () => {
               },
             }}
           >
-            {/* {isAuthenticated()
-              ? loginPages.map((page) => (
-                  <Button
-                    component="a"
-                    href={Object.values(page)}
-                    onClick={handleCloseNavMenu}
-                    sx={{
-                      my: 2,
-                      color: "black",
-                      display: "block",
-                      fontFamily: "MICEGothic Bold",
-                    }}
-                  >
-                    {Object.keys(page)}
-                  </Button>
-                ))
-              : notLoginPages.map((page) => (
-                  <Button
-                    component="a"
-                    href={Object.values(page)}
-                    onClick={handleCloseNavMenu}
-                    sx={{
-                      my: 2,
-                      color: "black",
-                      display: "block",
-                      fontFamily: "MICEGothic Bold",
-                    }}
-                  >
-                    {Object.keys(page)}
-                  </Button>
-                ))} */}
+            {/* ------------------------------------- */}
+            <>
+              {isAuthenticated()
+                ? loginPages.map((page, idx) => (
+                    <Button
+                      component="a"
+                      key={idx}
+                      href={String(Object.values(page))}
+                      onClick={handleCloseNavMenu}
+                      sx={{
+                        my: 2,
+                        color: "black",
+                        display: "block",
+                        fontFamily: "MICEGothic Bold",
+                      }}
+                    >
+                      {Object.keys(page)}
+                    </Button>
+                  ))
+                : notLoginPages.map((page, idx) => (
+                    <Button
+                      component="a"
+                      key={idx}
+                      href={String(Object.values(page))}
+                      onClick={handleCloseNavMenu}
+                      sx={{
+                        my: 2,
+                        color: "black",
+                        display: "block",
+                        fontFamily: "MICEGothic Bold",
+                      }}
+                    >
+                      {Object.keys(page)}
+                    </Button>
+                  ))}
+            </>
+            {/* ------------------------------------- */}
           </Box>
-
-          {isAuthenticated() ? (
-            <Box sx={{ flexGrow: 0 }}></Box>
-          ) : (
-            <Box sx={{ flexGrow: 0 }}></Box>
-          )}
+          <>
+            {isAuthenticated() ? (
+              <Box sx={{ flexGrow: 0 }}></Box>
+            ) : (
+              <Box sx={{ flexGrow: 0 }}></Box>
+            )}
+          </>
         </Toolbar>
       </Container>
     </AppBar>
