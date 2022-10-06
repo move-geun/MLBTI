@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import {
   StatusContainer,
-  simulDiv,
+  SimulDiv,
   StatusBtn,
   BatterContatiner,
   BatterResult,
@@ -114,7 +114,7 @@ const SimulationResult = (prop = defaultValue) => {
   ];
 
   return (
-    <simulDiv>
+    <SimulDiv>
       <Tabs
         className="simul_tab"
         indicatorColor="primary"
@@ -171,7 +171,7 @@ const SimulationResult = (prop = defaultValue) => {
         {/*         
          <h1>{menuArr[currentTab].content}</h1> */}
       </div>
-    </simulDiv>
+    </SimulDiv>
   );
 };
 

@@ -66,7 +66,7 @@ const BatterEvent = styled.div`
   z-index: 100;
   width: 17rem;
   height: 40px;
-  left: 60px;
+  left: 40px;
   line-height: 40px;
   background-color: white;
   text-align: center;
