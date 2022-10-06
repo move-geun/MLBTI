@@ -19,7 +19,7 @@ const SimulationPage = () => {
   const data = location.state;
 
   console.log("여기는 시뮬레이션 페이지, 팀매칭에서 어떤 값 가져왔어  ", data);
-  const teamId = {team1: data.home, team2: data.away};
+  const teamId = {team1: data.home.id, team2: data.away.id};
 
 
   // const [teamData, setTeamData] = useState({});
