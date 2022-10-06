@@ -205,6 +205,7 @@ const MainPage = () => {
     todayFormal();
     rank();
     setTimeout(() => setSpinner(false), 2000);
+    console.log("홈로고", todays[todays.length - 1]);
     // let step = 0;
     // for (step = 0; step < res.data.length; step++) {
     //   setNotice([...notices, res.data[step]]);
