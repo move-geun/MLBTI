@@ -351,6 +351,10 @@ const Predict = styled.div`
     align-items: center;
     justify-content: center;
     margin: 10px auto;
+
+    img {
+      margin: 0 5px;
+    }
   }
 
   .home {
@@ -623,6 +627,7 @@ const SubItem = styled.div`
         width: 40px;
         height: 40px;
         margin-bottom: 5px;
+        
       }
     }
   }
