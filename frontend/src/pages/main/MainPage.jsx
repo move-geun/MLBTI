@@ -1035,269 +1035,269 @@ const MainPage = () => {
         </DownChart>
       </Main>
     );
-  } else {
-    return (
-      <Main>
-        <Notice {...settings}>
-          {notices ? (
-            notices.map((notice, idx) => (
-              <Link to={`/notice/${notice.uid}`} key={idx}>
-                [공지] {notice.title}
-              </Link>
-            ))
-          ) : (
-            <div>공지사항이 없습니다</div>
-          )}
-        </Notice>
-        <SimulationCase>
-          <div className="Main">
-            {/* <img className="main_simul" src="../assets/Ground.png" alt="" /> */}
-            <Ground data={inningList} />
-            {todays ? (
-              <div className="main_des">
-                <div className="team_des">
-                  <img
-                    className="logo"
-                    src={todays[todays.length - 1].homeLogo}
-                    alt="홈팀로고"
-                  />
-                  <div>{todays[todays.length - 1].homeName}</div>
-                </div>
-                <div class="simul_case">
-                  <h5>지금 시뮬레이션 경기 중</h5>
-                  <div class="dot-elastic"></div>
-                </div>
-                <div className="team_des">
-                  <img
-                    className="logo"
-                    src={todays[todays.length - 1].awayLogo}
-                    alt="어웨이로고"
-                  />
-                  <div>{todays[todays.length - 1].awayName}</div>
-                </div>
-              </div>
-            ) : null}
-          </div>
-        </SimulationCase>
-        <DownChart {...downsettings}>
-          <Predict>
-            <div className="title">[ 어제 경기 결과 ]</div>
-            {yesterdays ? (
-              <div>
-                {yesterdays.map((yesterday, idx) => (
-                  <Link
-                    to={"/simulation"}
-                    style={{ textDecoration: "none", color: "black" }}
-                    state={{
-                      home: { id: yesterday.homeId, logo: yesterday.homeLogo },
-                      away: { id: yesterday.awayId, logo: yesterday.awayLogo },
-                    }}
-                    // onClick={() => clickHistory(yesterday)}
-                  >
-                    <div key={idx} className="contentdiv">
-                      <div className="home">
-                        <div>{yesterday.homeName}</div>
-                        <div
-                          className={
-                            yesterday.homeScore > yesterday.awayScore
-                              ? "win"
-                              : yesterday.homeScore < yesterday.awayScore
-                              ? "lose"
-                              : "gray"
-                          }
-                        >
-                          {yesterday.homeScore}
-                        </div>
-                      </div>
-                      <img
-                        className="homeImg"
-                        src={yesterday.homeLogo}
-                        alt="홈팀 사진"
-                      />
-                      <div className="status">
-                        <div className="vs">vs</div>
-                        <div className="status">{yesterday.status}</div>
-                      </div>
-                      <img
-                        className="AwayImg"
-                        src={yesterday.awayLogo}
-                        alt="어웨이팀 사진"
-                      />
-                      <div className="away">
-                        <div>{yesterday.awayName}</div>
-                        <div
-                          className={
-                            yesterday.awayScore > yesterday.homeScore
-                              ? "win"
-                              : yesterday.awayScore < yesterday.homeScore
-                              ? "lose"
-                              : "gray"
-                          }
-                        >
-                          {yesterday.awayScore}
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            ) : null}
-          </Predict>
-          <Predict>
-            <div className="title">[ 오늘 경기 일정 ]</div>
-            {todays ? (
-              <div>
-                {todays.map((today, idx) => (
-                  <Link
-                    to={"/simulation"}
-                    style={{ textDecoration: "none", color: "black" }}
-                    state={{
-                      home: { id: today.homeId, logo: today.homeLogo },
-                      away: { id: today.awayId, logo: today.awayLogo },
-                    }}
-                  >
-                    <div key={idx} className="contentdiv">
-                      <div className="home">
-                        <div>{today.homeName}</div>
-                        <div
-                          className={
-                            today.homeScore > today.awayScore
-                              ? "win"
-                              : today.homeScore < today.awayScore
-                              ? "lose"
-                              : "gray"
-                          }
-                        >
-                          {today.homeScore}
-                        </div>
-                      </div>
-                      <img
-                        className="homeImg"
-                        src={today.homeLogo}
-                        alt="홈팀 사진"
-                      />
-                      <div className="status">
-                        <div className="vs">vs</div>
-                        <div className="status">{today.status}</div>
-                      </div>
-                      <img
-                        className="AwayImg"
-                        src={today.awayLogo}
-                        alt="어웨이팀 사진"
-                      />
-                      <div className="away">
-                        <div>{today.awayName}</div>
-                        <div
-                          className={
-                            today.awayScore > today.homeScore
-                              ? "win"
-                              : today.awayScore < today.homeScore
-                              ? "lose"
-                              : "gray"
-                          }
-                        >
-                          {today.awayScore}
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            ) : null}
-          </Predict>
-          <Rank>
-            <div className="title">[팀 순위]</div>
-            <div className="divide">
-              <div claasName="leaguebtn" onClick={handleNa}>
-                내셔널 리그
-              </div>
-              <div claasName="leaguebtn" onClick={handleAm}>
-                아메리칸 리그
-              </div>
-            </div>
-            {national === true ? (
-              <Leagues {...ranksettings}>
-                <League>
-                  <div className="leaguetitle">[동부리그]</div>
-                  {NErank.map((rank, idx) => (
-                    <div key={idx} className="rank_cont">
-                      <div className="number">{rank.diveRank}</div>
-                      <div className="rank">
-                        <img src={rank.logo} alt="" />
-                        <div>{rank.teamName}</div>
-                      </div>
-                    </div>
-                  ))}
-                </League>
-                <League>
-                  <div className="leaguetitle">[서부리그]</div>
-                  {NWrank.map((rank, idx) => (
-                    <div key={idx} className="rank_cont">
-                      <div className="number">{rank.diveRank}</div>
-                      <div className="rank">
-                        <img src={rank.logo} alt="" />
-                        <div>{rank.teamName}</div>
-                      </div>
-                    </div>
-                  ))}
-                </League>
-                <League>
-                  <div className="leaguetitle">[중앙리그]</div>
-                  {NMrank.map((rank, idx) => (
-                    <div key={idx} className="rank_cont">
-                      <div className="number">{rank.diveRank}</div>
-                      <div className="rank">
-                        <img src={rank.logo} alt="" />
-                        <div>{rank.teamName}</div>
-                      </div>
-                    </div>
-                  ))}
-                </League>
-              </Leagues>
-            ) : (
-              <Leagues {...ranksettings}>
-                <League>
-                  <div className="leaguetitle">[동부리그]</div>
-                  {AErank.map((rank, idx) => (
-                    <div key={idx} className="rank_cont">
-                      <div className="number">{rank.diveRank}</div>
-                      <div className="rank">
-                        <img src={rank.logo} alt="" />
-                        <div>{rank.teamName}</div>
-                      </div>
-                    </div>
-                  ))}
-                </League>
-                <League>
-                  <div className="leaguetitle">[서부리그]</div>
-                  {AWrank.map((rank, idx) => (
-                    <div key={idx} className="rank_cont">
-                      <div className="number">{rank.diveRank}</div>
-                      <div className="rank">
-                        <img src={rank.logo} alt="" />
-                        <div>{rank.teamName}</div>
-                      </div>
-                    </div>
-                  ))}
-                </League>
-                <League>
-                  <div className="leaguetitle">[중앙리그]</div>
-                  {AMrank.map((rank, idx) => (
-                    <div key={idx} className="rank_cont">
-                      <div className="number">{rank.diveRank}</div>
-                      <div className="rank">
-                        <img src={rank.logo} alt="" />
-                        <div>{rank.teamName}</div>
-                      </div>
-                    </div>
-                  ))}
-                </League>
-              </Leagues>
-            )}
-          </Rank>
-        </DownChart>
-      </Main>
-    );
-  }
+  // } else {
+  //   return (
+  //     <Main>
+  //       <Notice {...settings}>
+  //         {notices ? (
+  //           notices.map((notice, idx) => (
+  //             <Link to={`/notice/${notice.uid}`} key={idx}>
+  //               [공지] {notice.title}
+  //             </Link>
+  //           ))
+  //         ) : (
+  //           <div>공지사항이 없습니다</div>
+  //         )}
+  //       </Notice>
+  //       <SimulationCase>
+  //         <div className="Main">
+  //           {/* <img className="main_simul" src="../assets/Ground.png" alt="" /> */}
+  //           <Ground data={inningList} />
+  //           {todays ? (
+  //             <div className="main_des">
+  //               <div className="team_des">
+  //                 <img
+  //                   className="logo"
+  //                   src={todays[todays.length - 1].homeLogo}
+  //                   alt="홈팀로고"
+  //                 />
+  //                 <div>{todays[todays.length - 1].homeName}</div>
+  //               </div>
+  //               <div class="simul_case">
+  //                 <h5>지금 시뮬레이션 경기 중</h5>
+  //                 <div class="dot-elastic"></div>
+  //               </div>
+  //               <div className="team_des">
+  //                 <img
+  //                   className="logo"
+  //                   src={todays[todays.length - 1].awayLogo}
+  //                   alt="어웨이로고"
+  //                 />
+  //                 <div>{todays[todays.length - 1].awayName}</div>
+  //               </div>
+  //             </div>
+  //           ) : null}
+  //         </div>
+  //       </SimulationCase>
+  //       <DownChart {...downsettings}>
+  //         <Predict>
+  //           <div className="title">[ 어제 경기 결과 ]</div>
+  //           {yesterdays ? (
+  //             <div>
+  //               {yesterdays.map((yesterday, idx) => (
+  //                 <Link
+  //                   to={"/simulation"}
+  //                   style={{ textDecoration: "none", color: "black" }}
+  //                   state={{
+  //                     home: { id: yesterday.homeId, logo: yesterday.homeLogo },
+  //                     away: { id: yesterday.awayId, logo: yesterday.awayLogo },
+  //                   }}
+  //                   // onClick={() => clickHistory(yesterday)}
+  //                 >
+  //                   <div key={idx} className="contentdiv">
+  //                     <div className="home">
+  //                       <div>{yesterday.homeName}</div>
+  //                       <div
+  //                         className={
+  //                           yesterday.homeScore > yesterday.awayScore
+  //                             ? "win"
+  //                             : yesterday.homeScore < yesterday.awayScore
+  //                             ? "lose"
+  //                             : "gray"
+  //                         }
+  //                       >
+  //                         {yesterday.homeScore}
+  //                       </div>
+  //                     </div>
+  //                     <img
+  //                       className="homeImg"
+  //                       src={yesterday.homeLogo}
+  //                       alt="홈팀 사진"
+  //                     />
+  //                     <div className="status">
+  //                       <div className="vs">vs</div>
+  //                       <div className="status">{yesterday.status}</div>
+  //                     </div>
+  //                     <img
+  //                       className="AwayImg"
+  //                       src={yesterday.awayLogo}
+  //                       alt="어웨이팀 사진"
+  //                     />
+  //                     <div className="away">
+  //                       <div>{yesterday.awayName}</div>
+  //                       <div
+  //                         className={
+  //                           yesterday.awayScore > yesterday.homeScore
+  //                             ? "win"
+  //                             : yesterday.awayScore < yesterday.homeScore
+  //                             ? "lose"
+  //                             : "gray"
+  //                         }
+  //                       >
+  //                         {yesterday.awayScore}
+  //                       </div>
+  //                     </div>
+  //                   </div>
+  //                 </Link>
+  //               ))}
+  //             </div>
+  //           ) : null}
+  //         </Predict>
+  //         <Predict>
+  //           <div className="title">[ 오늘 경기 일정 ]</div>
+  //           {todays ? (
+  //             <div>
+  //               {todays.map((today, idx) => (
+  //                 <Link
+  //                   to={"/simulation"}
+  //                   style={{ textDecoration: "none", color: "black" }}
+  //                   state={{
+  //                     home: { id: today.homeId, logo: today.homeLogo },
+  //                     away: { id: today.awayId, logo: today.awayLogo },
+  //                   }}
+  //                 >
+  //                   <div key={idx} className="contentdiv">
+  //                     <div className="home">
+  //                       <div>{today.homeName}</div>
+  //                       <div
+  //                         className={
+  //                           today.homeScore > today.awayScore
+  //                             ? "win"
+  //                             : today.homeScore < today.awayScore
+  //                             ? "lose"
+  //                             : "gray"
+  //                         }
+  //                       >
+  //                         {today.homeScore}
+  //                       </div>
+  //                     </div>
+  //                     <img
+  //                       className="homeImg"
+  //                       src={today.homeLogo}
+  //                       alt="홈팀 사진"
+  //                     />
+  //                     <div className="status">
+  //                       <div className="vs">vs</div>
+  //                       <div className="status">{today.status}</div>
+  //                     </div>
+  //                     <img
+  //                       className="AwayImg"
+  //                       src={today.awayLogo}
+  //                       alt="어웨이팀 사진"
+  //                     />
+  //                     <div className="away">
+  //                       <div>{today.awayName}</div>
+  //                       <div
+  //                         className={
+  //                           today.awayScore > today.homeScore
+  //                             ? "win"
+  //                             : today.awayScore < today.homeScore
+  //                             ? "lose"
+  //                             : "gray"
+  //                         }
+  //                       >
+  //                         {today.awayScore}
+  //                       </div>
+  //                     </div>
+  //                   </div>
+  //                 </Link>
+  //               ))}
+  //             </div>
+  //           ) : null}
+  //         </Predict>
+  //         <Rank>
+  //           <div className="title">[팀 순위]</div>
+  //           <div className="divide">
+  //             <div claasName="leaguebtn" onClick={handleNa}>
+  //               내셔널 리그
+  //             </div>
+  //             <div claasName="leaguebtn" onClick={handleAm}>
+  //               아메리칸 리그
+  //             </div>
+  //           </div>
+  //           {national === true ? (
+  //             <Leagues {...ranksettings}>
+  //               <League>
+  //                 <div className="leaguetitle">[동부리그]</div>
+  //                 {NErank.map((rank, idx) => (
+  //                   <div key={idx} className="rank_cont">
+  //                     <div className="number">{rank.diveRank}</div>
+  //                     <div className="rank">
+  //                       <img src={rank.logo} alt="" />
+  //                       <div>{rank.teamName}</div>
+  //                     </div>
+  //                   </div>
+  //                 ))}
+  //               </League>
+  //               <League>
+  //                 <div className="leaguetitle">[서부리그]</div>
+  //                 {NWrank.map((rank, idx) => (
+  //                   <div key={idx} className="rank_cont">
+  //                     <div className="number">{rank.diveRank}</div>
+  //                     <div className="rank">
+  //                       <img src={rank.logo} alt="" />
+  //                       <div>{rank.teamName}</div>
+  //                     </div>
+  //                   </div>
+  //                 ))}
+  //               </League>
+  //               <League>
+  //                 <div className="leaguetitle">[중앙리그]</div>
+  //                 {NMrank.map((rank, idx) => (
+  //                   <div key={idx} className="rank_cont">
+  //                     <div className="number">{rank.diveRank}</div>
+  //                     <div className="rank">
+  //                       <img src={rank.logo} alt="" />
+  //                       <div>{rank.teamName}</div>
+  //                     </div>
+  //                   </div>
+  //                 ))}
+  //               </League>
+  //             </Leagues>
+  //           ) : (
+  //             <Leagues {...ranksettings}>
+  //               <League>
+  //                 <div className="leaguetitle">[동부리그]</div>
+  //                 {AErank.map((rank, idx) => (
+  //                   <div key={idx} className="rank_cont">
+  //                     <div className="number">{rank.diveRank}</div>
+  //                     <div className="rank">
+  //                       <img src={rank.logo} alt="" />
+  //                       <div>{rank.teamName}</div>
+  //                     </div>
+  //                   </div>
+  //                 ))}
+  //               </League>
+  //               <League>
+  //                 <div className="leaguetitle">[서부리그]</div>
+  //                 {AWrank.map((rank, idx) => (
+  //                   <div key={idx} className="rank_cont">
+  //                     <div className="number">{rank.diveRank}</div>
+  //                     <div className="rank">
+  //                       <img src={rank.logo} alt="" />
+  //                       <div>{rank.teamName}</div>
+  //                     </div>
+  //                   </div>
+  //                 ))}
+  //               </League>
+  //               <League>
+  //                 <div className="leaguetitle">[중앙리그]</div>
+  //                 {AMrank.map((rank, idx) => (
+  //                   <div key={idx} className="rank_cont">
+  //                     <div className="number">{rank.diveRank}</div>
+  //                     <div className="rank">
+  //                       <img src={rank.logo} alt="" />
+  //                       <div>{rank.teamName}</div>
+  //                     </div>
+  //                   </div>
+  //                 ))}
+  //               </League>
+  //             </Leagues>
+  //           )}
+  //         </Rank>
+  //       </DownChart>
+  //     </Main>
+  //   );
+  // }
 };
 export default MainPage;
