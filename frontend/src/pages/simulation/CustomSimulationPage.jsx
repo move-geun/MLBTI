@@ -239,7 +239,7 @@ const CustomSimulationPage = () => {
                     src={"/assets/customTeamLogo.png"}
                     alt="이미지"
                   ></img>
-                  {myTeam.myTeamName} (내 구단)
+                  {myTeam.user.myTeamName} (내 구단)
                 </div>
                 {leagueName === "nationalMLB"
                   ? nationalSearchList.map((item, idx) => (
