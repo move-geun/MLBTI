@@ -211,7 +211,8 @@ public class SimulationServiceImpl implements SimulationService {
 			batterAtBat = batterH + batterSO + batterGO + batterAO;
 		}
 		double res = Math.random();
-		double factor = 2;
+//		double factor = 2;
+		double factor = 1.5;
 		if (res <= ((double) batterH / batterAtBat) * ((double) pitcherRbi * 9 / pitcherInning) * factor / 9) {
 			res = Math.random();
 			double fb = batterFB / (double) batterH;
@@ -752,7 +753,11 @@ public class SimulationServiceImpl implements SimulationService {
 		ArrayList<String> homePitchSide = new ArrayList<>();
 		ArrayList<String> awayBatSide = new ArrayList<>();
 		ArrayList<String> homeBatSide = new ArrayList<>();
+		batterRepository.findBySeasonAndPlayerUid(2022, 462101);
 		for (int i = 0; i < homeBatters.size(); i++) {
+			System.out.println(i);
+			System.out.println(homeBatters.get(i));
+			batterRepository.findBySeasonAndPlayerUid(2022, homeBatters.get(i));
 			homeBattersArray.add(batterRepository.findBySeasonAndPlayerUid(2022, homeBatters.get(i)));
 			homeBatSide.add(baseballPlayerRepository.findById(homeBatters.get(i)).get().getBatSideCode());
 		}
