@@ -7,69 +7,72 @@ import Ground from "./Ground";
 import BallCount from "./BallCount";
 import TeamScore from "../../components/game/TeamScore";
 import { useLocation, useNavigate } from "react-router-dom";
-
-import { SimulContainer, Center} from "./SimulationPage.style";
+import { PacmanLoader } from "react-spinners";
+import { SimulContainer, Center, SpinnerDiv } from "./SimulationPage.style";
 
 const SimulationPage = () => {
   const location = useLocation();
-  const home = location.state.home;
-  const away = location.state.away;
-
+  // const home = location.state.home;
+  // const away = location.state.away;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const data = location.state;
 
-    const [matchData, setMatchData] = useState({});
-    const [simulData, setSimulData] = useState({});
-    // 커스텀 데이터 넘어왔는지 확인
-    const [customStatus, setCustomStatus] = useState();
-    const logoUrl = [data.home.logo, data.away.logo];
+  const [matchData, setMatchData] = useState({});
+  const [simulData, setSimulData] = useState({});
+  // 커스텀 데이터 넘어왔는지 확인
+  const [customStatus, setCustomStatus] = useState();
+  const logoUrl = [data.home.logo, data.away.logo];
 
-  useEffect(()=> {
+  // 스피너
+  const [spinner, setSpinner] = useState(true);
+  useEffect(() => {
+    setTimeout(() => setSpinner(false), 2000);
     // 커스텀팀이 넘어왔을 때, status true로 변환
-    if(!data.home.id){
-      // setCustomStatus(true);  
-      takeCustomSimulData(matchInfo);     
+    if (!data.home.id) {
+      // setCustomStatus(true);
+      takeCustomSimulData(matchInfo);
     } else {
-      takeSimulData(teamId)
+      takeSimulData(teamId);
     }
     setMatchData(data);
-
   }, []);
-  
-  const teamId = {team1: data.home.id, team2: data.away.id};
-  const matchInfo = {email: data.home, uid: data.away.id }
 
+  const teamId = { team1: data.home.id, team2: data.away.id };
+  const matchInfo = { email: data.home, uid: data.away.id };
 
-  const takeSimulData= (teamId)=> {
+  const takeSimulData = (teamId) => {
     dispatch(simulationData(teamId))
-    .unwrap()
-    .then((res) => {
-      console.log("ressss ", res);
-      if(res.data === ""){
+      .unwrap()
+      .then((res) => {
+        console.log("ressss ", res);
+        if (res.data === "") {
+          alert("선수 정보가 부족합니다.");
+          navigate("/customsimultaion");
+        }
+        setSimulData(res.data);
+      })
+      .catch((err) => {
         alert("선수 정보가 부족합니다.");
         navigate("/customsimultaion");
-      }
-      setSimulData(res.data);
-      
-    });
-  }
+      });
+  };
 
-const takeCustomSimulData = (matchInfo) => {
-  console.log("커스텀 api 받으러 감", matchInfo);
-  dispatch(customsimulationData(matchInfo))
-  .unwrap()
-  .then((res) => {
-    console.log("커스텀 api 받으러 감", res);
-    setCustomStatus(false);
-  })
-}
+  const takeCustomSimulData = (matchInfo) => {
+    dispatch(customsimulationData(matchInfo))
+      .unwrap()
+      .then((res) => {
+        setCustomStatus(false);
+      })
+      .catch((err) => {
+        alert("선수 정보가 부족합니다.");
+        navigate("/customsimultaion");
+      });
+  };
 
-
-
-  useEffect(()=> {
-    if(simulData.gamePk){
+  useEffect(() => {
+    if (simulData.gamePk) {
       makeInningsInfo();
     }
   }, [simulData]);
@@ -88,12 +91,20 @@ const takeCustomSimulData = (matchInfo) => {
 
   return (
     <SimulContainer>
-      <TeamScore data={simulData} logo={logoUrl} />
-      <Center>
-        <Ground data={innginglist} />
-        <BallCount data = {innginglist} />
-      </Center>
-      <SimulationResult data={simulData} />
+      {spinner ? (
+        <SpinnerDiv>
+          <PacmanLoader></PacmanLoader>
+        </SpinnerDiv>
+      ) : (
+        <>
+          <TeamScore data={simulData} logo={logoUrl} />
+          <Center>
+            <Ground data={innginglist} />
+            <BallCount data={innginglist} />
+          </Center>
+          <SimulationResult data={simulData} />
+        </>
+      )}
     </SimulContainer>
   );
 };
