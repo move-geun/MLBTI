@@ -588,6 +588,7 @@ const SubItem = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-right: 30px;
   }
   @media screen and (max-width: 830px) {
     width: 300px;
@@ -605,12 +606,14 @@ const SubItem = styled.div`
   .sub_des {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     .sub_container {
+      width: 330px;
+      height: 80%;
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: space-between;
+      justify-content: space-around;
       font-size: 1rem;
       h5 {
         font-size: 1rem;
@@ -627,7 +630,6 @@ const SubItem = styled.div`
         width: 40px;
         height: 40px;
         margin-bottom: 5px;
-        
       }
     }
   }
