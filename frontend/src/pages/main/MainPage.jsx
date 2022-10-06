@@ -65,6 +65,11 @@ const MainPage = () => {
   };
   // const [notices, setNotices] = useState();
 
+  // 시뮬레이션으로 넘길 때 데이터 
+  // home = [{id: xx, logo: url}]
+  const [home, setHome] = useState([]);
+  const [away, setAway] = useState([]);
+
   // 오늘 날짜 구하기
   const todayFormal = () => {
     let now = new Date();
@@ -245,6 +250,17 @@ const MainPage = () => {
     return () => window.removeEventListener("resize", handleResize);
   });
 
+  const clickYesterday = (yesterday) => {
+    let newhome = {'id': '', 'logo':''}
+    let newaway = {'id': '', 'logo':''}
+    newhome['id'] = yesterday.homeId
+    newhome['logo'] = yesterday.homeLogo
+    newaway['id'] = yesterday.awayId
+    newaway['logo'] = yesterday.awayLogo
+    
+  
+  }
+
   if (windowSize > 980) {
     return (
       <Main>
@@ -383,50 +399,58 @@ const MainPage = () => {
             <div className="title">[ 어제 경기 결과 ]</div>
             <div>
               {yesterdays.map((yesterday, idx) => (
-                <div key={idx} className="contentdiv">
-                  <div className="home">
-                    <div>{yesterday.homeName}</div>
-                    <div
-                      className={
-                        yesterday.homeScore > yesterday.awayScore
-                          ? "win"
-                          : yesterday.homeScore < yesterday.awayScore
-                          ? "lose"
-                          : "gray"
-                      }
-                    >
-                      {yesterday.homeScore}
+                <Link 
+                  to={"/simulation"}
+                  style={{ textDecoration: "none", color: "black" }}
+                  state={{home: home, away: away}}
+                  onClick={()=>clickYesterday(yesterday)}
+                >
+                  
+                  <div key={idx} className="contentdiv">
+                    <div className="home">
+                      <div>{yesterday.homeName}</div>
+                      <div
+                        className={
+                          yesterday.homeScore > yesterday.awayScore
+                            ? "win"
+                            : yesterday.homeScore < yesterday.awayScore
+                            ? "lose"
+                            : "gray"
+                        }
+                      >
+                        {yesterday.homeScore}
+                      </div>
+                    </div>
+                    <img
+                      className="homeImg"
+                      src={yesterday.homeLogo}
+                      alt="홈팀 사진"
+                    />
+                    <div className="status">
+                      <div className="vs">vs</div>
+                      <div className="status">{yesterday.status}</div>
+                    </div>
+                    <img
+                      className="AwayImg"
+                      src={yesterday.awayLogo}
+                      alt="어웨이팀 사진"
+                    />
+                    <div className="away">
+                      <div>{yesterday.awayName}</div>
+                      <div
+                        className={
+                          yesterday.awayScore > yesterday.homeScore
+                            ? "win"
+                            : yesterday.awayScore < yesterday.homeScore
+                            ? "lose"
+                            : "gray"
+                        }
+                      >
+                        {yesterday.awayScore}
+                      </div>
                     </div>
                   </div>
-                  <img
-                    className="homeImg"
-                    src={yesterday.homeLogo}
-                    alt="홈팀 사진"
-                  />
-                  <div className="status">
-                    <div className="vs">vs</div>
-                    <div className="status">{yesterday.status}</div>
-                  </div>
-                  <img
-                    className="AwayImg"
-                    src={yesterday.awayLogo}
-                    alt="어웨이팀 사진"
-                  />
-                  <div className="away">
-                    <div>{yesterday.awayName}</div>
-                    <div
-                      className={
-                        yesterday.awayScore > yesterday.homeScore
-                          ? "win"
-                          : yesterday.awayScore < yesterday.homeScore
-                          ? "lose"
-                          : "gray"
-                      }
-                    >
-                      {yesterday.awayScore}
-                    </div>
-                  </div>
-                </div>
+                </Link>
               ))}
             </div>
           </Predict>

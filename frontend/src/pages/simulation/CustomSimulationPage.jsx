@@ -16,7 +16,7 @@ import FormControl from "@mui/material/FormControl";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getNational, getAmerican } from "./customsimulation-slice";
-import { myteam, myprofile } from "../profile/myprofile-slice";
+import { getMyteam, myprofile } from "../profile/myprofile-slice";
 
 // 모달 연결
 // 승률 높은 곳에 색 변경
@@ -39,12 +39,11 @@ const CustomSimulationPage = () => {
   // 선택한 팀 정보
   const [selectHome, setSelectHome] = useState([]);
   const [selectAway, setSelectAway] = useState([]);
-  
-  
-  // 내 정보 | 내 팀 
+
+  // 내 정보 | 내 팀
   const [myInfo, setMyInfo] = useState("");
   const [myTeam, setMyTeam] = useState();
-  
+
   // 내 팀 선택 시
   const [isClickMyTeam, setIsClickMyTeam] = useState(false);
 
@@ -107,12 +106,10 @@ const CustomSimulationPage = () => {
     setAmericanSearchList(value2);
   };
 
-
-  //  내 팀 선택 시 
+  //  내 팀 선택 시
   const clickMyTeam = () => {
     setIsClickMyTeam(true);
-
-  }
+  };
 
   useEffect(() => {
     dispatch(myprofile())
@@ -140,7 +137,7 @@ const CustomSimulationPage = () => {
       const data = {
         email: myInfo,
       };
-      dispatch(myteam(data))
+      dispatch(getMyteam(data))
         .unwrap()
         .then((res) => {
           setMyTeam(res.data[0].user);
@@ -148,17 +145,18 @@ const CustomSimulationPage = () => {
     }
   }, [myInfo]);
 
-  
-
   // 팀 설정 안했을 시 페이지 이동 막기
   const isSelectedTeams = (event) => {
-    if ((selectHome.length === 0 && !isClickMyTeam) || selectAway.length === 0) {
+    if (
+      (selectHome.length === 0 && !isClickMyTeam) ||
+      selectAway.length === 0
+    ) {
       event.preventDefault();
       alert("두 팀 모두 선택해 주세요");
     }
   };
   // console.log(isClickMyTeam, selectHome, selectAway)
-  console.log(myTeam)
+  console.log(myTeam);
   return myTeam ? (
     <CustomConatiner>
       <Header>매치업 설정하기</Header>
@@ -166,11 +164,15 @@ const CustomSimulationPage = () => {
         <TeamCase>
           {isClickMyTeam ? (
             <div>
-              <img onClick={handleOpen} className="myteamlogo" src={'/assets/customTeamLogo.png'}></img>
+              <img
+                onClick={handleOpen}
+                className="myteamlogo"
+                src={"/assets/customTeamLogo.png"}
+              ></img>
               <div>팀명: {myTeam.myTeamName}</div>
               <div>구단주: {myTeam.nickname}</div>
             </div>
-          ): selectHome.length !== 0 ? (
+          ) : selectHome.length !== 0 ? (
             <div>
               <img onClick={handleOpen} src={selectHome.logo} alt="선택한 팀" />
               <div>팀명: {selectHome.clubName}</div>
@@ -186,8 +188,7 @@ const CustomSimulationPage = () => {
               />
               <div>팀 설정하기</div>
             </div>
-          )
-          }
+          )}
           <Modal
             open={open}
             onClose={handleClose}
@@ -226,15 +227,19 @@ const CustomSimulationPage = () => {
                   </FormControl>
                 </div>
                 <div className="candidates">
-                  <div onClick={clickMyTeam}  className="myteam">
-                    <img className="myteamlogo" src={'/assets/customTeamLogo.png'}></img>{myTeam.myTeamName} (내 구단)
-                    </div>
+                  <div onClick={clickMyTeam} className="myteam">
+                    <img
+                      className="myteamlogo"
+                      src={"/assets/customTeamLogo.png"}
+                    ></img>
+                    {myTeam.myTeamName} (내 구단)
+                  </div>
                   {leagueName === "nationalMLB"
                     ? nationalSearchList.map((item, idx) => (
                         <ListWrap
                           value={idx}
                           onClick={(e) => {
-                            setIsClickMyTeam(false)
+                            setIsClickMyTeam(false);
                             setSelectHome(item);
                           }}
                         >
@@ -247,7 +252,7 @@ const CustomSimulationPage = () => {
                     : americanSearchList.map((item, idx) => (
                         <ListWrap
                           onClick={() => {
-                            setIsClickMyTeam(false)
+                            setIsClickMyTeam(false);
                             setSelectHome(item);
                           }}
                         >
@@ -358,11 +363,15 @@ const CustomSimulationPage = () => {
               </button>
             </ModalBox>
           </Modal>
-        </TeamCase> 
+        </TeamCase>
       </TeamContainer>
       <Link
         to={"/simulation"}
-        state={ isClickMyTeam ? ({ home: myTeam.email, away: selectAway}) : {home: selectHome, away: selectAway} }
+        state={
+          isClickMyTeam
+            ? { home: myTeam.email, away: selectAway }
+            : { home: selectHome, away: selectAway }
+        }
         style={{ textDecoration: "none", color: "black" }}
         onClick={isSelectedTeams}
       >

@@ -587,7 +587,7 @@ const SubItem = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
   }
   @media screen and (max-width: 830px) {
     width: 300px;
@@ -634,12 +634,12 @@ const SubItem = styled.div`
   .go_simul {
     font-size: 1rem;
   }
-  .dot-elastic {
+  /* .dot-elastic {
     position: relative;
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: blue;
+    background-color: lightgray;
     color: #9880ff;
     animation: dotElastic 1s infinite linear;
     @media screen and (max-width: 830px) {
@@ -665,7 +665,7 @@ const SubItem = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: yellow;
+    background-color: lightgray;
     color: #9880ff;
     animation: dotElasticBefore 1s infinite linear;
     @media screen and (max-width: 830px) {
@@ -680,7 +680,7 @@ const SubItem = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: tomato;
+    background-color: lightgray;
     color: #9880ff;
     animation: dotElasticAfter 1s infinite linear;
     @media screen and (max-width: 830px) {
@@ -742,7 +742,7 @@ const SubItem = styled.div`
     100% {
       transform: scale(1, 1);
     }
-  }
+  } */
 `;
 
 // const League = styled.div`
