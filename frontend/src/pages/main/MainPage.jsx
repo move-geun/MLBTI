@@ -413,7 +413,9 @@ const MainPage = () => {
               <div className="sub_des">
                 <div className="sub_title">오늘 예정 경기</div>
 
+
                 {/* <Link
+
                   className="sub_container"
                   to={"/simulation"}
                   style={{ textDecoration: "none", color: "black" }}
