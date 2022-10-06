@@ -55,7 +55,7 @@ public class PlayersDto {
 		b.setPosition(pitchers.getPosition());
 		// 여기서 타율 계산
 //		float era = Math.round(((float)(pitchers.getLeftEr() + pitchers.getRightEr())*9*1000)/(pitchers.getLeftInningNum() + pitchers.getRightInningNum()))/(float)1000;
-		float era1 = Math.round(((float)(pitchers.getLeftEr() + pitchers.getRightEr())*9*1000*3)/(pitchers.getLeftOutNum() + pitchers.getRightOutNum()))/(float)1000;
+		float era1 = Math.round(((float)(pitchers.getLeftRbi() + pitchers.getRightRbi())*9*1000*3)/(pitchers.getLeftOutNum() + pitchers.getRightOutNum()))/(float)1000;
 		
 		b.setIndicator(era1);
 		return b;
