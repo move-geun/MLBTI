@@ -25,8 +25,6 @@ import {
   getNMrank,
 } from "./mainpage-slice";
 
-// import {BallCountContainer } from "../simulation/SimulationPage.style";
-
 import { simulationData } from "../simulation/simulation-slice";
 
 // 모달
@@ -61,7 +59,7 @@ const MainPage = () => {
   const handleAm = () => setNational(false);
   const handleNa = () => setNational(true);
   const handleOpen = () => setOpen(true);
-  
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -73,7 +71,7 @@ const MainPage = () => {
     let month =
       now.getMonth() + 1 > 9 ? now.getMonth() + 1 : "0" + (now.getMonth() + 1);
     let day =
-      now.getDate() - 1 > 9 ? now.getDate() - 1 : "0" + (now.getDate() - 2);
+      now.getDate() - 2 > 9 ? now.getDate() - 2 : "0" + (now.getDate() - 2);
     return String(year) + String(month) + String(day);
   };
 
@@ -84,7 +82,7 @@ const MainPage = () => {
     let month =
       now.getMonth() + 1 > 9 ? now.getMonth() + 1 : "0" + (now.getMonth() + 1);
     let day =
-      now.getDate() - 2 > 9 ? now.getDate() - 2 : "0" + (now.getDate() - 3);
+      now.getDate() - 3 > 9 ? now.getDate() - 3 : "0" + (now.getDate() - 3);
     return String(year) + String(month) + String(day);
   };
 
@@ -110,7 +108,7 @@ const MainPage = () => {
         takeGameId(res);
       })
       .catch((err) => {
-        console.log("스케줄 불러오기 실패");
+        // console.log("스케줄 불러오기 실패");
       });
   }
 
@@ -119,24 +117,23 @@ const MainPage = () => {
     let length = data.length - 1;
     let teamId = { team1: data[length].homeId, team2: data[length].awayId };
     takeSimulResult(teamId);
-    // console.log("TeamId 만들어졌니", teamId);
   };
 
   //////////////////// 시뮬레이션 /////////////////////////////
 
   const [inningList, setInningList] = useState([]);
-  useEffect(() => {
-    if (inningList.length > 0) {
-      // console.log("여기는 메인 페이지 이닝리스트 들어감", inningList);
-    }
-  }, [inningList]);
+  // useEffect(() => {
+  //   if (inningList.length > 0) {
+  //     // console.log("여기는 메인 페이지 이닝리스트 들어감", inningList);
+  //   }
+  // }, [inningList]);
 
   // 게임 아이디로 시뮬레이션 결과 받아오기
   function takeSimulResult(teamId) {
     dispatch(simulationData(teamId))
       .unwrap()
       .then((res) => {
-        console.log("시뮬레이션 가져왔지롱  ", res);
+        // console.log("시뮬레이션 가져왔지롱  ", res);
         setInningList(res.data.inngings);
       })
       .catch((err) => {
@@ -158,7 +155,7 @@ const MainPage = () => {
       .unwrap()
       .then((res) => {})
       .catch((err) => {
-        console.log("어제어제 스케줄 불러오기 실패");
+        console.log("어제 스케줄 불러오기 실패");
       });
   }
   // 랭크 받아오기
@@ -199,9 +196,9 @@ const MainPage = () => {
     todayFormal();
     rank();
     setTimeout(() => setSpinner(false), 2000);
-    console.log("홈로고", todays[todays.length - 1]);
+    // console.log("홈로고", todays[todays.length - 1]);
     setMainSimul(todays[todays.length - 1]);
-    console.log("메인", mainSimul);
+    // console.log("메인", mainSimul);
     // let step = 0;
     // for (step = 0; step < res.data.length; step++) {
     //   setNotice([...notices, res.data[step]]);
@@ -250,10 +247,8 @@ const MainPage = () => {
     return () => window.removeEventListener("resize", handleResize);
   });
 
-
   const onESC = () => {
     setOpen(false);
-
   };
   const onKeyPress = (e) => {
     if (e.key === "ESC") {
@@ -261,11 +256,10 @@ const MainPage = () => {
     }
   };
 
-
   if (windowSize > 980) {
     return (
       <Main className="dd">
-        {spinner ? <PacmanLoader></PacmanLoader> : <div></div>}
+        {spinner ? <PacmanLoader></PacmanLoader> : null}
         <Notice {...settings}>
           {notices ? (
             notices.map((notice, idx) => (
@@ -278,13 +272,12 @@ const MainPage = () => {
                   }}
                   onClick={onESC}
                   open={open}
-                  onClose={()=>handleClose()}
+                  onClose={() => handleClose()}
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
                   onKeyPress={onKeyPress}
                 >
                   <ModalBox className="mainmodal">
-                    
                     <div className="maintitle">{notice.title}</div>
                     <div className="maincontent">
                       <hr />
@@ -376,7 +369,23 @@ const MainPage = () => {
                     </Link>
                   ) : null}
 
-                  <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+                  <Link
+                    className="go_simul"
+                    to={"/simulation"}
+                    style={{ textDecoration: "none", color: "black" }}
+                    state={{
+                      home: {
+                        id: todays[todays.length - 4].homeId,
+                        logo: todays[todays.length - 4].homeLogo,
+                      },
+                      away: {
+                        id: todays[todays.length - 4].awayId,
+                        logo: todays[todays.length - 4].awayLogo,
+                      },
+                    }}
+                  >
+                    지금 시뮬레이션 보러가기⚾
+                  </Link>
                 </div>
               </SubItem>
             </MainGameCard>
@@ -416,7 +425,23 @@ const MainPage = () => {
                     </Link>
                   ) : null}
 
-                  <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+                  <Link
+                    className="go_simul"
+                    to={"/simulation"}
+                    style={{ textDecoration: "none", color: "black" }}
+                    state={{
+                      home: {
+                        id: todays[todays.length - 3].homeId,
+                        logo: todays[todays.length - 3].homeLogo,
+                      },
+                      away: {
+                        id: todays[todays.length - 3].awayId,
+                        logo: todays[todays.length - 3].awayLogo,
+                      },
+                    }}
+                  >
+                    지금 시뮬레이션 보러가기⚾
+                  </Link>
                 </div>
               </SubItem>
             </MainGameCard>
@@ -456,7 +481,23 @@ const MainPage = () => {
                     </Link>
                   ) : null}
 
-                  <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+                  <Link
+                    className="go_simul"
+                    to={"/simulation"}
+                    style={{ textDecoration: "none", color: "black" }}
+                    state={{
+                      home: {
+                        id: todays[todays.length - 2].homeId,
+                        logo: todays[todays.length - 2].homeLogo,
+                      },
+                      away: {
+                        id: todays[todays.length - 2].awayId,
+                        logo: todays[todays.length - 2].awayLogo,
+                      },
+                    }}
+                  >
+                    지금 시뮬레이션 보러가기⚾
+                  </Link>
                 </div>
               </SubItem>
             </MainGameCard>
@@ -727,19 +768,30 @@ const MainPage = () => {
             <MainGameCard>
               <SubItem>
                 <div className="sub_dot">
-                  <img
-                    className="sub_simul"
-                    src="../assets/Ground.png"
-                    alt=""
-                  />
+                  <img className="sub_simul" src="../assets/sub1.gif" alt="" />
                   {/* <div class="dot-elastic"></div> */}
                 </div>
                 <div className="sub_des">
                   <div className="sub_title">
                     <div>오늘 예정 경기</div>
                   </div>
+
                   {todays ? (
-                    <div className="sub_container">
+                    <Link
+                      className="sub_container"
+                      to={"/simulation"}
+                      style={{ textDecoration: "none", color: "black" }}
+                      state={{
+                        home: {
+                          id: todays[todays.length - 4].homeId,
+                          logo: todays[todays.length - 4].homeLogo,
+                        },
+                        away: {
+                          id: todays[todays.length - 4].awayId,
+                          logo: todays[todays.length - 4].awayLogo,
+                        },
+                      }}
+                    >
                       <div className="sub_home">
                         <img src={todays[todays.length - 4].homeLogo} alt="" />
                         <div>{todays[todays.length - 4].homeName}</div>
@@ -749,27 +801,53 @@ const MainPage = () => {
                         <img src={todays[todays.length - 4].awayLogo} alt="" />
                         <div>{todays[todays.length - 4].awayName}</div>
                       </div>
-                    </div>
+                    </Link>
                   ) : null}
 
-                  <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+                  <Link
+                    className="go_simul"
+                    to={"/simulation"}
+                    style={{ textDecoration: "none", color: "black" }}
+                    state={{
+                      home: {
+                        id: todays[todays.length - 4].homeId,
+                        logo: todays[todays.length - 4].homeLogo,
+                      },
+                      away: {
+                        id: todays[todays.length - 4].awayId,
+                        logo: todays[todays.length - 4].awayLogo,
+                      },
+                    }}
+                  >
+                    지금 시뮬레이션 보러가기⚾
+                  </Link>
                 </div>
               </SubItem>
             </MainGameCard>
             <MainGameCard>
               <SubItem>
                 <div className="sub_dot">
-                  <img
-                    className="sub_simul"
-                    src="../assets/Ground.png"
-                    alt=""
-                  />
+                  <img className="sub_simul" src="../assets/sub2.gif" alt="" />
                   {/* <div class="dot-elastic"></div> */}
                 </div>
                 <div className="sub_des">
                   <div className="sub_title">오늘 예정 경기</div>
                   {todays ? (
-                    <div className="sub_container">
+                    <Link
+                      className="sub_container"
+                      to={"/simulation"}
+                      style={{ textDecoration: "none", color: "black" }}
+                      state={{
+                        home: {
+                          id: todays[todays.length - 3].homeId,
+                          logo: todays[todays.length - 3].homeLogo,
+                        },
+                        away: {
+                          id: todays[todays.length - 3].awayId,
+                          logo: todays[todays.length - 3].awayLogo,
+                        },
+                      }}
+                    >
                       <div className="sub_home">
                         <img src={todays[todays.length - 3].homeLogo} alt="" />
                         <div>{todays[todays.length - 3].homeName}</div>
@@ -779,27 +857,53 @@ const MainPage = () => {
                         <img src={todays[todays.length - 3].awayLogo} alt="" />
                         <div>{todays[todays.length - 3].awayName}</div>
                       </div>
-                    </div>
+                    </Link>
                   ) : null}
 
-                  <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+                  <Link
+                    className="go_simul"
+                    to={"/simulation"}
+                    style={{ textDecoration: "none", color: "black" }}
+                    state={{
+                      home: {
+                        id: todays[todays.length - 3].homeId,
+                        logo: todays[todays.length - 3].homeLogo,
+                      },
+                      away: {
+                        id: todays[todays.length - 3].awayId,
+                        logo: todays[todays.length - 3].awayLogo,
+                      },
+                    }}
+                  >
+                    지금 시뮬레이션 보러가기⚾
+                  </Link>
                 </div>
               </SubItem>
             </MainGameCard>
             <MainGameCard>
               <SubItem>
                 <div className="sub_dot">
-                  <img
-                    className="sub_simul"
-                    src="../assets/Ground.png"
-                    alt=""
-                  />
+                  <img className="sub_simul" src="../assets/sub3.gif" alt="" />
                   {/* <div class="dot-elastic"></div> */}
                 </div>
                 <div className="sub_des">
                   <div className="sub_title">오늘 예정 경기</div>
                   {todays ? (
-                    <div className="sub_container">
+                    <Link
+                      className="sub_container"
+                      to={"/simulation"}
+                      style={{ textDecoration: "none", color: "black" }}
+                      state={{
+                        home: {
+                          id: todays[todays.length - 2].homeId,
+                          logo: todays[todays.length - 2].homeLogo,
+                        },
+                        away: {
+                          id: todays[todays.length - 2].awayId,
+                          logo: todays[todays.length - 2].awayLogo,
+                        },
+                      }}
+                    >
                       <div className="sub_home">
                         <img src={todays[todays.length - 2].homeLogo} alt="" />
                         <div>{todays[todays.length - 2].homeName}</div>
@@ -809,10 +913,26 @@ const MainPage = () => {
                         <img src={todays[todays.length - 2].awayLogo} alt="" />
                         <div>{todays[todays.length - 2].awayName}</div>
                       </div>
-                    </div>
+                    </Link>
                   ) : null}
 
-                  <div className="go_simul">지금 시뮬레이션 보러가기⚾</div>
+                  <Link
+                    className="go_simul"
+                    to={"/simulation"}
+                    style={{ textDecoration: "none", color: "black" }}
+                    state={{
+                      home: {
+                        id: todays[todays.length - 2].homeId,
+                        logo: todays[todays.length - 2].homeLogo,
+                      },
+                      away: {
+                        id: todays[todays.length - 2].awayId,
+                        logo: todays[todays.length - 2].awayLogo,
+                      },
+                    }}
+                  >
+                    지금 시뮬레이션 보러가기⚾
+                  </Link>
                 </div>
               </SubItem>
             </MainGameCard>
