@@ -121,9 +121,7 @@ public class UserController {
     })
 	public ResponseEntity<? extends BaseResponseBody> register(
 			@ApiParam(value = "email", required = true) @RequestParam("email") String email, @RequestParam("randomNumber") String randomNumber ) {
-		System.out.println("hhhhhhhh");
-		System.out.println(email);
-		System.out.println(randomNumber);
+
 		Optional<MailConfirmKeys> mailkey = mailService.findMailKey(email);
 		LocalDateTime nowTime = LocalDateTime.now().minusMinutes(5);
 		
@@ -131,8 +129,7 @@ public class UserController {
 		if(nowTime.isBefore(mailkey.get().getCreateDate())){
 			if(mailkey.isPresent()) {
 				if(randomNumber.equals(mailkey.get().getRandomNumber())){
-					System.out.println("===================================");
-					System.out.println("saklfsdlakfsadlfjslajfkladjl");
+
 					mailService.setMailValid(email);
 					return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));	
 				}
@@ -183,28 +180,12 @@ public class UserController {
     })
 	public ResponseEntity<? extends BaseResponseBody> changeTeamName(
 			@ApiParam(value = "email", required = true) @RequestParam("email") String email,@ApiParam(value = "newTeamName", required = true) @RequestParam("newTeamName") String newTeamName) {
-		System.out.println("=============teamName change");	
-		Users u = userService.getUsersByEmail(email);
+     		Users u = userService.getUsersByEmail(email);
 			userService.modifyUserTeamName(u,newTeamName);
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "nickname is modified"));
 	}
 	
-	
-//	@DeleteMapping("/{uid}")
-//	@ApiOperation(value = "회원 삭제", notes = "<strong>uid</strong>를 통해 회원을 삭제한다.") 
-//    @ApiResponses({
-//        @ApiResponse(code = 200, message = "성공"),
-//        @ApiResponse(code = 401, message = "인증 실패"),
-//        @ApiResponse(code = 404, message = "사용자 없음"),
-//        @ApiResponse(code = 500, message = "서버 오류")
-//    })
-//	public ResponseEntity<? extends BaseResponseBody> deleteByUid(
-//			@PathVariable @ApiParam(value="uid", required = true) Integer uid) {
-//		userService.deleteUserByUid(uid);
-//		
-//		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
-//	}
-	
+
 	@DeleteMapping("/{email}")
 	@ApiOperation(value = "회원 삭제", notes = "<strong>email</strong>를 통해 회원을 삭제한다.") 
     @ApiResponses({
