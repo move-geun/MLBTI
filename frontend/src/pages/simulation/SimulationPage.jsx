@@ -7,12 +7,7 @@ import Ground from "./Ground";
 import TeamScore from "../../components/game/TeamScore";
 import { useLocation } from "react-router-dom";
 
-import {
-  TopLayout,
-  BottomLayout,
-  GroundContainer,
-  SimulResultContainer,
-} from "./SimulationPage.style";
+import { SimulContainer, Center, BallCount } from "./SimulationPage.style";
 
 const SimulationPage = () => {
   const location = useLocation();
@@ -27,6 +22,7 @@ const SimulationPage = () => {
 
   // const [teamData, setTeamData] = useState({});
   const [simulData, setSimulData] = useState({});
+
   // const [logoUrl, setLogoUrl] = useState([]);
   const teamId = { team1: data.home.id, team2: data.away.id };
   const logoUrl = [data.home.logo, data.away.logo];
@@ -59,20 +55,37 @@ const SimulationPage = () => {
   };
 
   return (
-    <>
-      <div className="title">ddd</div>
-      <TopLayout>
-        <TeamScore data={simulData} logo={logoUrl} />
-      </TopLayout>
-      <BottomLayout>
-        <GroundContainer>
-          <Ground data={innginglist} />
-        </GroundContainer>
-        <SimulResultContainer>
-          <SimulationResult data={simulData} />
-        </SimulResultContainer>
-      </BottomLayout>
-    </>
+    <SimulContainer>
+      <TeamScore data={simulData} logo={logoUrl} />
+      <Center>
+        <Ground data={innginglist} />
+        <BallCount>
+          <div className="count">
+            <div className="title">B</div>
+            <div className="circle_case">
+              <div className="circle ball"></div>
+              <div className="circle ball"></div>
+              <div className="circle"></div>
+            </div>
+          </div>
+          <div className="count">
+            <div className="title">S</div>
+            <div className="circle_case">
+              <div className="circle strike"></div>
+              <div className="circle"></div>
+            </div>
+          </div>
+          <div className="count">
+            <div className="title">O</div>
+            <div className="circle_case">
+              <div className="circle out"></div>
+              <div className="circle"></div>
+            </div>
+          </div>
+        </BallCount>
+      </Center>
+      <SimulationResult data={simulData} />
+    </SimulContainer>
   );
 };
 
