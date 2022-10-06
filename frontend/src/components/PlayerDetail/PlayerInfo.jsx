@@ -32,8 +32,8 @@ const PlayerInfo = ({ match }) => {
     <Wrapper>
       <PicName>
         <ProfileImg src={infoData.imgUrl}></ProfileImg>
-        <Name>{infoData.fullName}</Name>
         <img className="outline" src={"/assets/outline.png"}></img>
+        <Name>{infoData.fullName}</Name>
       </PicName>
       <div className="detail">
         <ProfileDiv>
