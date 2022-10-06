@@ -133,6 +133,7 @@ const MyProfilePage = () => {
         }
       });
   };
+
   return (
     <PageContainer>
       <NameBox>
@@ -183,7 +184,7 @@ const MyProfilePage = () => {
       <div>{teamName}</div>
       <GraphBox>
         <div>
-          현재 {nickName}의 선수정보
+          현재 {teamName}의 전력
           <img className="myprofileLogo" alt="mark" src={imgUrl}></img>
         </div>
         <CompositionWrapper>
@@ -209,8 +210,14 @@ const MyProfilePage = () => {
                   >
                     <TaBleList>{player["season"]}</TaBleList>
                     <TaBleList>
-                      {player["baseballPlayer"]["fullName"]}
+                      <Link
+                        to={`/playerdetail/${player["baseballPlayer"]["uid"]}`}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        {player["baseballPlayer"]["fullName"]}
+                      </Link>
                     </TaBleList>
+
                     <TaBleList align="right" component="th" scope="player">
                       {player["baseballPlayer"]["primaryPositionName"]}
                     </TaBleList>
