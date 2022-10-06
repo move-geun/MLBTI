@@ -158,7 +158,7 @@ const CustomSimulationPage = () => {
     }
   };
   // console.log(isClickMyTeam, selectHome, selectAway)
-  // console.log(myTeam)
+  console.log(myTeam)
   return myTeam ? (
     <CustomConatiner>
       <Header>매치업 설정하기</Header>
@@ -358,11 +358,11 @@ const CustomSimulationPage = () => {
               </button>
             </ModalBox>
           </Modal>
-        </TeamCase>
+        </TeamCase> 
       </TeamContainer>
       <Link
         to={"/simulation"}
-        state={ isClickMyTeam ? ({ home: myTeam.uid, away: selectAway.id}) : {home: selectHome.id, away: selectAway.id} }
+        state={ isClickMyTeam ? ({ home: myTeam.email, away: selectAway.id}) : {home: selectHome.id, away: selectAway.id} }
         style={{ textDecoration: "none", color: "black" }}
         onClick={isSelectedTeams}
       >
