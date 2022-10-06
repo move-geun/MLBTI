@@ -104,16 +104,15 @@ const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
       email: email,
       player_uid: player.playerUid,
       position: player.position,
-      // 찬호형
-      // battingorder: 0
+      season: player.season
     };
 
     // 내 팀에 같은 포지션의 선수가 있는지 확인할 변수
+    console.log(myTeam)
     const findSamePosition = myTeam.find(function (n) {
-      return n.baseballPlayer.primaryPositionName === data.position;
+      return n.baseballPlayer.primaryPositionAbbreviation === data.position;
     });
 
-    // 중복되는 선수가 있다면
     if (findSamePosition) {
       alert(
         "해당 포지션의 선수가 이미 있습니다. 기존 선수를 방출 후 영입 해주십시오"
@@ -163,7 +162,7 @@ const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
         setPosition("");
       });
   };
-
+  
   return (
     <>
       {/* Dropdown */}

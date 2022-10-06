@@ -250,12 +250,23 @@ const SimulationCase = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  font-size: 0.8rem;
   .main_con {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
+    .simul_page {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .temp_ball {
+        margin-left: 20px;
+      }
+    }
   }
-  img {
+  .logo {
     height: 330px;
     width: 500px;
   }
@@ -275,14 +286,11 @@ const SimulationCase = styled.div`
   }
 
   @media screen and (max-width: 830px) {
-    img {
+    .logo {
       height: 330px;
       width: 300px;
     }
-    font-size: 1rem;
-  }
-  @media screen and (max-width: 480px) {
-    font-size: 0.625rem;
+    font-size: 0.5rem;
   }
 `;
 

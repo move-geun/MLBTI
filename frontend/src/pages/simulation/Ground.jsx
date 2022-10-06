@@ -1,101 +1,87 @@
-import { letterSpacing } from "@mui/system";
 import { useEffect, useState } from "react";
 
 import {
-    GroundWrap,
-    Img,
-    BallWrap,
-    BaseBall,
-    BatterWrap,
-    BatterEvent,
-    BatterName,
-    Base,
-    FirstB,
-    SecondB,
-    ThirdB,
-  } from "./SimulationPage.style";
+  Groundmap,
+  BaseBall,
+  FirstB,
+  SecondB,
+  ThirdB,
+  BatterEvent,
+  BatterName,
+} from "./SimulationPage.style";
 
-const Ground = (prop) => { 
+const Ground = (prop) => {
+  const [inningList, setInningList] = useState([]);
+  // const [batterList, setBatterList] = useState([]);
+  const [firstBase, setFirstBase] = useState(false);
+  const [secondBase, setSecondBase] = useState(false);
+  const [thirdBase, setThirdBase] = useState(false);
+  const [batterEvent, setBatterEvent] = useState("");
+  const [hitterName, sethitterName] = useState("");
 
-    const [inningList, setInningList] = useState([]);
-    const [batterList, setBatterList] = useState([]);
-    const [firstBase, setFirstBase] = useState(false);
-    const [secondBase, setSecondBase]= useState(false);
-    const [thirdBase, setThirdBase] = useState(false);
+  console.log("여기는 그라운드 컴포넌트 ");
+  useEffect(() => {
+    if (prop.data !== null) {
+      setInningList(prop.data);
+      console.log("여기는 ground", prop);
+    }
+  }, [prop]);
 
-    console.log("여기는 그라운드 컴포넌트 ");
-    useEffect(()=>{
-        if(prop.data !== null){
-            setInningList(prop.data);
-            console.log("여기는 ground", prop);
-        }      
-    }, [prop])
-
-    useEffect(()=> {
-        if(inningList.length >0 ){
-            
-            async function processArray(inningList) {
-            for (let inning of inningList) {
-            // console.log("현재 이닝!", inning.inning)
-                for(let data of inning.datas){
-                    await makeBatterList(data)
-                }                    
-                }
-                console.log('Done!');
-              }
-                
-              processArray(inningList);
-       
+  useEffect(() => {
+    if (inningList.length > 0) {
+      async function processArray(inningList) {
+        for (let inning of inningList) {
+          // console.log("현재 이닝!", inning.inning)
+          for (let data of inning.datas) {
+            await makeBatterList(data);
+          }
         }
-    }, [inningList]);
-    
-     async function makeBatterList(batter) {
-        baseSetting(batter)
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        // await delay(2000)
+        console.log("Done!");
+      }
 
+      processArray(inningList);
     }
-  
-    function delay(time) {
-        return new Promise(resolve => setTimeout(resolve, time));
+  }, [inningList]);
 
-    }
+  async function makeBatterList(batter) {
+    baseSetting(batter);
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await delay(2000)
+  }
 
-    const [batterEvent, setBatterEvent] = useState('');
-    const [hitterName, sethitterName ] = useState('');
+  function delay(time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
 
-    const baseSetting = (batter) => {
-        // console.log("2초 뒤에 간ㄷ", batter);
-        setFirstBase(batter.firstBase);
-        setSecondBase(batter.secondBase);
-        setThirdBase(batter.thirdBase);
-        setBatterEvent(batter.event);
-        sethitterName(batter.batterName);
+  const baseSetting = (batter) => {
+    // console.log("2초 뒤에 간ㄷ", batter);
+    setFirstBase(batter.firstBase);
+    setSecondBase(batter.secondBase);
+    setThirdBase(batter.thirdBase);
+    setBatterEvent(batter.event);
+    sethitterName(batter.batterName);
+  };
 
-    }
+  useEffect(() => {
+    // console.log("event 알려줘", batterEvent);
+  }, [batterEvent, hitterName]);
 
-    useEffect(()=> {
-        // console.log("event 알려줘", batterEvent);
-    }, [batterEvent, hitterName]);
-
-    return (
-        <GroundWrap>
-
-        <Img className="ground" src={"/assets/Ground.png"}/>
-        <BallWrap>
-            <BaseBall src={"/assets/baseball.png"}/>
-        </BallWrap>
-        <BatterWrap>
-            <BatterEvent> {hitterName}  <BatterName> {batterEvent}</BatterName></BatterEvent>
-        </BatterWrap>
-       
-        {firstBase && <FirstB className="base1" src={"/assets/base.png"}/>}
-        {secondBase &&  <SecondB className="base2" src={"/assets/base.png"}/>}
-        {thirdBase &&  <ThirdB className="base3" src={"/assets/base.png"}/>}
-       
-        </GroundWrap>
-            
-    );
+  return (
+    <div>
+      <Groundmap>
+        <BaseBall src={"/assets/baseball.png"} />
+        {/* {firstBase && <FirstB className="base1" src={"/assets/base.png"} />}
+        {secondBase && <SecondB className="base2" src={"/assets/base.png"} />}
+        {thirdBase && <ThirdB className="base3" src={"/assets/base.png"} />} */}
+        <FirstB className="base1" src={"/assets/base.png"} />
+        <SecondB className="base2" src={"/assets/base.png"} />
+        <ThirdB className="base3" src={"/assets/base.png"} />
+        <BatterEvent>
+          {hitterName}, <BatterName> {batterEvent}</BatterName>
+        </BatterEvent>
+      </Groundmap>
+    </div>
+  );
 };
 
 export default Ground;

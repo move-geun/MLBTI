@@ -94,7 +94,8 @@ const ModalBox = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 330px;
+  width: 400px;
+  height: 600px;
   border: 2px solid rgba(0, 0, 0, 0.2);
   background-color: white;
   display: flex;
@@ -125,6 +126,7 @@ const ModalBox = styled.div`
   }
   .team {
     width: 90%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -137,12 +139,13 @@ const ModalBox = styled.div`
     flex-direction: row;
     margin-top: 5px;
     width: 100%;
+    height: 10%;
   }
   .candidates {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 250px;
+    height: 300px;
     margin: 5px 0;
     overflow-y: scroll;
     &::-webkit-scrollbar {
@@ -158,6 +161,16 @@ const ModalBox = styled.div`
     &::-webkit-scrollbar-track {
       background-color: #d7dcff;
       border-radius: 2rem;
+    }
+    .myteam {
+      margin: 5px 0;
+      cursor: pointer;
+      
+      .myteamlogo {
+        width: 20px;
+        height: 20px;
+        margin-right: 0.5rem;
+      }
     }
     .candi {
       margin: 5px 0;
