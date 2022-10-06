@@ -16,57 +16,178 @@ import FormControl from "@mui/material/FormControl";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getNational, getAmerican } from "./customsimulation-slice";
+import { myteam, myprofile } from "../profile/myprofile-slice";
+
 // 모달 연결
 // 승률 높은 곳에 색 변경
 // 수정필요
 
 const CustomSimulationPage = () => {
   const dispatch = useDispatch();
+
+  // 모달 개폐 변수
   const [open, setOpen] = React.useState(false);
   const [opensec, setOpenSec] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const handleOpensec = () => setOpenSec(true);
-  const handleClosesec = () => setOpenSec(false);
-  // const chat = () => console.log("눌러짐");
 
   // 리그 선택 필터링
-  const [legueName, setLegueName] = React.useState("nationalMLB");
+  const [leagueName, setLeagueName] = React.useState("nationalMLB");
 
+  // 리그 별 팀목록
   const [nationalList, setNationalList] = useState([]);
-  // const [americanList, setAmericanList] = useState([]);
-  const [setAmericanList] = useState([]);
+  const [americanList, setAmericanList] = useState([]);
 
-  const handleChange = (event) => {
-    setLegueName(event.target.value);
+  // 선택한 팀 정보
+  const [selectHome, setSelectHome] = useState([]);
+  const [selectAway, setSelectAway] = useState([]);
+  
+  
+  // 내 정보 | 내 팀 
+  const [myInfo, setMyInfo] = useState("");
+  const [myTeam, setMyTeam] = useState();
+  
+  // 내 팀 선택 시
+  const [isClickMyTeam, setIsClickMyTeam] = useState(false);
+
+  // 검색 인풋 변수
+  const [userInput, setUserInput] = useState("");
+
+  // 검색 결과를 담을 리스트
+  const [nationalSearchList, setNationalSearchList] = useState([]);
+  const [americanSearchList, setAmericanSearchList] = useState([]);
+
+  // 마우스 오버 변수 (이미지 변환)
+  const [isImgHover, setIsImgHover] = useState(false);
+  const startImg1 = "/assets/hit2.png";
+  const startImg2 = "/assets/hit1.png";
+
+  // 검색 입력값 변경 이벤트
+  const handleInput = (e) => {
+    setUserInput(e.target.value);
   };
 
+  // 리그 변경 이벤트
+  const handleChange = (event) => {
+    setLeagueName(event.target.value);
+    setUserInput("");
+    setNationalSearchList(nationalList);
+    setAmericanSearchList(americanList);
+  };
+
+  // 모달 개폐
+  const handleOpen = () => {
+    setOpen(true);
+    setUserInput("");
+  };
+  const handleClose = () => setOpen(false);
+  const handleOpensec = () => {
+    setOpenSec(true);
+    setUserInput("");
+  };
+  const handleClosesec = () => setOpenSec(false);
+
+  // 엔터 시 검색 기능
+  const onClick = () => {
+    searchClick();
+  };
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onClick();
+    }
+  };
+
+  // 팀명 검색 기능
+  const searchClick = () => {
+    const value1 = nationalList.filter((team) =>
+      team.name.toLowerCase().includes(userInput.toLowerCase())
+    );
+    const value2 = nationalList.filter((team) =>
+      team.name.toLowerCase().includes(userInput.toLowerCase())
+    );
+    setNationalSearchList(value1);
+    setAmericanSearchList(value2);
+  };
+
+
+  //  내 팀 선택 시 
+  const clickMyTeam = () => {
+    setIsClickMyTeam(true);
+
+  }
+
   useEffect(() => {
+    dispatch(myprofile())
+      .unwrap()
+      .then((res) => {
+        setMyInfo(res.data.userId);
+      });
+
     dispatch(getNational())
       .unwrap()
       .then((res) => {
         setNationalList(res);
+        setNationalSearchList(res);
       });
     dispatch(getAmerican())
       .unwrap()
       .then((res) => {
         setAmericanList(res);
+        setAmericanSearchList(res);
       });
-  }, []);
+  }, [getNational]);
 
-  console.log(nationalList)
-  return (
+  useEffect(() => {
+    if (myInfo.length !== 0) {
+      const data = {
+        email: myInfo,
+      };
+      dispatch(myteam(data))
+        .unwrap()
+        .then((res) => {
+          setMyTeam(res.data[0].user);
+        });
+    }
+  }, [myInfo]);
+
+  
+
+  // 팀 설정 안했을 시 페이지 이동 막기
+  const isSelectedTeams = (event) => {
+    if ((selectHome.length === 0 && !isClickMyTeam) || selectAway.length === 0) {
+      event.preventDefault();
+      alert("두 팀 모두 선택해 주세요");
+    }
+  };
+  // console.log(isClickMyTeam, selectHome, selectAway)
+  console.log(myTeam)
+  return myTeam ? (
     <CustomConatiner>
       <Header>매치업 설정하기</Header>
       <TeamContainer>
         <TeamCase>
-          <img
-            onClick={handleOpen}
-            src="/assets/teamlogo1.png"
-            alt="1팀이었던것.."
-          />
-          <div>팀 설정하기</div>
-          <div>56%</div>
+          {isClickMyTeam ? (
+            <div>
+              <img onClick={handleOpen} className="myteamlogo" src={'/assets/customTeamLogo.png'}></img>
+              <div>팀명: {myTeam.myTeamName}</div>
+              <div>구단주: {myTeam.nickname}</div>
+            </div>
+          ): selectHome.length !== 0 ? (
+            <div>
+              <img onClick={handleOpen} src={selectHome.logo} alt="선택한 팀" />
+              <div>팀명: {selectHome.clubName}</div>
+              <div>리그: {selectHome.divisionName}</div>
+              <div>연고지: {selectHome.locationName}</div>
+            </div>
+          ) : (
+            <div>
+              <img
+                onClick={handleOpen}
+                src="/assets/defaultTeam.png"
+                alt="기본 이미지"
+              />
+              <div>팀 설정하기</div>
+            </div>
+          )
+          }
           <Modal
             open={open}
             onClose={handleClose}
@@ -74,33 +195,19 @@ const CustomSimulationPage = () => {
             aria-describedby="modal-modal-description"
           >
             <ModalBox>
-              <div className="title">1팀 선택하기</div>
+              <div className="title">홈팀 선택하기</div>
               <br />
-              {/* <div className="content">
-                날씨
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>맑음</span>
-                </div>
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>흐림</span>
-                </div>
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>태풍</span>
-                </div>
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>흘김</span>
-                </div>
-              </div> */}
               <br />
               <div className="team">
-                팀
+                팀 검색
                 <div>
-                  <input type="text" />
-                  <button>검색하기</button>
+                  <input
+                    type="text"
+                    value={userInput}
+                    onChange={(e) => handleInput(e)}
+                    onKeyPress={onKeyPress}
+                  />
+                  <button onClick={onClick}>검색하기</button>
                 </div>
                 <div className="filter">
                   <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
@@ -110,9 +217,8 @@ const CustomSimulationPage = () => {
                     <Select
                       labelId="demo-simple-select-standard-label"
                       id="demo-simple-select-standard"
-                      value={legueName}
+                      value={leagueName}
                       onChange={handleChange}
-                      label="Age"
                     >
                       <MenuItem value={"nationalMLB"}>National League</MenuItem>
                       <MenuItem value={"americanMLB"}>American League</MenuItem>
@@ -120,11 +226,35 @@ const CustomSimulationPage = () => {
                   </FormControl>
                 </div>
                 <div className="candidates">
-                  {nationalList.map((item) => (
-                    <ListWrap>
-                      <div className="candi">{item.name}</div>
-                    </ListWrap>
-                  ))}
+                  <div onClick={clickMyTeam}  className="myteam">
+                    <img className="myteamlogo" src={'/assets/customTeamLogo.png'}></img>{myTeam.myTeamName} (내 구단)
+                    </div>
+                  {leagueName === "nationalMLB"
+                    ? nationalSearchList.map((item, idx) => (
+                        <ListWrap
+                          value={idx}
+                          onClick={(e) => {
+                            setIsClickMyTeam(false)
+                            setSelectHome(item);
+                          }}
+                        >
+                          <img alt="logo" src={item.logo}></img>
+                          <div value={idx} className="candi">
+                            {item.name}
+                          </div>
+                        </ListWrap>
+                      ))
+                    : americanSearchList.map((item, idx) => (
+                        <ListWrap
+                          onClick={() => {
+                            setIsClickMyTeam(false)
+                            setSelectHome(item);
+                          }}
+                        >
+                          <img alt="logo" src={item.logo}></img>
+                          <div className="candi">{item.name}</div>
+                        </ListWrap>
+                      ))}
                 </div>
               </div>
               <button className="change" onClick={handleClose}>
@@ -135,13 +265,27 @@ const CustomSimulationPage = () => {
         </TeamCase>
         <span> VS </span>
         <TeamCase>
-          <img
-            onClick={handleOpensec}
-            src="/assets/teamlogo2.png"
-            alt="2팀이었던것.."
-          />
-          <div>팀 설정하기</div>
-          <div>44%</div>
+          {selectAway.length !== 0 ? (
+            <div className="teamInfo">
+              <img
+                onClick={handleOpensec}
+                src={selectAway.logo}
+                alt="선택한 팀"
+              />
+              <div>팀명: {selectAway.clubName}</div>
+              <div>리그: {selectAway.divisionName}</div>
+              <div>연고지: {selectAway.locationName}</div>
+            </div>
+          ) : (
+            <div className="teamInfo">
+              <img
+                onClick={handleOpensec}
+                src="/assets/defaultTeam.png"
+                alt="기본 이미지"
+              />
+              <div>팀 설정하기</div>
+            </div>
+          )}
           <Modal
             open={opensec}
             onClose={handleClosesec}
@@ -149,60 +293,90 @@ const CustomSimulationPage = () => {
             aria-describedby="modal-modal-description"
           >
             <ModalBox>
-              <div className="title">2팀 선택하기</div>
+              <div className="title">어웨이팀 선택하기</div>
               <br />
-              <div className="content">
-                날씨
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>맑음</span>
-                </div>
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>흐림</span>
-                </div>
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>태풍</span>
-                </div>
-                <div className="weather">
-                  <input type="checkbox" />
-                  <span>흘김</span>
-                </div>
-              </div>
               <br />
               <div className="team">
-                팀
+                팀 검색
                 <div>
-                  <input type="text" />
-                  <button>검색하기</button>
+                  <input
+                    value={userInput}
+                    type="text"
+                    onChange={(e) => handleInput(e)}
+                    onKeyPress={onKeyPress}
+                  />
+                  <button onClick={onClick}>검색하기</button>
                 </div>
                 <div className="filter">
-                  <input type="drop" placeholder="연도" />
-                  <input type="drop" placeholder="리그" />
-                  <input type="drop" placeholder="팀명" />
+                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                    <InputLabel id="demo-simple-select-standard-label">
+                      리그 선택
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-standard-label"
+                      id="demo-simple-select-standard"
+                      value={leagueName}
+                      onChange={handleChange}
+                      label="Age"
+                    >
+                      <MenuItem value={"nationalMLB"}>National League</MenuItem>
+                      <MenuItem value={"americanMLB"}>American League</MenuItem>
+                    </Select>
+                  </FormControl>
                 </div>
                 <div className="candidates">
-                  <div className="candi">초코맛팀</div>
-                  <div className="candi">딸기맛팀</div>
-                  <div className="candi">바나나맛팀</div>
+                  {leagueName === "nationalMLB"
+                    ? nationalSearchList.map((item) => (
+                        <ListWrap
+                          onClick={() => {
+                            setSelectAway(item);
+                          }}
+                        >
+                          <img alt="logo" src={item.logo}></img>
+                          <div className="candi">{item.name}</div>
+                        </ListWrap>
+                      ))
+                    : americanSearchList.map((item) => (
+                        <ListWrap
+                          onClick={() => {
+                            setSelectAway(item);
+                          }}
+                        >
+                          <img alt="logo" src={item.logo}></img>
+                          <div className="candi">{item.name}</div>
+                        </ListWrap>
+                      ))}
                 </div>
               </div>
-              <button className="change" onClick={handleClose}>
+              <button
+                className="change"
+                onClick={() => {
+                  handleClosesec();
+                }}
+              >
                 매치업
               </button>
             </ModalBox>
           </Modal>
-        </TeamCase>
+        </TeamCase> 
       </TeamContainer>
-      <Link to="/simulation" style={{ textDecoration: "none", color: "black" }}>
-        <div className="start">
-          <img src="/assets/simulationStart.png" alt="시작아이콘..이었던것" />
-          <span>시뮬레이션 시작</span>
+      <Link
+        to={"/simulation"}
+        state={ isClickMyTeam ? ({ home: myTeam.email, away: selectAway}) : {home: selectHome, away: selectAway} }
+        style={{ textDecoration: "none", color: "black" }}
+        onClick={isSelectedTeams}
+      >
+        <div
+          className="start"
+          onMouseOver={() => setIsImgHover(true)}
+          onMouseOut={() => setIsImgHover(false)}
+        >
+          <img src={isImgHover ? startImg1 : startImg2} alt="시뮬레이션 시작" />
+          <div>시뮬레이션 시작</div>
         </div>
       </Link>
     </CustomConatiner>
-  );
+  ) : null;
 };
 
 export default CustomSimulationPage;

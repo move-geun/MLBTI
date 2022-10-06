@@ -89,7 +89,7 @@ useEffect(() => {
       </TopContainer>
     
       <ScoreHistory>
-        <LiveHistory livedata = {liveData}/>
+        {/* <LiveHistory livedata = {liveData}/> */}
       {/* <TabMenu>
           {tabList.map((ele, index)=>{
             return (

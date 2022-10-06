@@ -8,6 +8,10 @@ const Background = styled.div`
   width: 50%;
   height: 100%;
   margin-top: 3rem;
+  .namediv {
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const ImgDiv = styled.div`
@@ -16,7 +20,7 @@ const ImgDiv = styled.div`
 
 const Img = styled.img`
   &.ground {
-    
+    padding: 0;
     width: 450px;
     height: 450px;
 
@@ -33,11 +37,17 @@ const Img = styled.img`
 
 
 const Nickname = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 2rem;
   padding-left: 1rem;
+  margin-top: 2rem;
 `
 
 const Player = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   &.FB {
     position: absolute;
     top: 12rem;
@@ -161,6 +171,7 @@ const Player = styled.div`
   
   
   .img {
+    padding: 0;
     width: 50px;
     height: 50px;
     @media screen and (max-width: 830px) {

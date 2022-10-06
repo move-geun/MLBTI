@@ -1,69 +1,199 @@
 import styled from "styled-components";
 
+const SimulContainer = styled.div`
+  width: 88%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+`;
 
-const Img = styled.img`
+const Center = styled.div`
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+`;
 
+const Groundmap = styled.div`
+  background-image: url("/assets/Ground.png");
   position: relative;
-
-  &.ground{
-    width: 450px;
-    height: 450px;
-    
-    @media screen and (max-width: 830px) {
-      width: 350px;
-      height: 350px;
-      
-    }
-    @media screen and (max-width: 480px) {
-      width: 250px;
-      height: 250px;
-    }
-  }
-`
-
+  width: 370px;
+  height: 370px;
+  background-color: transparent;
+  background-size: cover;
+`;
 
 const BaseBall = styled.img`
-  width: 30px;
-  height: 30px;
-  /* position: absolute; */
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  left: 155px;
+  top: 158px;
 
-  animation: rotate_ball 0.5s linear infinite;
+  animation: rotate_ball 0.7s linear infinite;
   transform-origin: 50% 50%;
-
   @keyframes rotate_ball {
     100% {
       transform: rotate(360deg);
     }
   }
-`
+`;
 
 const Base = styled.img`
-  width: 40px;
-  height: 40px;
-  /* position: absolute; */
+  width: 50px;
+  height: 50px;
+  position: absolute;
 
-  /* animation: blink-effect 0.8s step-end infinite; */
-  animation: hue-rotate 3s linear infinite;
-/* 
+  animation: blink-effect 0.8s step-end infinite;
+
   @keyframes blink-effect {
-  50% {
-    opacity: 0;
-  } */
-
-
-  @keyframes hue-rotate {
-    0% {
-      filter: hue-rotate(0deg);
+    50% {
+      opacity: 0;
     }
-    100% {
-      filter: hue-rotate(360deg);
+  }
+`;
+
+// const BatterWrap = styled.div`
+//   text-align: center;
+// `;
+
+const BatterEvent = styled.div`
+  position: absolute;
+  z-index: 100;
+  width: 15rem;
+  height: 40px;
+  left: 60px;
+  line-height: 40px;
+  background-color: white;
+  text-align: center;
+  border: #16345a solid;
+  box-shadow: 2px 2px #16345a, 5px 5px #4d8cbf;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BatterName = styled.div`
+  font-size: 2em;
+  font-weight: 700;
+  margin-left: 10px;
+`;
+
+const FirstB = styled.img`
+  width: 50px;
+  height: 60px;
+  position: absolute;
+
+  top: 155px;
+  right: 60px;
+
+  animation: blink-effect 1s step-end infinite;
+
+  @keyframes blink-effect {
+    50% {
+      opacity: 0;
     }
-}
+  }
+`;
 
+const SecondB = styled.img`
+  width: 50px;
+  height: 60px;
+  position: absolute;
+  top: 53px;
+  left: 160px;
 
+  animation: blink-effect 1s step-end infinite;
+  @keyframes blink-effect {
+    50% {
+      opacity: 0;
+    }
+  }
+`;
 
+const ThirdB = styled.img`
+  width: 50px;
+  height: 60px;
+  position: absolute;
 
+  top: 155px;
+  left: 58px;
 
-`
+  animation: blink-effect 1s step-end infinite;
+  @keyframes blink-effect {
+    50% {
+      opacity: 0;
+    }
+  }
+`;
 
-export { Img, BaseBall, Base };
+const BallCountContainer = styled.div`
+  min-width: 250px;
+  height: 300px;
+  border-radius: 20px;
+  background-color: black;
+  /* background-color: rgba(0, 0, 0, 0.43); */
+  margin-left: 80px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  justify-content: space-evenly;
+  font-size: 30px;
+
+  .title {
+    width: 23px;
+  }
+
+  .count {
+    margin-left: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .circle_case {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: whitesmoke;
+    margin-left: 15px;
+  }
+
+  .ball {
+    background-color: #148b33;
+  }
+
+  .strike {
+    background-color: #f2920e;
+  }
+
+  .out {
+    background-color: #b00d0a;
+  }
+`;
+
+export {
+  SimulContainer,
+  Groundmap,
+  Center,
+  BaseBall,
+  Base,
+  BatterEvent,
+  BatterName,
+  FirstB,
+  SecondB,
+  ThirdB,
+  BallCountContainer,
+};

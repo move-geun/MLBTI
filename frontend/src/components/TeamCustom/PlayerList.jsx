@@ -18,16 +18,12 @@ import { SearchDiv, Img } from "../../pages/team/TeamCustomPage.style";
 import { TextField } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPersonCirclePlus } from "@fortawesome/free-solid-svg-icons";
-const PlayerList = ({
-  email,
 
-  myTeam,
-}) => {
+const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
   const dispatch = useDispatch();
-
   // MLB 선수 리스트
   const [playerList, setPlayerList] = useState([]);
-
+  
   // 필터링 변수 (렌더링 조건)
   const [year, setYear] = React.useState("");
   const [league, setLeague] = React.useState("");
@@ -70,16 +66,16 @@ const PlayerList = ({
     dispatch(getPlayer())
       .unwrap()
       .then((res) => {
-        setPlayerList(res.data);
+        setPlayerList(res.data.data);
 
         // Dropdown에 표시 할 조건 리스트 전처리
         const yearData = [];
         const leagueData = [];
         const teamData = [];
         const positionData = [];
-
+        
         // 선수마다 가지고 있는, 조건이 될 정보 뽑아오기
-        res.data.map((item, _) => {
+        res.data.data.map((item) => {
           if (!yearData.includes(item.season) && item.season !== null) {
             yearData.push(parseInt(item.season));
           }
@@ -108,20 +104,22 @@ const PlayerList = ({
       email: email,
       player_uid: player.playerUid,
       position: player.position,
+      season: player.season
     };
 
     // 내 팀에 같은 포지션의 선수가 있는지 확인할 변수
+    console.log(myTeam)
     const findSamePosition = myTeam.find(function (n) {
-      return n.baseballPlayer.primaryPositionName === data.position;
+      return n.baseballPlayer.primaryPositionAbbreviation === data.position;
     });
 
-    // 중복되는 선수가 있다면
     if (findSamePosition) {
       alert(
         "해당 포지션의 선수가 이미 있습니다. 기존 선수를 방출 후 영입 해주십시오"
       );
     } else {
       dispatch(registTeam(data));
+      setIsModified(!isModified)
     }
   };
 
@@ -134,6 +132,7 @@ const PlayerList = ({
 
   // 필터링
   let filterdList = playerList;
+  
   if (year !== "") {
     filterdList = filterdList.filter((person) => person.season === year);
   }
@@ -163,7 +162,7 @@ const PlayerList = ({
         setPosition("");
       });
   };
-
+  
   return (
     <>
       {/* Dropdown */}
@@ -322,12 +321,10 @@ const PlayerList = ({
                 />
               </PlyaerDetailWrapper>
             </List>
-
           ))
         ) : (
           <div className="noCondition">조건을 선택해 주세요</div>
         )}
-
       </ListWrapper>
     </>
   );

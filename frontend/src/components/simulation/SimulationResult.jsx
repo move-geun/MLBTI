@@ -2,35 +2,28 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 
 import {
- TabMenu,
- StatusBtn
+  StatusContainer,
+  StatusBtn,
+  BatterContatiner,
+  BatterResult
 } from './SimulationResult.style';
+
+
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+
 
 const defaultValue = {};
 const SimulationResult = (prop = defaultValue) => {
-  
-  
 
-  const menuArr = [
-  { name: '1회', content: 'Tab menu TWO'},
-    { name: '2회', content: 'Tab menu TWO' },
-    { name: '3회', content: 'Tab menu TWO'},
-    { name: '4회', content: 'Tab menu TWO' },
-    { name: '5회', content: 'Tab menu TWO' },
-    { name: '6회', content: 'Tab menu TWO' },
-    { name: '7회', content: 'Tab menu TWO' },
-    { name: '8회', content: 'Tab menu TWO' },
-    { name: '9회', content: 'Tab menu TWO' },
-    { name: '10회', content: 'Tab menu TWO' },
-    { name: '11회', content: 'Tab menu TWO' },
-    { name: '12회', content: 'Tab menu TWO' },
-  ];
 
   const [currentTab, setCurrentTab] = useState(0);
   const [inningList, setInningList] = useState([]);
   const [inningInfo, setInningInfo] = useState([]);
   const [inningStatus, setInningStatus] = useState(true);
- 
+  const [batterList, setBatterList] = useState([]);
   const [batterInfo, setBatterInfo] = useState();
 
   useEffect(()=> {
@@ -51,6 +44,7 @@ const SimulationResult = (prop = defaultValue) => {
 
   useEffect(()=> {
     InfoHandler();
+    
   }, [inningStatus])
 
 
@@ -91,8 +85,6 @@ const SimulationResult = (prop = defaultValue) => {
     }
   }
 
-  const [batterList, setBatterList] = useState([]);
-
   // 회 -> 초,말까지 선택한 후의 inning의 datas 가져오기
   const ResultContent = () => {
     setBatterList([]);
@@ -104,16 +96,7 @@ const SimulationResult = (prop = defaultValue) => {
       }
       setBatterList(prev => [...prev, batInfo]);
      
-    })
-  
-    
-   
-  }
-
-
-
-  const onClickHandler = (index) => {
-    setCurrentTab(index);
+    }) 
   }
 
   const onClickTopPlay = (e) =>{
@@ -122,29 +105,78 @@ const SimulationResult = (prop = defaultValue) => {
   const onClickBottomPlay = (e) => {
     setInningStatus(false);
   };
+  const handleChange = (event, newValue) => {
+    setCurrentTab(newValue);
+    setInningStatus(true);
+  };
 
+
+  const tabs = [
+    {label: '1회'},
+    {label: '2회'},
+    {label: '3회'},
+    {label: '4회'},
+    {label: '5회'},
+    {label: '6회'},
+    {label: '7회'},
+    {label: '8회'},
+    {label: '9회'},
+    {label: '10회'},
+    {label: '11회'},
+    {label: '12회'},
+
+  ]
 
   return (
     <>
       <div>
-        <TabMenu>
-        {
-           menuArr.map((v, idx) => {
-            return <li onClick={()=> onClickHandler(idx)}>{v.name}</li>
-          })
-        } 
-        </TabMenu>
+          <Tabs                                                               
+              indicatorColor="primary"                                          
+              onChange={handleChange}                                       
+              scrollButtons="auto"                                              
+              sx={{ px: 1, fontWeight:'bold' }}                                                    
+              textColor="primary"                                               
+              value={currentTab}                                                
+              variant="scrollable">                                                                   
+            {tabs.map((tab) => (                          
+          <Tab                                        
+            key={tab.value}                           
+            label={
+              // 여기가 수정 됨
+              <Typography                             
+                sx={{                                 
+                  border: '2px solid',                
+                  borderColor: 'inherit',             
+                  borderRadius: 3,                    
+                  px: 3,                              
+                  fontSize: '1rem',                
+                  fontWeight: 'bold',                 
+                }}                                    
+              >                                       
+                {tab.label}                           
+              </Typography>                           
+            }                                         
+            value={tab.value}                         
+          />                                          
+        ))}                  
+                                                     
+        </Tabs>
+
         <div>
-        <StatusBtn onClick={onClickTopPlay}>{currentTab+1}회 초</StatusBtn>
-        <StatusBtn onClick={onClickBottomPlay}>{currentTab+1}회 말</StatusBtn>
+        <StatusContainer>
+          <StatusBtn onClick={onClickTopPlay}>{currentTab+1}회 초</StatusBtn>
+          <StatusBtn onClick={onClickBottomPlay}>{currentTab+1}회 말</StatusBtn>
+        </StatusContainer>       
+        <BatterContatiner>
         {
           batterList.batterName !== null ?
           (batterList.map(b =>{
-            return(<div>투수 {b.batterName}  {b.batterEvent}</div>)
+            return(<BatterResult>타자 {b.batterName}  {b.batterEvent}</BatterResult>)
           }))
           :
           (<div>데이터를 가져오는 중입니다.</div>)
         }
+        </BatterContatiner>
 {/*         
          <h1>{menuArr[currentTab].content}</h1> */}
         </div>
@@ -154,3 +186,31 @@ const SimulationResult = (prop = defaultValue) => {
 } 
 
 export default SimulationResult;
+
+
+
+
+// const menuArr = [
+//   { name: '1회', content: 'Tab menu TWO'},
+//     { name: '2회', content: 'Tab menu TWO' },
+//     { name: '3회', content: 'Tab menu TWO'},
+//     { name: '4회', content: 'Tab menu TWO' },
+//     { name: '5회', content: 'Tab menu TWO' },
+//     { name: '6회', content: 'Tab menu TWO' },
+//     { name: '7회', content: 'Tab menu TWO' },
+//     { name: '8회', content: 'Tab menu TWO' },
+//     { name: '9회', content: 'Tab menu TWO' },
+//     { name: '10회', content: 'Tab menu TWO' },
+//     { name: '11회', content: 'Tab menu TWO' },
+//     { name: '12회', content: 'Tab menu TWO' },
+//   ];
+
+
+
+  //  {/* <TabMenu>
+  //       {
+  //          menuArr.map((v, idx) => {
+  //           return <TabName onClick={()=> onClickHandler(idx)}>{v.name}</TabName>
+  //         })
+  //       } 
+  //       </TabMenu>  */}
