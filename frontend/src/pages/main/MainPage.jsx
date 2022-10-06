@@ -78,7 +78,7 @@ const MainPage = () => {
     let month =
       now.getMonth() + 1 > 9 ? now.getMonth() + 1 : "0" + (now.getMonth() + 1);
     let day =
-      now.getDate() - 1 > 9 ? now.getDate() - 1 : "0" + (now.getDate() - 1);
+      now.getDate() - 1 > 9 ? now.getDate() - 1 : "0" + (now.getDate() - 2);
     return String(year) + String(month) + String(day);
   };
 
@@ -89,7 +89,7 @@ const MainPage = () => {
     let month =
       now.getMonth() + 1 > 9 ? now.getMonth() + 1 : "0" + (now.getMonth() + 1);
     let day =
-      now.getDate() - 2 > 9 ? now.getDate() - 2 : "0" + (now.getDate() - 2);
+      now.getDate() - 2 > 9 ? now.getDate() - 2 : "0" + (now.getDate() - 3);
     return String(year) + String(month) + String(day);
   };
 
@@ -203,6 +203,7 @@ const MainPage = () => {
     floatingYesterday();
     todayFormal();
     rank();
+    setTimeout(() => setSpinner(false), 2000);
     // let step = 0;
     // for (step = 0; step < res.data.length; step++) {
     //   setNotice([...notices, res.data[step]]);
@@ -306,33 +307,35 @@ const MainPage = () => {
               <Ground data={inningList} />
               <BallCount data={inningList} />
             </div>
-            <div className="main_des">
-              <div className="team_des">
-                <img
-                  className="logo"
-                  src={todays[todays.length - 1].homeLogo}
-                  alt="홈팀로고"
-                />
-                <div>{todays[todays.length - 1].homeName}</div>
+            {todays ? (
+              <div className="main_des">
+                <div className="team_des">
+                  <img
+                    className="logo"
+                    src={todays[todays.length - 1].homeLogo}
+                    alt="홈팀로고"
+                  />
+                  <div>{todays[todays.length - 1].homeName}</div>
+                </div>
+                <div class="simul_case">
+                  <h5>지금 시뮬레이션 경기 중</h5>
+                  <div class="dot-elastic"></div>
+                </div>
+                <div className="team_des">
+                  <img
+                    className="logo"
+                    src={todays[todays.length - 1].awayLogo}
+                    alt="어웨이로고"
+                  />
+                  <div>{todays[todays.length - 1].awayName}</div>
+                </div>
               </div>
-              <div class="simul_case">
-                <h5>지금 시뮬레이션 경기 중</h5>
-                <div class="dot-elastic"></div>
-              </div>
-              <div className="team_des">
-                <img
-                  className="logo"
-                  src={todays[todays.length - 1].awayLogo}
-                  alt="어웨이로고"
-                />
-                <div>{todays[todays.length - 1].awayName}</div>
-              </div>
-            </div>
+            ) : null}
           </div>
           <div className="sub">
             <SubItem>
               <div className="sub_dot">
-                <img className="sub_simul" src="../assets/Ground.png" alt="" />
+                <img className="sub_simul" src="../assets/sub1.gif" alt="" />
                 {/* <div class="dot-elastic"></div> */}
               </div>
               <div className="sub_des">
@@ -371,7 +374,7 @@ const MainPage = () => {
             </SubItem>
             <SubItem>
               <div className="sub_dot">
-                <img className="sub_simul" src="../assets/Ground.png" alt="" />
+                <img className="sub_simul" src="../assets/sub2.gif" alt="" />
                 {/* <div class="dot-elastic"></div> */}
               </div>
               <div className="sub_des">
@@ -408,7 +411,7 @@ const MainPage = () => {
             </SubItem>
             <SubItem>
               <div className="sub_dot">
-                <img className="sub_simul" src="../assets/Ground.png" alt="" />
+                <img className="sub_simul" src="../assets/sub3.gif" alt="" />
                 {/* <div class="dot-elastic"></div> */}
               </div>
               <div className="sub_des">
@@ -676,28 +679,30 @@ const MainPage = () => {
           <div className="Main">
             {/* <img className="main_simul" src="../assets/Ground.png" alt="" /> */}
             <Ground data={inningList} />
-            <div className="main_des">
-              <div className="team_des">
-                <img
-                  className="logo"
-                  src={todays[todays.length - 1].homeLogo}
-                  alt="홈팀로고"
-                />
-                <div>{todays[todays.length - 1].homeName}</div>
+            {todays ? (
+              <div className="main_des">
+                <div className="team_des">
+                  <img
+                    className="logo"
+                    src={todays[todays.length - 1].homeLogo}
+                    alt="홈팀로고"
+                  />
+                  <div>{todays[todays.length - 1].homeName}</div>
+                </div>
+                <div class="simul_case">
+                  <h5>지금 시뮬레이션 경기 중</h5>
+                  <div class="dot-elastic"></div>
+                </div>
+                <div className="team_des">
+                  <img
+                    className="logo"
+                    src={todays[todays.length - 1].awayLogo}
+                    alt="어웨이로고"
+                  />
+                  <div>{todays[todays.length - 1].awayName}</div>
+                </div>
               </div>
-              <div class="simul_case">
-                <h5>지금 시뮬레이션 경기 중</h5>
-                <div class="dot-elastic"></div>
-              </div>
-              <div className="team_des">
-                <img
-                  className="logo"
-                  src={todays[todays.length - 1].awayLogo}
-                  alt="어웨이로고"
-                />
-                <div>{todays[todays.length - 1].awayName}</div>
-              </div>
-            </div>
+            ) : null}
           </div>
           <div className="sub">
             <SubItem>
@@ -1000,28 +1005,30 @@ const MainPage = () => {
           <div className="Main">
             {/* <img className="main_simul" src="../assets/Ground.png" alt="" /> */}
             <Ground data={inningList} />
-            <div className="main_des">
-              <div className="team_des">
-                <img
-                  className="logo"
-                  src={todays[todays.length - 1].homeLogo}
-                  alt="홈팀로고"
-                />
-                <div>{todays[todays.length - 1].homeName}</div>
+            {todays ? (
+              <div className="main_des">
+                <div className="team_des">
+                  <img
+                    className="logo"
+                    src={todays[todays.length - 1].homeLogo}
+                    alt="홈팀로고"
+                  />
+                  <div>{todays[todays.length - 1].homeName}</div>
+                </div>
+                <div class="simul_case">
+                  <h5>지금 시뮬레이션 경기 중</h5>
+                  <div class="dot-elastic"></div>
+                </div>
+                <div className="team_des">
+                  <img
+                    className="logo"
+                    src={todays[todays.length - 1].awayLogo}
+                    alt="어웨이로고"
+                  />
+                  <div>{todays[todays.length - 1].awayName}</div>
+                </div>
               </div>
-              <div class="simul_case">
-                <h5>지금 시뮬레이션 경기 중</h5>
-                <div class="dot-elastic"></div>
-              </div>
-              <div className="team_des">
-                <img
-                  className="logo"
-                  src={todays[todays.length - 1].awayLogo}
-                  alt="어웨이로고"
-                />
-                <div>{todays[todays.length - 1].awayName}</div>
-              </div>
-            </div>
+            ) : null}
           </div>
         </SimulationCase>
         <DownChart {...downsettings}>
