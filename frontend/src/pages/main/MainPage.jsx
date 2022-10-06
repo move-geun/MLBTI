@@ -197,7 +197,7 @@ const MainPage = () => {
       .then((res) => {})
       .catch((err) => {});
   }
-
+  const [mainSimul, setMainSimul] = useState([]);
   useEffect(() => {
     floatingNotice();
     floatingToday();
@@ -206,6 +206,8 @@ const MainPage = () => {
     rank();
     setTimeout(() => setSpinner(false), 2000);
     console.log("홈로고", todays[todays.length - 1]);
+    setMainSimul(todays[todays.length - 1]);
+    console.log("메인", mainSimul);
     // let step = 0;
     // for (step = 0; step < res.data.length; step++) {
     //   setNotice([...notices, res.data[step]]);
@@ -701,10 +703,10 @@ const MainPage = () => {
                 <div className="team_des">
                   <img
                     className="logo"
-                    src={todays[todays.length - 1].homeLogo}
+                    src={mainSimul.homeLogo}
                     alt="홈팀로고"
                   />
-                  <div>{todays[todays.length - 1].homeName}</div>
+                  <div>{mainSimul.homeName}</div>
                 </div>
                 <div class="simul_case">
                   <h5>지금 시뮬레이션 경기 중</h5>
@@ -713,10 +715,10 @@ const MainPage = () => {
                 <div className="team_des">
                   <img
                     className="logo"
-                    src={todays[todays.length - 1].awayLogo}
+                    src={mainSimul.awayLogo}
                     alt="어웨이로고"
                   />
-                  <div>{todays[todays.length - 1].awayName}</div>
+                  <div>{mainSimul.awayName}</div>
                 </div>
               </div>
             ) : null}
