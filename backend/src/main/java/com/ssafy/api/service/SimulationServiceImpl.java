@@ -213,7 +213,7 @@ public class SimulationServiceImpl implements SimulationService {
 		}
 		double res = Math.random();
 //		double factor = 2;
-		double factor = 1.5;
+		double factor = 1.75;
 		if (res <= ((double) batterH / batterAtBat) * ((double) pitcherRbi * 9 / pitcherInning) * factor / 9) {
 			res = Math.random();
 			double fb = batterFB / (double) batterH;
@@ -246,14 +246,16 @@ public class SimulationServiceImpl implements SimulationService {
 
 	static String simulate(int plays, PlayTeam homeTeam, PlayTeam awayTeam, String homeName, String awayName,
 			boolean printlog, boolean resultlog) {
+		System.out.println(homeName + " vs " + awayName);
 		SimulGames res = new SimulGames();
 		res.setGamePk(554135);
 		res.setAwayName(homeName);
 		res.setHomeName(awayName);
 		res.setSeason(2022);
 		res.setVenueName("Globe Life Field");
-		res.setWeatherTemp(21);
-		res.setWeatherWind("8.3m/h");
+		Random random = new Random();
+		res.setWeatherTemp(random.nextInt(5) + 18);
+		res.setWeatherWind(random.nextInt(50) / (float) 10 + "m/h");
 		Integer[][] scoreBoard = new Integer[2][14];
 
 		SimulGameInning[] innings = res.getInngings();
@@ -266,7 +268,7 @@ public class SimulationServiceImpl implements SimulationService {
 		int overtime = 12;
 		StringBuilder gamelog = new StringBuilder();
 		int[] gameResult = new int[7];
-		Random random = new Random();
+		random = new Random();
 		for (int k = 0; k < plays; k++) {
 			int gameInning = 0;
 			int[][] ScoreRecord = new int[2][overtime];
@@ -305,7 +307,6 @@ public class SimulationServiceImpl implements SimulationService {
 
 					String result = getResult(awayTeam.nowBatter(), homeTeam.nowPitcher(), awayTeam.nowBatSide(),
 							homeTeam.nowPitchSide());
-					System.out.println(result);
 					if (result == "SO" || result == "GO" || result == "AO") {
 						if (result == "SO") {
 							gamelog.append("삼진 아웃" + "\n");
@@ -421,7 +422,6 @@ public class SimulationServiceImpl implements SimulationService {
 //						gamelog.append(homeTeam.nowPitcher().name + "\n");
 //					}
 					awayTeam.nextBatter();
-					System.out.println(awayTeam.nowBatter().getName());
 				}
 				HitRecord[0][inning - 1] = inningHit;
 				awayHit += inningHit;
@@ -438,21 +438,21 @@ public class SimulationServiceImpl implements SimulationService {
 					gamelog.append((homeTeam.batterIndex + 1) + "번 타자 "
 							+ homeTeam.batters[homeTeam.batterIndex].getName() + "의 타석: ");
 					SimulGameDatas e = new SimulGameDatas();
-					e.setBatSide(awayTeam.nowBatSide());
-					e.setBatterName(awayTeam.nowBatter().getName());
-					e.setFirstBase(awayTeam.base[1]);
-					e.setSecondBase(awayTeam.base[2]);
-					e.setThirdBase(awayTeam.base[3]);
+					e.setBatSide(homeTeam.nowBatSide());
+					e.setBatterName(homeTeam.nowBatter().getName());
+					e.setFirstBase(homeTeam.base[1]);
+					e.setSecondBase(homeTeam.base[2]);
+					e.setThirdBase(homeTeam.base[3]);
 					e.setIndex(inningIdx);
 					inningIdx++;
 					e.setStrikeCount(random.nextInt(3));
 					e.setBallCount(random.nextInt(4));
 					e.setInning(inning);
 					e.setOutCount(out);
-					e.setPitcherName(homeTeam.nowPitcher().getName());
+					e.setPitcherName(awayTeam.nowPitcher().getName());
 
-					String result = getResult(awayTeam.nowBatter(), homeTeam.nowPitcher(), awayTeam.nowBatSide(),
-							homeTeam.nowPitchSide());
+					String result = getResult(homeTeam.nowBatter(), awayTeam.nowPitcher(), homeTeam.nowBatSide(),
+							awayTeam.nowPitchSide());
 					if (result == "SO" || result == "GO" || result == "AO") {
 						if (result == "SO") {
 							gamelog.append("삼진 아웃" + "\n");
@@ -617,6 +617,10 @@ public class SimulationServiceImpl implements SimulationService {
 			scoreBoard[0][13] = awayHit;
 			scoreBoard[1][13] = homeHit;
 		}
+		System.out.println(homeWin);
+		System.out.println(homeName + " 승리 확률: " + (double) homeWin / plays * 100 + "%");
+		System.out.println("무승부 확률: " + (double) draw / plays * 100 + "%");
+		System.out.println(awayName + " 승리 확률: " + (double) awayWin / plays * 100 + "%");
 		res.setScoreBoard(scoreBoard);
 		Gson gson = new Gson();
 		String json = gson.toJson(res);
@@ -1045,12 +1049,15 @@ public class SimulationServiceImpl implements SimulationService {
 //		ArrayList<Integer> homePitchersSeason = new ArrayList<>();
 
 		int userUid = userRepository.findByEmail(email).get().getUid();
+		homeName = userRepository.findByEmail(email).get().getNickname();
 		ArrayList<UserTeams> userteams = (ArrayList<UserTeams>) userTeamRepository.findAllByUserUid(userUid);
 		int[] batterIdx = new int[9];
 		int[] batterSeason = new int[9];
 		int pitcherIdx = 0;
 		int pitcherSeason = 0;
 		for (int i = 0; i < userteams.size(); i++) {
+			System.out.println(userteams.get(i).getUid());
+			System.out.println(userteams.get(i).getOrder());
 			if (userteams.get(i).getOrder() >= 1 && userteams.get(i).getOrder() <= 9) {
 				batterIdx[userteams.get(i).getOrder() - 1] = userteams.get(i).getBaseballPlayer().getUid();
 				batterSeason[userteams.get(i).getOrder() - 1] = userteams.get(i).getSeason();
@@ -1076,7 +1083,8 @@ public class SimulationServiceImpl implements SimulationService {
 		ArrayList<String> awayBatSide = new ArrayList<>();
 		ArrayList<String> homeBatSide = new ArrayList<>();
 		for (int i = 0; i < homeBatters.size(); i++) {
-			homeBattersArray.add(batterRepository.findBySeasonAndPlayerUid(2022, homeBatters.get(i)));
+			homeBattersArray
+					.add(batterRepository.findBySeasonAndPlayerUid(homeBattersSeason.get(i), homeBatters.get(i)));
 			homeBatSide.add(baseballPlayerRepository.findById(homeBatters.get(i)).get().getBatSideCode());
 		}
 		for (int i = 0; i < awayBatters.size(); i++) {
@@ -1091,13 +1099,173 @@ public class SimulationServiceImpl implements SimulationService {
 			awayPitchersArray.add(pitcherRepository.findBySeasonAndPlayerUid(2022, awayPitchers.get(i)));
 			awayPitchSide.add(baseballPlayerRepository.findById(awayPitchers.get(i)).get().getPitchHandCode());
 		}
-
+		System.out.println(homeBattersArray);
 		Team home = new Team(homeName, homeBattersArray, homePitchersArray, homeBatSide, homePitchSide);
 		Team away = new Team(awayName, awayBattersArray, awayPitchersArray, awayBatSide, awayPitchSide);
 		PlayTeam homeTeam = new PlayTeam(home);
 		PlayTeam awayTeam = new PlayTeam(away);
-		String result = simulate(1, homeTeam, awayTeam, homeName, awayName, true, true);
+		String result = simulate(1, homeTeam, awayTeam, awayName, homeName, true, true);
 		return result;
+	}
+
+	@Override
+	public String getYesterdaySim() {
+		ArrayList<Integer> homeBatters = new ArrayList<>();
+		ArrayList<Integer> awayBatters = new ArrayList<>();
+		ArrayList<Integer> homePitchers = new ArrayList<>();
+		ArrayList<Integer> awayPitchers = new ArrayList<>();
+		ArrayList<Integer> homeBattersSeason = new ArrayList<>();
+		ArrayList<Integer> awayBattersSeason = new ArrayList<>();
+		ArrayList<Integer> homePitchersSeason = new ArrayList<>();
+		ArrayList<Integer> awayPitchersSeason = new ArrayList<>();
+		int gamePK = 0;
+		Calendar calendar = new GregorianCalendar();
+		SimpleDateFormat SDF = new SimpleDateFormat("MM/dd/yyyy");
+
+		String chkDate = SDF.format(calendar.getTime());
+		calendar.add(Calendar.DATE, -2);
+		chkDate = SDF.format(calendar.getTime());
+		System.out.println(chkDate);
+		String homeName = "";
+		String awayName = "";
+		String result = null;
+		try {
+			URL url = new URL(
+					"https://statsapi.mlb.com/api/v1/schedule?sportId=1&startDate=" + chkDate + "&endDate=" + chkDate); // fastAPI에서
+																														// 호출
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET"); // http 메서드
+			conn.setRequestProperty("Content-Type", "application/json"); // header Content-Type 정보
+			conn.setRequestProperty("auth", "myAuth"); // header의 auth 정보
+			conn.setDoOutput(true); // 서버로부터 받는 값이 있다면 true
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+
+			while ((line = br.readLine()) != null) { // 읽을 수 있을 때 까지 반복
+				sb.append(line);
+			}
+			JSONObject obj = new JSONObject(sb.toString()); // json으로 변경 (역직렬화)
+			JSONArray dates = obj.getJSONArray("dates");
+			JSONObject date = dates.getJSONObject(0);
+			JSONArray games = date.getJSONArray("games");
+			for (int i = 0; i < games.length(); i++) {
+				JSONObject game = games.getJSONObject(i);
+				JSONObject teams = game.getJSONObject("teams");
+				JSONObject away = teams.getJSONObject("away");
+				JSONObject home = teams.getJSONObject("home");
+				JSONObject awayteam = away.getJSONObject("team");
+				JSONObject hometeam = home.getJSONObject("team");
+				int homeId = hometeam.getInt("id");
+				int awayId = awayteam.getInt("id");
+				gamePK = game.getInt("gamePk");
+				System.out.println(gamePK);
+				homeName = hometeam.getString("name");
+				awayName = awayteam.getString("name");
+
+				try {
+					url = new URL("https://statsapi.mlb.com/api/v1/game/" + gamePK + "/playByPlay"); // fastAPI에서 호출
+					conn = (HttpURLConnection) url.openConnection();
+					conn.setRequestMethod("GET"); // http 메서드
+					conn.setRequestProperty("Content-Type", "application/json"); // header Content-Type 정보
+					conn.setRequestProperty("auth", "myAuth"); // header의 auth 정보
+					conn.setDoOutput(true); // 서버로부터 받는 값이 있다면 true
+
+					br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+					sb = new StringBuilder();
+					line = null;
+					while ((line = br.readLine()) != null) { // 읽을 수 있을 때 까지 반복
+						sb.append(line);
+					}
+					obj = new JSONObject(sb.toString()); // json으로 변경 (역직렬화)
+					JSONArray playsByInning = obj.getJSONArray("playsByInning");
+					ArrayList<Integer> homeIdx = new ArrayList<>();
+					ArrayList<Integer> awayIdx = new ArrayList<>();
+					for (int k = 0; k < playsByInning.length(); k++) {
+						JSONObject playByInning = playsByInning.getJSONObject(k);
+						JSONArray top = playByInning.getJSONArray("top");
+						for (int j = 0; j < top.length(); j++) {
+							awayIdx.add(top.getInt(j));
+						}
+						JSONArray bottom = playByInning.getJSONArray("bottom");
+						for (int j = 0; j < bottom.length(); j++) {
+							homeIdx.add(bottom.getInt(j));
+						}
+					}
+					JSONArray allPlays = obj.getJSONArray("allPlays");
+					for (int k = 0; k < 9; k++) {
+						int playIdx = awayIdx.get(k);
+						JSONObject play = allPlays.getJSONObject(playIdx);
+						JSONObject matchup = play.getJSONObject("matchup");
+						JSONObject batter = matchup.getJSONObject("batter");
+						int id = batter.getInt("id");
+						awayBatters.add(id);
+						awayBattersSeason.add(2022);
+						if (k == 0) {
+							JSONObject pitcher = matchup.getJSONObject("pitcher");
+							id = pitcher.getInt("id");
+							homePitchers.add(id);
+							homePitchersSeason.add(2022);
+						}
+					}
+					for (int k = 0; k < 9; k++) {
+						int playIdx = homeIdx.get(k);
+						JSONObject play = allPlays.getJSONObject(playIdx);
+						JSONObject matchup = play.getJSONObject("matchup");
+						JSONObject batter = matchup.getJSONObject("batter");
+						int id = batter.getInt("id");
+						homeBatters.add(id);
+						homeBattersSeason.add(2022);
+						if (k == 0) {
+							JSONObject pitcher = matchup.getJSONObject("pitcher");
+							id = pitcher.getInt("id");
+							awayPitchers.add(id);
+							awayPitchersSeason.add(2022);
+						}
+					}
+				} catch (Exception e) {
+					System.out.println(e);
+					return null;
+				}
+				ArrayList<Batters> homeBattersArray = new ArrayList<>();
+				ArrayList<Batters> awayBattersArray = new ArrayList<>();
+				ArrayList<Pitchers> homePitchersArray = new ArrayList<>();
+				ArrayList<Pitchers> awayPitchersArray = new ArrayList<>();
+				ArrayList<String> awayPitchSide = new ArrayList<>();
+				ArrayList<String> homePitchSide = new ArrayList<>();
+				ArrayList<String> awayBatSide = new ArrayList<>();
+				ArrayList<String> homeBatSide = new ArrayList<>();
+				for (int l = 0; l < homeBatters.size(); l++) {
+					homeBattersArray.add(batterRepository.findBySeasonAndPlayerUid(2022, homeBatters.get(l)));
+					homeBatSide.add(baseballPlayerRepository.findById(homeBatters.get(l)).get().getBatSideCode());
+				}
+				for (int l = 0; l < awayBatters.size(); l++) {
+					awayBattersArray.add(batterRepository.findBySeasonAndPlayerUid(2022, awayBatters.get(l)));
+					awayBatSide.add(baseballPlayerRepository.findById(awayBatters.get(l)).get().getBatSideCode());
+				}
+				for (int l = 0; l < homePitchers.size(); l++) {
+					homePitchersArray.add(pitcherRepository.findBySeasonAndPlayerUid(2022, homePitchers.get(l)));
+					homePitchSide.add(baseballPlayerRepository.findById(homePitchers.get(l)).get().getPitchHandCode());
+				}
+				for (int l = 0; l < awayPitchers.size(); l++) {
+					awayPitchersArray.add(pitcherRepository.findBySeasonAndPlayerUid(2022, awayPitchers.get(l)));
+					awayPitchSide.add(baseballPlayerRepository.findById(awayPitchers.get(l)).get().getPitchHandCode());
+				}
+
+				Team homeT = new Team(homeName, homeBattersArray, homePitchersArray, homeBatSide, homePitchSide);
+				Team awayT = new Team(awayName, awayBattersArray, awayPitchersArray, awayBatSide, awayPitchSide);
+				PlayTeam homeTeam = new PlayTeam(homeT);
+				PlayTeam awayTeam = new PlayTeam(awayT);
+				result = simulate(1000, homeTeam, awayTeam, homeName, awayName, false, true);
+//				System.out.println(result);
+
+			}
+		} catch (Exception e) {
+			System.out.println("경기 없음");
+			return null;
+		}
+		return null;
 	}
 
 }

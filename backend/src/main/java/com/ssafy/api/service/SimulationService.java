@@ -21,4 +21,5 @@ import com.ssafy.db.entity.Schedules;
 public interface SimulationService {
 	String getNormalSim(int homeTeamUid, int awayTeamUid);
 	String getCustomSim(String email, int teamUid);
+	String getYesterdaySim();
 }

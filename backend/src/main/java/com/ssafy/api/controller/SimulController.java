@@ -76,7 +76,20 @@ public class SimulController {
 		
 		String json = simulationService.getCustomSim(email, teamUid);
 		return ResponseEntity.status(200).body(json);
+	}
+	
+	@PostMapping("/yesterday")
+	@ApiOperation(value = "경기 시물레이션", notes = "<strong>어제 경기를</strong> 시뮬레이션한다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 401, message = "인증 실패"),
+        @ApiResponse(code = 404, message = "사용자 없음"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<String> yesterday() {
 		
+		String json = simulationService.getYesterdaySim();
+		return ResponseEntity.status(200).body(json);
 	}
 	
 	@PostMapping()
