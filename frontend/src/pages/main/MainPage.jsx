@@ -65,16 +65,7 @@ const MainPage = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  // const [notices, setNotices] = useState();
 
-<<<<<<< HEAD
-=======
-  // 시뮬레이션으로 넘길 때 데이터
-  // home = [{id: xx, logo: url}]
-  // const [home, setHome] = useState([]);
-  // const [away, setAway] = useState([]);
-
->>>>>>> 37e49de0ff943696b1623026e01a07376c40285a
   // 오늘 날짜 구하기
   const todayFormal = () => {
     let now = new Date();
@@ -259,18 +250,6 @@ const MainPage = () => {
     return () => window.removeEventListener("resize", handleResize);
   });
 
-<<<<<<< HEAD
-  const clickHistory = (yesterday) => {
-    // let newhome = { id: "", logo: "" };
-    // let newaway = { id: "", logo: "" };
-    // newhome["id"] = yesterday.homeId;
-    // newhome["logo"] = yesterday.homeLogo;
-    // newaway["id"] = yesterday.awayId;
-    // newaway["logo"] = yesterday.awayLogo;
-    // setHome(newhome)
-    // setAway(newaway)
-    
-  };
 
   const onESC = () => {
     setOpen(false);
@@ -281,19 +260,7 @@ const MainPage = () => {
       onESC();
     }
   };
-=======
-  // const clickHistory = (yesterday) => {
-  // let newhome = { id: "", logo: "" };
-  // let newaway = { id: "", logo: "" };
-  // newhome["id"] = yesterday.homeId;
-  // newhome["logo"] = yesterday.homeLogo;
-  // newaway["id"] = yesterday.awayId;
-  // newaway["logo"] = yesterday.awayLogo;
-  // setHome(newhome)
-  // setAway(newaway)
-  // console.log("메인페이지 값", home, away);
-  // };
->>>>>>> 37e49de0ff943696b1623026e01a07376c40285a
+
 
   if (windowSize > 980) {
     return (
