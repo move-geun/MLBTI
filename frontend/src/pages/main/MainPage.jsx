@@ -302,7 +302,7 @@ const MainPage = () => {
           <div className="main_con">
             <div className="simul_page">
               <Ground data={inningList} />
-              <BallCount data={inningList}/>
+              <BallCount data={inningList} />
             </div>
             <div className="main_des">
               <div className="team_des">

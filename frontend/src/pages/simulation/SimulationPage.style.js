@@ -143,6 +143,7 @@ const BallCountContainer = styled.div`
   flex-direction: column;
   color: white;
   justify-content: space-evenly;
+  align-items: center;
   font-size: 30px;
 
   .title {
@@ -151,7 +152,7 @@ const BallCountContainer = styled.div`
 
   .count {
     margin-left: 10px;
-    width: 100%;
+    width: 200px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -164,8 +165,8 @@ const BallCountContainer = styled.div`
     align-items: center;
   }
   .circle {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: whitesmoke;
     margin-left: 15px;
