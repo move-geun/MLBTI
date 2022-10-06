@@ -132,7 +132,7 @@ const ThirdB = styled.img`
   }
 `;
 
-const BallCount = styled.div`
+const BallCountContainer = styled.div`
   min-width: 250px;
   height: 300px;
   border-radius: 20px;
@@ -195,5 +195,5 @@ export {
   FirstB,
   SecondB,
   ThirdB,
-  BallCount,
+  BallCountContainer,
 };
