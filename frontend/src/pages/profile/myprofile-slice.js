@@ -16,8 +16,8 @@ export const myprofile = createAsyncThunk(
 );
 
 // 나의 팀 불러오기
-export const myteam = createAsyncThunk(
-  "MYTEAM",
+export const getMyteam = createAsyncThunk(
+  "GETMYTEAM",
   async (data, { rejectWithValue }) => {
     try {
       const res = await http.auth_axios.get("/user_team/list", {
@@ -25,7 +25,8 @@ export const myteam = createAsyncThunk(
           email: data.email,
         },
       });
-      return res;
+      console.log(res.data);
+      return res.data;
     } catch (err) {
       alert("팀 정보 조회 실패");
       return rejectWithValue(err.response);
@@ -39,13 +40,11 @@ export const changeTeamName = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const res = await http.auth_axios.put("/user/teamName", null, {
-
         params: {
           email: data.email,
           newTeamName: data.newTeamName,
         },
       });
-      console.log(res);
       return res;
     } catch (err) {
       alert("팀 이름 변경 실패");
@@ -55,16 +54,22 @@ export const changeTeamName = createAsyncThunk(
 );
 
 const initialState = {
-  isLoading: false,
+  myteam: [],
 };
 
 const myprofileSlice = createSlice({
   name: "myprofile",
   initialState,
   reducers: {
-    
+    setMyteam: (state) => {
+      state.myteam = [];
+    },
   },
-  extraReducers: {},
+  extraReducers: {
+    [getMyteam.fulfiiled]: (state, action) => {
+      state.myteam = action.payload;
+    },
+  },
 });
 
 export default myprofileSlice.reducer;
