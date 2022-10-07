@@ -82,6 +82,12 @@ const SimulationPage = () => {
     }
   }, [simulData]);
 
+  const [ sendinningList, setSendInningList] = useState([]);
+
+  useEffect(()=> {
+
+  }, [sendinningList]);
+
   let innginglist = [];
   let batterlist = [];
 
@@ -91,7 +97,9 @@ const SimulationPage = () => {
         batterlist.push(batter);
       });
       innginglist.push(inning);
+      
     });
+    setSendInningList(innginglist);
   };
 
   return (
@@ -104,8 +112,8 @@ const SimulationPage = () => {
         <>
           <TeamScore data={simulData} logo={logoUrl} />
           <Center>
-            <Ground data={innginglist} />
-            <BallCount data={innginglist} />
+            <Ground data={sendinningList} />
+            <BallCount data={sendinningList} />
           </Center>
           <SimulationResult data={simulData} />
         </>
