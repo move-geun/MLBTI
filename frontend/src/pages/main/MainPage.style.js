@@ -10,7 +10,7 @@ const Main = styled.div`
   margin: 1rem auto 0 auto;
   justify-content: center;
   font-size: 1.5rem;
-  
+
   .loading {
     display: flex;
     flex-direction: column;
@@ -640,7 +640,6 @@ const SubItem = styled.div`
         width: 40px;
         height: 40px;
         margin-bottom: 5px;
-        
       }
     }
   }
@@ -772,12 +771,12 @@ const MainGameCard = styled.div`
   width: 40rem;
   border-radius: 0.7em;
   border-style: none;
-  box-shadow: 5px 5px 10px 0.1px gray;
-  padding: 1em;
-  background-color: #bfd4eea0;
+  box-shadow: 3px 3px 10px 0.1px gray;
+  background-color: #e7eff99f;
+  margin-bottom: 13px;
 `;
 
-const MainSimulContainer = styled.div``
+const MainSimulContainer = styled.div``;
 export {
   Notice,
   Main,
