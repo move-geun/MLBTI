@@ -56,14 +56,18 @@ const SimulationPage = () => {
       .catch((err) => {
         alert("선수 정보가 부족합니다.");
         navigate("/customsimultaion");
-      });
-  };
+      }
+      
+    );
+  }
+
 
   const takeCustomSimulData = (matchInfo) => {
     dispatch(customsimulationData(matchInfo))
       .unwrap()
       .then((res) => {
-        setCustomStatus(false);
+        setSimulData(res.data);
+        setCustomStatus();
       })
       .catch((err) => {
         alert("선수 정보가 부족합니다.");
@@ -71,11 +75,18 @@ const SimulationPage = () => {
       });
   };
 
+
   useEffect(() => {
     if (simulData.gamePk) {
       makeInningsInfo();
     }
   }, [simulData]);
+
+  const [ sendinningList, setSendInningList] = useState([]);
+
+  useEffect(()=> {
+
+  }, [sendinningList]);
 
   let innginglist = [];
   let batterlist = [];
@@ -86,7 +97,9 @@ const SimulationPage = () => {
         batterlist.push(batter);
       });
       innginglist.push(inning);
+      
     });
+    setSendInningList(innginglist);
   };
 
   return (
@@ -99,8 +112,8 @@ const SimulationPage = () => {
         <>
           <TeamScore data={simulData} logo={logoUrl} />
           <Center>
-            <Ground data={innginglist} />
-            <BallCount data={innginglist} />
+            <Ground data={sendinningList} />
+            <BallCount data={sendinningList} />
           </Center>
           <SimulationResult data={simulData} />
         </>
