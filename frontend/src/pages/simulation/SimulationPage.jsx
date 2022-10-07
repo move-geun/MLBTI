@@ -62,7 +62,8 @@ const takeCustomSimulData = (matchInfo) => {
   .unwrap()
   .then((res) => {
     console.log("커스텀 api 받으러 감", res);
-    setCustomStatus(false);
+    setSimulData(res.data);
+    setCustomStatus();
   })
 }
 
