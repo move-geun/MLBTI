@@ -306,10 +306,6 @@ const MainPage = () => {
             </Notice>
             <SimulationCase>
               <div className="main_con">
-                <div className="simul_page">
-                  <Ground data={inningList} />
-                  <BallCount data={inningList} />
-                </div>
                 {todays ? (
                   <div className="main_des">
                     <div className="team_des">
@@ -334,6 +330,10 @@ const MainPage = () => {
                     </div>
                   </div>
                 ) : null}
+                <div className="simul_page">
+                  <Ground data={inningList} />
+                  <BallCount data={inningList} />
+                </div>
               </div>
               <div className="sub">
                 <MainGameCard>
@@ -734,7 +734,6 @@ const MainPage = () => {
         <SimulationCase>
           <div className="Main">
             {/* <img className="main_simul" src="../assets/Ground.png" alt="" /> */}
-            <Ground data={inningList} />
             {todays ? (
               <div className="main_des">
                 <div className="team_des">
@@ -759,6 +758,7 @@ const MainPage = () => {
                 </div>
               </div>
             ) : null}
+            <Ground data={inningList} />
           </div>
           <div className="sub">
             <MainGameCard>
@@ -1170,7 +1170,6 @@ const MainPage = () => {
         <SimulationCase>
           <div className="Main">
             {/* <img className="main_simul" src="../assets/Ground.png" alt="" /> */}
-            <Ground data={inningList} />
             {todays ? (
               <div className="main_des">
                 <div className="team_des">
@@ -1194,7 +1193,8 @@ const MainPage = () => {
                   <div>{mainSimul.awayName}</div>
                 </div>
               </div>
-            ) : null}
+            ) : null}{" "}
+            <Ground data={inningList} />
           </div>
         </SimulationCase>
         <DownChart {...downsettings}>
