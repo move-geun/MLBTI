@@ -774,7 +774,7 @@ const MainGameCard = styled.div`
   border-style: none;
   box-shadow: 3px 3px 10px 0.1px gray;
   background-color: #e7eff99f;
-  margin-bottom: 10px;
+  margin-bottom: 13px;
 `;
 export {
   Notice,
