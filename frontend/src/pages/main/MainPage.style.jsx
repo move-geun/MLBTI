@@ -20,9 +20,8 @@ const Main = styled.div`
     width: 50%;
     height: 70vh;
     .spinner {
-      margin: 0 1rem 2rem 0
+      margin: 0 1rem 2rem 0;
     }
-    
   }
   .main_des {
     width: 100%;
@@ -768,6 +767,7 @@ const SubItem = styled.div`
 //   margin: 0 auto;
 // `;
 
+// 카드형식
 const MainGameCard = styled.div`
   width: 100%;
   border-radius: 0.7em;
