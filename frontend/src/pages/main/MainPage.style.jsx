@@ -20,7 +20,7 @@ const Main = styled.div`
     width: 50%;
     height: 70vh;
     .spinner {
-      margin: 0 1rem 2rem 0
+      margin: 0 1rem 2rem 0;
     }
   }
 
@@ -765,6 +765,7 @@ const SubItem = styled.div`
 //   margin: 0 auto;
 // `;
 
+// 카드형식
 const MainGameCard = styled.div`
   margin: 0.3em;
   margin-left: 2%;
