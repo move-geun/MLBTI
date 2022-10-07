@@ -9,7 +9,7 @@ const PageContainer = styled.div`
   font-size: 1.5rem;
 
   .divide {
-    margin-top: 2rem;
+    margin-top: 2rem ;
     width: 100%;
   }
 

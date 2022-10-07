@@ -1,105 +1,93 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React from "react";
+import { useEffect, useState } from "react";
 
 import {
   StatusContainer,
+  SimulDiv,
   StatusBtn,
   BatterContatiner,
-  BatterResult
-} from './SimulationResult.style';
+  BatterResult,
+} from "./SimulationResult.style";
 
-
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
 
 const defaultValue = {};
 const SimulationResult = (prop = defaultValue) => {
-
-
   const [currentTab, setCurrentTab] = useState(0);
   const [inningList, setInningList] = useState([]);
   const [inningInfo, setInningInfo] = useState([]);
   const [inningStatus, setInningStatus] = useState(true);
   const [batterList, setBatterList] = useState([]);
-  const [batterInfo, setBatterInfo] = useState();
+  // const [batterInfo, setBatterInfo] = useState();
 
-  useEffect(()=> {
-    if(prop.data.gamePk){
-        setInningList(prop.data.inngings);
+  useEffect(() => {
+    if (prop.data.gamePk) {
+      setInningList(prop.data.inngings);
     }
   }, [prop]);
 
-  useEffect(()=>{  
-    if(inningList.length > 0){
+  useEffect(() => {
+    if (inningList.length > 0) {
       InfoHandler();
     }
-  }, [inningList])
+  }, [inningList]);
 
-  useEffect(()=> {
+  useEffect(() => {
     InfoHandler();
   }, [currentTab]);
 
-  useEffect(()=> {
+  useEffect(() => {
     InfoHandler();
-    
-  }, [inningStatus])
+  }, [inningStatus]);
 
-
-  useEffect(()=> {
-    if (inningInfo.length !== 0 ){
+  useEffect(() => {
+    if (inningInfo.length !== 0) {
       ResultContent();
+    } else {
+      console.log("현재 이닝에는 값이 없습니다.");
     }
-    else {
-      console.log("현재 이닝에는 값이 없습니다.")
-    }
-  }, [inningInfo])
-
+  }, [inningInfo]);
 
   // 한 이닝 값 전체를 핸들링
-  const InfoHandler = () => { 
-    if(inningList.length >0 ){
+  const InfoHandler = () => {
+    if (inningList.length > 0) {
       // 초기화해주기
       setInningInfo([]);
       let info = [];
-      inningList.map(inning => {        
-        if(inning.inning == currentTab+1){
+      inningList.map((inning) => {
+        if (inning.inning == currentTab + 1) {
           info.push(inning);
-            // setInningInfo(prev => [...prev, inning]);
+          // setInningInfo(prev => [...prev, inning]);
         }
-      })
+      });
       StatusHandler(info);
-      
-    }  
-  }
+    }
+  };
 
   // 초, 말에 따라 값 핸들링
   const StatusHandler = (info) => {
-    if(inningStatus){
+    if (inningStatus) {
       setInningInfo(info[0]);
-    }
-    else {
+    } else {
       setInningInfo(info[1]);
     }
-  }
+  };
 
   // 회 -> 초,말까지 선택한 후의 inning의 datas 가져오기
   const ResultContent = () => {
     setBatterList([]);
-    inningInfo.datas.map( batter =>{
-      
+    inningInfo.datas.map((batter) => {
       let batInfo = {
         batterName: batter.batterName,
-        batterEvent : batter.event
-      }
-      setBatterList(prev => [...prev, batInfo]);
-     
-    }) 
-  }
+        batterEvent: batter.event,
+      };
+      setBatterList((prev) => [...prev, batInfo]);
+    });
+  };
 
-  const onClickTopPlay = (e) =>{
+  const onClickTopPlay = (e) => {
     setInningStatus(true);
   };
   const onClickBottomPlay = (e) => {
@@ -110,85 +98,84 @@ const SimulationResult = (prop = defaultValue) => {
     setInningStatus(true);
   };
 
-
   const tabs = [
-    {label: '1회'},
-    {label: '2회'},
-    {label: '3회'},
-    {label: '4회'},
-    {label: '5회'},
-    {label: '6회'},
-    {label: '7회'},
-    {label: '8회'},
-    {label: '9회'},
-    {label: '10회'},
-    {label: '11회'},
-    {label: '12회'},
-
-  ]
+    { label: "1회" },
+    { label: "2회" },
+    { label: "3회" },
+    { label: "4회" },
+    { label: "5회" },
+    { label: "6회" },
+    { label: "7회" },
+    { label: "8회" },
+    { label: "9회" },
+    { label: "10회" },
+    { label: "11회" },
+    { label: "12회" },
+  ];
 
   return (
-    <>
-      <div>
-          <Tabs                                                               
-              indicatorColor="primary"                                          
-              onChange={handleChange}                                       
-              scrollButtons="auto"                                              
-              sx={{ px: 1, fontWeight:'bold' }}                                                    
-              textColor="primary"                                               
-              value={currentTab}                                                
-              variant="scrollable">                                                                   
-            {tabs.map((tab) => (                          
-          <Tab                                        
-            key={tab.value}                           
+    <SimulDiv>
+      <Tabs
+        className="simul_tab"
+        indicatorColor="primary"
+        onChange={handleChange}
+        scrollButtons="auto"
+        sx={{ px: 1, fontWeight: "bold" }}
+        textColor="primary"
+        value={currentTab}
+        variant="scrollable"
+      >
+        {tabs.map((tab) => (
+          <Tab
+            key={tab.value}
             label={
               // 여기가 수정 됨
-              <Typography                             
-                sx={{                                 
-                  border: '2px solid',                
-                  borderColor: 'inherit',             
-                  borderRadius: 3,                    
-                  px: 3,                              
-                  fontSize: '1rem',                
-                  fontWeight: 'bold',                 
-                }}                                    
-              >                                       
-                {tab.label}                           
-              </Typography>                           
-            }                                         
-            value={tab.value}                         
-          />                                          
-        ))}                  
-                                                     
-        </Tabs>
+              <Typography
+                sx={{
+                  border: "2px solid",
+                  borderColor: "inherit",
+                  borderRadius: 3,
+                  px: 3,
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                }}
+              >
+                {tab.label}
+              </Typography>
+            }
+            value={tab.value}
+          />
+        ))}
+      </Tabs>
 
-        <div>
+      <div>
         <StatusContainer>
-          <StatusBtn onClick={onClickTopPlay}>{currentTab+1}회 초</StatusBtn>
-          <StatusBtn onClick={onClickBottomPlay}>{currentTab+1}회 말</StatusBtn>
-        </StatusContainer>       
+          <StatusBtn onClick={onClickTopPlay}>{currentTab + 1}회 초</StatusBtn>
+          <StatusBtn onClick={onClickBottomPlay}>
+            {currentTab + 1}회 말
+          </StatusBtn>
+        </StatusContainer>
         <BatterContatiner>
-        {
-          batterList.batterName !== null ?
-          (batterList.map(b =>{
-            return(<BatterResult>타자 {b.batterName}  {b.batterEvent}</BatterResult>)
-          }))
-          :
-          (<div>데이터를 가져오는 중입니다.</div>)
-        }
+          {batterList.batterName !== null ? (
+            batterList.map((b, idx) => {
+              return (
+                <BatterResult key={idx}>
+                  타자 {b.batterName} {b.batterEvent}
+                </BatterResult>
+              );
+            })
+          ) : (
+            <div>데이터를 가져오는 중입니다.</div>
+          )}
         </BatterContatiner>
-{/*         
+        {/*         
          <h1>{menuArr[currentTab].content}</h1> */}
-        </div>
       </div>
-    </>
-  )
-} 
+    </SimulDiv>
+  );
+};
 
 export default SimulationResult;
-
-
-
 
 // const menuArr = [
 //   { name: '1회', content: 'Tab menu TWO'},
@@ -205,12 +192,10 @@ export default SimulationResult;
 //     { name: '12회', content: 'Tab menu TWO' },
 //   ];
 
-
-
-  //  {/* <TabMenu>
-  //       {
-  //          menuArr.map((v, idx) => {
-  //           return <TabName onClick={()=> onClickHandler(idx)}>{v.name}</TabName>
-  //         })
-  //       } 
-  //       </TabMenu>  */}
+//  {/* <TabMenu>
+//       {
+//          menuArr.map((v, idx) => {
+//           return <TabName onClick={()=> onClickHandler(idx)}>{v.name}</TabName>
+//         })
+//       }
+//       </TabMenu>  */}
