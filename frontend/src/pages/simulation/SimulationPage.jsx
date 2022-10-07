@@ -56,20 +56,25 @@ const SimulationPage = () => {
       .catch((err) => {
         alert("선수 정보가 부족합니다.");
         navigate("/customsimultaion");
-      });
-  };
+      }
+      
+    );
+  }
+
 
   const takeCustomSimulData = (matchInfo) => {
     dispatch(customsimulationData(matchInfo))
       .unwrap()
       .then((res) => {
-        setCustomStatus(false);
+        setSimulData(res.data);
+        setCustomStatus();
       })
       .catch((err) => {
         alert("선수 정보가 부족합니다.");
         navigate("/customsimultaion");
       });
   };
+
 
   useEffect(() => {
     if (simulData.gamePk) {
