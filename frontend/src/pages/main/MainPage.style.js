@@ -23,6 +23,7 @@ const Main = styled.div`
       margin: 0 1rem 2rem 0;
     }
   }
+
   .main_des {
     width: 100%;
     display: flex;
@@ -267,14 +268,11 @@ const SimulationCase = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding-right: 15px;
-    border-right: 2px solid rgba(0, 0, 0, 0.1);
 
     .simul_page {
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: center;
 
       .temp_ball {
         margin-left: 20px;
@@ -590,8 +588,8 @@ const League = styled.div`
 const SubItem = styled.div`
   margin: 0;
   margin-bottom: 10px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  width: 600px;
   height: 160px;
   /* background-color: rgba(0, 0, 0, 0.05); */
   display: flex;
@@ -621,7 +619,6 @@ const SubItem = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin-right: 10px;
     .sub_container {
       display: flex;
       flex-direction: row;
@@ -769,13 +766,17 @@ const SubItem = styled.div`
 
 // 카드형식
 const MainGameCard = styled.div`
-  width: 100%;
+  margin: 0.3em;
+  margin-left: 2%;
+  width: 40rem;
   border-radius: 0.7em;
   border-style: none;
   box-shadow: 3px 3px 10px 0.1px gray;
   background-color: #e7eff99f;
   margin-bottom: 13px;
 `;
+
+const MainSimulContainer = styled.div``;
 export {
   Notice,
   Main,

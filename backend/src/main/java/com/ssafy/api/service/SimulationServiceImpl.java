@@ -685,12 +685,14 @@ public class SimulationServiceImpl implements SimulationService {
 					homeGamePK = game.getInt("gamePk");
 					homeName = hometeam.getString("name");
 					homeTopBottom = "bottom";
-				} else if (homeId == awayTeamUid) {
+					System.out.println(homeName);
+					System.out.println(homeGamePK);
+				} else if (awayId == homeTeamUid) {
 					homeGamePK = game.getInt("gamePk");
 					homeName = awayteam.getString("name");
 					homeTopBottom = "top";
 				}
-				if (awayId == homeTeamUid) {
+				if (homeId == awayTeamUid) {
 					awayGamePK = game.getInt("gamePk");
 					awayName = hometeam.getString("name");
 					awayTopBottom = "bottom";
@@ -705,7 +707,6 @@ public class SimulationServiceImpl implements SimulationService {
 			System.out.println("경기 없음");
 			return null;
 		}
-
 		try {
 			URL url = new URL("https://statsapi.mlb.com/api/v1/game/" + homeGamePK + "/playByPlay"); // fastAPI에서 호출
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
