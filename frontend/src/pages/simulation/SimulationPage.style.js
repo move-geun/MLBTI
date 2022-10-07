@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+const SpinnerDiv = styled.div`
+  width: 100%;
+  height: 50vh;
+  position: absolute;
+  top: 40vh;
+  left: 50%;
+`;
+
 const SimulContainer = styled.div`
   width: 88%;
   display: flex;
@@ -7,6 +15,7 @@ const SimulContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  position: relative;
 `;
 
 const Center = styled.div`
@@ -66,7 +75,7 @@ const BatterEvent = styled.div`
   z-index: 100;
   width: 17rem;
   height: 40px;
-  left: 60px;
+  left: 40px;
   line-height: 40px;
   background-color: white;
   text-align: center;
@@ -138,7 +147,7 @@ const BallCountContainer = styled.div`
   border-radius: 20px;
   background-color: #343434;
   /* background-color: rgba(0, 0, 0, 0.43); */
-  margin-left: 80px;
+  margin-left: 30px;
   display: flex;
   flex-direction: column;
   color: white;
@@ -186,6 +195,7 @@ const BallCountContainer = styled.div`
 `;
 
 export {
+  SpinnerDiv,
   SimulContainer,
   Groundmap,
   Center,

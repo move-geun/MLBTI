@@ -18,12 +18,13 @@ import { SearchDiv, Img } from "../../pages/team/TeamCustomPage.style";
 import { TextField } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPersonCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { PacmanLoader  } from "react-spinners";
 
-const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
+const PlayerList = ({ email, myTeam, isModified, setIsModified }) => {
   const dispatch = useDispatch();
   // MLB 선수 리스트
   const [playerList, setPlayerList] = useState([]);
-  
+
   // 필터링 변수 (렌더링 조건)
   const [year, setYear] = React.useState("");
   const [league, setLeague] = React.useState("");
@@ -42,6 +43,9 @@ const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
   const [isSearch, setIsSearch] = useState(false);
   // 검색 결과
   const [searchRes, setSearchRes] = useState([]);
+
+  // 스피너
+  const [spinner, setSpinner] = useState(true);
 
   // 조건 갱신 함수 | 검색창 입력값 초기화
   const handleChangeYear = (event) => {
@@ -62,6 +66,7 @@ const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
   };
 
   useEffect(() => {
+    setTimeout(() => setSpinner(false), 3000);
     // MLB 선수 목록 받아오고 저장
     dispatch(getPlayer())
       .unwrap()
@@ -73,7 +78,7 @@ const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
         const leagueData = [];
         const teamData = [];
         const positionData = [];
-        
+
         // 선수마다 가지고 있는, 조건이 될 정보 뽑아오기
         res.data.data.map((item) => {
           if (!yearData.includes(item.season) && item.season !== null) {
@@ -104,11 +109,11 @@ const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
       email: email,
       player_uid: player.playerUid,
       position: player.position,
-      season: player.season
+      season: player.season,
     };
 
     // 내 팀에 같은 포지션의 선수가 있는지 확인할 변수
-    console.log(myTeam)
+    console.log(myTeam);
     const findSamePosition = myTeam.find(function (n) {
       return n.baseballPlayer.primaryPositionAbbreviation === data.position;
     });
@@ -119,7 +124,7 @@ const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
       );
     } else {
       dispatch(registTeam(data));
-      setIsModified(!isModified)
+      setIsModified(!isModified);
     }
   };
 
@@ -132,7 +137,7 @@ const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
 
   // 필터링
   let filterdList = playerList;
-  
+
   if (year !== "") {
     filterdList = filterdList.filter((person) => person.season === year);
   }
@@ -162,10 +167,9 @@ const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
         setPosition("");
       });
   };
-  
+
   return (
     <>
-      {/* Dropdown */}
       <Wrapper>
         <SearchDiv className="playerSearch">
           <TextField
@@ -266,11 +270,12 @@ const PlayerList = ({email, myTeam, isModified, setIsModified}) => {
             ;
           </Select>
         </FormControl>
-
-        {/* PlayerList */}
       </Wrapper>
+
       <ListWrapper>
-        {year || team || league || position ? (
+        {spinner ? (
+          <PacmanLoader  color="#13a083"></PacmanLoader>
+        ) : year || team || league || position ? (
           filterdList.length !== 0 ? (
             filterdList.map((player, idx) => (
               <List key={idx + 1000}>

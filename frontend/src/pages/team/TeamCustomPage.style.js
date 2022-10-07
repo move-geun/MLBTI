@@ -44,6 +44,9 @@ const CenterWrapper = styled.div`
 const MyteamWrapper = styled.div`
   width: 50%;
   padding-top: 2rem;
+  .candi {
+    background-color: rgba(45, 68, 150, 0.07);
+  }
   /* height: 100%; */
   @media screen and (max-width: 830px) {
     width: 90%;
@@ -56,8 +59,11 @@ const Nickname = styled.div`
 `;
 
 const CustomTeamName = styled.div`
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  text-align: start;
+  margin-left: 10px;
+  /* display: flex;
+  justify-content: center; */
   font-size: 30px;
   color: #2565d0;
   @media screen and (max-width: 830px) {
