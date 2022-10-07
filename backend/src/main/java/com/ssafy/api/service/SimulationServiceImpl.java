@@ -1123,7 +1123,7 @@ public class SimulationServiceImpl implements SimulationService {
 		SimpleDateFormat SDF = new SimpleDateFormat("MM/dd/yyyy");
 
 		String chkDate = SDF.format(calendar.getTime());
-		calendar.add(Calendar.DATE, -2);
+		calendar.add(Calendar.DATE, -2); 
 		chkDate = SDF.format(calendar.getTime());
 		System.out.println(chkDate);
 		String homeName = "";
