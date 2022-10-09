@@ -16,6 +16,7 @@ import GameHistory from "./pages/game/GameHistory";
 import GameSchedule from "./pages/game/GameSchedule";
 import TeamComparison from "./pages/game/TeamComparison";
 import Navbar from "./components/navbar/Navbar";
+import NotFound from "./pages/auth/NotFound";
 
 // import PrivateRoute from "./lib/PrivateRoute";
 // import PublicRoute from "./lib/PublicRoute";
@@ -62,6 +63,9 @@ function App() {
         {/* 관리자 페이지 */}
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/notice/:id" element={<AmdinNoticeDetail />} />
+
+        {/* notFound */}
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
