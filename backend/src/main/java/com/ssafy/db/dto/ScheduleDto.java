@@ -62,7 +62,21 @@ public class ScheduleDto {
 		scheduleDto.winningPitcher=s.getWinningPitcher();
 		scheduleDto.losingPitcher=s.getLosingPitcher();
 		scheduleDto.savePitcher=s.getSavePitcher();
-		scheduleDto.homeLogo=homeLogo;
+		
+		if (homeLogo.equals("")) {
+			scheduleDto.homeLogo = s.getHomeName();
+		}
+		else {
+			scheduleDto.homeLogo=homeLogo;
+		}
+		if (awayLogo.equals("")) {
+			scheduleDto.awayLogo = s.getAwayName();
+		}
+		else {
+			scheduleDto.awayLogo=awayLogo;
+		}
+		
+		
 		scheduleDto.awayLogo=awayLogo;
 		return scheduleDto;
 	}
