@@ -71,7 +71,7 @@ const MainPage = () => {
     let month =
       now.getMonth() + 1 > 9 ? now.getMonth() + 1 : "0" + (now.getMonth() + 1);
     let day =
-      now.getDate() - 4 > 9 ? now.getDate() - 4 : "0" + (now.getDate() - 4);
+      now.getDate() - 3 > 9 ? now.getDate() - 3 : "0" + (now.getDate() - 3);
     return String(year) + String(month) + String(day);
   };
 
@@ -82,7 +82,7 @@ const MainPage = () => {
     let month =
       now.getMonth() + 1 > 9 ? now.getMonth() + 1 : "0" + (now.getMonth() + 1);
     let day =
-      now.getDate() - 5 > 9 ? now.getDate() - 5 : "0" + (now.getDate() - 5);
+      now.getDate() - 4 > 9 ? now.getDate() - 4 : "0" + (now.getDate() - 4);
     return String(year) + String(month) + String(day);
   };
 
