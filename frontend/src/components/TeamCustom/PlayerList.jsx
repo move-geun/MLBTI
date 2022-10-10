@@ -279,7 +279,6 @@ const PlayerList = ({ email, myTeam, isModified, setIsModified }) => {
           filterdList.length !== 0 ? (
             filterdList.map((player, idx) => (
               <List key={idx + 1000}>
-                {console.log(player.type)}
                 <PlyaerName>{player.name}</PlyaerName>
                 <PlyaerDetailWrapper>
                   <PlyaerDetail>{player.season}</PlyaerDetail>

@@ -25,7 +25,7 @@ const ListWrapper = styled.div`
   }
 
   @media screen and (max-width: 830px) {
-    height: 50%;
+    height: 300px;
     font-size: 15px;
   }
 
