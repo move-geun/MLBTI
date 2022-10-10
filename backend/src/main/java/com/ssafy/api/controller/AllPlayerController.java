@@ -158,7 +158,5 @@ public class AllPlayerController {
 		}
 		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",playersList));
 	}
-	
-	
-	
+
 }
