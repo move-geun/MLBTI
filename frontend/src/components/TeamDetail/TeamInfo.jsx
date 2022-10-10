@@ -1,27 +1,16 @@
-// import { useScrollTrigger } from "@mui/material";
 import React, { useState } from "react";
 import { useEffect } from "react";
-// import styled from "styled-components";
 import { Wrapper, Logo, InfoWrapper, Info, LogoDiv } from "./TeamInfo.style";
-
 
 const TeamInfo = (props) => {
 
-  console.log("TeamInfo   ", props.data);
+  const [teamInfo, setTeamInfo] = useState({});
 
-  const[teamInfo, setTeamInfo] = useState({});
-
-  useEffect(()=> {
+  useEffect(() => {
     setTeamInfo(props.data);
-    console.log("첫번째");
   }, []);
 
-  useEffect(()=> {
-    console.log("두번째");
-    console.log(teamInfo);
-  }, [teamInfo])
-
-
+  useEffect(() => {}, [teamInfo]);
 
   return (
     <Wrapper>
@@ -49,4 +38,3 @@ const TeamInfo = (props) => {
 };
 
 export default TeamInfo;
-
