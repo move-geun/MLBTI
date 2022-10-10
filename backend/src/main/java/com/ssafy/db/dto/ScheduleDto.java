@@ -75,9 +75,6 @@ public class ScheduleDto {
 		else {
 			scheduleDto.awayLogo=awayLogo;
 		}
-		
-		
-		scheduleDto.awayLogo=awayLogo;
 		return scheduleDto;
 	}
 }
