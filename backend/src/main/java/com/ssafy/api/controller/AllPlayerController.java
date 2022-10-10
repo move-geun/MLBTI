@@ -27,6 +27,7 @@ import com.ssafy.db.dto.BattersDto;
 import com.ssafy.db.dto.PitchersDto;
 import com.ssafy.db.dto.PlayerDetailDto;
 import com.ssafy.db.dto.PlayersDto;
+import com.ssafy.db.entity.BaseballPlayers;
 import com.ssafy.db.entity.Batters;
 import com.ssafy.db.entity.Notices;
 import com.ssafy.db.entity.Pitchers;
@@ -117,17 +118,22 @@ public class AllPlayerController {
 		ArrayList<Pitchers> p_l = (ArrayList<Pitchers>) pitcherService.getPitcherByName(searchName);
 		List<PlayerDetailDto> playersList = new ArrayList();
 		for(int i=0;i<b_l.size();++i) {
-//			int player_uid = b_l.get(i).getPlayerUid();
-//			String img_url = baseballPlayerService.getBaseballPlayerByUid(player_uid).getImgUrl();
+			int player_uid = b_l.get(i).getPlayerUid();
+			BaseballPlayers b = baseballPlayerService.getBaseballPlayerByUid(player_uid);
 			String img_url = "";
-			System.out.println(img_url);
+			if(b !=null) {
+				img_url =b.getImgUrl();				
+			}
 			playersList.add(PlayerDetailDto.of(b_l.get(i),img_url));
 		}
 		
 		for(int i=0;i<p_l.size();++i) {
-//			int player_uid = b_l.get(i).getPlayerUid();
-//			String img_url = baseballPlayerService.getBaseballPlayerByUid(player_uid).getImgUrl();
+			int player_uid = p_l.get(i).getPlayerUid();
+			BaseballPlayers b = baseballPlayerService.getBaseballPlayerByUid(player_uid);
 			String img_url = "";
+			if(b !=null) {
+				img_url =b.getImgUrl();				
+			}
 			playersList.add(PlayerDetailDto.of(p_l.get(i),img_url));
 		}
 		
