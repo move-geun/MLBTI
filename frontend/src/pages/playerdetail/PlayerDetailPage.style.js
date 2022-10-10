@@ -8,8 +8,6 @@ const Background = styled.div`
   height: 100vh;
 `;
 
-const Header = styled.div``;
-
 const SearchDiv = styled.div`
   display: flex;
   justify-content: space-between;
@@ -44,4 +42,4 @@ const SearchDiv = styled.div`
   }
 `;
 
-export { Background, Header, SearchDiv };
+export { Background, SearchDiv };

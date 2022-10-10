@@ -9,7 +9,7 @@ import {
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getPlayerDetail } from "./playerdetail-slice";
-const PlayerInfo = ({ match }) => {
+const PlayerInfo = () => {
   const dispatch = useDispatch();
   const { uid } = useParams();
   const [infoData, setInfoData] = useState();
@@ -32,7 +32,7 @@ const PlayerInfo = ({ match }) => {
     <Wrapper>
       <PicName>
         <ProfileImg src={infoData.imgUrl}></ProfileImg>
-        <img className="outline" src={"/assets/outline.png"}></img>
+        <img alt="outline" className="outline" src={"/assets/outline.png"}></img>
         <Name>{infoData.fullName}</Name>
       </PicName>
       <div className="detail">

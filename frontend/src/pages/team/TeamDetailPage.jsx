@@ -13,7 +13,6 @@ const TeamDetailPage = () => {
     const teamId = 100;
     axios.get(process.env.REACT_APP_DB_HOST+`/team/${teamId}`)
     .then((res) => {
-      console.log("ressss", res.data);
       setTeamData(res.data);
     })
     .catch();
@@ -23,7 +22,6 @@ const TeamDetailPage = () => {
 
 
   useEffect(()=>{
-    console.log("뿌엥");
   }, [teamData]);
 
   return (

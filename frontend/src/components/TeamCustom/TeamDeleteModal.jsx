@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Overlay,
-  ModalWrap,
-  Button,
-  Contents,
-} from "./ModifiedModal.style";
+import { Overlay, ModalWrap, Button, Contents } from "./ModifiedModal.style";
 import { useDispatch } from "react-redux";
 import { deleteUserTeam } from "./teamCustom-slice";
 
@@ -18,15 +13,13 @@ function TeamDeleteModal({ userInfo, onClose }) {
   // 저장 버튼 클릭
   const deleteHandle = () => {
     dispatch(deleteUserTeam(userInfo.userId))
-    .unwrap()
-    .then((res) => {
-      console.log(res)
-    })
-    .catch((err) => {
-      alert("에러떴다");
-    });
+      .unwrap()
+      .then((res) => {})
+      .catch((err) => {
+        alert("선수 삭제 실패");
+      });
   };
-  
+
   return (
     <Overlay>
       <ModalWrap>

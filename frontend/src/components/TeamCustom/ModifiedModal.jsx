@@ -4,7 +4,6 @@ import {
   ModalWrap,
   Button,
   Contents,
-  // CloseButton,
 } from "./ModifiedModal.style";
 import { SearchDiv } from "../../pages/team/TeamCustomPage.style";
 import TextField from "@mui/material/TextField";
@@ -13,7 +12,6 @@ import { modifiedTeamName } from "./teamCustom-slice";
 
 function ModifiedModal({ userInfo, onClose, isChangeName, setIsChangeName }) {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
   const [newName, setNewName] = useState("");
 
   // 모달 닫기
@@ -39,7 +37,7 @@ function ModifiedModal({ userInfo, onClose, isChangeName, setIsChangeName }) {
         handleClose()
       })
       .catch((err) => {
-        alert("에러떴다");
+        alert("선수 추가에 실패 했습니다.");
       });
   };
   return (
