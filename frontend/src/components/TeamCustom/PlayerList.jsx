@@ -113,7 +113,6 @@ const PlayerList = ({ email, myTeam, isModified, setIsModified }) => {
     };
 
     // 내 팀에 같은 포지션의 선수가 있는지 확인할 변수
-    console.log(myTeam);
     const findSamePosition = myTeam.find(function (n) {
       return n.baseballPlayer.primaryPositionAbbreviation === data.position;
     });
@@ -224,8 +223,8 @@ const PlayerList = ({ email, myTeam, isModified, setIsModified }) => {
             <MenuItem key={""} value={""}>
               전체
             </MenuItem>
-            {leagueFilter.map((league) => (
-              <MenuItem value={league}>{league}</MenuItem>
+            {leagueFilter.map((league, idx) => (
+              <MenuItem key={idx} value={league}>{league}</MenuItem>
             ))}
             ;
           </Select>
@@ -244,8 +243,8 @@ const PlayerList = ({ email, myTeam, isModified, setIsModified }) => {
             <MenuItem key={""} value={""}>
               전체
             </MenuItem>
-            {teamFilter.map((team) => (
-              <MenuItem value={team}>{team}</MenuItem>
+            {teamFilter.map((team, idx) => (
+              <MenuItem key={idx} value={team}>{team}</MenuItem>
             ))}
             ;
           </Select>
@@ -264,8 +263,8 @@ const PlayerList = ({ email, myTeam, isModified, setIsModified }) => {
             <MenuItem key={""} value={""}>
               전체
             </MenuItem>
-            {positionFilter.map((position) => (
-              <MenuItem value={position}>{position}</MenuItem>
+            {positionFilter.map((position, idx) => (
+              <MenuItem key={idx} value={position}>{position}</MenuItem>
             ))}
             ;
           </Select>

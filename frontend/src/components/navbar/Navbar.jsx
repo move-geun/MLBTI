@@ -62,10 +62,6 @@ const Navbar = () => {
     logout();
   };
 
-  const loginHandle = () => {
-    login();
-  };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -135,15 +131,15 @@ const Navbar = () => {
               }}
             >
               {isAuthenticated()
-                ? loginPages.map((page) => (
-                    <MenuItem onClick={handleCloseNavMenu}>
+                ? loginPages.map((page,idx) => (
+                    <MenuItem key={idx} onClick={handleCloseNavMenu}>
                       <Typography textAlign="center">
                         {Object.keys(page)}
                       </Typography>
                     </MenuItem>
                   ))
-                : notLoginPages.map((page) => (
-                    <MenuItem onClick={handleCloseNavMenu}>
+                : notLoginPages.map((page,idx) => (
+                    <MenuItem key={idx} onClick={handleCloseNavMenu}>
                       <Typography textAlign="center">
                         {Object.keys(page)}
                       </Typography>

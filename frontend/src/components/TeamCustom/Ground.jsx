@@ -23,49 +23,49 @@ const Ground = ({ myTeam, userInfo }) => {
       <ImgDiv>
         <Img className="ground" src={"/assets/Ground5.png"}></Img>
 
-        {myTeam.map((player) =>
+        {myTeam.map((player, idx) =>
           player.baseballPlayer.primaryPositionName === "First Base" ? (
-            <Player className="FB">
+            <Player key={idx} className="FB">
               <Img className="img" src={"/assets/shortStop3.png"}></Img>
               <div>{player.baseballPlayer.nickName[0]}</div>
             </Player>
           ) : player.baseballPlayer.primaryPositionName === "Second Base" ? (
-            <Player className="SB">
+            <Player key={idx} className="SB">
               <Img className="img" src={"/assets/shortStop3.png"}></Img>
               <div>{player.baseballPlayer.nickName[0]}</div>
             </Player>
           ) : player.baseballPlayer.primaryPositionName === "Third Base" ? (
-            <Player className="TB">
+            <Player key={idx} className="TB">
               <Img className="img" src={"/assets/shortStop3.png"}></Img>
               <div>{player.baseballPlayer.nickName[0]}</div>
             </Player>
           ) : player.baseballPlayer.primaryPositionName === "Shortstop" ? (
-            <Player className="SS">
+            <Player key={idx} className="SS">
               <Img className="img" src={"/assets/shortStop3.png"}></Img>
               <div>{player.baseballPlayer.nickName[0]}</div>
             </Player>
           ) : player.baseballPlayer.primaryPositionAbbreviation === "LF" ? (
-            <Player className="LF">
+            <Player key={idx} className="LF">
               <Img className="img" src={"/assets/outFielder3.png"}></Img>
               <div>{player.baseballPlayer.nickName[0]}</div>
             </Player>
           ) : player.baseballPlayer.primaryPositionAbbreviation === "CF" ? (
-            <Player className="CF">
+            <Player key={idx} className="CF">
               <Img className="img" src={"/assets/outFielder3.png"}></Img>
               <div>{player.baseballPlayer.nickName[0]}</div>
             </Player>
           ) : player.baseballPlayer.primaryPositionAbbreviation === "RF" ? (
-            <Player className="RF">
+            <Player key={idx} className="RF">
               <Img className="img" src={"/assets/outFielder3.png"}></Img>
               <div>{player.baseballPlayer.nickName[0]}</div>
             </Player>
           ) : player.baseballPlayer.primaryPositionName === "Pitcher" ? (
-            <Player className="P">
+            <Player key={idx} className="P">
               <Img className="img" src={"/assets/pitcher3.png"}></Img>
               <div>{player.baseballPlayer.nickName[0]}</div>
             </Player>
           ) : player.baseballPlayer.primaryPositionName === "Catcher" ? (
-            <Player className="C">
+            <Player key={idx} className="C">
               <Img className="img" src={"/assets/catcher.png"}></Img>
               <div>{player.baseballPlayer.nickName[0]}</div>
             </Player>
