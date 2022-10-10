@@ -279,13 +279,14 @@ const PlayerList = ({ email, myTeam, isModified, setIsModified }) => {
           filterdList.length !== 0 ? (
             filterdList.map((player, idx) => (
               <List key={idx + 1000}>
+                {console.log(player.type)}
                 <PlyaerName>{player.name}</PlyaerName>
                 <PlyaerDetailWrapper>
                   <PlyaerDetail>{player.season}</PlyaerDetail>
                   <PlyaerDetail>{player.league}</PlyaerDetail>
                   <PlyaerDetail>{player.teamName}</PlyaerDetail>
                   <PlyaerDetail>{player.position}</PlyaerDetail>
-                  {player.position === "P" ? (
+                  {player.type === "P" ? (
                     <PlyaerDetail>방어율: {player.indicator}</PlyaerDetail>
                   ) : (
                     <PlyaerDetail>타율: {player.indicator}</PlyaerDetail>
