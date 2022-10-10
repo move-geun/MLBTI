@@ -19,12 +19,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.api.request.NoticeRegisterPostReq;
 import com.ssafy.api.response.BaseRes;
+import com.ssafy.api.service.BaseballPlayerService;
 import com.ssafy.api.service.BatterService;
 import com.ssafy.api.service.PitcherService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.dto.BattersDto;
 import com.ssafy.db.dto.PitchersDto;
+import com.ssafy.db.dto.PlayerDetailDto;
 import com.ssafy.db.dto.PlayersDto;
+import com.ssafy.db.entity.BaseballPlayers;
 import com.ssafy.db.entity.Batters;
 import com.ssafy.db.entity.Notices;
 import com.ssafy.db.entity.Pitchers;
@@ -57,6 +60,8 @@ public class AllPlayerController {
 	BatterRepository batterRepository;
 	@Autowired
 	PitcherService pitcherService;
+	@Autowired
+	BaseballPlayerService baseballPlayerService;
 
 	@GetMapping("/list")
 	@ApiOperation(value = "모든 선수 정보 얻기", notes = "<strong>모든 선수 정보를 가져온다.") 
@@ -102,6 +107,40 @@ public class AllPlayerController {
 		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",playersList));
 	}
 	
+	@GetMapping("/detail")
+	@ApiOperation(value = "검색한 선수 정보 얻기 (선수 검색 페이지에서 사용할 디테일한 정보 )", notes = "검색 단어가 포함된 선수들을 가져온다.") 
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "성공"),
+        @ApiResponse(code = 500, message = "서버 오류")
+    })
+	public ResponseEntity<BaseRes> getDetailBySearchName(@RequestParam(value="searchName", required = false) String searchName ) {
+		ArrayList<Batters> b_l = (ArrayList<Batters>) batterService.getBatterByName(searchName);
+		ArrayList<Pitchers> p_l = (ArrayList<Pitchers>) pitcherService.getPitcherByName(searchName);
+		List<PlayerDetailDto> playersList = new ArrayList();
+		for(int i=0;i<b_l.size();++i) {
+			int player_uid = b_l.get(i).getPlayerUid();
+			BaseballPlayers b = baseballPlayerService.getBaseballPlayerByUid(player_uid);
+			String img_url = "";
+			if(b !=null) {
+				img_url =b.getImgUrl();				
+			}
+			playersList.add(PlayerDetailDto.of(b_l.get(i),img_url));
+		}
+		
+		for(int i=0;i<p_l.size();++i) {
+			int player_uid = p_l.get(i).getPlayerUid();
+			BaseballPlayers b = baseballPlayerService.getBaseballPlayerByUid(player_uid);
+			String img_url = "";
+			if(b !=null) {
+				img_url =b.getImgUrl();				
+			}
+			playersList.add(PlayerDetailDto.of(p_l.get(i),img_url));
+		}
+		
+		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",playersList));
+	}
+	
+	
 	@GetMapping("/searchUid")
 	@ApiOperation(value = "uid로 검색한 선수 정보 얻기", notes = "uid로 검색한 선수 정보를 가져온다.") 
     @ApiResponses({
@@ -125,7 +164,5 @@ public class AllPlayerController {
 		}
 		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",playersList));
 	}
-	
-	
-	
+
 }

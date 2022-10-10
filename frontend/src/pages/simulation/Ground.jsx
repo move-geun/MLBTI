@@ -19,6 +19,7 @@ const Ground = (prop) => {
   const [batterEvent, setBatterEvent] = useState("");
   const [hitterName, sethitterName] = useState("");
 
+  // console.log("ground에 야니정보 들어옴??", prop.data);
   useEffect(() => {
     if (prop.data !== null) {
       setInningList(prop.data);
@@ -26,10 +27,10 @@ const Ground = (prop) => {
   }, [prop]);
 
   useEffect(() => {
-    if (inningList.length > 0) {
+    if (inningList) {
+      // if (inningList.length > 0) {
       async function processArray(inningList) {
         for (let inning of inningList) {
-          // console.log("현재 이닝!", inning.inning)
           for (let data of inning.datas) {
             await makeBatterList(data);
           }
@@ -83,5 +84,3 @@ const Ground = (prop) => {
 };
 
 export default Ground;
-
-

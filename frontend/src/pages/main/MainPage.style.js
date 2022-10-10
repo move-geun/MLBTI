@@ -20,9 +20,8 @@ const Main = styled.div`
     width: 50%;
     height: 70vh;
     .spinner {
-      margin: 0 1rem 2rem 0
+      margin: 0 1rem 2rem 0;
     }
-    
   }
   .main_des {
     width: 100%;

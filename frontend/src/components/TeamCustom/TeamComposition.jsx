@@ -87,6 +87,7 @@ const TeamCoposition = ({ userInfo, myTeam, isModified, setIsModified }) => {
                   {player["baseballPlayer"]["primaryPositionAbbreviation"]}
                 </TaBleList>
                 <TaBleList align="right">
+                  {console.log(player)}
                   {player["baseballPlayer"]["batSideCode"]}
                 </TaBleList>
 
