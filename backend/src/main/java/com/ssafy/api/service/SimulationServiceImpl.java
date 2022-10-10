@@ -644,7 +644,7 @@ public class SimulationServiceImpl implements SimulationService {
 		SimpleDateFormat SDF = new SimpleDateFormat("MM/dd/yyyy");
 
 		String chkDate = SDF.format(calendar.getTime());
-		calendar.add(Calendar.DATE, -2);
+		calendar.add(Calendar.DATE, -8);
 		chkDate = SDF.format(calendar.getTime());
 		System.out.println(chkDate);
 		String homeName = "";
@@ -722,6 +722,7 @@ public class SimulationServiceImpl implements SimulationService {
 				sb.append(line);
 			}
 			JSONObject obj = new JSONObject(sb.toString()); // json으로 변경 (역직렬화)
+			System.out.println(obj);
 			JSONArray playsByInning = obj.getJSONArray("playsByInning");
 			ArrayList<Integer> homeIdx = new ArrayList<>();
 			ArrayList<Integer> awayIdx = new ArrayList<>();
@@ -854,21 +855,21 @@ public class SimulationServiceImpl implements SimulationService {
 		ArrayList<String> homePitchSide = new ArrayList<>();
 		ArrayList<String> awayBatSide = new ArrayList<>();
 		ArrayList<String> homeBatSide = new ArrayList<>();
-		batterRepository.findBySeasonAndPlayerUid(2022, 462101);
 		for (int i = 0; i < homeBatters.size(); i++) {
-			homeBattersArray.add(batterRepository.findBySeasonAndPlayerUid(2022, homeBatters.get(i)));
+			System.out.println(homeBatters.get(i));
+			homeBattersArray.add(batterRepository.findBySeasonAndPlayerUidAndTeamName(2022, homeBatters.get(i), homeName));
 			homeBatSide.add(baseballPlayerRepository.findById(homeBatters.get(i)).get().getBatSideCode());
 		}
 		for (int i = 0; i < awayBatters.size(); i++) {
-			awayBattersArray.add(batterRepository.findBySeasonAndPlayerUid(2022, awayBatters.get(i)));
+			awayBattersArray.add(batterRepository.findBySeasonAndPlayerUidAndTeamName(2022, awayBatters.get(i), awayName));
 			awayBatSide.add(baseballPlayerRepository.findById(awayBatters.get(i)).get().getBatSideCode());
 		}
 		for (int i = 0; i < homePitchers.size(); i++) {
-			homePitchersArray.add(pitcherRepository.findBySeasonAndPlayerUid(2022, homePitchers.get(i)));
+			homePitchersArray.add(pitcherRepository.findBySeasonAndPlayerUidAndTeamName(2022, homePitchers.get(i), homeName));
 			homePitchSide.add(baseballPlayerRepository.findById(homePitchers.get(i)).get().getPitchHandCode());
 		}
 		for (int i = 0; i < awayPitchers.size(); i++) {
-			awayPitchersArray.add(pitcherRepository.findBySeasonAndPlayerUid(2022, awayPitchers.get(i)));
+			awayPitchersArray.add(pitcherRepository.findBySeasonAndPlayerUidAndTeamName(2022, awayPitchers.get(i), awayName));
 			awayPitchSide.add(baseballPlayerRepository.findById(awayPitchers.get(i)).get().getPitchHandCode());
 		}
 
@@ -1124,7 +1125,7 @@ public class SimulationServiceImpl implements SimulationService {
 		SimpleDateFormat SDF = new SimpleDateFormat("MM/dd/yyyy");
 
 		String chkDate = SDF.format(calendar.getTime());
-		calendar.add(Calendar.DATE, -2);
+		calendar.add(Calendar.DATE, -4);
 		chkDate = SDF.format(calendar.getTime());
 		System.out.println(chkDate);
 		String homeName = "";

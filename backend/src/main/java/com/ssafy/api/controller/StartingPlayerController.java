@@ -25,14 +25,16 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+
 /**
 
-* @FileName : BaseballPlayerController.java
-* @Date : 2022. 9. 20
-* @작성자 : 인예림
-* @변경이력 : x
-* @프로그램 설명 : 선수 API 요청 처리를 위한 컨트롤러 정의.
-*/
+  * @FileName : StartingPlayerController.java
+  * @Project : mlb-analysis-project
+  * @Date : 2022. 10. 9 
+  * @작성자 : 김동우
+  * @변경이력 :
+  * @프로그램 설명 :
+  */
 @Api(value = "선수 API", tags = {"StartingPlayer"})
 @RestController
 @RequestMapping("/api/starting_player")

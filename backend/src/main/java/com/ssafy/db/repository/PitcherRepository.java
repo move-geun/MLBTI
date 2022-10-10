@@ -21,4 +21,5 @@ import com.ssafy.db.entity.Pitchers;
 @Repository
 public interface PitcherRepository extends JpaRepository<Pitchers, Integer>{
 	Pitchers findBySeasonAndPlayerUid(int season, int uid);
+	Pitchers findBySeasonAndPlayerUidAndTeamName(int season, int uid, String name);
 }

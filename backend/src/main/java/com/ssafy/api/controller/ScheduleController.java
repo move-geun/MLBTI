@@ -21,6 +21,7 @@ import com.ssafy.api.service.TeamService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.dto.ScheduleDto;
 import com.ssafy.db.entity.Schedules;
+import com.ssafy.db.entity.Teams;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -74,14 +75,13 @@ public class ScheduleController {
     @ApiResponses({
         @ApiResponse(code = 200, message = "성공"),
         @ApiResponse(code = 401, message = "인증 실패"),
-        @ApiResponse(code = 404, message = "사용자 없음"),
+        @ApiResponse(code = 404, message = "데이터 없음"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
 	public ResponseEntity<BaseRes> getByDate(
 			@ApiParam(value="date", required = true)@RequestParam(name="date") String date) {
 		
 		String processedDate = date.substring(0,4)+"-"+date.substring(4,6)+"-"+date.substring(6,8);
-		System.out.println(processedDate);
 		List<Schedules> s = (ArrayList<Schedules>) scheduleService.getScheduleByDate(processedDate);
 		
 		if(s.size()==0) {
@@ -89,11 +89,22 @@ public class ScheduleController {
 		}
 		List l = new ArrayList<ScheduleDto>();
 		for(int i=0;i<s.size();++i) {
-			 
-			String awayLogo = teamService.getTeamById(Integer.parseInt(s.get(i).getAwayId())).getLogo();
-			String homeLogo = teamService.getTeamById(Integer.parseInt(s.get(i).getHomeId())).getLogo();
-			
+			Teams away = teamService.getTeamById(Integer.parseInt(s.get(i).getAwayId()));
+			Teams home = teamService.getTeamById(Integer.parseInt(s.get(i).getHomeId()));
+			System.out.println(away);
+			String awayLogo = "";
+			String homeLogo = "";
+			if(away!=null){
+				awayLogo = away.getLogo();
+			}
+
+			if (home!=null) {
+				homeLogo = home.getLogo();
+			}
 			l.add(ScheduleDto.of(s.get(i),homeLogo,awayLogo));
+		}
+		if(l.size()==0) {
+			return ResponseEntity.status(404).body(BaseRes.of(404,"data not found"));
 		}
 
 		return ResponseEntity.status(200).body(BaseRes.of(200, "Success",l));

@@ -48,6 +48,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	public List<Schedules> getScheduleByDate(String Date) {
 		// TODO Auto-generated method stub
 		List<Schedules> s = scheduleRepository.findByGameDate(Date);
+
 		return s;
 	}
 }

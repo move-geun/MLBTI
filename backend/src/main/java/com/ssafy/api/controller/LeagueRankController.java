@@ -70,7 +70,11 @@ public class LeagueRankController {
 			return ResponseEntity.status(404).body(BaseRes.of(404, "failed"));
 		}
 		List l = new ArrayList<LeagueRank>();
-		for(int i=0;i<lr.size();++i) {
+		int lrSize=lr.size();
+		if (lrSize>5) {
+			lrSize=5;
+		}
+		for(int i=0;i<lrSize;++i) {
 			String logo = teamService.getTeamById(lr.get(i).getTeamId()).getLogo();
 			l.add(LeagueRankDto.of(lr.get(i),logo));
 		}
