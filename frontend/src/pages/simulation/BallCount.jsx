@@ -23,7 +23,7 @@ const BallCount = (prop) => {
     if (inningList) {
       async function processArray(inningList) {
         for (let inning of inningList) {
-          //   console.log("현재 이닝!", inning.inning)
+
           for (let data of inning.datas) {
             await makeBatterList(data);
           }
@@ -35,6 +35,7 @@ const BallCount = (prop) => {
   }, [inningList]);
 
   async function makeBatterList(batter) {
+
     BSOcountSetting(batter);
     await new Promise((resolve) => setTimeout(resolve, 1200));
     // await delay(2000)

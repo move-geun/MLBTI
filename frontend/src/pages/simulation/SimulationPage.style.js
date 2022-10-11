@@ -88,7 +88,7 @@ const BatterEvent = styled.div`
 `;
 
 const BatterName = styled.div`
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: 700;
   margin-left: 10px;
 `;

@@ -40,8 +40,14 @@ const TeamScore = (prop) => {
   }, [gameInfo]);
 
   useEffect(()=>{
+    if(logoUrl.length > 0){
+    }
 
   }, [logoUrl])
+
+  useEffect(()=>{
+
+  }, [prop.score])
 
   // 이닝별 스코어 데이터 파싱
   const eachInningScore = (data) => {
@@ -71,6 +77,8 @@ const TeamScore = (prop) => {
 
 
 
+
+
   const [winMark, setWinMark] = useState(0);
   const whozWin = (scoreInfo) => {
     if(scoreInfo[0] > scoreInfo[1]){
@@ -85,7 +93,7 @@ const TeamScore = (prop) => {
     <Score>
       <ScoreTitle>
         <div className="title">
-          <div>{gameInfo.homeName}</div>
+          <div>{gameInfo.awayName}</div>
           <div>{winMark === 0 ? '승' : '패'}</div>
           {/* <div>승-하비에르</div> */}
         </div>
@@ -99,7 +107,7 @@ const TeamScore = (prop) => {
         <div className="score">{scoreInfo[1]}</div>
         <img src={logoUrl[1]} alt="" />
         <div className="title">
-          <div>{gameInfo.awayName}</div>
+          <div>{gameInfo.homeName}</div>
           <div>{winMark === 1 ? '승' : '패'}</div>
           {/* <div>패-페레즈</div> */}
         </div>
@@ -107,8 +115,9 @@ const TeamScore = (prop) => {
       <ScoreInfo>
         <div className="each">
           <div className="info">회차</div>
-          <div>{gameInfo.homeName}</div>
+          
           <div>{gameInfo.awayName}</div>
+          <div>{gameInfo.homeName}</div>
         </div>
   
         { scoreBoard.map(inning => {     
@@ -116,8 +125,10 @@ const TeamScore = (prop) => {
           return(
             <div className="each">
               <div className="info">{cnt}</div>
-              <div>{inning.home !== null ? inning.home : '_'}</div>
+
+              {/* 이 위치에 띄우냐마냐 결정 */}
               <div>{inning.away !== null ? inning.away: '_'} </div>
+              <div>{inning.home !== null ? inning.home : '_'}</div>
             </div>
           
           )
