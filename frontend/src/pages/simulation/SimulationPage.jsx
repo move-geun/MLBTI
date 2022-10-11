@@ -30,10 +30,10 @@ const SimulationPage = () => {
   // const [logoUrl, setlogoUrl] = useState([]);
 
  // 커스텀팀로고 일 때, url 설정해주기
- let logoUrl =[data.home.logo, data.away.logo];
+ let logoUrl =[ data.away.logo, data.home.logo];
   if(!data.home.logo){
     // setlogoUrl(["/assets/defaultTeam.png", data.away.logo]);
-    logoUrl = ["/assets/defaultTeam.png", data.away.logo];
+    logoUrl = [data.away.logo, "/assets/defaultTeam.png"];
   } 
 
 
