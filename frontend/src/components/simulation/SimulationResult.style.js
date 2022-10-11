@@ -28,6 +28,9 @@ const TabName = styled.span`
   border-radius: 30%;
 `;
 const StatusContainer = styled.div`
+  .title {
+    margin-top: 1.1rem;
+  }
   /* padding-left: 4rem; */
 `;
 
