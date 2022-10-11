@@ -25,7 +25,6 @@ export const getMyteam = createAsyncThunk(
           email: data.email,
         },
       });
-      console.log(res.data);
       return res.data;
     } catch (err) {
       alert("팀 정보 조회 실패");

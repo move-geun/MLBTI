@@ -7,7 +7,6 @@ const Background = styled.div`
   align-items: center;
   width: 50%;
   height: 100%;
-  margin-top: 3rem;
   .namediv {
     display: flex;
     align-items: center;
@@ -21,7 +20,9 @@ const ImgDiv = styled.div`
 const Img = styled.img`
   &.ground {
     padding: 0;
-    width: 450px;
+    /* width: 450px;
+    height: 450px; */
+    width: 500px;
     height: 450px;
 
     @media screen and (max-width: 830px) {
@@ -41,7 +42,6 @@ const Nickname = styled.div`
   align-items: center;
   font-size: 2rem;
   padding-left: 1rem;
-  margin-top: 2rem;
 `
 
 const Player = styled.div`
@@ -50,8 +50,8 @@ const Player = styled.div`
   align-items: center;
   &.FB {
     position: absolute;
-    top: 12rem;
-    left: 20rem;
+    top: 16rem;
+    left: 19.5rem;
     @media screen and (max-width: 830px) {
       top: 9rem;
       left: 16rem;
@@ -64,8 +64,8 @@ const Player = styled.div`
   
   &.SB {
     position: absolute;
-    top: 5rem;
-    left: 17rem;
+    top: 12.5rem;
+    left: 18rem;
     @media screen and (max-width: 830px) {
       top: 4rem;
       left: 13rem;
@@ -77,8 +77,8 @@ const Player = styled.div`
   }
   &.TB {
     position: absolute;
-    top: 12rem;
-    left: 4.5rem;
+    top: 16rem;
+    left: 8.5rem;
     @media screen and (max-width: 830px) {
       top: 9rem;
       left: 3.6rem;
@@ -91,8 +91,8 @@ const Player = styled.div`
 
   &.SS {
     position: absolute;
-    top: 5rem;
-    left: 8rem;
+    top: 12.5rem;
+    left: 11rem;
     @media screen and (max-width: 830px) {
       top: 4rem;
       left: 6rem;
@@ -104,8 +104,8 @@ const Player = styled.div`
   }
   &.LF {
     position: absolute;
-    top: 5rem;
-    left: 3rem;
+    top: 9rem;
+    left: 7rem;
     @media screen and (max-width: 830px) {
       top: 5rem;
       left: 2rem;
@@ -117,8 +117,8 @@ const Player = styled.div`
   }
   &.CF {
     position: absolute;
-    top: 1rem;
-    left: 12.5rem;
+    top: 5rem;
+    left: 14.2rem;
     @media screen and (max-width: 830px) {
       top: 0.8rem;
       left: 9.5rem;
@@ -130,8 +130,8 @@ const Player = styled.div`
   }
   &.RF {
     position: absolute;
-    top: 5rem;
-    left: 22rem;
+    top: 9rem;
+    left: 21rem;
     @media screen and (max-width: 830px) {
       top: 4rem;
       left: 17rem;
@@ -143,8 +143,8 @@ const Player = styled.div`
   }
   &.P {
     position: absolute;
-    top: 12rem;
-    left: 12.5rem;
+    top: 16rem;
+    left: 14rem;
     @media screen and (max-width: 830px) {
       top: 9.3rem;
       left: 9.7rem;
@@ -157,8 +157,8 @@ const Player = styled.div`
 
   &.C {
     position: absolute;
-    top: 20rem;
-    left: 12.5rem;
+    top: 21.5rem;
+    left: 14.5rem;
     @media screen and (max-width: 830px) {
       top: 16.5rem;
       left: 9.7rem;
@@ -172,11 +172,11 @@ const Player = styled.div`
   
   .img {
     padding: 0;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     @media screen and (max-width: 830px) {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
     }
     @media screen and (max-width: 480px) {
       width: 30px;

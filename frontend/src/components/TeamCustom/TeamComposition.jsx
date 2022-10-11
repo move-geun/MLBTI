@@ -51,7 +51,7 @@ const TeamCoposition = ({ userInfo, myTeam, isModified, setIsModified }) => {
         }
       });
   };
-  
+
   return (
     <CompositionWrapper>
       <Header>
@@ -78,7 +78,7 @@ const TeamCoposition = ({ userInfo, myTeam, isModified, setIsModified }) => {
                 key={idx}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TaBleList>{player['season']}</TaBleList>
+                <TaBleList>{player["season"]}</TaBleList>
                 <TaBleList>{player["baseballPlayer"]["fullName"]}</TaBleList>
                 <TaBleList align="right" component="th" scope="player">
                   {player["baseballPlayer"]["primaryPositionName"]}
@@ -100,19 +100,19 @@ const TeamCoposition = ({ userInfo, myTeam, isModified, setIsModified }) => {
                       label="타순"
                       onChange={(e) => handleChange(e, player)}
                     >
-                      {player["baseballPlayer"]["primaryPositionAbbreviation"] === "P" ? (
-                         <MenuItem key={0} value={0}>
-                         0
-                       </MenuItem>
-                      ) :
-                    
-                      orderList.map((idx) => (
-                        <MenuItem key={idx} value={idx}>
-                          {idx}
+                      {player["baseballPlayer"][
+                        "primaryPositionAbbreviation"
+                      ] === "P" ? (
+                        <MenuItem key={0} value={0}>
+                          0
                         </MenuItem>
-                      ))
-                    } 
-
+                      ) : (
+                        orderList.map((idx) => (
+                          <MenuItem key={idx} value={idx}>
+                            {idx}
+                          </MenuItem>
+                        ))
+                      )}
                     </Select>
                   </FormControl>
                 </TaBleList>

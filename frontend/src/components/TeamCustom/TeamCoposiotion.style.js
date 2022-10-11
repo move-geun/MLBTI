@@ -4,11 +4,9 @@ const CompositionWrapper = styled.div`
   width: 95%;
   .deletePlayer {
     padding-top: 1rem;
-    
-    font-size : 1.5rem;
-
+    font-size: 1.5rem;
   }
-`
+`;
 
 const Header = styled.div`
   display: flex;
@@ -16,30 +14,16 @@ const Header = styled.div`
   font-size: 40px;
   p {
     @media screen and (max-width: 830px) {
-    font-size: 25px;
+      font-size: 25px;
+    }
   }
-}
-`
+`;
 
 const MyNickname = styled.div`
   color: #2565d0;
   @media screen and (max-width: 830px) {
     font-size: 25px;
   }
-  
-`
-const Select = styled.select`
+`;
 
-`
-
-const Option = styled.option`
-`
-
-
-export {
-  CompositionWrapper,
-  Header,
-  MyNickname,
-  Select,
-  Option
-}
+export { CompositionWrapper, Header, MyNickname };

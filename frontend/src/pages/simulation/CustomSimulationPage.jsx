@@ -145,12 +145,6 @@ const CustomSimulationPage = () => {
     }
   }, [myInfo]);
 
-  // useEffect(()=>{
-
-  //     console.log("myTeaeeeam들어왔으면 값 출ㄹ겨 ", myTeam);
-
-  // }, [myTeam]);
-
   // 팀 설정 안했을 시 페이지 이동 막기
   const isSelectedTeams = (event) => {
     if (
@@ -161,8 +155,7 @@ const CustomSimulationPage = () => {
       alert("두 팀 모두 선택해 주세요");
     }
   };
-  console.log(isClickMyTeam, selectHome, selectAway);
-  console.log(myTeam);
+
   return myTeam ? (
     <CustomConatiner>
       <Header>매치업 설정하기</Header>
@@ -244,6 +237,7 @@ const CustomSimulationPage = () => {
                 {leagueName === "nationalMLB"
                   ? nationalSearchList.map((item, idx) => (
                       <ListWrap
+                        key={idx}
                         value={idx}
                         onClick={(e) => {
                           setIsClickMyTeam(false);
@@ -258,6 +252,7 @@ const CustomSimulationPage = () => {
                     ))
                   : americanSearchList.map((item, idx) => (
                       <ListWrap
+                        key={idx}
                         onClick={() => {
                           setIsClickMyTeam(false);
                           setSelectHome(item);
@@ -344,8 +339,9 @@ const CustomSimulationPage = () => {
                 </div>
                 <div className="candidates">
                   {leagueName === "nationalMLB"
-                    ? nationalSearchList.map((item) => (
+                    ? nationalSearchList.map((item, idx) => (
                         <ListWrap
+                          key={idx}
                           onClick={() => {
                             setSelectAway(item);
                           }}
@@ -354,8 +350,9 @@ const CustomSimulationPage = () => {
                           <div className="candi">{item.name}</div>
                         </ListWrap>
                       ))
-                    : americanSearchList.map((item) => (
+                    : americanSearchList.map((item, idx) => (
                         <ListWrap
+                          key={idx}
                           onClick={() => {
                             setSelectAway(item);
                           }}

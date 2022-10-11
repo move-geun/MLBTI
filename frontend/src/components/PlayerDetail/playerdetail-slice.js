@@ -1,5 +1,5 @@
 import http from "../../api/http";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // GET - 선수 상세 조회
 export const getPlayerDetail = createAsyncThunk (
