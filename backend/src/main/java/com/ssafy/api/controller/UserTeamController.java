@@ -71,7 +71,7 @@ public class UserTeamController {
 			return ResponseEntity.status(404).body(BaseResponseBody.of(404, "Not Player"));
 		}
 		
-		UserTeams userTeam = userTeamService.createUserTeam(user, baseballPlayer, registerInfo.getPosition(), registerInfo.getSeason());
+		UserTeams userTeam = userTeamService.createUserTeam(user, baseballPlayer, registerInfo.getPosition(), registerInfo.getSeason(), registerInfo.getTeam());
 		if(userTeam==null) {
 			return ResponseEntity.status(404).body(BaseResponseBody.of(404, "Already Exists"));
 		}

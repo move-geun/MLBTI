@@ -23,6 +23,7 @@ public class UserTeams extends BaseEntity{
 	Integer team_index;
 	Integer order;
 	Integer season;
+	String team;
 //	Integer playerUid;
 //	Integer userUid;
 	@ManyToOne

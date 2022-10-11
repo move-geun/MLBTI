@@ -30,12 +30,13 @@ public class UserTeamServiceImpl implements UserTeamService{
 	BaseballPlayerRepository baseballPlayerRepository;
 	
 	@Override
-	public UserTeams createUserTeam(Users user, BaseballPlayers baseballPlayer, String position, int season) {
+	public UserTeams createUserTeam(Users user, BaseballPlayers baseballPlayer, String position, int season, String team) {
 		UserTeams userTeam = new UserTeams();
 		userTeam.setUser(user);
 		userTeam.setBaseballPlayer(baseballPlayer);
 		userTeam.setPosition(position);
 		userTeam.setSeason(season);
+		userTeam.setTeam(team);
 		if(userTeamRepository.existsByUserAndBaseballPlayer(user, baseballPlayer)) {
 			return null;
 		}
