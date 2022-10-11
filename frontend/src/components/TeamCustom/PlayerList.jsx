@@ -110,6 +110,7 @@ const PlayerList = ({ email, myTeam, isModified, setIsModified }) => {
       player_uid: player.playerUid,
       position: player.position,
       season: player.season,
+      team: player.teamName,
     };
 
     // 내 팀에 같은 포지션의 선수가 있는지 확인할 변수
