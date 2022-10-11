@@ -41,7 +41,7 @@ import BallCount from "../simulation/BallCount";
 
 // 너비 지정해놔서 크기 줄 때 바꿔줘야함
 // title 안내려오게끔 고정
-  
+
 const MainPage = () => {
   const notices = useSelector((state) => state.main.notices);
   const todays = useSelector((state) => state.main.todays);
@@ -184,7 +184,7 @@ const MainPage = () => {
     floatingYesterday();
     todayFormal();
     rank();
-    setTimeout(() => setSpinner(false), 2000);
+    setTimeout(() => setSpinner(false), 4500);
     setMainSimul(todays[todays.length - 1]);
   }, []);
 
@@ -330,9 +330,7 @@ const MainPage = () => {
                       {/* <div class="dot-elastic"></div> */}
                     </div>
                     <div className="sub_des">
-                      <div className="sub_title">
-                        <div>오늘 예정 경기</div>
-                      </div>
+                      <div className="sub_title">오늘 예정 경기</div>
 
                       {todays ? (
                         <Link
