@@ -10,8 +10,6 @@ const CompareContainer = styled.div`
   margin: 1rem auto 0 auto;
   font-size: 1.5rem;
   input {
-    /* border-left: 2px solid rgba(0, 0, 0, 0.5);
-    border-right: 2px solid rgba(0, 0, 0, 0.5); */
     text-align: center;
     padding-left: 10px;
     font-size: 2.5rem;

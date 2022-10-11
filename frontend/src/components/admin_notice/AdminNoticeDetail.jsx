@@ -13,7 +13,6 @@ const AmdinNoticeDetail = ({prop}) => {
     const [ data ] = useState({});
     const location = useLocation();
     const notice = location.state;
-    console.log("디데일페이지   ", notice);
 
     let navigate = useNavigate();
 
@@ -37,7 +36,6 @@ const AmdinNoticeDetail = ({prop}) => {
                         navigate("/admin");
                     })
                     .catch(function(err){
-                        console.log(err);
                      });
             }
             else{

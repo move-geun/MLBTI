@@ -46,7 +46,6 @@ const SimulationResult = (prop = defaultValue) => {
     if (inningInfo.length !== 0) {
       ResultContent();
     } else {
-      console.log("현재 이닝에는 값이 없습니다.");
     }
   }, [inningInfo]);
 

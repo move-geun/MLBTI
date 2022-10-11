@@ -13,7 +13,6 @@ export const getNotice = createAsyncThunk(
       const res = await http.axios.get("/notice");
       return res.data;
     } catch (err) {
-      alert("공지사항 불러오기 실패!");
       return rejectWithValue(err.response);
     }
   }
@@ -28,10 +27,8 @@ export const getToday = createAsyncThunk(
       const res = await http.axios.get("/schedule", {
         params,
       });
-      console.log("오늘", res.data.data);
       return res.data.data;
     } catch (err) {
-      alert("스케줄 불러오기 실패");
       return rejectWithValue(err.response);
     }
   }
@@ -46,10 +43,8 @@ export const getYesterday = createAsyncThunk(
       const res = await http.axios.get("/schedule", {
         params,
       });
-      console.log("어제", res.data.data);
       return res.data.data;
     } catch (err) {
-      alert("어제 스케줄 불러오기 실패");
       return rejectWithValue(err.response);
     }
   }
@@ -69,7 +64,6 @@ export const getAWrank = createAsyncThunk(
       });
       return res.data.data;
     } catch (err) {
-      alert("랭크 불러오기 실패");
       return rejectWithValue(err.response);
     }
   }
@@ -88,7 +82,6 @@ export const getAErank = createAsyncThunk(
       });
       return res.data.data;
     } catch (err) {
-      alert("랭크 불러오기 실패");
       return rejectWithValue(err.response);
     }
   }
@@ -107,7 +100,6 @@ export const getAMrank = createAsyncThunk(
       });
       return res.data.data;
     } catch (err) {
-      alert("랭크 불러오기 실패");
       return rejectWithValue(err.response);
     }
   }
@@ -127,7 +119,6 @@ export const getNWrank = createAsyncThunk(
       });
       return res.data.data;
     } catch (err) {
-      alert("랭크 불러오기 실패");
       return rejectWithValue(err.response);
     }
   }
@@ -147,7 +138,6 @@ export const getNErank = createAsyncThunk(
       });
       return res.data.data;
     } catch (err) {
-      alert("랭크 불러오기 실패");
       return rejectWithValue(err.response);
     }
   }
@@ -166,7 +156,6 @@ export const getNMrank = createAsyncThunk(
       });
       return res.data.data;
     } catch (err) {
-      alert("랭크 불러오기 실패");
       return rejectWithValue(err.response);
     }
   }

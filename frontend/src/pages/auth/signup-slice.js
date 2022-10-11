@@ -37,8 +37,6 @@ export const checkCertNumber = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       let result = false;
-
-      // const res = await axios.post('/user/mail/valid/check', null, {params: { email: email, randomNumber: `${randomNumber}` }})
       const res = await http.axios.post("/user/mail/valid/check", null, {
         params: { email: data.email, randomNumber: data.randomNumber },
       });

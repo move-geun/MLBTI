@@ -46,7 +46,6 @@ const SimulationPage = () => {
     dispatch(simulationData(teamId))
       .unwrap()
       .then((res) => {
-        console.log("ressss ", res);
         if (res.data === "") {
           alert("선수 정보가 부족합니다.");
           navigate("/customsimultaion");
