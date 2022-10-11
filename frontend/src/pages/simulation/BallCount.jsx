@@ -13,7 +13,6 @@ const BallCount = (prop) => {
   useEffect(() => {
     if (prop.data !== null) {
       setInningList(prop.data);
-      console.log("현재 이닝!!!!", prop);
     }
   }, [prop]);
 

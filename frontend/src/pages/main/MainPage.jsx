@@ -196,7 +196,6 @@ const MainPage = () => {
     todayFormal();
     rank();
     setTimeout(() => setSpinner(false), 2000);
-    console.log("홈로고", todays[todays.length - 1]);
     setMainSimul(todays[todays.length - 1]);
     // console.log("메인", mainSimul);
     // let step = 0;

@@ -22,7 +22,6 @@ const Ground = (prop, {test}) => {
   // console.log("ground에 야니정보 들어옴??", prop.data);
   useEffect(() => {
     if (prop.data !== null) {
-      console.log("시뮬에서 뭐 받아와", prop);
       setInningList(prop.data);
     }
   }, [prop]);
@@ -35,9 +34,8 @@ const Ground = (prop, {test}) => {
           for (let data of inning.datas) {
             await makeBatterList(data);
           }
-          prop.test(inning);
+          prop.test();
         }
-        console.log("Done!");
       }
 
       processArray(inningList);

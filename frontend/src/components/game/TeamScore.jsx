@@ -14,7 +14,6 @@ const TeamScore = (prop) => {
 
   useEffect(()=> {
     if(prop.data.gamePk){
-      console.log("여기는 전광판", prop);
       setGameInfo(prop.data);
       setLogoUrl(prop.logo);
 
@@ -42,12 +41,11 @@ const TeamScore = (prop) => {
 
   useEffect(()=>{
     if(logoUrl.length > 0){
-      console.log("로고 URL 읽으셈", logoUrl);
     }
   }, [logoUrl])
 
   useEffect(()=>{
-    console.log("ccccc",prop.score)
+
   }, [prop.score])
 
   // 이닝별 스코어 데이터 파싱
@@ -57,7 +55,7 @@ const TeamScore = (prop) => {
 
   useEffect(()=> {
     if(scoreBoard.length > 0 ){
-      showScore(scoreBoard);
+
     }
     
   }, [scoreBoard]);
@@ -74,16 +72,6 @@ const TeamScore = (prop) => {
     data.map(s => {
       setScoreInfo(prev => [...prev, s[12]]);
     })    
-  }
-
-  // 이닝 끝나고 경기 보여주는 함수
-  async function showScore(data) {
-    showScoreListSetting(data);
-    await new Promise((resolve) => setTimeout(resolve, 1200));
-  }
-
-  const showScoreListSetting = (data) => {
-    console.log("1초에 한 번씩 값 들어와?? ", data);
   }
 
 
