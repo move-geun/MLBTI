@@ -149,10 +149,14 @@ const SimulationResult = (prop = defaultValue) => {
 
       <div>
         <StatusContainer>
-          <StatusBtn onClick={onClickTopPlay}>{currentTab + 1}회 초</StatusBtn>
-          <StatusBtn onClick={onClickBottomPlay}>
-            {currentTab + 1}회 말
-          </StatusBtn>
+          <div className="title">
+            <StatusBtn onClick={onClickTopPlay}>
+              {currentTab + 1}회 초
+            </StatusBtn>
+            <StatusBtn onClick={onClickBottomPlay}>
+              {currentTab + 1}회 말
+            </StatusBtn>
+          </div>
         </StatusContainer>
         <BatterContatiner>
           {batterList.batterName !== null ? (
