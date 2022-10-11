@@ -10,7 +10,7 @@ import {
   BatterName,
 } from "./SimulationPage.style";
 
-const Ground = (prop) => {
+const Ground = (prop, {test}) => {
   const [inningList, setInningList] = useState([]);
   // const [batterList, setBatterList] = useState([]);
   const [firstBase, setFirstBase] = useState(false);
@@ -22,6 +22,7 @@ const Ground = (prop) => {
   // console.log("ground에 야니정보 들어옴??", prop.data);
   useEffect(() => {
     if (prop.data !== null) {
+      console.log("시뮬에서 뭐 받아와", prop);
       setInningList(prop.data);
     }
   }, [prop]);
@@ -34,6 +35,7 @@ const Ground = (prop) => {
           for (let data of inning.datas) {
             await makeBatterList(data);
           }
+          prop.test(inning);
         }
         console.log("Done!");
       }

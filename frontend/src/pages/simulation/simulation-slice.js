@@ -19,6 +19,7 @@ export const simulationData = createAsyncThunk(
 export const customsimulationData = createAsyncThunk(
   "CUSTOMSIMULATIONDATA",
   async (matchInfo, { rejectWithValue }) => {
+    console.log("커스텀 api 부르고 있어??? 정보는 뭐야  ", matchInfo);
     try {
       const res = await http.axios.post("/simul/custom", null, {
         params: { email: matchInfo.email, teamUid: matchInfo.uid },

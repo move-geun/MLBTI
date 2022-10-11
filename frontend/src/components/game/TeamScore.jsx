@@ -46,6 +46,10 @@ const TeamScore = (prop) => {
     }
   }, [logoUrl])
 
+  useEffect(()=>{
+    console.log("ccccc",prop.score)
+  }, [prop.score])
+
   // 이닝별 스코어 데이터 파싱
   const eachInningScore = (data) => {
     setScoreBoard(data);
@@ -53,7 +57,7 @@ const TeamScore = (prop) => {
 
   useEffect(()=> {
     if(scoreBoard.length > 0 ){
-
+      showScore(scoreBoard);
     }
     
   }, [scoreBoard]);
@@ -72,6 +76,18 @@ const TeamScore = (prop) => {
     })    
   }
 
+  // 이닝 끝나고 경기 보여주는 함수
+  async function showScore(data) {
+    showScoreListSetting(data);
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+  }
+
+  const showScoreListSetting = (data) => {
+    console.log("1초에 한 번씩 값 들어와?? ", data);
+  }
+
+
+
 
 
   const [winMark, setWinMark] = useState(0);
@@ -88,7 +104,7 @@ const TeamScore = (prop) => {
     <Score>
       <ScoreTitle>
         <div className="title">
-          <div>{gameInfo.homeName}</div>
+          <div>{gameInfo.awayName}</div>
           <div>{winMark === 0 ? '승' : '패'}</div>
           {/* <div>승-하비에르</div> */}
         </div>
@@ -102,7 +118,7 @@ const TeamScore = (prop) => {
         <div className="score">{scoreInfo[1]}</div>
         <img src={logoUrl[1]} alt="" />
         <div className="title">
-          <div>{gameInfo.awayName}</div>
+          <div>{gameInfo.homeName}</div>
           <div>{winMark === 1 ? '승' : '패'}</div>
           {/* <div>패-페레즈</div> */}
         </div>
@@ -110,8 +126,9 @@ const TeamScore = (prop) => {
       <ScoreInfo>
         <div className="each">
           <div className="info">회차</div>
-          <div>{gameInfo.homeName}</div>
+          
           <div>{gameInfo.awayName}</div>
+          <div>{gameInfo.homeName}</div>
         </div>
   
         { scoreBoard.map(inning => {     
@@ -119,8 +136,10 @@ const TeamScore = (prop) => {
           return(
             <div className="each">
               <div className="info">{cnt}</div>
-              <div>{inning.home !== null ? inning.home : '_'}</div>
+
+              {/* 이 위치에 띄우냐마냐 결정 */}
               <div>{inning.away !== null ? inning.away: '_'} </div>
+              <div>{inning.home !== null ? inning.home : '_'}</div>
             </div>
           
           )
