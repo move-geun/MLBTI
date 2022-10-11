@@ -23,8 +23,8 @@ const TeamScore = (prop) => {
 
   useEffect(()=> {
     if(gameInfo.gamePk){
-      let homeScore = gameInfo.scoreBoard[0];
-      let awayScore = gameInfo.scoreBoard[1];
+      let homeScore = gameInfo.scoreBoard[1];
+      let awayScore = gameInfo.scoreBoard[0];
 
         for(let i = 0; i < gameInfo.scoreBoard[0].length - 2 ; i ++){
           let data = {
