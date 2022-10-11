@@ -23,29 +23,21 @@ const NotFound = () => {
   if (windowSize > 980) {
     return (
       <NotFoundcontainer>
-        <div>
-          <img src="../assets/notfound.png" alt="" />
-        </div>
+        <img src="../assets/notfound.png" alt="" />
         <button onClick={gomain}>메인으로 가기</button>
       </NotFoundcontainer>
     );
   } else if (windowSize > 480) {
     return (
       <NotFoundcontainer>
-        <div>
-          <img src="../assets/notfound2.png" alt="" />
-          <span>나오나</span>
-        </div>
+        <img src="../assets/notfound2.png" alt="" />
         <button onClick={gomain}>메인으로 가기</button>
       </NotFoundcontainer>
     );
   } else {
     return (
       <NotFoundcontainer>
-        <div>
-          <img src="../assets/notfound3.png" alt="" />
-          <span>이건?</span>
-        </div>
+        <img src="../assets/notfound3.png" alt="" />
         <button onClick={gomain}>메인으로 가기</button>
       </NotFoundcontainer>
     );
