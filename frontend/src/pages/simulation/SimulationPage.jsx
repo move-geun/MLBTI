@@ -116,12 +116,6 @@ const SimulationPage = () => {
     setSendInningList(innginglist);
   };
 
-
-  const test = () => {
-    console.log("Test 호출호출");
-    // setScoreData(x)
-  }
-
   return (
     <SimulContainer>
       {spinner ? (
@@ -132,7 +126,7 @@ const SimulationPage = () => {
         <>
           <TeamScore data={simulData}  logo={logoUrl} score = {scoreData} />
           <Center>
-            <Ground data={sendinningList} test= {test} score = {scoreData}/>
+            <Ground data={sendinningList} score = {scoreData}/>
             <BallCount data={sendinningList} />
           </Center>
           <SimulationResult data={simulData} />
