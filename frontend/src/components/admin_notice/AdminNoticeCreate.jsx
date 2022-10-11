@@ -16,7 +16,6 @@ const onPost = (e) => {
 
 
     let str = {title: Notitle, content: Nocontent};
-    console.log("str   ",str);
 
     axios.post(process.env.REACT_APP_DB_HOST+`/notice`, {
      
@@ -27,9 +26,7 @@ const onPost = (e) => {
     })
     .then(function(res){
         handleClose();
-        console.log(res);
     }).catch(function(err){
-        console.log(err);
     })
 
 }

@@ -15,7 +15,6 @@ export const changePwd = createAsyncThunk(
       });
       return res;
     } catch (err) {
-      alert("에러입니다");
       return rejectWithValue(err.response);
     }
   }

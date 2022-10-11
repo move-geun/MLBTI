@@ -40,15 +40,12 @@ const dispatch = useDispatch();
     }
 
     webSocket.onmessage = function(message) {
-        console.log("서버에서 온 메세지", message);
        
         var data = JSON.parse(message.data);
-        console.log("daaataaa  ", data);
         const obj = {};
         obj.id = data.id;
         obj.message = data.message;
         
-        console.log("obj", obj);
         setServerMessageList([...serverMessageList, obj]);
 
     }
@@ -69,10 +66,8 @@ const dispatch = useDispatch();
     
     useEffect(()=> {
         webSocket.onopen = function(){
-            console.log("서버와 웹소켓 연결 성공");
         };
         dispatch(myprofile()).unwrap().then((res) => {
-            console.log("Resssssss ", res);
             setUserEmail(res.data.userId);
         })
     }, []);
@@ -83,7 +78,6 @@ const dispatch = useDispatch();
         <LiveCommentContainer>
             <CommentBox>
                 {serverMessageList.map((comment, index) => {
-                    console.log("commnet", comment);
                     if(comment !== null) {
                         return(
                             <Bubble>{comment.id} : {comment.message}</Bubble>

@@ -51,7 +51,6 @@ const Cheer = () => {
         })
         .then(function(response) {
            const resData = response.data.data;
-           console.log("ggg", resData);
            setCheerScore({
                 homeName: resData.homeName,
                 awayName: resData.awayName,
@@ -63,14 +62,11 @@ const Cheer = () => {
            setHomeTeam(cheerScore.homeCount);
            setAwayTeam(cheerScore.awayCount);
            setTotalScore(resData.homeCount + resData.awayCount);
-           console.log("ttt",totalScore)
            
            
      
         })
-        .catch(function(error) {
-            console.log("ERROR : " + JSON.stringify(error));
-        });
+        .catch();
     
     }, []);
 
@@ -93,7 +89,7 @@ const Cheer = () => {
         .then(function(response) {
 
 
-            console.log("성공~~~");
+
         })
          .catch(function(error) {
              console.log("ERROR : " + JSON.stringify(error));

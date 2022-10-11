@@ -38,7 +38,6 @@ export const tmppwd = createAsyncThunk(
       console.log(res);
       return res;
     } catch (err) {
-      alert("실패");
       return rejectWithValue(err.response);
     }
   }

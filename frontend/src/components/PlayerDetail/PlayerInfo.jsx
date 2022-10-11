@@ -27,7 +27,7 @@ const PlayerInfo = () => {
         setInfoData(res);
       });
   }, []);
-
+  
   return infoData ? (
     <Wrapper>
       <PicName>

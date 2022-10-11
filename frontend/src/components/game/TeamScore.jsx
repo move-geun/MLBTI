@@ -14,7 +14,6 @@ const TeamScore = (prop) => {
 
   useEffect(()=> {
     if(prop.data.gamePk){
-      console.log("여기는 전광판", prop);
       setGameInfo(prop.data);
       setLogoUrl(prop.logo);
 
@@ -41,9 +40,7 @@ const TeamScore = (prop) => {
   }, [gameInfo]);
 
   useEffect(()=>{
-    if(logoUrl.length > 0){
-      console.log("로고 URL 읽으셈", logoUrl);
-    }
+
   }, [logoUrl])
 
   // 이닝별 스코어 데이터 파싱
