@@ -19,7 +19,8 @@ const BallCount = (prop) => {
   useEffect(() => {}, [ballCnt, strikeCnt, outCnt, inningindex]);
 
   useEffect(() => {
-    if (inningList.length > 0) {
+    // if (inningList.length > 0) {
+    if (inningList) {
       async function processArray(inningList) {
         for (let inning of inningList) {
           //   console.log("현재 이닝!", inning.inning)
