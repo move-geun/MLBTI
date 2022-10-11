@@ -10,7 +10,7 @@ import {
   BatterName,
 } from "./SimulationPage.style";
 
-const Ground = (prop, {test}) => {
+const Ground = (prop, ) => {
   const [inningList, setInningList] = useState([]);
   const [firstBase, setFirstBase] = useState(false);
   const [secondBase, setSecondBase] = useState(false);
@@ -32,7 +32,6 @@ const Ground = (prop, {test}) => {
           for (let data of inning.datas) {
             await makeBatterList(data);
           }
-          prop.test();
         }
       }
 
