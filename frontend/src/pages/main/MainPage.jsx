@@ -195,8 +195,8 @@ const MainPage = () => {
     floatingYesterday();
     todayFormal();
     rank();
-    setTimeout(() => setSpinner(false), 2000);
-    console.log("홈로고", todays[todays.length - 1]);
+    setTimeout(() => setSpinner(false), 4500);
+    // console.log("홈로고", todays[todays.length - 1]);
     setMainSimul(todays[todays.length - 1]);
     // console.log("메인", mainSimul);
     // let step = 0;
@@ -347,9 +347,7 @@ const MainPage = () => {
                       {/* <div class="dot-elastic"></div> */}
                     </div>
                     <div className="sub_des">
-                      <div className="sub_title">
-                        <div>오늘 예정 경기</div>
-                      </div>
+                      <div className="sub_title">오늘 예정 경기</div>
 
                       {todays ? (
                         <Link
