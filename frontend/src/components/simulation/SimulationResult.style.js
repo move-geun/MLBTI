@@ -30,6 +30,11 @@ const TabName = styled.span`
 const StatusContainer = styled.div`
   .title {
     margin-top: 1.1rem;
+    cursor: pointer;
+    .select {
+      background-color: black;
+      color: white;
+    }
   }
   /* padding-left: 4rem; */
 `;
