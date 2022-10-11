@@ -42,6 +42,7 @@ const TeamScore = (prop) => {
   useEffect(()=>{
     if(logoUrl.length > 0){
     }
+
   }, [logoUrl])
 
   useEffect(()=>{

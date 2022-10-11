@@ -244,6 +244,14 @@ const DownChart = styled(Slider)`
     .lose {
       background-color: tomato;
     }
+    .title {
+      @media screen and (max-width: 830px) {
+        font-size: 1.5rem;
+      }
+      @media screen and (max-width: 480px) {
+        font-size: 1rem;
+      }
+    }
   }
 
   .slick-dots {
@@ -356,7 +364,13 @@ const Predict = styled.div`
   font-size: 0.8rem;
   .title {
     margin-bottom: 20px;
-    font-size: 1rem;
+    font-size: 1.5rem;
+    @media screen and (max-width: 830px) {
+      font-size: 1rem;
+    }
+    @media screen and (max-width: 480px) {
+      font-size: 0.625rem;
+    }
   }
 
   .contentdiv {
@@ -499,6 +513,13 @@ const Rank = styled.div`
   .title {
     margin-bottom: 20px;
     width: 100%;
+    font-size: 1.5rem;
+    @media screen and (max-width: 830px) {
+      font-size: 1rem;
+    }
+    @media screen and (max-width: 480px) {
+      font-size: 0.625rem;
+    }
   }
 
   .divide {
@@ -608,6 +629,12 @@ const SubItem = styled.div`
     width: 300px;
   }
 
+  .sub_title {
+    font-size: 1.5rem;
+    @media screen and (max-width: 830px) {
+      font-size: 1rem;
+    }
+  }
   .sub_simul {
     width: 200px;
     height: 120px;

@@ -28,7 +28,6 @@ const BallCount = (prop) => {
             await makeBatterList(data);
           }
         }
-        console.log("Done!");
       }
 
       processArray(inningList);

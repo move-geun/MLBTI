@@ -12,14 +12,12 @@ import {
 
 const Ground = (prop, {test}) => {
   const [inningList, setInningList] = useState([]);
-  // const [batterList, setBatterList] = useState([]);
   const [firstBase, setFirstBase] = useState(false);
   const [secondBase, setSecondBase] = useState(false);
   const [thirdBase, setThirdBase] = useState(false);
   const [batterEvent, setBatterEvent] = useState("");
   const [hitterName, sethitterName] = useState("");
 
-  // console.log("ground에 야니정보 들어옴??", prop.data);
   useEffect(() => {
     if (prop.data !== null) {
       setInningList(prop.data);
@@ -53,7 +51,6 @@ const Ground = (prop, {test}) => {
   }
 
   const baseSetting = (batter) => {
-    // console.log("2초 뒤에 간ㄷ", batter);
     setFirstBase(batter.firstBase);
     setSecondBase(batter.secondBase);
     setThirdBase(batter.thirdBase);
@@ -62,7 +59,6 @@ const Ground = (prop, {test}) => {
   };
 
   useEffect(() => {
-    // console.log("event 알려줘", batterEvent);
   }, [batterEvent, hitterName]);
 
   return (
@@ -72,9 +68,6 @@ const Ground = (prop, {test}) => {
         {firstBase && <FirstB className="base1" src={"/assets/base.png"} />}
         {secondBase && <SecondB className="base2" src={"/assets/base.png"} />}
         {thirdBase && <ThirdB className="base3" src={"/assets/base.png"} />}
-        {/* <FirstB className="base1" src={"/assets/base.png"} />
-        <SecondB className="base2" src={"/assets/base.png"} />
-        <ThirdB className="base3" src={"/assets/base.png"} /> */}
         <BatterEvent>
           {hitterName} <BatterName> {batterEvent}</BatterName>
         </BatterEvent>

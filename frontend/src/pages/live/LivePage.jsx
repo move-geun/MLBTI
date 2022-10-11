@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   LiveContainer,
-  // Score,
-  // ScoreTitle,
-  // ScoreInfo,
   ScoreHistory,
-  // TabMenu,
-  // Desc,
   TopContainer,
   LiveEnjoyContainer,
   MLBPlayer,
@@ -15,22 +10,13 @@ import {
 
 import Cheer from "../../components/cheer/Cheer";
 import LiveComment from "../../components/livecomment/LiveComment";
-// import http from "../../api/http";
 import { playData } from "./live-slice";
 import { useDispatch } from "react-redux";
-import LiveHistory from "../../components/live_history/LiveHistory";
 
 const LivePage = () => {
-  // const [currentTab, setCurrentTab] = useState(0);
   const [liveData, setLiveData] = useState({});
-  // const [innings, setInnings] = useState([]);
-  // const [ statusIsTop, setStatusIsTop ] = useState(true);
 
   const dispatch = useDispatch();
-
-  // const selectTabHandler = (index) => {
-  //   setCurrentTab(index);
-  // }
 
   useEffect(() => {
     dispatch(playData())
@@ -43,23 +29,11 @@ const LivePage = () => {
 
   function inningsInfo(data) {
     let inningList = [];
-    // const count = 0;
 
     data.forEach((value, index, array) => {
-      // console.log(`${index}`);
       inningList.push(value);
     });
   }
-
-  // function batterInfo(data){
-  //   let batterList = [];
-  //   batterList.push(data);
-  // }
-
-  // let tabList = [{
-  //   tabName: '',
-  //   content: '',
-  // }];
 
   return (
     <LiveContainer>

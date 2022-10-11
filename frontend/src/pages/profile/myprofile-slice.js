@@ -9,7 +9,6 @@ export const myprofile = createAsyncThunk(
       const res = await http.auth_axios.get("/user/me");
       return res;
     } catch (err) {
-      alert("에러입니다");
       return rejectWithValue(err.response);
     }
   }
@@ -27,7 +26,6 @@ export const getMyteam = createAsyncThunk(
       });
       return res.data;
     } catch (err) {
-      alert("팀 정보 조회 실패");
       return rejectWithValue(err.response);
     }
   }
@@ -46,7 +44,6 @@ export const changeTeamName = createAsyncThunk(
       });
       return res;
     } catch (err) {
-      alert("팀 이름 변경 실패");
       return rejectWithValue(err.response);
     }
   }

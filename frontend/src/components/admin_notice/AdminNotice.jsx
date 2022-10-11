@@ -24,11 +24,9 @@ const AmdinNotice = () => {
     useEffect(()=>{
       axios.get(process.env.REACT_APP_DB_HOST+`/notice`)
       .then((res) => {
-        console.log("Res    ", res);
         setPosts(res.data);
   
       }).catch(function(err){
-        console.log(err);
       });
     },[]);
   

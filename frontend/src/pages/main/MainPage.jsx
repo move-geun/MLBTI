@@ -42,7 +42,6 @@ import BallCount from "../simulation/BallCount";
 // 너비 지정해놔서 크기 줄 때 바꿔줘야함
 // title 안내려오게끔 고정
 
-// 후후
 const MainPage = () => {
   const notices = useSelector((state) => state.main.notices);
   const todays = useSelector((state) => state.main.todays);
@@ -71,7 +70,7 @@ const MainPage = () => {
     let month =
       now.getMonth() + 1 > 9 ? now.getMonth() + 1 : "0" + (now.getMonth() + 1);
     let day =
-      now.getDate() - 6 > 9 ? now.getDate() - 6 : "0" + (now.getDate() - 6);
+      now.getDate() - 7 > 9 ? now.getDate() - 7 : "0" + (now.getDate() - 7);
     return String(year) + String(month) + String(day);
   };
 
@@ -82,7 +81,7 @@ const MainPage = () => {
     let month =
       now.getMonth() + 1 > 9 ? now.getMonth() + 1 : "0" + (now.getMonth() + 1);
     let day =
-      now.getDate() - 7 > 9 ? now.getDate() - 7 : "0" + (now.getDate() - 7);
+      now.getDate() - 8 > 9 ? now.getDate() - 8 : "0" + (now.getDate() - 8);
     return String(year) + String(month) + String(day);
   };
 
@@ -93,7 +92,6 @@ const MainPage = () => {
       .unwrap()
       .then((res) => {})
       .catch((err) => {
-        console.log("공지 불러오기 실패");
       });
   }
 
@@ -108,7 +106,6 @@ const MainPage = () => {
         takeGameId(res);
       })
       .catch((err) => {
-        // console.log("스케줄 불러오기 실패");
       });
   }
 
@@ -122,22 +119,15 @@ const MainPage = () => {
   //////////////////// 시뮬레이션 /////////////////////////////
 
   const [inningList, setInningList] = useState([]);
-  // useEffect(() => {
-  //   if (inningList.length > 0) {
-  //     // console.log("여기는 메인 페이지 이닝리스트 들어감", inningList);
-  //   }
-  // }, [inningList]);
 
   // 게임 아이디로 시뮬레이션 결과 받아오기
   function takeSimulResult(teamId) {
     dispatch(simulationData(teamId))
       .unwrap()
       .then((res) => {
-        // console.log("시뮬레이션 가져왔지롱  ", res);
         setInningList(res.data.inngings);
       })
       .catch((err) => {
-        console.log("시뮬레이션 데이터 불러오기 실패");
       });
   }
 
@@ -155,7 +145,6 @@ const MainPage = () => {
       .unwrap()
       .then((res) => {})
       .catch((err) => {
-        console.log("어제 스케줄 불러오기 실패");
       });
   }
   // 랭크 받아오기
@@ -195,13 +184,8 @@ const MainPage = () => {
     floatingYesterday();
     todayFormal();
     rank();
-    setTimeout(() => setSpinner(false), 2000);
+    setTimeout(() => setSpinner(false), 4500);
     setMainSimul(todays[todays.length - 1]);
-    // console.log("메인", mainSimul);
-    // let step = 0;
-    // for (step = 0; step < res.data.length; step++) {
-    //   setNotice([...notices, res.data[step]]);
-    // }
   }, []);
 
   const settings = {
@@ -346,9 +330,7 @@ const MainPage = () => {
                       {/* <div class="dot-elastic"></div> */}
                     </div>
                     <div className="sub_des">
-                      <div className="sub_title">
-                        <div>오늘 예정 경기</div>
-                      </div>
+                      <div className="sub_title">오늘 예정 경기</div>
 
                       {todays ? (
                         <Link

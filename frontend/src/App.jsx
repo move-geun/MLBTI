@@ -26,17 +26,6 @@ import GlobalStyle from "./styles/global";
 import AmdinNoticeDetail from "./components/admin_notice/AdminNoticeDetail";
 
 function App() {
-  //   // 로그인시 특정 페이지 막기
-  //   useEffect(() => {
-  //     const path = window.location.pathname;
-  //     console.log(isAuthenticated());
-  //     if (isAuthenticated() === false) {
-  //       if (path === "/playerdetail" || path === "/singup" || path === "/login") {
-  //         alert("로그인이 필요한 서비스입니다");
-  //         go("/login");
-  //       }
-  //     }
-  //   }, [window.location.pathname]);
 
   return (
     <BrowserRouter>

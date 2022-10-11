@@ -33,7 +33,6 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { CompositionWrapper } from "../../components/TeamCustom/TeamCoposiotion.style";
 import {RiBallPenFill} from "react-icons/ri"
-// 선수 목록 받아와서 뿌리기 남음
 
 const TaBleList = styled(TableCell)`
   font-family: "MICEGothic Bold";
@@ -67,12 +66,6 @@ const MyProfilePage = () => {
     const res = await dispatch(getMyteam(mail));
     setMyTeam(res.payload);
 
-    // await setUsermail(infodata.userId);
-    // if (userInfo.teamName === null) {
-    //   await setTeamName("팀 이름을 설정해주세요");
-    // } else {
-    //   await setTeamName(userInfo.teamName);
-    // }
   }
 
   // 팀 이름 변경
@@ -88,7 +81,6 @@ const MyProfilePage = () => {
         window.location.reload();
       })
       .catch((err) => {
-        alert("에러떴다");
       });
   }
 
@@ -110,7 +102,7 @@ const MyProfilePage = () => {
           setTeamName(res.data.teamName);
         }
       })
-      .catch((err) => alert("오류"));
+      .catch();
   }, []);
 
   const deleteHandle = (data) => {
@@ -272,27 +264,6 @@ const MyProfilePage = () => {
             </Table>
           </TableContainer>
         </CompositionWrapper>
-        {/* <Link to="/teamcustom">{userTeam}</Link> */}
-        {/* 실경기 박스
-        <div className="GraphDraw">
-          <div className="nameDraw">
-            <span>실경기 : </span>
-            <span> 34회 (68%)</span>
-          </div>
-          <div>
-            <img src="/assets/cap.png" alt="" />
-          </div>
-        </div>
-        커스텀 경기
-        <div className="GraphDraw">
-          <div className="nameDraw">
-            <span>커스텀 경기:</span>
-            <span>34회(68%)</span>
-          </div>
-          <div>
-            <img src="/assets/cap.png" alt="" />
-          </div>
-        </div> */}
       </GraphBox>
     </PageContainer>
   );

@@ -68,12 +68,10 @@ export default function TabLiveHistory(prop = defaultValue) {
   };
   const onClickTopPlay = (e) =>{
     e.preventDefault();
-    console.log("초 클릭함");
     setPlayStatus(true);
   };
   const onClickBottomPlay = (e) => {
     e.preventDefault();
-    console.log("말 클릭함");
     setPlayStatus(false);
   };
 
@@ -91,7 +89,6 @@ export default function TabLiveHistory(prop = defaultValue) {
 
     useEffect(()=> {    
         if(prop.livedata[0]){
-          console.log("이닝길이", prop.livedata.length);
           setInningsLength(prop.livedata.length/2);
             prop.livedata.map(inning => {
                 setInnings(previnnings => [...previnnings, inning]);
@@ -118,7 +115,6 @@ export default function TabLiveHistory(prop = defaultValue) {
 
 
     const MakebatterList = (value) => {
-        console.log("Ccccccc", value);
         let batterList = []; 
         innings.map(batter => {
             if(batter.inning == value +1){
@@ -128,7 +124,6 @@ export default function TabLiveHistory(prop = defaultValue) {
         }) 
        
         if(batterList.length !== 0){
-            // console.log("liiiiiiiiiii ", batterList)
             ContentTabValue(batterList);
         }
         
@@ -138,14 +133,11 @@ export default function TabLiveHistory(prop = defaultValue) {
 
   
 const ContentTabValue = (batterList) => {
-    console.log("content 도는 중 ", batterList);
     if(playStatus){
-        console.log(batterList[0]);
         setBatterInfo(batterList[0]);
 
     }
     else {
-        console.log(batterList[1]);
         setBatterInfo(batterList[1]);
     }
 
@@ -158,7 +150,6 @@ const ContentTabValue = (batterList) => {
 
 
 const BatterInfoHandler = () => {
-  console.log("handler")
     if(batterInfo.length !== 0){
       batterInfo.datas.map(info => {
         return(
@@ -333,7 +324,6 @@ let checkBallList = [];
 
 // const TabContent = () => {
 
-//       console.log("얍얍얍", inningsLength);
 
 //       const TabContentList = '';
 //       for(let i = 0; i< inningsLength < 0; i++){
