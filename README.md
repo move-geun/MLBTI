@@ -1,8 +1,11 @@
 # MLBTI (enjoy MLB Together with Interest)
 
 📆 **프로젝트 진행기간 : 2022/08/22 ~ 2022/10/07**
+
 🏆 **SSAFY 특화 프로젝트 수상** 
+
 😎 **BE: 김동우(팀장), 박찬호**
+
 😆 **FE: 이동근, 배송윤, 정민지**
 
 ![image-20221005141403117](README.assets/image-20221005141403117.png)
