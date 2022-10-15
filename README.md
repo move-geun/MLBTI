@@ -10,7 +10,9 @@
 
 ![image-20221005141403117](https://user-images.githubusercontent.com/51036842/195288810-e029dd67-f024-4132-beee-795cccf33885.png)
 
+
 ### [소개 UCC](https://youtu.be/gL8SykLT9KA)
+![image](https://user-images.githubusercontent.com/51036842/195972950-65332ce7-f2fb-410c-9d6b-f9f2766e7fa3.png)
 
 
 ## ✨소개
