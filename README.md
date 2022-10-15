@@ -160,20 +160,18 @@ ___
   - 1900~2022 년 MLB 경기 데이터(100GB), 역대 MLB 팀 및 선수 데이터 등 방대한 양의 데이터를 크롤링과 MLB API를 활용해 쌓았습니다.
   - 쌓은 데이터들에서 활용하여 시뮬레이션 및 'MLBTI' 서비스를 구축했습니다. 
 
-  ![방대한 데이터](https://user-images.githubusercontent.com/51036842/195283950-35db04f9-74e0-4d3a-8fe3-62895e5f0658.png)
+    ![방대한 데이터](https://user-images.githubusercontent.com/51036842/195283950-35db04f9-74e0-4d3a-8fe3-62895e5f0658.png)
 
 
 
 - 자체 제작한 데이터 베이스
-  - 5 만줄의 MLB 경기 데이터 속에 있는 팀, 타자, 투수, 타격 이벤트, 날씨 데이터
+  - 5 만줄의 MLB 경기 데이터 속에 있는 팀, 타자, 투수, 타격 이벤트, 날씨 데이터 
 
-63 가지 이벤트 경우의 수를 분석하여 적절한 data 로 mapping 할 수 있게 가공했습니다. 
+  - 마운드 위에서 일어날 수 있는 63 가지 경우의 수를 분석하여 적절한 field로 mapping 할 수 있게 가공하였고, 이때 타자인지 투수인지를 기준으로 partition을 나누었고, 왼손잡이인지 오른손잡이인지 partition을 각각 나눠서 가공했습니다. 
 
-추출한 event 경우의 수
-
-
-![image](https://user-images.githubusercontent.com/51036842/195971635-32aa9699-4ae3-4139-8b9c-48477969ab43.png)
-
+  - data 가공 flow
+    
+    ![image](https://user-images.githubusercontent.com/51036842/195972781-3c5864b5-20c3-4cc9-aa76-1e91d7e10189.png)
 
 
 - AirFlow 활용
@@ -185,7 +183,7 @@ ___
   - 1일에 한 번씩 리그 순위 기록 갱신
   - 3일에 한 번씩 새로 수행한 경기 기록 갱신
  
-![image](https://user-images.githubusercontent.com/51036842/195971943-a9a4e0c8-7873-4c74-bccd-9713deb669d1.png)
+  ![image](https://user-images.githubusercontent.com/51036842/195971943-a9a4e0c8-7873-4c74-bccd-9713deb669d1.png)
 
 ## 👨‍👩‍👦‍👦협업 툴
 
@@ -313,7 +311,7 @@ Story : [담당역할] 세부 업무
 
 ## 포팅 메뉴얼
 
-### Front End
+### Front End 포팅 메뉴얼
 #### 로컬 실행 방법
 
 ```
@@ -395,7 +393,7 @@ docker build -t mlbti_front:0.1 .
 docker run --name mlbti_front -d -p 3000:80 mlbti_front:0.1
 ```
 
-### backend build
+### backend 포팅 메뉴얼
 
 #### 로컬에서 실행 방법
 
@@ -448,11 +446,4 @@ docker run --name mlbti_back -p 8081:8080 mlbti_back:0.1
 ```
 
 다음을 실행하면 배포가 완료됩니다.
-
-
-## ✒기타 포팅 자료
-
-[하둡 설치 및 word count 실행 따라하기](참고자료\[BE] 하둡 설치 및 word count 실행 따라하기)
-
- [포팅 정리](참고자료/[FB] 포팅 자료)
 
